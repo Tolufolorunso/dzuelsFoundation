@@ -32,53 +32,65 @@ function Header() {
   }
 
   return (
-    <header className={classes.header}>
-      <div className={classes.container}>
-        <nav className={classes.topNav}>
-          <div className='logo'>
-            <Link href='/'>
-              <Image
-                src='/images/logo.png'
-                alt='Logo'
-                width={100}
-                height={60}
-                quality={100}
+    <>
+      <header className={classes.header}>
+        <nav>
+          <div className={classes.container}>
+            <div className={classes.nav_items}>
+              <div className='logo'>
+                <Link href='/'>
+                  <Image
+                    src='/images/logo.png'
+                    alt='Logo'
+                    width={100}
+                    height={60}
+                    quality={100}
+                  />
+                </Link>
+              </div>
+              <ul
+                className={classes.links}
+                style={{ display: isMobile ? 'none' : 'block' }}
+              >
+                <li className='item'>
+                  <Link href='/' className='active'>
+                    Home
+                  </Link>
+                </li>
+                <li className='item'>
+                  <Link href='/catalogs'>Cataloging</Link>
+                </li>
+                <li className='item'>
+                  <Link href='/cohort'>Cohort Class</Link>
+                </li>
+                <li className='item'>
+                  <Link href='/inventory'>Inventory</Link>
+                </li>
+                <li className='item'>
+                  <Link href='/patrons'>Patrons</Link>
+                </li>
+              </ul>
+              <input
+                type='checkbox'
+                className={classes.navigationCheckbox}
+                id='navi-toggle'
+                checked={isDrawerOpen}
+                onClick={handleDrawerToggle}
               />
-            </Link>
+              <label
+                htmlFor='navi-toggle'
+                className={classes.navigationButton}
+                style={{ display: isMobile ? 'flex' : 'none' }}
+              >
+                <span className={classes.navigationIcon}>&nbsp;</span>
+              </label>
+            </div>
           </div>
-          <ul
-            className={classes.links}
-            style={{ display: isMobile ? 'none' : 'block' }}
-          >
-            <li class='item'>
-              <Link href='/' className='active'>
-                Home
-              </Link>
-            </li>
-            <li className='item'>
-              <Link href='/catalogs'>Cataloging</Link>
-            </li>
-            <li className='item'>
-              <Link href='/cohort'>Cohort Class</Link>
-            </li>
-            <li className='item'>
-              <Link href='/inventory'>Inventory</Link>
-            </li>
-            <li className='item'>
-              <Link href='/patrons'>Patrons</Link>
-            </li>
-          </ul>
-          <button
-            onClick={handleDrawerToggle}
-            style={{ display: isMobile ? 'block' : 'none' }}
-          >
-            Toggle Right Drawer
-          </button>
-          <RightDrawer open={isDrawerOpen} onClose={handleDrawerToggle} />
         </nav>
-      </div>
-      <div className='bottomNav'></div>
-    </header>
+        <div className='bottomNav'></div>
+      </header>
+      <RightDrawer open={isDrawerOpen} onClose={handleDrawerToggle} />
+    </>
   )
 }
 

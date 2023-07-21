@@ -1,8 +1,10 @@
+import Container from '@/components/layout/container'
+
 function InventoryPage() {
   return (
-    <div>
-      <h1>All Patrons/Students</h1>
-    </div>
+    <Container>
+      <h1>Inventory List and Add tools to inventory</h1>
+    </Container>
   )
 }
 

@@ -37,3 +37,8 @@ body {
   font-family: 'Poppins', sans-serif !important;
   font-size: 1.6rem !important;
 }
+
+.container {
+  width: min(1200px, 100% - 2rem);
+  margin: 0 auto;
+}

@@ -1,10 +1,11 @@
+import Container from '@/components/layout/container'
 import Button from '@mui/material/Button'
 import Head from 'next/head'
 import Link from 'next/link'
 
 function HomePage() {
   return (
-    <div>
+    <Container>
       <Head>
         <title>Hello</title>
       </Head>
@@ -31,7 +32,7 @@ function HomePage() {
       </Button>
       <Button variant='contained'>Contained</Button>
       <Button variant='outlined'>Outlined</Button>
-    </div>
+    </Container>
   )
 }
 

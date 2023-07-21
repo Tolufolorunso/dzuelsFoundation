@@ -1,8 +1,10 @@
+import Container from '@/components/layout/container'
+
 function CirculationPage() {
   return (
-    <div>
-      <h1>All Patrons/Students</h1>
-    </div>
+    <Container>
+      <h1>Kids checkout and checkin Page</h1>
+    </Container>
   )
 }
 

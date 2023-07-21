@@ -1,8 +1,10 @@
+import Container from '@/components/layout/container'
+
 function CohortClassPage() {
   return (
-    <div>
-      <h1>All Patrons/Students</h1>
-    </div>
+    <Container>
+      <h1>Students in cohort class</h1>
+    </Container>
   )
 }
 

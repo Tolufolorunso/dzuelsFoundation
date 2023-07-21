@@ -3,6 +3,7 @@ import Drawer from '@mui/material/Drawer'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
+import Link from 'next/link'
 
 const RightDrawer = ({ open, onClose }) => {
   const drawerWidth = 240
@@ -22,10 +23,10 @@ const RightDrawer = ({ open, onClose }) => {
       }}
     >
       <List>
-        <ListItem button>
-          <ListItemText primary='Item 1' />
+        <ListItem>
+          <Link href='/'>Home</Link>
         </ListItem>
-        <ListItem button>
+        <ListItem>
           <ListItemText primary='Item 2' />
         </ListItem>
         <ListItem button>

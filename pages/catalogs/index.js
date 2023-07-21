@@ -1,11 +1,12 @@
+import Container from '@/components/layout/container'
 import Link from 'next/link'
 
 function CatalogPage() {
   return (
-    <div>
+    <Container>
       <h1>Cataloging Board</h1>
       <Link href='/catalogs/create'>Add Book</Link>
-    </div>
+    </Container>
   )
 }
 

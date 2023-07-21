@@ -1,5 +1,3 @@
-import React, { useState } from 'react'
-
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
@@ -8,10 +6,10 @@ import Box from '@mui/material/Box'
 import classes from './cataloging-form.module.css'
 
 function CatalogingForm(props) {
-  const { handleSubmit, formData, handleChange } = props
+  const { handleSubmit, formData, handleChange, goToCatalogPageHandler } = props
 
   return (
-    <Box maxWidth={750} width='100%'>
+    <Box maxWidth={750} width='100%' style={{ margin: '0 auto' }}>
       <h2>Add a Book</h2>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
@@ -236,6 +234,15 @@ function CatalogingForm(props) {
           // className={classes.btn}
         >
           Add Book
+        </Button>
+        <Button
+          type='button'
+          variant='contained'
+          color='primary'
+          style={{ marginTop: '1rem', marginLeft: '5px' }}
+          onClick={goToCatalogPageHandler}
+        >
+          Cancel
         </Button>
       </form>
     </Box>

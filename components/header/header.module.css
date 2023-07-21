@@ -4,24 +4,19 @@
   left: 0;
   right: 0;
   top: 0;
-  height: 60px;
+  /* height: 60px; */
   background: var(--white);
-  /* display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center; */
-
-  padding: 0 100px;
+  /* padding: 0 100px; */
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .container {
-  width: min(1200px, 100%);
+  width: min(1200px, 100% - 2rem);
   margin: 0 auto;
 }
 
-.topNav {
+.nav_items {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -51,4 +46,65 @@
 .links a:hover,
 .links a:active {
   color: var(--main);
+}
+
+.navigationCheckbox {
+  display: none;
+}
+
+.navigationButton {
+  z-index: 2000;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+.iconsContainer {
+  position: relative;
+  padding: 3px;
+}
+
+.navigationIcon,
+.navigationIcon::before,
+.navigationIcon::after {
+  width: 3rem;
+  height: 2px;
+  background-color: var(--black);
+  display: inline-block;
+}
+
+.navigationIcon::before,
+.navigationIcon::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  transition: all 0.2s;
+}
+
+.navigationIcon::before {
+  top: -0.8rem;
+}
+.navigationIcon::after {
+  top: 0.8rem;
+}
+
+.navigationButton:hover .navigationIcon::before {
+  top: -1rem;
+}
+
+.navigationButton:hover .navigationIcon::after {
+  top: 1rem;
+}
+
+.navigationCheckbox:checked + .navigationButton .navigationIcon {
+  background-color: transparent;
+}
+
+.navigationCheckbox:checked + .navigationButton .navigationIcon::before {
+  top: 0;
+  transform: rotate(135deg);
+}
+
+.navigationCheckbox:checked + .navigationButton .navigationIcon::after {
+  top: 0;
+  transform: rotate(-135deg);
 }

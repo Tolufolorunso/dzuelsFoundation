@@ -1,8 +1,10 @@
+import Container from '@/components/layout/container'
+
 function PatronsHomePage() {
   return (
-    <div>
+    <Container>
       <h1>All Patrons/Students</h1>
-    </div>
+    </Container>
   )
 }
 

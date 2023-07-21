@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 
-import Wrapper from '@/components/layout/Wrapper'
+import { useRouter } from 'next/router'
+
 import CatalogingForm from '@/components/cataloging/cataloging-form'
+import Container from '@/components/layout/container'
 
 function AddItemPage() {
   const [formData, setFormData] = useState({
@@ -24,12 +26,18 @@ function AddItemPage() {
     holdingsInformation: 40,
   })
 
+  const router = useRouter()
+
   const handleChange = (event) => {
     const { name, value } = event.target
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }))
+  }
+
+  function goToCatalogPageHandler() {
+    router.replace('/catalogs')
   }
 
   const handleSubmit = async (event) => {
@@ -58,13 +66,14 @@ function AddItemPage() {
   }
 
   return (
-    <Wrapper>
+    <Container>
       <CatalogingForm
         handleSubmit={handleSubmit}
         handleChange={handleChange}
         formData={formData}
+        goToCatalogPageHandler={goToCatalogPageHandler}
       />
-    </Wrapper>
+    </Container>
   )
 }
 
