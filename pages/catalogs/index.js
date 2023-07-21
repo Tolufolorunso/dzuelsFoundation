@@ -1,7 +1,10 @@
+import Link from 'next/link'
+
 function CatalogPage() {
   return (
     <div>
-      <h1>All Patrons/Students</h1>
+      <h1>Cataloging Board</h1>
+      <Link href='/catalogs/create'>Add Book</Link>
     </div>
   )
 }
