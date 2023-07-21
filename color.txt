@@ -1,0 +1,24 @@
+
+    --white: #fff;
+    --black: #000;
+    --tinted-black: rgba(45, 45, 45, 0.7);
+    --dark-main: #6A0406;
+    --main: #b4070a;
+    --variant-main: #F9DEC9;
+    --light-variant-main: #FFF5ED;
+    --complementary-main: #56E39F;
+    --light-complementary-main: #F9FFFC;
+    --light-main: #ddf2ff;
+    --logo-grey: #969593;
+    --main-opacity: rgba(31, 142, 17, 0.8);
+    --mid-opacity: rgba(31, 142, 17, 0.5);
+    --light-opacity: rgba(31, 142, 17, 0.2);
+    --grey: #b2b2b2;
+    --light-grey: #CDCDCD;
+    --dark-grey: #242F40;
+    --blue: #C7DDFF;
+    --card-width: 200px;
+    --card-height: 300px;
+    --card-transition-duration: 800ms;
+    --card-transition-easing: ease;
+    --style-font: "Great Vibes", cursive;

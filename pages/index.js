@@ -1,8 +1,13 @@
+import Button from '@mui/material/Button'
+import Head from 'next/head'
 import Link from 'next/link'
 
 function HomePage() {
   return (
     <div>
+      <Head>
+        <title>Hello</title>
+      </Head>
       <h1>Dzuels Foundation</h1>
       <ul>
         <li>
@@ -21,6 +26,11 @@ function HomePage() {
           <Link href='/cohort-class'>Cohort Class</Link>
         </li>
       </ul>
+      <Button variant='text' color='ter'>
+        Text
+      </Button>
+      <Button variant='contained'>Contained</Button>
+      <Button variant='outlined'>Outlined</Button>
     </div>
   )
 }

@@ -1,0 +1,39 @@
+:root {
+  --white: #fff;
+  --black: #000;
+  --tinted-black: rgba(45, 45, 45, 0.7);
+  --dark-main: #6a0406;
+  --main: #b4070a;
+  --variant-main: #f9dec9;
+  --light-variant-main: #fff5ed;
+  --complementary-main: #56e39f;
+  --light-complementary-main: #f9fffc;
+  --light-main: #ddf2ff;
+  --logo-grey: #969593;
+  --main-opacity: rgba(31, 142, 17, 0.8);
+  --mid-opacity: rgba(31, 142, 17, 0.5);
+  --light-opacity: rgba(31, 142, 17, 0.2);
+  --grey: #b2b2b2;
+  --light-grey: #cdcdcd;
+  --dark-grey: #242f40;
+  --blue: #c7ddff;
+  --card-width: 200px;
+  --card-height: 300px;
+  --card-transition-duration: 800ms;
+  --card-transition-easing: ease;
+  --style-font: 'Great Vibes', cursive;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 62.5% !important;
+}
+
+body {
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 1.6rem !important;
+}
