@@ -35,7 +35,7 @@ function Header() {
     <header className={classes.header}>
       <div className={classes.container}>
         <nav className={classes.topNav}>
-          <div class='logo'>
+          <div className='logo'>
             <Link href='/'>
               <Image
                 src='/images/logo.png'

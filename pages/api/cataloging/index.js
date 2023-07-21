@@ -30,10 +30,14 @@ async function handler(req, res) {
       //   return res.status(400).json({ error: error.details[0].message })
       // }
 
+      await dbConnect()
+
       // Check if the barcode already exists in the database
       const existingBookWithBarcode = await Cataloging.findOne({
         barcode: req.body.barcode,
       })
+
+      console.log(existingBookWithBarcode)
 
       if (existingBookWithBarcode) {
         return res.status(409).json({ error: 'Barcode already in use' })
@@ -57,8 +61,6 @@ async function handler(req, res) {
       }
 
       console.log(data)
-
-      await dbConnect()
 
       // If data is valid, create a new book record in the database
       const newBook = await Cataloging.create(data)
