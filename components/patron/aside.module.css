@@ -1,0 +1,5 @@
+.aside {
+  background-color: var(--white);
+  padding: 1rem 2rem;
+  max-width: 500px;
+}

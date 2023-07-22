@@ -1,9 +1,15 @@
 import Container from '@/components/layout/container'
+import Aside from '@/components/patron/aside'
+import ContentSide from '@/components/patron/content-side'
+import CustomHeader from '@/components/typography/custom-header'
 
 function PatronsHomePage() {
   return (
     <Container>
-      <h1>All Patrons/Students</h1>
+      <main className='patron-container'>
+        <Aside />
+        <ContentSide />
+      </main>
     </Container>
   )
 }

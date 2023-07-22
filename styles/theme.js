@@ -26,8 +26,9 @@ const theme = createTheme({
     },
   },
   typography: {
-    // fontFamily: roboto.style.fontFamily,
-    // fontFamily: 'Poppins, sans-serif',
+    subtitle1: {
+      fontSize: 12,
+    },
   },
 })
 

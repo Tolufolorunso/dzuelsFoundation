@@ -1,0 +1,8 @@
+.form {
+  max-width: 750px;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 5px;
+  padding: 2rem;
+  background-color: var(--white);
+}

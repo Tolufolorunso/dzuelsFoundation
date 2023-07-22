@@ -61,13 +61,16 @@ function Header() {
                   <Link href='/catalogs'>Cataloging</Link>
                 </li>
                 <li className='item'>
+                  <Link href='/patrons'>Patrons</Link>
+                </li>
+                <li className='item'>
+                  <Link href='/circulation'>Circulation</Link>
+                </li>
+                <li className='item'>
                   <Link href='/cohort'>Cohort Class</Link>
                 </li>
                 <li className='item'>
                   <Link href='/inventory'>Inventory</Link>
-                </li>
-                <li className='item'>
-                  <Link href='/patrons'>Patrons</Link>
                 </li>
               </ul>
               <input
@@ -75,7 +78,7 @@ function Header() {
                 className={classes.navigationCheckbox}
                 id='navi-toggle'
                 checked={isDrawerOpen}
-                onClick={handleDrawerToggle}
+                onChange={handleDrawerToggle}
               />
               <label
                 htmlFor='navi-toggle'

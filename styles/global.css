@@ -22,6 +22,8 @@
   --card-transition-duration: 800ms;
   --card-transition-easing: ease;
   --style-font: 'Great Vibes', cursive;
+
+  --bg: #f3f4f4;
 }
 
 * {
@@ -36,9 +38,22 @@ html {
 body {
   font-family: 'Poppins', sans-serif !important;
   font-size: 1.6rem !important;
+  background-color: var(--bg) !important;
 }
 
 .container {
   width: min(1200px, 100% - 2rem);
   margin: 0 auto;
+}
+
+.patron-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 5rem;
+  margin: 11rem 0 6rem 0;
+}
+
+.createSaveBtns {
+  width: 100%;
+  background-color: #56e39f;
 }

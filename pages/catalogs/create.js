@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 
 import CatalogingForm from '@/components/cataloging/cataloging-form'
 import Container from '@/components/layout/container'
+import CatalogFunctionBtns from '@/components/cataloging/catalog-function-btns'
 
 function AddItemPage() {
   const [formData, setFormData] = useState({
@@ -67,6 +68,8 @@ function AddItemPage() {
 
   return (
     <Container>
+      <CatalogFunctionBtns />
+
       <CatalogingForm
         handleSubmit={handleSubmit}
         handleChange={handleChange}

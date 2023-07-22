@@ -1,8 +1,11 @@
+import Container from '@/components/layout/container'
+import AddPatron from '@/components/patron/add-patron'
+
 function CreatePatronPage() {
   return (
-    <div>
-      <h1>Dzuels Foundation</h1>
-    </div>
+    <Container>
+      <AddPatron />
+    </Container>
   )
 }
 
