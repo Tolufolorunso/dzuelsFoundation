@@ -1,8 +1,7 @@
 import React from 'react'
 import Drawer from '@mui/material/Drawer'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemText from '@mui/material/ListItemText'
+import DrawerLinkList from './drawer-link-list'
+import Image from 'next/image'
 import Link from 'next/link'
 
 const RightDrawer = ({ open, onClose }) => {
@@ -22,17 +21,19 @@ const RightDrawer = ({ open, onClose }) => {
         },
       }}
     >
-      <List>
-        <ListItem>
-          <Link href='/'>Home</Link>
-        </ListItem>
-        <ListItem>
-          <ListItemText primary='Item 2' />
-        </ListItem>
-        <ListItem button>
-          <ListItemText primary='Item 3' />
-        </ListItem>
-      </List>
+      <div style={{ width: '100%', margin: '0 auto' }}>
+        <Link href='/'>
+          <Image
+            src='/images/logo.png'
+            alt='Logo'
+            width={100}
+            height={60}
+            quality={100}
+            style={{ width: '100%', margin: '0 auto' }}
+          />
+        </Link>
+      </div>
+      <DrawerLinkList />
     </Drawer>
   )
 }

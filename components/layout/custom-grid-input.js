@@ -1,7 +1,7 @@
 import TextField from '@mui/material/TextField'
 import Grid from '@mui/material/Grid'
 
-function CustomInput({ label, name, formData, handleChange }) {
+function CustomGridInput({ label, name, value, onChange, required }) {
   return (
     <Grid item xs={12}>
       <TextField
@@ -9,12 +9,12 @@ function CustomInput({ label, name, formData, handleChange }) {
         variant='outlined'
         fullWidth
         name={name}
-        value={formData.title}
-        onChange={handleChange}
-        required
+        value={value}
+        onChange={onChange}
+        required={required}
       />
     </Grid>
   )
 }
 
-export default CustomInput
+export default CustomGridInput

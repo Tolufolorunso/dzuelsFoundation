@@ -9,13 +9,15 @@ import PatronForm from './patron-form'
 import { useState } from 'react'
 import SelectPatronType from './select-patron-type'
 
-function AddPatron() {
-  const [patronType, setPatronType] = useState('student') // Default selection: 'student'
+function AddPatron(props) {
+  const {
+    handleSubmit,
+    formData,
+    handleChange,
+    patronType,
+    changePatronTypeHandler,
+  } = props
 
-  const handleChange = (event) => {
-    console.log(patronType)
-    setPatronType(event.target.value)
-  }
   return (
     <div className={classes.form}>
       <CustomHeader level={4} text={`Add Patron (${patronType})`} />
@@ -24,13 +26,25 @@ function AddPatron() {
         direction='row'
         // style={{ position: 'absolute', top: 0 }}
       >
-        <Button variant='contained' color='success' startIcon={<SaveAltIcon />}>
+        <Button
+          onClick={handleSubmit}
+          variant='contained'
+          color='success'
+          startIcon={<SaveAltIcon />}
+        >
           Save
         </Button>
         <Button variant='text'>Cancel</Button>
       </Stack>
-      <SelectPatronType patronType={patronType} handleChange={handleChange} />
-      <PatronForm />
+      <SelectPatronType
+        patronType={patronType}
+        changePatronTypeHandler={changePatronTypeHandler}
+      />
+      <PatronForm
+        formData={formData}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+      />
     </div>
   )
 }

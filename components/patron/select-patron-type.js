@@ -5,7 +5,7 @@ import FormControl from '@mui/material/FormControl'
 import FormLabel from '@mui/material/FormLabel'
 
 function SelectPatronType(props) {
-  const { patronType, handleChange } = props
+  const { patronType, changePatronTypeHandler } = props
   return (
     <FormControl
       component='fieldset'
@@ -22,7 +22,7 @@ function SelectPatronType(props) {
         aria-label='patron-type'
         name='patron-type'
         value={patronType}
-        onChange={handleChange}
+        onChange={changePatronTypeHandler}
       >
         <FormControlLabel value='student' control={<Radio />} label='Student' />
         <FormControlLabel value='staff' control={<Radio />} label='Staff' />

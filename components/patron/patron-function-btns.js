@@ -16,7 +16,7 @@ function PatronFunctionBtns() {
   }
 
   return (
-    <div class={classes.btns}>
+    <div className={classes.btns}>
       <Stack direction='row' spacing={3}>
         <Button
           variant='outlined'
