@@ -6,8 +6,6 @@ import Patron from '@/models/PatronModel'
 import calculateExpiryDate from '@/utils/expiryDate'
 
 export default async function handler(req, res) {
-  console.log(req.body)
-
   if (req.method !== 'POST') {
     return res.status(405).end() // Method Not Allowed
   }

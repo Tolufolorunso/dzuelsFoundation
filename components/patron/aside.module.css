@@ -3,3 +3,10 @@
   padding: 1rem 2rem;
   max-width: 500px;
 }
+
+@media (max-width: 768px) {
+  .aside {
+    width: 100%;
+    flex: 1;
+  }
+}

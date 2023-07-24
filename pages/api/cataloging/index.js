@@ -3,41 +3,14 @@ import Cataloging from '@/models/Cataloging'
 import Joi from 'joi'
 
 async function handler(req, res) {
-  console.log(6, req.body)
-
   if (req.method == 'POST') {
     try {
-      // Define a Joi schema for validation
-      // const schema = Joi.object({
-      //   title: Joi.object().required(),
-      //   author: Joi.object().required(),
-      //   publicationInfo: Joi.object({
-      //     publisher: Joi.string().required(),
-      //     place: Joi.string().required(),
-      //     year: Joi.number().required(),
-      //   }).required(),
-      //   ISBN: Joi.string().required(),
-      //   physicalDescription: Joi.string(),
-      //   barcode: Joi.string().required(),
-      //   subjectHeadings: Joi.array().items(Joi.string()),
-      // })
-
-      // Validate the request body against the schema
-      // const { error } = schema.validate(req.body)
-      // console.log(29, error)
-
-      // if (error) {
-      //   return res.status(400).json({ error: error.details[0].message })
-      // }
-
       await dbConnect()
 
       // Check if the barcode already exists in the database
       const existingBookWithBarcode = await Cataloging.findOne({
         barcode: req.body.barcode,
       })
-
-      console.log(existingBookWithBarcode)
 
       if (existingBookWithBarcode) {
         return res.status(409).json({ error: 'Barcode already in use' })
@@ -60,14 +33,43 @@ async function handler(req, res) {
         subjectHeadings: subHeading,
       }
 
-      console.log(data)
-
       // If data is valid, create a new book record in the database
       const newBook = await Cataloging.create(data)
 
-      return res.status(201).json(newBook)
+      return res.status(201).json({
+        status: true,
+        message: 'Book added successfully',
+        data: { barcode: newBook.barcode, title: newBook.title.mainTitle },
+      })
     } catch (error) {
       console.error('Error adding book:', error)
+      return res.status(500).json({ error: 'Something went wrong' })
+    }
+  }
+
+  if (req.method == 'GET') {
+    try {
+      await dbConnect()
+      const { title, author, publisher, barcode, ISBN, library } = req.query
+
+      // Build the query object based on the provided filters
+      const query = {}
+      if (title) query.title = new RegExp(title, 'i') // Case-insensitive search
+      if (author) query.author = new RegExp(author, 'i')
+      if (library) query.library = new RegExp(library, 'i')
+      if (publisher)
+        query['publicationInfo.publisher'] = new RegExp(publisher, 'i')
+      if (barcode) query.barcode = barcode
+      if (ISBN) query.ISBN = ISBN
+
+      // Fetch cataloging records based on the query
+      const catalogingRecords = await Cataloging.find(query).select(
+        'barcode author title classification controlNumber'
+      )
+
+      return res.status(200).json(catalogingRecords)
+    } catch (error) {
+      console.error('Error fetching books:', error)
       return res.status(500).json({ error: 'Something went wrong' })
     }
   }

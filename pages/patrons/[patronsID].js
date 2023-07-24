@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 
 function PatronPage() {
   const router = useRouter()
-  console.log(router)
+  // console.log(router)
   return (
     <div>
       <h1>Patron Page</h1>

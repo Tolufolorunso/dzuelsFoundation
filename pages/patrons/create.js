@@ -25,7 +25,6 @@ function CreatePatronPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    console.log(formData)
     try {
       // Send the form data to the Next.js backend (API route)
       const response = await fetch('/api/patrons', {
@@ -41,7 +40,7 @@ function CreatePatronPage() {
       } else {
         // Handle the error (e.g., show an error message)
         const data = await response.json()
-        console.error(data.error)
+        // console.error(data.error)
       }
     } catch (error) {
       console.error('Error adding book:', error)

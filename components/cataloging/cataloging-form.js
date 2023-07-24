@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
+import CircularProgress from '@mui/material/CircularProgress'
 
 import CustomHeader from '../typography/custom-header'
 import FieldSetFormLayout from '../layout/field-set-layout'
@@ -8,7 +8,13 @@ import CustomGridInput from '../layout/custom-grid-input'
 import FormContainer from '../layout/form-container'
 
 function CatalogingForm(props) {
-  const { handleSubmit, formData, handleChange, goToCatalogPageHandler } = props
+  const {
+    handleSubmit,
+    formData,
+    handleChange,
+    goToCatalogPageHandler,
+    loading,
+  } = props
 
   return (
     <FormContainer>
@@ -100,13 +106,6 @@ function CatalogingForm(props) {
               required
             />
             <CustomGridInput
-              label='Index Term-Genre/Form'
-              name='indexTermGenre'
-              value={formData.indexTermGenre}
-              onChange={handleChange}
-              required
-            />
-            <CustomGridInput
               label='General information'
               name='informationSummary'
               value={formData.informationSummary}
@@ -145,7 +144,13 @@ function CatalogingForm(props) {
               onChange={handleChange}
               required
             />
-            <CustomGridInput />
+            <CustomGridInput
+              label='Library'
+              name='library'
+              value={formData.library}
+              onChange={handleChange}
+              required
+            />
           </FieldSetFormLayout>
         </Grid>
 
@@ -157,7 +162,14 @@ function CatalogingForm(props) {
             style={{ marginTop: '1rem' }}
             // className={classes.btn}
           >
-            Add Book
+            {loading ? (
+              <>
+                <CircularProgress size={10} color='inherit' />
+                <span style={{ marginLeft: '5px' }}>Saving...</span>
+              </>
+            ) : (
+              'Add Book'
+            )}
           </Button>
           <Button
             type='button'

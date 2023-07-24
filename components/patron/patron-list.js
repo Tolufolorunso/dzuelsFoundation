@@ -1,7 +1,7 @@
 import { DataGrid } from '@mui/x-data-grid'
 
-function BookList(props) {
-  const { rows, columns, onRowDoubleClick, isLoadingBooks } = props
+function PatronList(props) {
+  const { rows, columns, onCellClickHandler, isLoadingBooks } = props
 
   return (
     <div style={{ height: '500px', width: '100%' }}>
@@ -16,7 +16,7 @@ function BookList(props) {
         }}
         pageSizeOptions={[5, 7, 10, 15, 20]}
         checkboxSelection
-        onRowDoubleClick={onRowDoubleClick}
+        onCellClick={onCellClickHandler}
         getRowId={(row) => row.barcode}
         loading={isLoadingBooks}
       />
@@ -24,4 +24,4 @@ function BookList(props) {
   )
 }
 
-export default BookList
+export default PatronList
