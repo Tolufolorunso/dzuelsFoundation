@@ -45,10 +45,34 @@ const PatronSchema = new mongoose.Schema(
     library: {
       type: String,
       required: true,
+      default: 'AAoJ',
     },
     patronExpiryDate: {
       type: Date,
       default: Date.now,
+    },
+    employerInfo: {
+      employerName: String,
+      schoolName: String,
+      schoolAdress: String,
+      headOfSchool: String,
+      schoolEmail: String,
+      schoolPhoneNumber: String,
+    },
+    studentSchoolInfo: {
+      schoolName: String,
+      schoolAdress: String,
+      headOfSchool: String,
+      currentClass: String,
+      schoolEmail: String,
+      schoolPhoneNumber: String,
+    },
+    parentInfo: {
+      parentName: String,
+      parentAddress: String,
+      parentPhoneNumber: String,
+      relationshipToPatron: String,
+      parentEmail: String,
     },
     messagePreferences: {
       type: Array,

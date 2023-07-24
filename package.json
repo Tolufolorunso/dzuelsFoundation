@@ -16,12 +16,21 @@
     "@mui/icons-material": "^5.14.1",
     "@mui/material": "^5.14.1",
     "@mui/x-data-grid": "^6.10.1",
+    "date-fns": "^2.30.0",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.10",
+    "exceljs": "^4.3.0",
+    "formidable": "^1.2.2",
     "joi": "^17.9.2",
+    "mime": "^3.0.0",
+    "mongo-xlsx": "^1.0.12",
     "mongoose": "^7.4.0",
+    "multer": "^1.4.5-lts.1",
     "next": "13.4.10",
+    "next-connect": "^1.0.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "uuid": "^9.0.0",
+    "xlsx": "^0.19.3"
   }
 }
