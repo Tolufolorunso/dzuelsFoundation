@@ -10,18 +10,21 @@ function CustomGridInput({ label, name, value, onChange, type, required }) {
     return (
       <Grid item xs={12}>
         <FormControl fullWidth>
-          <InputLabel id='gender'>Age</InputLabel>
+          <InputLabel id={name}>{label}</InputLabel>
           <Select
-            labelId='gender'
-            id='gender'
+            labelId={name}
+            id={name}
+            name={name}
             value={value}
-            label='Gender'
+            label={label}
             onChange={onChange}
           >
-            <MenuItem value='none' selected disabled>
-              None
+            {/* <MenuItem value='' selected disabled>
+              Select
+            </MenuItem> */}
+            <MenuItem value='male' selected>
+              Male
             </MenuItem>
-            <MenuItem value='male'>Male</MenuItem>
             <MenuItem value='female'>Female</MenuItem>
           </Select>
         </FormControl>

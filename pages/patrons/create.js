@@ -1,18 +1,73 @@
 import Container from '@/components/layout/container'
 import AddPatron from '@/components/patron/add-patron'
+import useAppStore from '@/store/applicationStateStore'
+import usePatronStore from '@/store/patronStore'
 import { useState } from 'react'
 
 function CreatePatronPage() {
-  const [patronType, setPatronType] = useState('student')
+  const setErrorMessage = useAppStore((state) => state.setErrorMessage)
+  const setSuccessMessage = useAppStore((state) => state.setSuccessMessage)
+  const patronType = usePatronStore((state) => state.patrons.selectedPatronType)
+  const setIsLoading = usePatronStore((state) => state.setIsLoading)
 
   const [formData, setFormData] = useState({
-    surname: '',
-    firstName: '',
-    patronType: patronType,
+    surname: 'tolulope',
+    firstname: 'kola',
+    middlename: '',
+    email: 'tolu@yahoo.com',
+    phoneNumber: '08068963757',
+    gender: 'male',
+    dateOfBirth: '20/2/2014',
+    street: '5, okeloggbo',
+    city: 'ijero',
+    state: 'ekiti',
+    country: 'Nigeria',
+    barcode: '202302',
+    library: 'AAoj',
+    employerName: '',
+    schoolName: '',
+    schoolAdress: '',
+    schoolEmail: '',
+    schoolPhoneNumber: '',
+    headOfSchool: '',
+    currentClass: '',
+    parentName: '',
+    parentAddress: '',
+    parentPhoneNumber: '',
+    relationshipToPatron: '',
+    parentEmail: '',
+    messagePreferences: '',
   })
 
-  const changePatronTypeHandler = (event) => {
-    setPatronType(event.target.value)
+  const clearFormDataExceptLibrary = () => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      surname: '',
+      firstname: '',
+      middlename: '',
+      email: '',
+      phoneNumber: '',
+      gender: '',
+      dateOfBirth: '',
+      street: '',
+      city: '',
+      state: '',
+      country: '',
+      barcode: '',
+      employerName: '',
+      schoolName: '',
+      schoolAdress: '',
+      schoolEmail: '',
+      schoolPhoneNumber: '',
+      headOfSchool: '',
+      currentClass: '',
+      parentName: '',
+      parentAddress: '',
+      parentPhoneNumber: '',
+      relationshipToPatron: '',
+      parentEmail: '',
+      messagePreferences: '',
+    }))
   }
 
   const handleChange = (event) => {
@@ -25,25 +80,33 @@ function CreatePatronPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    const patronData = { ...formData, patronType: patronType }
     try {
-      // Send the form data to the Next.js backend (API route)
+      setIsLoading(true)
       const response = await fetch('/api/patrons', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(patronData),
       })
 
+      const data = await response.json()
+
       if (response.ok) {
-        // Book added successfully, do something (e.g., show a success message)
+        // console.log(66, data)
+        // clearFormDataExceptLibrary()
+        setSuccessMessage(
+          `Patron Added Successfully. Welcome ${data.patron.firstname}: ${data.patron.barcode}`
+        )
       } else {
-        // Handle the error (e.g., show an error message)
-        const data = await response.json()
-        // console.error(data.error)
+        setErrorMessage(data.error)
       }
     } catch (error) {
-      console.error('Error adding book:', error)
+      // console.error('Error adding book:', error)
+      setErrorMessage('Error adding book:', error.message)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -53,8 +116,6 @@ function CreatePatronPage() {
         formData={formData}
         handleSubmit={handleSubmit}
         handleChange={handleChange}
-        patronType={patronType}
-        changePatronTypeHandler={changePatronTypeHandler}
       />
     </Container>
   )

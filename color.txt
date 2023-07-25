@@ -22,3 +22,83 @@
     --card-transition-duration: 800ms;
     --card-transition-easing: ease;
     --style-font: "Great Vibes", cursive;
+
+     {/* <FieldSetFormLayout legend='Patron Detail'>
+          <CustomGridInput
+            label='Surname'
+            name='surname'
+            value={formData.surname}
+            onChange={handleChange}
+            required
+          />
+          <CustomGridInput
+            label='Firstname'
+            name='firstname'
+            value={formData.firstname}
+            onChange={handleChange}
+            required
+          />
+          <CustomGridInput
+            label='Middlename'
+            name='middlename'
+            value={formData.middlename}
+            onChange={handleChange}
+          />
+          <CustomGridInput
+            label='email'
+            name='email'
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <CustomGridInput
+            label='Phone Number'
+            name='phoneNumber'
+            value={formData.phoneNumber}
+            onChange={handleChange}
+          />
+          <CustomGridInput
+            label='Gender'
+            type='select'
+            name='phoneNumber'
+            value={formData.phoneNumber}
+            onChange={handleChange}
+          />
+        </FieldSetFormLayout>
+        <FieldSetFormLayout legend='Patron Address'>
+          <CustomGridInput
+            label='Street'
+            type='select'
+            name='street'
+            value={formData.street}
+            onChange={handleChange}
+          />
+          <CustomGridInput
+            label='City'
+            type='select'
+            name='city'
+            value={formData.city}
+            onChange={handleChange}
+          />
+          <CustomGridInput
+            label='State'
+            type='select'
+            name='state'
+            value={formData.state}
+            onChange={handleChange}
+          />
+          <CustomGridInput
+            label='Zip Code'
+            type='select'
+            name='zipCode'
+            value={formData.zipCode}
+            onChange={handleChange}
+          />
+          <CustomGridInput
+            label='Country'
+            type='select'
+            name='country'
+            value={formData.country}
+            onChange={handleChange}
+          />
+        </FieldSetFormLayout> */}

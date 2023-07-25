@@ -10,7 +10,7 @@ function PatronsHomePage(props) {
   const router = useRouter()
 
   function onCellClickHandler(books) {
-    console.log(13, `/patrons/${books.row.barcode}`)
+    // console.log(13, `/patrons/${books.row.barcode}`)
     // router.push(`/patrons/${books.row.barcode}`, books.row)
     router.push({
       pathname: `/patrons/${books.row.barcode}`, // not router.asPath

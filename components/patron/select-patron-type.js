@@ -22,7 +22,7 @@ function SelectPatronType(props) {
         aria-label='patron-type'
         name='patron-type'
         value={patronType}
-        onChange={changePatronTypeHandler}
+        onChange={(type) => changePatronTypeHandler(type.target.value)}
       >
         <FormControlLabel value='student' control={<Radio />} label='Student' />
         <FormControlLabel value='staff' control={<Radio />} label='Staff' />

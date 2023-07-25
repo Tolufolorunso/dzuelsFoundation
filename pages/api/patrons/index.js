@@ -9,38 +9,126 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).end() // Method Not Allowed
   }
+  const {
+    barcode,
+    employerName,
+    street,
+    city,
+    state,
+    country,
+    schoolName,
+    schoolAdress,
+    schoolEmail,
+    schoolPhoneNumber,
+    headOfSchool,
+    currentClass,
+    parentName,
+    parentAddress,
+    parentPhoneNumber,
+    relationshipToPatron,
+    parentEmail,
+    patronType,
+    messagePreferences,
+  } = req.body
+
+  let patronExpiryDate
+
+  if (patronType === 'staff') {
+    patronExpiryDate = calculateExpiryDate(5)
+  } else {
+    patronExpiryDate = calculateExpiryDate()
+  }
+
+  let patronData = {
+    ...req.body,
+    patronExpiryDate,
+    messagePreferences: messagePreferences.split(', '),
+  }
+
+  if (patronType === 'student') {
+    patronData = {
+      ...patronData,
+      address: {
+        street,
+        city,
+        state,
+        country,
+      },
+      studentSchoolInfo: {
+        schoolName,
+        schoolAdress,
+        headOfSchool,
+        currentClass,
+        schoolEmail,
+        schoolPhoneNumber,
+      },
+      parentInfo: {
+        parentName,
+        parentAddress,
+        parentPhoneNumber,
+        relationshipToPatron,
+        parentEmail,
+      },
+    }
+  } else {
+    patronData = {
+      ...patronData,
+      address: {
+        street,
+        city,
+        state,
+        country,
+      },
+      employerInfo: {
+        employerName,
+        schoolName,
+        schoolAdress,
+        headOfSchool,
+        schoolEmail,
+        schoolPhoneNumber,
+      },
+    }
+  }
 
   try {
     await dbConnect() // Connect to the MongoDB database
 
     // Check if the patron with the same email already exists
-    const existingPatron = await Patron.findOne({ barcode: req.body.barcode })
+    const existingPatron = await Patron.findOne({ barcode })
     if (existingPatron) {
       return res
         .status(409)
         .json({ error: 'Duplicate patron, check the barcode' })
     }
 
-    let patronExpiryDate
-
-    if (req.body.patronType === 'staff') {
-      patronExpiryDate = calculateExpiryDate(5)
-    } else {
-      patronExpiryDate = calculateExpiryDate()
-    }
-
-    const patronData = {
-      ...req.body,
-      patronExpiryDate,
-      libraryManagment: {},
-    }
-
     // Create a new patron record
     const newPatron = await Patron.create(patronData)
 
-    return res.status(201).json({ status: true, patron: newPatron })
+    return res.status(201).json({
+      status: true,
+      patron: newPatron,
+      message: 'Patron created successfully',
+    })
   } catch (error) {
-    console.error('Error adding patron:', error)
-    return res.status(500).json({ error: 'Something went wrong' })
+    // Get the error messages as an array
+    const errorMessagesArray = extractErrorMessages(error.errors)
+    // console.log(errorMessagesArray)
+    const errorMessageString = errorMessagesArray.join('\n')
+    return res.status(500).json({ error: errorMessageString })
   }
+}
+
+function extractErrorMessages(errors) {
+  let messages = []
+  for (const key in errors) {
+    if (key !== '_message' && errors.hasOwnProperty(key)) {
+      const error = errors[key]
+      if (error.hasOwnProperty('message')) {
+        messages.push(error.message)
+        // const { path, ...rest } = error
+        // messages.push(rest.message)
+      }
+    }
+  }
+  return messages
 }

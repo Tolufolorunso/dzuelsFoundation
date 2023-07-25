@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 const PatronSchema = new mongoose.Schema(
   {
-    firstName: {
+    firstname: {
       type: String,
       required: true,
     },
@@ -11,7 +11,7 @@ const PatronSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    middleName: String,
+    middlename: String,
     email: {
       type: String,
       lowercase: true,
@@ -25,10 +25,9 @@ const PatronSchema = new mongoose.Schema(
       street: String,
       city: String,
       state: String,
-      zipCode: String,
       country: String,
     },
-
+    dateOfBirth: Date,
     patronType: {
       type: String,
       enum: ['student', 'teacher', 'staff'],
@@ -76,7 +75,7 @@ const PatronSchema = new mongoose.Schema(
     },
     messagePreferences: {
       type: Array,
-      default: ['email', 'text'],
+      default: ['email'],
     },
     registeredBy: {
       type: String,

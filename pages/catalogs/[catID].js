@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 function ItemPage() {
   const router = useRouter()
-  console.log(router.query)
+  // console.log(router.query)
   return (
     <Container>
       <h1>Dzuels Foundation</h1>
