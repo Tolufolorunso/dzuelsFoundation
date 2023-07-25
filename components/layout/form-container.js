@@ -28,7 +28,7 @@ function FormContainer(props) {
         margin: '0 auto 3rem auto',
         backgroundColor: 'rgba(255, 255, 255)',
         borderRadius: '5px',
-        padding: isMobile ? '1.5rem 0.7rem' : '2rem 4rem',
+        padding: isMobile ? '1rem 0' : '2rem 4rem',
       }}
     >
       {children}

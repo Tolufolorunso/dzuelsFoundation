@@ -3,14 +3,17 @@ import Drawer from '@mui/material/Drawer'
 import DrawerLinkList from './drawer-link-list'
 import Image from 'next/image'
 import Link from 'next/link'
+import useAppStore from '@/store/applicationStateStore'
 
 const RightDrawer = ({ open, onClose }) => {
+  const isMenuOpen = useAppStore((state) => state.appState.isMenuOpen)
+
   const drawerWidth = 240
 
   return (
     <Drawer
       anchor='left'
-      open={open}
+      open={isMenuOpen}
       onClose={onClose}
       sx={{
         width: drawerWidth,

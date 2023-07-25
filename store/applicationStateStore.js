@@ -6,8 +6,17 @@ const useAppStore = create((set) => ({
   appState: {
     successMessage: '',
     errorMessage: '',
+    isMenuOpen: false,
   },
 
+  closeMenu: () => {
+    set((state) => ({
+      appState: {
+        ...state.appState,
+        isMenuOpen: !state.appState.isMenuOpen,
+      },
+    }))
+  },
   setSuccessMessage: (message) => {
     set((state) => ({
       appState: {

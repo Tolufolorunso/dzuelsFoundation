@@ -6,8 +6,12 @@ import MenuIcon from '@mui/icons-material/Menu'
 import Button from '@mui/material/Button'
 import RightDrawer from './mobile-nav'
 import { useState, useEffect } from 'react'
+import useAppStore from '@/store/applicationStateStore'
 
 function Header() {
+  const closeMenu = useAppStore((state) => state.closeMenu)
+  const isMenuOpen = useAppStore((state) => state.appState.isMenuOpen)
+
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   const [isMobile, setIsMobile] = useState(false)
@@ -27,9 +31,9 @@ function Header() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  const handleDrawerToggle = () => {
-    setIsDrawerOpen(!isDrawerOpen)
-  }
+  // const handleDrawerToggle = () => {
+  //   setIsDrawerOpen(!isDrawerOpen)
+  // }
 
   return (
     <>
@@ -77,8 +81,8 @@ function Header() {
                 type='checkbox'
                 className={classes.navigationCheckbox}
                 id='navi-toggle'
-                checked={isDrawerOpen}
-                onChange={handleDrawerToggle}
+                checked={isMenuOpen}
+                onChange={closeMenu}
               />
               <label
                 htmlFor='navi-toggle'
@@ -92,7 +96,7 @@ function Header() {
         </nav>
         <div className='bottomNav'></div>
       </header>
-      <RightDrawer open={isDrawerOpen} onClose={handleDrawerToggle} />
+      <RightDrawer open={isMenuOpen} onClose={closeMenu} />
     </>
   )
 }
