@@ -11,10 +11,10 @@ import DraftsIcon from '@mui/icons-material/Drafts'
 import CustomHeader from '../typography/custom-header'
 
 function CirculationUserInfo(props) {
-  const {
-    patronData: { surname },
-  } = props
-  // console.log(patronData)
+  // const {
+  //   patronData: { surname },
+  // } = props
+  console.log(patronData)
   return (
     <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
       <nav aria-label='main mailbox folders'>
@@ -24,7 +24,7 @@ function CirculationUserInfo(props) {
               level={2}
               text={`${patronData?.surname}, ${patronData?.firstname} ${patronData?.middlename}`}
             /> */}
-            <p>{patronData?.barcode}</p>
+            {/* <p>{patronData?.barcode}</p> */}
           </ListItem>
           <ListItem disablePadding>
             <ListItemButton>
