@@ -1,4 +1,3 @@
-import classes from './patron-form.module.css'
 import FieldSetFormLayout from '../layout/field-set-layout'
 import CustomGridInput from '../layout/custom-grid-input'
 import FormContainer from '../layout/form-container'
@@ -13,6 +12,8 @@ function PatronForm(props) {
   let requiredFormFields = formFields.filter((fields) => {
     if (patronType === 'student') {
       return fields.type === 'all' || fields.type === 'student'
+    } else if (patronType === 'guest') {
+      return fields.type === 'all'
     } else {
       return fields.type === 'all' || fields.type === 'employer'
     }
@@ -37,7 +38,7 @@ function PatronForm(props) {
                       type={input.type}
                       name={input.name}
                       value={formData[input.name] || ''}
-                      onChange={handleChange} // Assuming you have the handleChange function to update the form data.
+                      onChange={handleChange}
                       required={input.required}
                     />
                   )

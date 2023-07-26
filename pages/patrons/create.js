@@ -80,7 +80,27 @@ function CreatePatronPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const patronData = { ...formData, patronType: patronType }
+    let patronData = { ...formData, patronType: patronType }
+
+    if (patronType === 'guest') {
+      patronData = {
+        surname: patronData.surname,
+        firstname: patronData.firstname,
+        middlename: patronData.middlename,
+        email: patronData.email,
+        phoneNumber: patronData.phoneNumber,
+        gender: patronData.gender,
+        dateOfBirth: patronData.dateOfBirth,
+        street: patronData.street,
+        city: patronData.city,
+        state: patronData.state,
+        country: patronData.country,
+        barcode: patronData.barcode,
+        library: 'AAoj',
+        patronType: patronType,
+      }
+    }
+
     try {
       setIsLoading(true)
       const response = await fetch('/api/patrons', {

@@ -12,7 +12,6 @@ function CheckoutContent(props) {
   const patronData = useCirculationStore(
     (state) => state.circulation.patronData
   )
-  console.log(patronData)
   const { getPatron } = props
   const formRef = useRef(null)
   const inputRef = useRef(null)
@@ -117,15 +116,16 @@ function CheckoutContent(props) {
           </form>
         </Box>
         <Divider />
-        <Stack container spacing={3} direction={{ sm: 'column', md: 'row' }}>
-          <Box sx={{ width: '30%' }}>
-            <CirculationUserInfo patronData={patronData} />
-          </Box>
-          <Divider orientation='vertical' />
-          <Box sx={{ width: '70%' }}>
-            <h1>hello</h1>
-          </Box>
-        </Stack>
+        {patronData ? (
+          <Stack container spacing={3} direction={{ sm: 'column', md: 'row' }}>
+            <Box sx={{ width: '30%' }}>
+              <CirculationUserInfo patronData={patronData} />
+            </Box>
+            <Box sx={{ width: '70%' }}>
+              <h1>hello</h1>
+            </Box>
+          </Stack>
+        ) : null}
       </Stack>
     </Box>
   )

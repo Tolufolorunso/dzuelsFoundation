@@ -15,17 +15,13 @@ const fetchApi = async (endpoint, method = 'GET', data = null) => {
     }
 
     const response = await fetch(`${baseUrl}${endpoint}`, config)
+    const result = await response.json()
 
-    if (!response.ok) {
-      // Handle error responses from the API
-      const errResponse = await response.json()
-      if (response.status === 404) {
-        throw new Error(errResponse.error)
-      }
-      throw new Error(errResponse.errResponse.error)
+    if (result.status) {
+      return result
+    } else {
+      throw new Error(result.errorMessage)
     }
-
-    return await response.json()
   } catch (error) {
     // Handle any other errors that might occur during the fetch process
     throw new Error(error.message)

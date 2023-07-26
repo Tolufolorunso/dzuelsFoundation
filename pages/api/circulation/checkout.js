@@ -5,26 +5,29 @@ import Cataloging from '@/models/CatalogingModel'
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
-    // console.log(8, req.query.patronBarcode)
-    dbConnect()
     try {
+      await dbConnect()
       const patron = await Patron.findOne({ barcode: req.query.patronBarcode })
-      // console.log(12, 'server', patron)
 
       if (!patron) {
-        // console.log(14, 'server', patron)
-        return res.status(404).json({ error: 'Patron not found' })
+        return res
+          .status(404)
+          .json({ status: false, errorMessage: 'Patron not found' })
       }
 
-      return res.status(200).json(patron)
+      return res.status(200).json({ status: true, patron })
     } catch (error) {
-      res.status(500).json({ error: error })
+      res.status(500).json({
+        status: false,
+        error: error,
+        errorMessage: 'Server error occurred',
+      })
     }
   }
 
   if (req.method == 'POST') {
-    dbConnect()
     try {
+      await dbConnect()
       const { patronId, barcode } = req.body
 
       // Find the patron and the cataloging record by ID and barcode, respectively
@@ -32,11 +35,15 @@ export default async function handler(req, res) {
       const cataloging = await Cataloging.findOne({ barcode })
 
       if (!patron || !cataloging) {
-        return res.status(404).json({ error: 'Patron or item not found' })
+        return res
+          .status(404)
+          .json({ errorMessage: 'Patron or item not found' })
       }
 
       if (cataloging.checkedOutBy) {
-        return res.status(409).json({ error: 'Item is already checked out' })
+        return res
+          .status(409)
+          .json({ errorMessage: 'Item is already checked out' })
       }
 
       // Update the cataloging record with checkout details

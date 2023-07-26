@@ -27,6 +27,7 @@ function SelectPatronType(props) {
         <FormControlLabel value='student' control={<Radio />} label='Student' />
         <FormControlLabel value='staff' control={<Radio />} label='Staff' />
         <FormControlLabel value='teacher' control={<Radio />} label='Teacher' />
+        <FormControlLabel value='guest' control={<Radio />} label='Guest' />
       </RadioGroup>
     </FormControl>
   )

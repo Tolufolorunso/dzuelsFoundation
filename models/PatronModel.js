@@ -30,7 +30,7 @@ const PatronSchema = new mongoose.Schema(
     dateOfBirth: Date,
     patronType: {
       type: String,
-      enum: ['student', 'teacher', 'staff'],
+      enum: ['student', 'teacher', 'staff', 'guest'],
       default: 'student',
     },
     barcode: {

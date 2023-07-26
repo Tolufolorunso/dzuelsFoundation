@@ -42,7 +42,9 @@ export default async function handler(req, res) {
   let patronData = {
     ...req.body,
     patronExpiryDate,
-    messagePreferences: messagePreferences.split(', '),
+    messagePreferences: messagePreferences
+      ? messagePreferences.split(', ')
+      : [],
   }
 
   if (patronType === 'student') {
@@ -70,6 +72,10 @@ export default async function handler(req, res) {
         parentEmail,
       },
     }
+  } else if (patronType === 'guest') {
+    patronData = {
+      ...patronData,
+    }
   } else {
     patronData = {
       ...patronData,
@@ -89,6 +95,9 @@ export default async function handler(req, res) {
       },
     }
   }
+
+  console.log(patronData)
+  // return
 
   try {
     await dbConnect() // Connect to the MongoDB database
