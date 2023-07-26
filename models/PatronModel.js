@@ -82,6 +82,15 @@ const PatronSchema = new mongoose.Schema(
       required: true,
       default: 'Admin',
     },
+    checkoutHistory: {
+      type: [
+        {
+          itemBarcode: String,
+          checkoutDate: Date,
+          dueDate: Date,
+        },
+      ],
+    },
   },
   { timestamps: true }
 )

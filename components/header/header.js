@@ -2,17 +2,24 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import classes from './header.module.css'
-import MenuIcon from '@mui/icons-material/Menu'
-import Button from '@mui/material/Button'
+// import MenuIcon from '@mui/icons-material/Menu'
+// import Button from '@mui/material/Button'
 import RightDrawer from './mobile-nav'
 import { useState, useEffect } from 'react'
 import useAppStore from '@/store/applicationStateStore'
+import { useRouter } from 'next/router'
+import CatalogNav from './catalog-nav'
+import PatronNav from './patron-nav'
 
 function Header() {
   const closeMenu = useAppStore((state) => state.closeMenu)
   const isMenuOpen = useAppStore((state) => state.appState.isMenuOpen)
 
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const router = useRouter()
+
+  console.log(router.pathname)
+
+  // const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   const [isMobile, setIsMobile] = useState(false)
 
@@ -31,9 +38,14 @@ function Header() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // const handleDrawerToggle = () => {
-  //   setIsDrawerOpen(!isDrawerOpen)
-  // }
+  let bottomNav
+
+  if (router.pathname.includes('catalogs')) {
+    bottomNav = <CatalogNav />
+  }
+  if (router.pathname.includes('patrons')) {
+    bottomNav = <PatronNav />
+  }
 
   return (
     <>
@@ -42,13 +54,13 @@ function Header() {
           <div className={classes.container}>
             <div className={classes.nav_items}>
               <div className='logo'>
-                <Link href='/'>
+                <Link href='/' className={classes.logo_link}>
                   <Image
                     src='/images/logo.png'
                     alt='Logo'
-                    width={100}
-                    height={60}
-                    quality={100}
+                    width={80}
+                    height={40}
+                    quality={60}
                   />
                 </Link>
               </div>
@@ -94,7 +106,7 @@ function Header() {
             </div>
           </div>
         </nav>
-        <div className='bottomNav'></div>
+        {bottomNav}
       </header>
       <RightDrawer open={isMenuOpen} onClose={closeMenu} />
     </>

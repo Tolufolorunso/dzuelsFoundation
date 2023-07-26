@@ -79,6 +79,13 @@ const CatalogingSchema = new mongoose.Schema(
     image_url: {
       type: String,
     },
+    isCheckedOut: { type: Boolean, default: false },
+    checkedOutBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Patron',
+      default: null,
+    },
+    checkedOutAt: { type: Date, default: null },
     library: {
       type: String,
       default: 'AAoJ',

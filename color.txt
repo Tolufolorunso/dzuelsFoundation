@@ -102,3 +102,19 @@
             onChange={handleChange}
           />
         </FieldSetFormLayout> */}
+
+          const { getPatron } = props
+  const [patronBarcode, setPatronBarcode] = useState('')
+
+  const debouncedGetPatron = debounce(getPatron, 2000)
+
+  function handleBarcodeScan(event) {
+    const scannedBarcode = event.target.value
+    setPatronBarcode(scannedBarcode)
+    debouncedGetPatron(scannedBarcode)
+  }
+
+  function handleChange(event) {
+    const scannedBarcode = event.target.value
+    setPatronBarcode(scannedBarcode)
+  }

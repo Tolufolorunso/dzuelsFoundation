@@ -1,5 +1,5 @@
 import dbConnect from '@/lib/dbConnect'
-import Cataloging from '@/models/Cataloging'
+import Cataloging from '@/models/CatalogingModel'
 import Joi from 'joi'
 
 async function handler(req, res) {

@@ -3,11 +3,26 @@
 const mongoose = require('mongoose')
 
 const UserSchema = new mongoose.Schema({
-  name: {
+  email: {
     type: String,
-    require: true,
+    required: true,
+    unique: true,
+    trim: true,
+    lowercase: true,
   },
-  libraryLogin: String,
+  password: {
+    type: String,
+    required: true,
+  },
+  role: {
+    type: String,
+    enum: ['admin', 'ima', 'librarian'],
+    default: 'librarian',
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 })
 
 export default mongoose.models.User || mongoose.model('User', UserSchema)

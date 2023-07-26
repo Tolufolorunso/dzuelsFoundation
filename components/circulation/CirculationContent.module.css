@@ -1,0 +1,12 @@
+.button {
+  background-color: #969593 !important;
+  text-align: left !important;
+  padding: 1.3rem !important;
+  display: inline-block !important;
+  color: var(--white) !important;
+  font-size: 2rem !important;
+}
+
+.button:hover {
+  background-color: var(--dark-main) !important;
+}

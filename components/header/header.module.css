@@ -7,13 +7,17 @@
   /* height: 60px; */
   background: var(--white);
   /* padding: 0 100px; */
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px; */
 }
 
 .container {
   width: min(1200px, 100% - 2rem);
   margin: 0 auto;
+}
+
+.logo_link {
+  display: flex;
 }
 
 .nav_items {
@@ -31,13 +35,13 @@
 
 .links li {
   display: inline-block;
-  padding: 0 10px;
+  padding: 0 6px;
 }
 
 .links a:link,
 .links a:visited {
   text-decoration: none;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   font-weight: 400;
   transition: all ease-in-out 0.5s;
   color: var(--black);

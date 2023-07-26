@@ -1,5 +1,6 @@
 function Container(props) {
-  return <div className='container'>{props.children}</div>
+  const { children } = props
+  return <div className='container'>{children}</div>
 }
 
 export default Container
