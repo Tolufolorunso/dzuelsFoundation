@@ -12,7 +12,7 @@ DzuelsFoundation is a comprehensive library management system that simplifies th
 
 - **Patron Management**: DzuelsFoundation enables library staff to manage patrons' records, including adding new patrons, editing patron details, and deleting patron information if needed. It also allows patrons to be categorized as staff, students, teachers, or guests.
 
-- **User Roles**: The project implements various user roles, such as admin, librarian, and ima (Ima is an acronym for I Must Administer), to control access and permissions for different functionalities.
+- **User Roles**: The project implements various user roles, such as admin, librarian, and ima (ima means mother. Our company director), to control access and permissions for different functionalities.
 
 - **Student Attendance**: The system facilitates tracking student attendance, which can be a valuable feature for educational institutions using the library.
 
