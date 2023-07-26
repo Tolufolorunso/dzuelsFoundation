@@ -14,6 +14,7 @@ function Checkout() {
       const data = await fetchApi(
         `/circulation/checkout?patronBarcode=${patronBarcode}`
       )
+
       setPatron(data)
     } catch (error) {
       setErrorMessage(error.message)

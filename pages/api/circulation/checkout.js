@@ -5,18 +5,20 @@ import Cataloging from '@/models/CatalogingModel'
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
-    console.log(req.query.patronBarcode)
+    // console.log(8, req.query.patronBarcode)
     dbConnect()
     try {
       const patron = await Patron.findOne({ barcode: req.query.patronBarcode })
-      console.log(12, patron)
+      // console.log(12, 'server', patron)
+
       if (!patron) {
+        // console.log(14, 'server', patron)
         return res.status(404).json({ error: 'Patron not found' })
       }
 
       return res.status(200).json(patron)
     } catch (error) {
-      res.status().json({ error: error })
+      res.status(500).json({ error: error })
     }
   }
 

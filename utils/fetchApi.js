@@ -22,8 +22,7 @@ const fetchApi = async (endpoint, method = 'GET', data = null) => {
       if (response.status === 404) {
         throw new Error(errResponse.error)
       }
-      console.log(await response.json())
-      throw new Error('Network response was not ok')
+      throw new Error(errResponse.errResponse.error)
     }
 
     return await response.json()
