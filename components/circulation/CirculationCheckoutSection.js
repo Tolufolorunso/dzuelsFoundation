@@ -55,14 +55,13 @@ function CirculationCheckoutSection() {
   function checkoutHandler() {
     const inputValue = formRef.current.barcode.value
     // getPatron(inputValue)
-    console.log(inputValue)
+    // console.log(inputValue)
   }
 
   const handleScan = (barcodeString) => {
     //set barcode display to data
     // getPatron(barcodeString)
-
-    console.log(65, barcodeString)
+    // console.log(65, barcodeString)
   }
 
   const patronBarcode = patronData ? patronData.barcode : null

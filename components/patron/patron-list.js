@@ -1,7 +1,7 @@
 import { DataGrid } from '@mui/x-data-grid'
 
 function PatronList(props) {
-  const { rows, columns, onCellClickHandler, isLoadingBooks } = props
+  const { rows, columns, onCellClickHandler, isLoadingPatrons } = props
 
   return (
     <div style={{ height: '500px', width: '100%' }}>
@@ -18,7 +18,7 @@ function PatronList(props) {
         checkboxSelection
         onCellClick={onCellClickHandler}
         getRowId={(row) => row.barcode}
-        loading={isLoadingBooks}
+        loading={isLoadingPatrons}
       />
     </div>
   )

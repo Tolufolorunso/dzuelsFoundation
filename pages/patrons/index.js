@@ -1,11 +1,13 @@
 import Container from '@/components/layout/container'
 import Aside from '@/components/patron/aside'
 import ContentSide from '@/components/patron/content-side'
-import CustomHeader from '@/components/typography/custom-header'
+import useAppStore from '@/store/applicationStateStore'
+import fetchApi from '@/utils/fetchApi'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function PatronsHomePage(props) {
+  const setErrorMessage = useAppStore((state) => state.setErrorMessage)
   const { columns } = props
   const router = useRouter()
 
@@ -20,6 +22,29 @@ function PatronsHomePage(props) {
 
   const [isLoadingPatrons, setIsLoadingPatrons] = useState(true)
   const [patrons, setPatrons] = useState([])
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setIsLoadingPatrons(true)
+        const res = await fetchApi('/patrons')
+        const { status, patrons } = res
+        if (status) {
+          setPatrons(patrons)
+        } else {
+          throw new Error('Error occurred while fetching')
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error)
+        setErrorMessage(error.message)
+      } finally {
+        setIsLoadingPatrons(false)
+      }
+    }
+
+    fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Container>

@@ -55,9 +55,6 @@ export default async function handler(req, res) {
         // const
         // console.log(extractedData)
 
-        // Now you have the 'extractedData' variable containing the extracted data.
-        // console.log('Data extracted:', extractedData)
-
         // Delete the temporary file after extracting the data.
         fs.unlink(tempFilePath, (err) => {
           if (err) {
@@ -79,7 +76,6 @@ export default async function handler(req, res) {
 }
 
 // const post = async (req, res) => {
-//   console.log(123)
 //   const form = new formidable.IncomingForm()
 //   form.parse(req, (err, fields, files) => {
 //     if (err) {
@@ -111,9 +107,7 @@ export default async function handler(req, res) {
 // }
 
 const saveFile = async (file) => {
-  console.log(file)
   const data = fs.readFileSync(file.path)
-  console.log(data)
   fs.writeFileSync(`./public/${file.name}`, data)
   await fs.unlinkSync(file.path)
   return

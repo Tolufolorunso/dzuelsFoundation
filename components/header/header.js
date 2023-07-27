@@ -17,8 +17,6 @@ function Header() {
 
   const router = useRouter()
 
-  console.log(router.pathname)
-
   // const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   const [isMobile, setIsMobile] = useState(false)

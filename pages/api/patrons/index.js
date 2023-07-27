@@ -6,6 +6,32 @@ import Patron from '@/models/PatronModel'
 import calculateExpiryDate from '@/utils/expiryDate'
 
 export default async function handler(req, res) {
+  if (req.method === 'GET') {
+    try {
+      await dbConnect()
+      const { firstname, surname, library, barcode, gender, patronType } =
+        req.query
+      // Build the query object based on the provided filters
+      const query = {}
+      if (firstname) query.firstname = new RegExp(firstname, 'i') // Case-insensitive search
+      if (surname) query.surname = new RegExp(surname, 'i')
+      if (library) query.library = new RegExp(library, 'i')
+      if (gender) query.gender = new RegExp(gender, 'i')
+      if (patronType) query.patronType = new RegExp(patronType, 'i')
+      if (barcode) query.barcode = barcode
+
+      // Fetch cataloging records based on the query
+      const patrons = await Patron.find(query).select(
+        'firstname surname library barcode gender patronType'
+      )
+
+      return res.status(200).json({ status: true, patrons })
+    } catch (error) {
+      console.error('Error fetching books:', error)
+      return res.status(500).json({ error: 'Something went wrong' })
+    }
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).end() // Method Not Allowed
   }

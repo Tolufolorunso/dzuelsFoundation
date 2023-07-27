@@ -30,7 +30,6 @@ function PatronForm(props) {
             return (
               <FieldSetFormLayout key={index} legend={fieldset.legend}>
                 {fieldset.inputs.map((input, inputIndex) => {
-                  // console.log(formData[input.name])
                   return (
                     <CustomGridInput
                       key={inputIndex}
