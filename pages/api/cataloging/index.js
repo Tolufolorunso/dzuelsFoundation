@@ -16,21 +16,21 @@ async function handler(req, res) {
         return res.status(409).json({ error: 'Barcode already in use' })
       }
 
-      const subHeading = req.body.subjectHeadings.split(', ')
+      const indexTermGenre = req.body.indexTermGenre.split(', ')
 
       const data = {
         ...req.body,
         title: { mainTitle: req.body.title, subtitle: req.body.subtitle },
         author: {
           mainAuthor: req.body.mainAuthor,
-          additionalAuthor: req.body.additionalAuthor,
+          additionalAuthors: req.body.additionalAuthors,
         },
         publicationInfo: {
           publisher: req.body.publisher,
           place: req.body.place,
           year: req.body.year,
         },
-        subjectHeadings: subHeading,
+        indexTermGenre: indexTermGenre,
       }
 
       // If data is valid, create a new book record in the database

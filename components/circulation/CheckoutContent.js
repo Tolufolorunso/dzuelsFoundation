@@ -7,6 +7,7 @@ import { Divider } from '@mui/material'
 import classes from './CheckoutContent.module.css'
 import useCirculationStore from '@/store/circulationStore'
 import CirculationUserInfo from './CirculationUserInfo'
+import CirculationCheckoutSection from './CirculationCheckoutSection'
 
 function CheckoutContent(props) {
   const patronData = useCirculationStore(
@@ -19,7 +20,7 @@ function CheckoutContent(props) {
   let barcodeScan = ''
 
   useEffect(() => {
-    inputRef.current.focus()
+    // inputRef.current.focus()
   }, [])
 
   useEffect(() => {
@@ -73,14 +74,6 @@ function CheckoutContent(props) {
               direction={{ xs: 'column', sm: 'row' }}
               style={{ width: '60%', alignItems: 'flex-end' }}
             >
-              {/* <TextField
-                label='Scan Patron Barcode'
-                autoFocus={true}
-                style={{ width: '70%' }}
-                name='barcode'
-                ref={inputRef}
-              /> */}
-
               <div
                 style={{
                   width: '70%',
@@ -117,12 +110,12 @@ function CheckoutContent(props) {
         </Box>
         <Divider />
         {patronData ? (
-          <Stack container spacing={3} direction={{ sm: 'column', md: 'row' }}>
+          <Stack container spacing={4} direction={{ sm: 'column', md: 'row' }}>
             <Box sx={{ width: '30%' }}>
               <CirculationUserInfo patronData={patronData} />
             </Box>
             <Box sx={{ width: '70%' }}>
-              <h1>hello</h1>
+              <CirculationCheckoutSection />
             </Box>
           </Stack>
         ) : null}

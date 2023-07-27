@@ -16,34 +16,45 @@ function CirculationUserInfo(props) {
     ? `${patronData.surname}, ${patronData.firstname} ${patronData.middlename}`
     : ''
   const barcode = patronData ? `${patronData.barcode}` : ''
+  const phoneNumber = patronData ? `${patronData.phoneNumber}` : ''
+  const email = patronData ? `${patronData.email}` : ''
+  const library = patronData ? `${patronData.library}` : ''
+  const address = patronData
+    ? `${patronData.address?.street},\n${patronData.address?.city}${patronData.address?.state},\n${patronData.address?.country}`
+    : ''
 
   return (
     <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
       <nav aria-label='main mailbox folders'>
         <List>
-          <ListItem disablePadding>
-            <CustomHeader level={2} text={fullName} />
-            <p>{barcode}</p>
+          <ListItem>
+            <div>
+              <h1>{fullName}</h1>
+              <p>({barcode})</p>
+            </div>
           </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText primary='Drafts' />
-            </ListItemButton>
+          <ListItem>
+            <address>
+              <pre>{address}</pre>
+            </address>
+          </ListItem>
+          <ListItem>
+            <pre>{phoneNumber}</pre>
+          </ListItem>
+          <ListItem>
+            <pre>{email}</pre>
           </ListItem>
         </List>
       </nav>
       <Divider />
-      <nav aria-label='secondary mailbox folders'>
+      <nav aria-label='main mailbox folders'>
         <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText primary='Trash' />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component='a' href='#simple-list'>
-              <ListItemText primary='Spam' />
-            </ListItemButton>
+          <ListItem>
+            <div>
+              <p>
+                <strong>Library</strong>: {library}
+              </p>
+            </div>
           </ListItem>
         </List>
       </nav>

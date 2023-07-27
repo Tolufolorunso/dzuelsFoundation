@@ -1,0 +1,12 @@
+.checkingHeader {
+  font-weight: 600;
+  color: var(--black);
+  font-size: 1.8rem;
+}
+
+.enterBarcode {
+  font-weight: 300;
+  margin-top: -5px;
+  font-size: 1.4rem;
+  color: var(--logo-grey);
+}

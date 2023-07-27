@@ -45,9 +45,9 @@ function CatalogingForm(props) {
               required
             />
             <CustomGridInput
-              label='Additional Author'
-              name='additionalAuthor'
-              value={formData.additionalAuthor}
+              label='Additional Authors'
+              name='additionalAuthors'
+              value={formData.additionalAuthors}
               onChange={handleChange}
             />
           </FieldSetFormLayout>
@@ -131,12 +131,7 @@ function CatalogingForm(props) {
               value={formData.physicalDescription}
               onChange={handleChange}
             />
-            <CustomGridInput
-              label='Subject Headings'
-              name='subjectHeadings'
-              value={formData.subjectHeadings}
-              onChange={handleChange}
-            />
+
             <CustomGridInput
               label='Holdings Information'
               name='holdingsInformation'

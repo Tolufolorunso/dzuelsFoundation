@@ -19,8 +19,8 @@ const CatalogingSchema = new mongoose.Schema(
         type: String,
         required: true,
       },
-      additionalAuthor: {
-        type: String,
+      additionalAuthors: {
+        type: Array,
       },
     },
 
@@ -51,7 +51,7 @@ const CatalogingSchema = new mongoose.Schema(
       required: true,
     },
     indexTermGenre: {
-      type: String,
+      type: Array,
       required: true,
     },
     informationSummary: {
@@ -64,10 +64,6 @@ const CatalogingSchema = new mongoose.Schema(
     },
     physicalDescription: {
       type: String,
-    },
-    subjectHeadings: {
-      type: [String],
-      required: true,
     },
     barcode: {
       type: String,

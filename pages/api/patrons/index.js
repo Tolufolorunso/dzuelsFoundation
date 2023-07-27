@@ -96,18 +96,16 @@ export default async function handler(req, res) {
     }
   }
 
-  console.log(patronData)
-  // return
-
   try {
-    await dbConnect() // Connect to the MongoDB database
+    await dbConnect()
 
     // Check if the patron with the same email already exists
     const existingPatron = await Patron.findOne({ barcode })
     if (existingPatron) {
-      return res
-        .status(409)
-        .json({ error: 'Duplicate patron, check the barcode' })
+      return res.status(409).json({
+        status: false,
+        errorMessage: 'Duplicate patron, check the barcode',
+      })
     }
 
     // Create a new patron record
@@ -121,9 +119,10 @@ export default async function handler(req, res) {
   } catch (error) {
     // Get the error messages as an array
     const errorMessagesArray = extractErrorMessages(error.errors)
-    // console.log(errorMessagesArray)
     const errorMessageString = errorMessagesArray.join('\n')
-    return res.status(500).json({ error: errorMessageString })
+    return res
+      .status(500)
+      .json({ status: false, errorMessage: errorMessageString, error })
   }
 }
 

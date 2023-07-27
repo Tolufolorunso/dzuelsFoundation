@@ -13,6 +13,7 @@ export const formFields = [
         label: 'Date Of Birth',
         type: 'date',
         name: 'dateOfBirth',
+        placeholder: 'YYYY-MM-DD',
       },
     ],
   },

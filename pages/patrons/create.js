@@ -2,6 +2,7 @@ import Container from '@/components/layout/container'
 import AddPatron from '@/components/patron/add-patron'
 import useAppStore from '@/store/applicationStateStore'
 import usePatronStore from '@/store/patronStore'
+import fetchApi from '@/utils/fetchApi'
 import { useState } from 'react'
 
 function CreatePatronPage() {
@@ -19,11 +20,11 @@ function CreatePatronPage() {
     gender: '',
     dateOfBirth: '',
     street: '',
-    city: '',
-    state: '',
-    country: '',
+    city: 'ijero',
+    state: 'ekiti',
+    country: 'nigeria',
     barcode: '',
-    library: 'AAoj',
+    library: 'AAoJ',
     employerName: '',
     schoolName: '',
     schoolAdress: '',
@@ -36,7 +37,7 @@ function CreatePatronPage() {
     parentPhoneNumber: '',
     relationshipToPatron: '',
     parentEmail: '',
-    messagePreferences: '',
+    messagePreferences: 'email,sms,call',
   })
 
   const clearFormDataExceptLibrary = () => {
@@ -103,28 +104,21 @@ function CreatePatronPage() {
 
     try {
       setIsLoading(true)
-      const response = await fetch('/api/patrons', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(patronData),
-      })
+      const res = await fetchApi('/patrons', 'POST', patronData)
+      const { status, message, patron } = res
 
-      const data = await response.json()
-
-      if (response.ok) {
-        // console.log(66, data)
-        // clearFormDataExceptLibrary()
+      if (status) {
+        clearFormDataExceptLibrary()
         setSuccessMessage(
-          `Patron Added Successfully. Welcome ${data.patron.firstname}: ${data.patron.barcode}`
+          `${message}. Welcome ${patron.firstname}: ${patron.barcode}`
         )
       } else {
-        setErrorMessage(data.error)
+        throw new Error(
+          'Something bad went wrong. Please contact your administrator'
+        )
       }
     } catch (error) {
-      // console.error('Error adding book:', error)
-      setErrorMessage('Error adding book:', error.message)
+      setErrorMessage(error.message)
     } finally {
       setIsLoading(false)
     }

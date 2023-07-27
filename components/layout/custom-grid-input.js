@@ -5,7 +5,15 @@ import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 
-function CustomGridInput({ label, name, value, onChange, type, required }) {
+function CustomGridInput({
+  label,
+  name,
+  value,
+  onChange,
+  type,
+  required,
+  placeholder,
+}) {
   if (type === 'select') {
     return (
       <Grid item xs={12}>
@@ -41,6 +49,7 @@ function CustomGridInput({ label, name, value, onChange, type, required }) {
         value={value}
         onChange={onChange}
         required={required}
+        placeholder={placeholder}
       />
     </Grid>
   )

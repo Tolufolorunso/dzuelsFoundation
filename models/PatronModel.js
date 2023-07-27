@@ -73,6 +73,7 @@ const PatronSchema = new mongoose.Schema(
       relationshipToPatron: String,
       parentEmail: String,
     },
+    image_url: String,
     messagePreferences: {
       type: Array,
       default: ['email'],
@@ -82,15 +83,16 @@ const PatronSchema = new mongoose.Schema(
       required: true,
       default: 'Admin',
     },
-    checkoutHistory: {
-      type: [
-        {
-          itemBarcode: String,
-          checkoutDate: Date,
-          dueDate: Date,
+    checkoutHistory: [
+      {
+        itemBarcode: {
+          type: String,
+          ref: 'Cataloging',
         },
-      ],
-    },
+        checkoutDate: Date,
+        dueDate: Date,
+      },
+    ],
   },
   { timestamps: true }
 )

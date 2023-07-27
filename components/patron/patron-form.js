@@ -40,6 +40,7 @@ function PatronForm(props) {
                       value={formData[input.name] || ''}
                       onChange={handleChange}
                       required={input.required}
+                      placeholder={input.placeholder}
                     />
                   )
                 })}
