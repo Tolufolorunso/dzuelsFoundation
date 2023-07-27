@@ -69,7 +69,7 @@ export async function getStaticProps(ctx) {
     { field: 'surname', headerName: 'Surname', width: 200 },
     {
       field: 'patronType',
-      headerName: 'patronType',
+      headerName: 'Patron Type',
       width: 130,
     },
   ]

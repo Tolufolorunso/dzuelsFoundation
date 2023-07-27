@@ -70,7 +70,7 @@ export default async function handler(req, res) {
       patron.checkoutHistory.push({
         itemBarcode: cataloging.barcode,
         checkoutDate: new Date(),
-        dueDate: cataloging.checkedOutHistory.dueDate,
+        dueDate: dueDate,
       })
       await patron.save()
 
