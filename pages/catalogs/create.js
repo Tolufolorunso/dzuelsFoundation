@@ -59,6 +59,26 @@ function AddItemPage() {
     router.replace('/catalogs')
   }
 
+  const clearFormDataExceptLibrary = () => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      title: '',
+      subtitle: '',
+      mainAuthor: '',
+      additionalAuthors: '',
+      publisher: '',
+      place: '',
+      year: '',
+      ISBN: '',
+      barcode: '',
+      classification: '',
+      controlNumber: '',
+      indexTermGenre: '',
+      informationSummary: '',
+      physicalDescription: '',
+    }))
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault()
     setLoading(true)
@@ -76,6 +96,7 @@ function AddItemPage() {
       const data = await response.json()
       if (response.ok) {
         // Book added successfully, do something (e.g., show a success message)
+        clearFormDataExceptLibrary()
         setState({
           ...state,
           open: true,
