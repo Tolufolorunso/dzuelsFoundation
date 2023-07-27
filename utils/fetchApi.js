@@ -16,7 +16,7 @@ const fetchApi = async (endpoint, method = 'GET', data = null) => {
 
     const response = await fetch(`${baseUrl}${endpoint}`, config)
     const result = await response.json()
-    // console.log(result)
+    console.log(19, result)
 
     if (result.status) {
       return result

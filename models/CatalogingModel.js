@@ -76,12 +76,18 @@ const CatalogingSchema = new mongoose.Schema(
       type: String,
     },
     isCheckedOut: { type: Boolean, default: false },
-    checkedOutBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Patron',
-      default: null,
-    },
-    checkedOutAt: { type: Date, default: null },
+    checkedOutHistory: [
+      {
+        checkedOutBy: {
+          type: String,
+          ref: 'Patron',
+          default: null,
+        },
+        checkedOutAt: { type: Date, default: null },
+        dueDate: Date,
+      },
+    ],
+
     library: {
       type: String,
       default: 'AAoJ',
