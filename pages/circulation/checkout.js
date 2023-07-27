@@ -9,14 +9,16 @@ function Checkout() {
   const setErrorMessage = useAppStore((state) => state.setErrorMessage)
   const setPatron = useCirculationStore((state) => state.setPatron)
 
-  async function getPatron(patronBarcode) {
-    try {
-      const data = await fetchApi(
-        `/circulation/checkout?patronBarcode=${patronBarcode}`
-      )
-      setPatron(data.patron)
-    } catch (error) {
-      setErrorMessage(error.message)
+  async function getPatron(patronBarcode, type) {
+    if (type === 'patron') {
+      try {
+        const data = await fetchApi(
+          `/circulation/checkout?patronBarcode=${patronBarcode}`
+        )
+        setPatron(data.patron)
+      } catch (error) {
+        setErrorMessage(error.message)
+      }
     }
   }
 

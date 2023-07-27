@@ -1,3 +1,4 @@
+import fetchApi from '@/utils/fetchApi'
 import { create } from 'zustand'
 
 import { devtools, persist } from 'zustand/middleware'
@@ -13,6 +14,14 @@ const useCirculationStore = create((set) => ({
         patronData: patron,
       },
     }))
+  },
+  checkout: async (checkoutData) => {
+    try {
+      const res = await fetchApi('/circulation/checkout', 'POST', checkoutData)
+      return res
+    } catch (error) {
+      throw new Error(error.message)
+    }
   },
 }))
 

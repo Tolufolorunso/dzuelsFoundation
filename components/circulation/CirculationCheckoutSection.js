@@ -6,11 +6,14 @@ import Divider from '@mui/material/Divider'
 
 import classes from './CirculationCheckoutSection.module.css'
 import { useEffect, useRef } from 'react'
+import useAppStore from '@/store/applicationStateStore'
 
 function CirculationCheckoutSection() {
   const patronData = useCirculationStore(
     (state) => state.circulation.patronData
   )
+  const checkout = useCirculationStore((state) => state.checkout)
+  const setErrorMessage = useAppStore((state) => state.setErrorMessage)
 
   const formRef = useRef(null)
   const inputRef = useRef(null)
@@ -54,14 +57,21 @@ function CirculationCheckoutSection() {
 
   function checkoutHandler() {
     const inputValue = formRef.current.barcode.value
-    // getPatron(inputValue)
-    // console.log(inputValue)
+    handleCheckout(inputValue)
   }
 
   const handleScan = (barcodeString) => {
-    //set barcode display to data
-    // getPatron(barcodeString)
-    // console.log(65, barcodeString)
+    handleCheckout(barcodeString)
+  }
+
+  async function handleCheckout(itemBarcode) {
+    const patronBarcode = patronData ? patronData.barcode : null
+    try {
+      const res = await checkout({ itemBarcode, patronBarcode })
+      console.log(69, res)
+    } catch (error) {
+      setErrorMessage(error.message)
+    }
   }
 
   const patronBarcode = patronData ? patronData.barcode : null

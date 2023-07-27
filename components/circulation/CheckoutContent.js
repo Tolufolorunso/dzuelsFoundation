@@ -56,12 +56,14 @@ function CheckoutContent(props) {
 
   function submitBtnClickHandler() {
     const inputValue = formRef.current.barcode.value
-    getPatron(inputValue)
+    getPatron(inputValue, 'patron')
   }
 
   const handleScan = (barcodeString) => {
     //set barcode display to data
-    getPatron(barcodeString)
+    if (!patronData) {
+      getPatron(barcodeString, 'patron')
+    }
   }
 
   return (
