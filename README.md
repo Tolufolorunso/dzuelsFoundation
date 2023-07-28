@@ -24,7 +24,7 @@ DzuelsFoundation is a comprehensive library management system that simplifies th
 
 Follow the instructions below to set up and run the DzuelsFoundation library management system on your local machine.
 
-1. Clone the repository:
+1. Clone the repository:http://localhost:3000/api/patrons
 
 ```
 git clone https://github.com/Tolufolorunso/dzuelsFoundation.git

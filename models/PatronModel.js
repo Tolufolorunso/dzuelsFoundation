@@ -83,6 +83,10 @@ const PatronSchema = new mongoose.Schema(
       required: true,
       default: 'Admin',
     },
+    hasBorrowedBook: {
+      type: Boolean,
+      default: false,
+    },
     checkoutHistory: [
       {
         itemBarcode: {

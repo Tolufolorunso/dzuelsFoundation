@@ -107,7 +107,6 @@ function AddItemPage() {
         setState({ ...state, open: true, message: data.error })
       }
     } catch (error) {
-      console.error(76, 'Error adding book:', error)
       setState({ ...state, open: true })
     } finally {
       setLoading(false)

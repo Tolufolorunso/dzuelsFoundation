@@ -8,6 +8,7 @@ import classes from './CheckoutContent.module.css'
 import useCirculationStore from '@/store/circulationStore'
 import CirculationUserInfo from './CirculationUserInfo'
 import CirculationCheckoutSection from './CirculationCheckoutSection'
+// import useScanner from '@/hooks/useScanner'
 
 function CheckoutContent(props) {
   const patronData = useCirculationStore(
@@ -19,8 +20,10 @@ function CheckoutContent(props) {
 
   let barcodeScan = ''
 
+  // const { barcode, inputRef: customInputRef } = useScanner(handleScan)
+
   useEffect(() => {
-    // inputRef.current.focus()
+    inputRef.current.focus()
   }, [])
 
   useEffect(() => {

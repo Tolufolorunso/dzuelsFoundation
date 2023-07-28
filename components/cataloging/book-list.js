@@ -1,7 +1,7 @@
 import { DataGrid } from '@mui/x-data-grid'
 
 function BookList(props) {
-  const { rows, columns, onRowDoubleClick, isLoadingBooks } = props
+  const { rows, columns, onRowDoubleClick } = props
 
   return (
     <div style={{ height: '500px', width: '100%' }}>
@@ -18,7 +18,6 @@ function BookList(props) {
         checkboxSelection
         onRowDoubleClick={onRowDoubleClick}
         getRowId={(row) => row.barcode}
-        loading={isLoadingBooks}
       />
     </div>
   )

@@ -29,7 +29,6 @@ export default async function handler(req, res) {
     try {
       await dbConnect()
       const { patronBarcode, itemBarcode, dueDay = 2 } = req.body
-      console.log(patronBarcode, itemBarcode, dueDay)
 
       // Find the patron and the cataloging record by ID and barcode, respectively
       const cataloging = await Cataloging.findOne({ barcode: itemBarcode })
@@ -41,12 +40,17 @@ export default async function handler(req, res) {
           .json({ status: false, errorMessage: 'Patron or Item not found' })
       }
 
-      console.log(cataloging)
+      if (patron.hasBorrowedBook) {
+        return res.status(409).json({
+          errorMessage:
+            'You are not allowed to borrow more than one item at a time',
+        })
+      }
 
       if (cataloging.isCheckedOut) {
         return res
           .status(409)
-          .json({ errorMessage: 'Item is already checked out' })
+          .json({ errorMessage: 'Item is/are already checked out' })
       }
 
       // Get the current date and time
@@ -72,9 +76,9 @@ export default async function handler(req, res) {
         checkoutDate: new Date(),
         dueDate: dueDate,
       })
-      await patron.save()
 
-      console.log(76, cataloging.checkedOutHistory)
+      patron.hasBorrowedBook = true
+      await patron.save()
 
       return res.status(200).json({
         status: true,

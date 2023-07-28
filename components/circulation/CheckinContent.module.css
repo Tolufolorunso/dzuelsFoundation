@@ -1,0 +1,29 @@
+.checkin {
+  background-color: var(--white);
+  padding: 2rem;
+  width: min(100%, 1000px);
+  margin: auto;
+}
+
+.checkin p {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.4rem;
+}
+
+.checkin input {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.checkin input:last-of-type {
+  margin-bottom: 1rem;
+}
+
+.checkin input:focus {
+  border: 1px solid var(--main) !important;
+}
