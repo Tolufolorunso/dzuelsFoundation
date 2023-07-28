@@ -7,7 +7,7 @@ function HomePageTopHeading() {
   return (
     <div className={classes.btns}>
       <Stack direction='row' spacing={3}>
-        <div onClick={() => console.log('hello')}>
+        <div>
           <CustomHeader level={3} text='Circulation' />
         </div>
       </Stack>

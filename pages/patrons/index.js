@@ -1,18 +1,22 @@
 import Container from '@/components/layout/container'
 import Aside from '@/components/patron/aside'
 import ContentSide from '@/components/patron/content-side'
-import useAppStore from '@/store/applicationStateStore'
 import fetchApi from '@/utils/fetchApi'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import usePatronStore from '@/store/patronStore'
 
 function PatronsHomePage(props) {
-  const setErrorMessage = useAppStore((state) => state.setErrorMessage)
-  const { columns } = props
+  const setAllPatrons = usePatronStore((state) => state.setAllPatrons)
+  const { columns, errorMessage, patrons } = props
   const router = useRouter()
 
+  if (!errorMessage) {
+    setAllPatrons(patrons)
+  }
+
   function onCellClickHandler(books) {
-    // console.log(13, `/patrons/${books.row.barcode}`)
     // router.push(`/patrons/${books.row.barcode}`, books.row)
     router.push({
       pathname: `/patrons/${books.row.barcode}`, // not router.asPath
@@ -20,49 +24,38 @@ function PatronsHomePage(props) {
     })
   }
 
-  const [isLoadingPatrons, setIsLoadingPatrons] = useState(true)
-  const [patrons, setPatrons] = useState([])
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        setIsLoadingPatrons(true)
-        const res = await fetchApi('/patrons')
-        const { status, patrons } = res
-        if (status) {
-          setPatrons(patrons)
-        } else {
-          throw new Error('Error occurred while fetching')
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error)
-        setErrorMessage(error.message)
-      } finally {
-        setIsLoadingPatrons(false)
-      }
-    }
-
-    fetchData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
   return (
     <Container>
       <main className='patron-container'>
         <Aside />
-        <ContentSide
-          rows={patrons}
-          onCellClickHandler={onCellClickHandler}
-          onRowClick={onCellClickHandler}
-          columns={columns}
-          isLoadingPatrons={isLoadingPatrons}
-        />
+        {errorMessage ? (
+          <Box
+            sx={{
+              width: '100%',
+              marginTop: '100px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Typography variant='h6' color='error'>
+              {errorMessage}
+            </Typography>
+          </Box>
+        ) : (
+          <ContentSide
+            rows={patrons}
+            onCellClickHandler={onCellClickHandler}
+            onRowClick={onCellClickHandler}
+            columns={columns}
+          />
+        )}
       </main>
     </Container>
   )
 }
 
-export async function getStaticProps(ctx) {
+export async function getServerSideProps(ctx) {
   const columns = [
     { field: 'barcode', headerName: 'Barcode', width: 100 },
     { field: 'firstname', headerName: 'Firstname', width: 200 },
@@ -74,11 +67,32 @@ export async function getStaticProps(ctx) {
     },
   ]
 
-  return {
-    props: {
-      data: null,
-      columns,
-    },
+  let endpoint =
+    process.env.NEXT_ENV === 'development'
+      ? process.env.LOCALURL
+      : process.env.BASEURL
+
+  try {
+    const res = await fetchApi(`${endpoint}/patrons`)
+    const { status, patrons } = res
+
+    if (status) {
+      return {
+        props: {
+          patrons,
+          columns,
+        },
+      }
+    } else {
+      throw new Error('Error occurred while fetching')
+    }
+  } catch (error) {
+    return {
+      props: {
+        errorMessage: error.message,
+        columns,
+      },
+    }
   }
 }
 

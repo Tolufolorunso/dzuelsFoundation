@@ -18,7 +18,6 @@ function PatronList(props) {
         checkboxSelection
         onCellClick={onCellClickHandler}
         getRowId={(row) => row.barcode}
-        loading={isLoadingPatrons}
       />
     </div>
   )

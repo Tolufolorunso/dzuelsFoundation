@@ -1,6 +1,5 @@
 import dbConnect from '@/lib/dbConnect'
 import Cataloging from '@/models/CatalogingModel'
-import Joi from 'joi'
 
 async function handler(req, res) {
   if (req.method == 'POST') {
@@ -67,7 +66,7 @@ async function handler(req, res) {
         'barcode author title classification controlNumber'
       )
 
-      return res.status(200).json(catalogingRecords)
+      return res.status(200).json({ status: true, items: catalogingRecords })
     } catch (error) {
       console.error('Error fetching books:', error)
       return res.status(500).json({ error: 'Something went wrong' })

@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
-import DeleteIcon from '@mui/icons-material/Delete'
-import SendIcon from '@mui/icons-material/Send'
+import AddIcon from '@mui/icons-material/Add'
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered'
 
 import classes from './catalog-function-btns.module.css'
 import { useRouter } from 'next/router'
@@ -24,12 +24,16 @@ function CatalogFunctionBtns() {
       <Stack direction='row' spacing={3}>
         <Button
           variant='outlined'
-          startIcon={<DeleteIcon />}
+          startIcon={<AddIcon />}
           onClick={CreateRecordHandler}
         >
           New record
         </Button>
-        <Button variant='outlined' onClick={GetAllBooksHandler}>
+        <Button
+          variant='outlined'
+          onClick={GetAllBooksHandler}
+          startIcon={<FormatListNumberedIcon />}
+        >
           Get All books
         </Button>
       </Stack>
