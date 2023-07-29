@@ -11,8 +11,6 @@ function LoginPage() {
   async function submitHandler(props) {
     const { username, password } = props
 
-    console.log(username, password)
-
     try {
       const res = await signIn('credentials', {
         redirect: false,

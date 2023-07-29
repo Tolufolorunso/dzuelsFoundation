@@ -17,7 +17,6 @@ const RegisterPage = () => {
     const username = event.target.username.value
     const password = event.target.password.value
     const name = event.target.name.value
-    console.log(username, password, selectedRole, name)
 
     try {
       const res = await fetchApi('/auth/register', 'POST', {

@@ -5,22 +5,15 @@ import BookList from '@/components/cataloging/book-list'
 import { useRouter } from 'next/router'
 import fetchApi from '@/utils/fetchApi'
 
-import { useSession, getSession } from 'next-auth/react'
 import { useAuth } from '@/utils/protectedPage'
+import Loading from '@/components/layout/Loading'
 
 function CatalogPage(props) {
   const session = useAuth()
-  const { data, loading } = useSession()
-  const hello = getSession()
-
-  console.log(session)
-
-  console.log(hello)
   const { columns, items } = props
   const router = useRouter()
 
   function onListClickHandler(books) {
-    console.log(13, `/catalogs/${books.row.barcode}`)
     // router.push(`/catalogs/${books.row.barcode}`, books.row)
     router.push({
       pathname: `/catalogs/${books.row.barcode}`, // not router.asPath
@@ -42,7 +35,8 @@ function CatalogPage(props) {
     : []
 
   if (!session) {
-    return null // You can also show a loading state or a message here
+    // You can also show a loading state or a message here
+    return <Loading />
   }
 
   return (
@@ -84,7 +78,6 @@ export async function getStaticProps(ctx) {
     const res = await fetchApi(`${endpoint}/cataloging`)
     const { status, items } = res
 
-    console.log(status)
     if (status) {
       return {
         props: {

@@ -18,9 +18,6 @@ export default async function handler(req, res) {
           .json({ status: false, errorMessage: 'Patron or Item not found' })
       }
 
-      // console.log(patron.checkoutHistory)
-      // console.log(cataloging.checkedOutHistory)
-
       // Check if the borrowed book is inside cataloging checkedOutHistory array
       const isPatronBorrowedTheItem = cataloging.checkedOutHistory.find(
         (historyItem) => historyItem.checkedOutBy === patronBarcode
