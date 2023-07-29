@@ -1,6 +1,3 @@
-// pages/api/addPatron.js
-import Joi from 'joi'
-
 import dbConnect from '@/lib/dbConnect'
 import Patron from '@/models/PatronModel'
 import calculateExpiryDate from '@/utils/expiryDate'

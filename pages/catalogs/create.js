@@ -2,14 +2,13 @@ import React, { useState } from 'react'
 
 import { useRouter } from 'next/router'
 import Snackbar from '@mui/material/Snackbar'
-import IconButton from '@mui/material/IconButton'
-import CloseIcon from '@mui/icons-material/Close'
 
 import CatalogingForm from '@/components/cataloging/cataloging-form'
 import Container from '@/components/layout/container'
 import CatalogFunctionBtns from '@/components/cataloging/catalog-function-btns'
 
 import MuiAlert from '@mui/material/Alert'
+import { getSession } from 'next-auth/react'
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />
@@ -157,6 +156,19 @@ function AddItemPage() {
       </Snackbar>
     </Container>
   )
+}
+
+export async function getServerSideProps(ctx) {
+  const session = await getSession(ctx)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    }
+  }
 }
 
 export default AddItemPage

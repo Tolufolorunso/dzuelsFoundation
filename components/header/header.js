@@ -10,8 +10,13 @@ import useAppStore from '@/store/applicationStateStore'
 import { useRouter } from 'next/router'
 import CatalogNav from './catalog-nav'
 import PatronNav from './patron-nav'
+import { useSession, signOut } from 'next-auth/react'
+import Button from '@mui/material/Button'
 
 function Header() {
+  const { data, loading, update } = useSession()
+  console.log(data, loading)
+
   const closeMenu = useAppStore((state) => state.closeMenu)
   const isMenuOpen = useAppStore((state) => state.appState.isMenuOpen)
 
@@ -86,6 +91,11 @@ function Header() {
                 <li className='item'>
                   <Link href='/inventory'>Inventory</Link>
                 </li>
+                {data?.user && (
+                  <li className='item'>
+                    <Button onClick={() => signOut()}>Log out</Button>
+                  </li>
+                )}
               </ul>
               <input
                 type='checkbox'
