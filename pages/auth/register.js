@@ -3,10 +3,15 @@ import React, { useState } from 'react'
 import RegisterContent from '@/components/auth/RegisterContent'
 import fetchApi from '@/utils/fetchApi'
 import useAppStore from '@/store/applicationStateStore'
+import { useRouter } from 'next/router'
 
 const RegisterPage = () => {
-  const { setErrorMessage, setSuccessMessage } = useAppStore((state) => state)
+  const { setErrorMessage, setSuccessMessage, clearMessage } = useAppStore(
+    (state) => state
+  )
   const [selectedRole, setSelectedRole] = useState('librarian')
+
+  const router = useRouter()
 
   const handleRoleChange = (event) => {
     setSelectedRole(event.target.value)
@@ -29,6 +34,10 @@ const RegisterPage = () => {
 
       if (status) {
         setSuccessMessage(message)
+        setTimeout(() => {
+          clearMessage()
+          router.push('/auth/login')
+        }, 1500)
       } else {
         throw new Error('Registration failed')
       }
