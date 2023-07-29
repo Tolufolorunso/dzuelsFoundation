@@ -5,8 +5,18 @@ import BookList from '@/components/cataloging/book-list'
 import { useRouter } from 'next/router'
 import fetchApi from '@/utils/fetchApi'
 
+import { useSession, getSession } from 'next-auth/react'
+import { useAuth } from '@/utils/protectedPage'
+
 function CatalogPage(props) {
-  const { columns } = props
+  const session = useAuth()
+  const { data, loading } = useSession()
+  const hello = getSession()
+
+  console.log(session)
+
+  console.log(hello)
+  const { columns, items } = props
   const router = useRouter()
 
   function onListClickHandler(books) {
@@ -18,22 +28,28 @@ function CatalogPage(props) {
     })
   }
 
-  // const transformedArray = items.map((item) => {
-  //   const { barcode, title, author, classification, controlNumber } = item
-  //   return {
-  //     barcode,
-  //     title: title.mainTitle,
-  //     author: author.mainAuthor,
-  //     classification,
-  //     controlNumber,
-  //   }
-  // })
+  const transformedArray = items
+    ? items.map((item) => {
+        const { barcode, title, author, classification, controlNumber } = item
+        return {
+          barcode,
+          title: title.mainTitle,
+          author: author.mainAuthor,
+          classification,
+          controlNumber,
+        }
+      })
+    : []
+
+  if (!session) {
+    return null // You can also show a loading state or a message here
+  }
 
   return (
     <Container>
       <CatalogFunctionBtns />
       <BookList
-        rows={[]}
+        rows={transformedArray}
         onRowDoubleClick={onListClickHandler}
         columns={columns}
       />
@@ -66,7 +82,7 @@ export async function getStaticProps(ctx) {
 
   try {
     const res = await fetchApi(`${endpoint}/cataloging`)
-    const { status } = res
+    const { status, items } = res
 
     console.log(status)
     if (status) {
