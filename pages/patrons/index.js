@@ -91,6 +91,11 @@ export async function getServerSideProps(ctx) {
     if (status) {
       return {
         props: {
+          user: {
+            username: session.user.username,
+            role: session.user.role,
+            name: session.user.name,
+          },
           patrons,
           columns,
         },

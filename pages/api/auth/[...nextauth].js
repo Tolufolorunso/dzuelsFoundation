@@ -25,11 +25,17 @@ export const authOptions = {
         if (!isPasswordsCorrect) {
           throw new Error('Wrong credentials. Try again.')
         }
+
+        if (!user.active) {
+          throw new Error('You must be verified. Contact your administrator')
+        }
+
         if (user) {
           return {
             username: user.username,
             role: user.role,
             active: user.active,
+            name: user.name,
           }
         }
         // Return null if user data could not be retrieved

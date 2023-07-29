@@ -21,9 +21,9 @@ function LoginPage() {
         throw new Error(res.error)
       } else {
         setSuccessMessage('login successful')
-        // setTimeout(() => {
-        //   router.replace('/')
-        // }, 1500)
+        setTimeout(() => {
+          router.replace('/')
+        }, 1500)
       }
     } catch (error) {
       setErrorMessage(error.message)

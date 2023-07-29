@@ -2,14 +2,11 @@ import Home from '@/components/home/Home'
 import { getSession } from 'next-auth/react'
 
 const HomePage = () => {
-  // const classes = useStyles()
-
   return <Home />
 }
 
 export async function getServerSideProps(ctx) {
   const session = await getSession(ctx)
-
   if (!session) {
     return {
       redirect: {
@@ -17,6 +14,16 @@ export async function getServerSideProps(ctx) {
         permanent: false,
       },
     }
+  }
+
+  return {
+    props: {
+      user: {
+        username: session.user.username,
+        role: session.user.role,
+        name: session.user.name,
+      },
+    },
   }
 }
 

@@ -169,6 +169,16 @@ export async function getServerSideProps(ctx) {
       },
     }
   }
+
+  return {
+    props: {
+      user: {
+        username: session.user.username,
+        role: session.user.role,
+        name: session.user.name,
+      },
+    },
+  }
 }
 
 export default AddItemPage
