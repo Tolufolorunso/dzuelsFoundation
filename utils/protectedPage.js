@@ -12,7 +12,7 @@ export const useAuth = () => {
 
   if (!session) {
     // Redirect to login page if not authenticated
-    router.replace('/login')
+    router.replace('/auth/login')
     return null
   }
 

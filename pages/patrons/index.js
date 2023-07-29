@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import usePatronStore from '@/store/patronStore'
+import { getSession } from 'next-auth/react'
 
 function PatronsHomePage(props) {
   const setAllPatrons = usePatronStore((state) => state.setAllPatrons)
@@ -56,6 +57,17 @@ function PatronsHomePage(props) {
 }
 
 export async function getServerSideProps(ctx) {
+  const session = await getSession(ctx)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    }
+  }
+
   const columns = [
     { field: 'barcode', headerName: 'Barcode', width: 100 },
     { field: 'firstname', headerName: 'Firstname', width: 200 },

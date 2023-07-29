@@ -17,8 +17,6 @@ const clientSideEmotionCache = createEmotionCache()
 function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
 
-  // console.log(props)
-
   const router = useRouter()
 
   const auth = router.pathname.includes('auth')
@@ -28,7 +26,8 @@ function MyApp(props) {
       <CacheProvider value={emotionCache}>
         <Head>
           <meta name='viewport' content='initial-scale=1, width=device-width' />
-          <meta name='description' content='The page for all' />
+          <meta name='description' content='Dzuels foundation' />
+          <meta name='robots' content='noindex' />
           <title>Dzuels Foundation</title>
         </Head>
         <ThemeProvider theme={theme}>

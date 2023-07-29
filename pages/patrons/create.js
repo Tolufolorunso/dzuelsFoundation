@@ -3,6 +3,7 @@ import AddPatron from '@/components/patron/add-patron'
 import useAppStore from '@/store/applicationStateStore'
 import usePatronStore from '@/store/patronStore'
 import fetchApi from '@/utils/fetchApi'
+import { getSession } from 'next-auth/react'
 import { useState } from 'react'
 
 function CreatePatronPage() {
@@ -133,6 +134,19 @@ function CreatePatronPage() {
       />
     </Container>
   )
+}
+
+export async function getServerSideProps(ctx) {
+  const session = await getSession(ctx)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    }
+  }
 }
 
 export default CreatePatronPage

@@ -5,6 +5,7 @@ import useAppStore from '@/store/applicationStateStore'
 import useCirculationStore from '@/store/circulationStore'
 import usePatronStore from '@/store/patronStore'
 import fetchApi from '@/utils/fetchApi'
+import { getSession } from 'next-auth/react'
 import { useEffect } from 'react'
 
 function Checkout() {
@@ -30,6 +31,19 @@ function Checkout() {
       <CheckoutContent getPatron={getPatron} />
     </Container>
   )
+}
+
+export async function getServerSideProps(ctx) {
+  const session = await getSession(ctx)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    }
+  }
 }
 
 export default Checkout

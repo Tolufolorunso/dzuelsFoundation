@@ -15,7 +15,6 @@ import Button from '@mui/material/Button'
 
 function Header() {
   const { data, loading, update } = useSession()
-  console.log(data, loading)
 
   const closeMenu = useAppStore((state) => state.closeMenu)
   const isMenuOpen = useAppStore((state) => state.appState.isMenuOpen)
@@ -41,14 +40,14 @@ function Header() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  let bottomNav
+  // let bottomNav
 
-  if (router.pathname.includes('catalogs')) {
-    bottomNav = <CatalogNav />
-  }
-  if (router.pathname.includes('patrons')) {
-    bottomNav = <PatronNav />
-  }
+  // if (router.pathname.includes('catalogs')) {
+  //   bottomNav = <CatalogNav />
+  // }
+  // if (router.pathname.includes('patrons')) {
+  //   bottomNav = <PatronNav />
+  // }
 
   return (
     <>
@@ -114,7 +113,7 @@ function Header() {
             </div>
           </div>
         </nav>
-        {bottomNav}
+        {/* {bottomNav} */}
       </header>
       <RightDrawer open={isMenuOpen} onClose={closeMenu} />
     </>

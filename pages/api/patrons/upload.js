@@ -14,7 +14,6 @@ export default async function handler(req, res) {
 
   form.parse(req, (err, fields, files) => {
     if (err) {
-      console.error('Error parsing form:', err)
       res.status(500).json({ error: 'File upload failed.' })
       return
     }
@@ -40,7 +39,6 @@ export default async function handler(req, res) {
     // Read the Excel file as binary data.
     fs.readFile(tempFilePath, (err, data) => {
       if (err) {
-        console.error('Error reading the Excel file:', err)
         res.status(500).json({ error: 'Error reading the Excel file.' })
         return
       }
@@ -52,8 +50,6 @@ export default async function handler(req, res) {
         const worksheet = workbook.Sheets[sheetName]
 
         const extractedData = xlsx.utils.sheet_to_json(worksheet)
-        // const
-        // console.log(extractedData)
 
         // Delete the temporary file after extracting the data.
         fs.unlink(tempFilePath, (err) => {
