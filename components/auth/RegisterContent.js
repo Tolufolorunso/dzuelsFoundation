@@ -7,7 +7,6 @@ import Button from '@mui/material/Button'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import { useState } from 'react'
 import classes from './auth.module.css'
 
 function RegisterContent(props) {

@@ -2,27 +2,20 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import classes from './header.module.css'
-// import MenuIcon from '@mui/icons-material/Menu'
-// import Button from '@mui/material/Button'
 import RightDrawer from './mobile-nav'
 import { useState, useEffect } from 'react'
 import useAppStore from '@/store/applicationStateStore'
 import { useRouter } from 'next/router'
-import CatalogNav from './catalog-nav'
-import PatronNav from './patron-nav'
 import { useSession, signOut } from 'next-auth/react'
 import Button from '@mui/material/Button'
+import Loading from '../layout/Loading'
 
 function Header() {
-  const { data, loading, update } = useSession()
+  const { data, status } = useSession()
 
   const closeMenu = useAppStore((state) => state.closeMenu)
   const isMenuOpen = useAppStore((state) => state.appState.isMenuOpen)
-
   const router = useRouter()
-
-  // const [isDrawerOpen, setIsDrawerOpen] = useState(false)
-
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -40,14 +33,17 @@ function Header() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // let bottomNav
+  if (status === 'loading') {
+    return (
+      <div style={{ position: 'absolute', inset: 0 }}>
+        <Loading />
+      </div>
+    )
+  }
 
-  // if (router.pathname.includes('catalogs')) {
-  //   bottomNav = <CatalogNav />
-  // }
-  // if (router.pathname.includes('patrons')) {
-  //   bottomNav = <PatronNav />
-  // }
+  if (status === 'unauthenticated') {
+    router.replace('/auth/login')
+  }
 
   return (
     <>

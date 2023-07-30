@@ -68,7 +68,6 @@ async function handler(req, res) {
 
       return res.status(200).json({ status: true, items: catalogingRecords })
     } catch (error) {
-      console.error('Error fetching books:', error)
       return res.status(500).json({ error: 'Something went wrong' })
     }
   }

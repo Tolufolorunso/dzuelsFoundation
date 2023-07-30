@@ -9,8 +9,12 @@ import LibraryBooksIcon from '@mui/icons-material/LibraryBooks'
 import PortraitIcon from '@mui/icons-material/Portrait'
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket'
 import useAppStore from '@/store/applicationStateStore'
+import { useSession } from 'next-auth/react'
+import Button from '@mui/material/Button'
 
 const DrawerLinkList = () => {
+  const { status } = useSession()
+
   const closeMenu = useAppStore((state) => state.closeMenu)
   return (
     <List>
@@ -38,6 +42,11 @@ const DrawerLinkList = () => {
         Icon={ShoppingBasketIcon}
         closeMenu={closeMenu}
       />
+      {status === 'authenticated' && (
+        <li className='item'>
+          <Button onClick={() => signOut()}>Log out</Button>
+        </li>
+      )}
     </List>
   )
 }

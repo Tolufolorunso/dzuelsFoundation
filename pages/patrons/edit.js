@@ -1,10 +1,13 @@
+import CatalogingForm from '@/components/cataloging/cataloging-form'
+import Container from '@/components/layout/container'
 import { getSession } from 'next-auth/react'
+import { useState } from 'react'
 
 function EditPatronPage() {
   return (
-    <div>
-      <h1>Dzuels Foundation</h1>
-    </div>
+    <Container>
+      <h1>patron edit</h1>
+    </Container>
   )
 }
 

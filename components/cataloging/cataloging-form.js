@@ -14,6 +14,7 @@ function CatalogingForm(props) {
     handleChange,
     goToCatalogPageHandler,
     loading,
+    type,
   } = props
 
   return (
@@ -162,6 +163,8 @@ function CatalogingForm(props) {
                 <CircularProgress size={10} color='inherit' />
                 <span style={{ marginLeft: '5px' }}>Saving...</span>
               </>
+            ) : type === 'edit' ? (
+              'Update Item'
             ) : (
               'Add Book'
             )}

@@ -11,6 +11,7 @@ import Loading from '@/components/layout/Loading'
 function CatalogPage(props) {
   const session = useAuth()
   const { columns, items } = props
+
   const router = useRouter()
 
   function onListClickHandler(books) {
@@ -34,11 +35,6 @@ function CatalogPage(props) {
       })
     : []
 
-  if (!session) {
-    // You can also show a loading state or a message here
-    return <Loading />
-  }
-
   return (
     <Container>
       <CatalogFunctionBtns />
@@ -51,7 +47,7 @@ function CatalogPage(props) {
   )
 }
 
-export async function getStaticProps(ctx) {
+export async function getServerSideProps(ctx) {
   const columns = [
     { field: 'barcode', headerName: 'Barcode', width: 100 },
     { field: 'title', headerName: 'Title', width: 350 },

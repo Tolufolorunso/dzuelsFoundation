@@ -7,7 +7,7 @@ import User from '@/models/UserModel'
 import { verifyPassword } from '@/lib/auth'
 
 export const authOptions = {
-  // session: { strategy: 'jwt', maxAge: 5 * 60 * 60 },
+  session: { strategy: 'jwt', maxAge: 18000 },
 
   providers: [
     CredentialsProvider({

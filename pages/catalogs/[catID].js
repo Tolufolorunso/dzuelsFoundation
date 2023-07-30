@@ -1,13 +1,40 @@
+import ItemDetail from '@/components/cataloging/ItemDetail'
+import Loading from '@/components/layout/Loading'
 import Container from '@/components/layout/container'
+import fetchApi from '@/utils/fetchApi'
 import { getSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
 function ItemPage() {
   const router = useRouter()
+  const [item, setItem] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function getItem() {
+      try {
+        const catID = router.query.catID
+        const res = await fetchApi(`/cataloging/${catID}`)
+        const { item, status } = res
+        if (status) {
+          setItem(item)
+        }
+        setLoading(false)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getItem()
+  }, [router.query.catID])
+
+  if (loading) {
+    return <Loading />
+  }
+
   return (
     <Container>
-      <h1>Dzuels Foundation</h1>
-      <p>{router.query.catID}</p>
+      <ItemDetail item={item} />
     </Container>
   )
 }
