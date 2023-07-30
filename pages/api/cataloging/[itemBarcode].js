@@ -2,7 +2,6 @@ import dbConnect from '@/lib/dbConnect'
 import Cataloging from '@/models/CatalogingModel'
 
 export default async function handler(req, res) {
-  console.log('item')
   const { itemBarcode } = req.query
 
   if (req.method === 'GET') {
@@ -58,8 +57,6 @@ export default async function handler(req, res) {
         data,
         { new: true, runValidators: true }
       )
-
-      console.log(catalogItem)
 
       return res.status(200).json({
         status: true,

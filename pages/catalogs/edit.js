@@ -61,7 +61,6 @@ function EditItemPage() {
 
     try {
       const res = await fetchApi(`/cataloging/${item.barcode}`, 'PUT', formData)
-      console.log(res)
       const { status, message } = res
 
       if (status) {

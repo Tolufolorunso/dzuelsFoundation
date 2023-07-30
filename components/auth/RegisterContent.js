@@ -8,9 +8,10 @@ import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import classes from './auth.module.css'
+import CircularProgress from '@mui/material/CircularProgress'
 
 function RegisterContent(props) {
-  const { submitHandler, handleRoleChange, selectedRole } = props
+  const { submitHandler, handleRoleChange, selectedRole, loading } = props
 
   return (
     <Box className={classes.container}>
@@ -54,7 +55,7 @@ function RegisterContent(props) {
             />
             <FormControlLabel value='admin' control={<Radio />} label='Admin' />
             <FormControlLabel
-              value='ictadmin'
+              value='ict'
               control={<Radio />}
               label='ICT Admin'
             />
@@ -65,7 +66,14 @@ function RegisterContent(props) {
             color='primary'
             sx={{ mt: 2 }}
           >
-            Register
+            {loading ? (
+              <>
+                <CircularProgress size={10} color='inherit' />
+                <span style={{ marginLeft: '5px' }}>Register...</span>
+              </>
+            ) : (
+              'Register'
+            )}
           </Button>
         </form>
         <Link href='/auth/login' passHref>

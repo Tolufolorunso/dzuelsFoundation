@@ -7,9 +7,10 @@ import Button from '@mui/material/Button'
 import { useState } from 'react'
 
 import classes from './auth.module.css'
+import CircularProgress from '@mui/material/CircularProgress'
 
 function LoginContent(props) {
-  const { submitHandler } = props
+  const { submitHandler, loading } = props
   const [state, setState] = useState({
     username: '',
     password: '',
@@ -53,8 +54,16 @@ function LoginContent(props) {
           sx={{ mt: 2 }}
           onClick={clickHandler}
         >
-          Login
+          {loading ? (
+            <>
+              <CircularProgress size={10} color='inherit' />
+              <span style={{ marginLeft: '5px' }}>Login...</span>
+            </>
+          ) : (
+            'Login'
+          )}
         </Button>
+
         <Link href='/auth/register' passHref>
           <Button variant='text' color='primary' sx={{ mt: 2 }}>
             Register instead?

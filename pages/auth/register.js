@@ -9,6 +9,7 @@ const RegisterPage = () => {
   const { setErrorMessage, setSuccessMessage, clearMessage } = useAppStore(
     (state) => state
   )
+  const [loading, setLoading] = useState(false)
   const [selectedRole, setSelectedRole] = useState('librarian')
 
   const router = useRouter()
@@ -19,6 +20,8 @@ const RegisterPage = () => {
 
   async function submitHandler(event) {
     event.preventDefault()
+    setLoading(true)
+
     const username = event.target.username.value
     const password = event.target.password.value
     const name = event.target.name.value
@@ -27,7 +30,7 @@ const RegisterPage = () => {
       const res = await fetchApi('/auth/register', 'POST', {
         username,
         password,
-        selectedRole,
+        role: selectedRole,
         name,
       })
       const { status, message } = res
@@ -43,6 +46,8 @@ const RegisterPage = () => {
       }
     } catch (error) {
       setErrorMessage(error.message)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -51,6 +56,7 @@ const RegisterPage = () => {
       submitHandler={submitHandler}
       handleRoleChange={handleRoleChange}
       selectedRole={selectedRole}
+      loading={loading}
     />
   )
 }
