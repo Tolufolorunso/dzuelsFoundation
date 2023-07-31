@@ -13,7 +13,6 @@ const ItemDetail = (props) => {
     classification,
     barcode,
     indexTermGenre,
-    isCheckedOut,
   } = item
 
   const router = useRouter()

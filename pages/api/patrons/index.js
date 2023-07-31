@@ -8,6 +8,7 @@ export default async function handler(req, res) {
       await dbConnect()
       const { firstname, surname, library, barcode, gender, patronType } =
         req.query
+
       // Build the query object based on the provided filters
       const query = {}
       if (firstname) query.firstname = new RegExp(firstname, 'i') // Case-insensitive search
@@ -123,7 +124,8 @@ export default async function handler(req, res) {
     await dbConnect()
 
     // Check if the patron with the same email already exists
-    const existingPatron = await Patron.findOne({ barcode })
+    const existingPatron = await Patron.findOne({ barcode: barcode.trim() })
+
     if (existingPatron) {
       return res.status(409).json({
         status: false,
