@@ -55,6 +55,11 @@ function RegisterContent(props) {
             />
             <FormControlLabel value='admin' control={<Radio />} label='Admin' />
             <FormControlLabel
+              value='facility'
+              control={<Radio />}
+              label='Facility Officer'
+            />
+            <FormControlLabel
               value='ict'
               control={<Radio />}
               label='ICT Admin'
