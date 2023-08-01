@@ -9,7 +9,7 @@ import '@/styles/global.css'
 import Header from '@/components/header/header'
 import Toast from '@/components/layout/alert'
 import { useRouter } from 'next/router'
-import { SessionProvider, useSession } from 'next-auth/react'
+import { SessionProvider } from 'next-auth/react'
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()

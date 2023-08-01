@@ -7,14 +7,38 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import usePatronStore from '@/store/patronStore'
 import { getSession } from 'next-auth/react'
+import { useEffect, useState } from 'react'
+import useAppStore from '@/store/applicationStateStore'
+
+import XLSX from 'xlsx'
+import { saveAs } from 'file-saver'
 
 function PatronsHomePage(props) {
-  const setAllPatrons = usePatronStore((state) => state.setAllPatrons)
+  const setPatrons = usePatronStore((state) => state.setAllPatrons)
+  const searchTerm = usePatronStore((state) => state.patrons.searchTerm)
+  const { setErrorMessage, setSuccessMessage } = useAppStore((state) => state)
   const { columns, errorMessage, patrons } = props
   const router = useRouter()
 
+  const exportToExcel = (data) => {
+    console.log(5, data)
+    const worksheet = XLSX.utils.json_to_sheet(data)
+    const workbook = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1')
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: 'xlsx',
+      type: 'array',
+    })
+    const dataBlob = new Blob([excelBuffer], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    })
+    saveAs(dataBlob, 'data.xlsx')
+  }
+
+  // const [fil]
+
   if (!errorMessage) {
-    setAllPatrons(patrons)
+    setPatrons(patrons)
   }
 
   function onCellClickHandler(books) {
@@ -23,6 +47,39 @@ function PatronsHomePage(props) {
       pathname: `/patrons/${books.row.barcode}`, // not router.asPath
       // query: { confirm: true },
     })
+  }
+
+  async function exportToExcelFrontend(type) {
+    if (type === 'detail') {
+      try {
+        const res = await fetchApi(
+          `/patrons?mode=detail&patronType=${searchTerm?.patronType}`
+        )
+        const { status, patrons } = res
+        if (status) {
+          setSuccessMessage('Your file is ready to be downloaded in 2 seconds.')
+
+          const flattenedArray = patrons.map((patron) => {
+            const { address, studentSchoolInfo, parentInfo, ...rest } = patron
+            return {
+              ...rest,
+              ...address,
+              ...studentSchoolInfo,
+              ...parentInfo,
+            }
+          })
+          setTimeout(() => {
+            setSuccessMessage('')
+            exportToExcel(flattenedArray)
+          }, 2000)
+        }
+      } catch (error) {
+        setErrorMessage(error.message)
+        setTimeout(() => {
+          setErrorMessage('')
+        }, 2000)
+      }
+    }
   }
 
   return (
@@ -49,6 +106,7 @@ function PatronsHomePage(props) {
             onCellClickHandler={onCellClickHandler}
             onRowClick={onCellClickHandler}
             columns={columns}
+            exportToExcel={exportToExcelFrontend}
           />
         )}
       </main>

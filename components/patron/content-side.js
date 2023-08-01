@@ -5,7 +5,7 @@ import PatronList from './patron-list'
 function ContentSide(props) {
   return (
     <article className={classes.patron}>
-      <PatronFunctionBtns />
+      <PatronFunctionBtns exportToExcel={props.exportToExcel} />
       <PatronList {...props} />
     </article>
   )

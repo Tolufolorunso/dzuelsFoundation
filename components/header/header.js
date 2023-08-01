@@ -33,13 +33,13 @@ function Header() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  if (status === 'loading') {
-    return (
-      <div style={{ position: 'absolute', inset: 0 }}>
-        <Loading />
-      </div>
-    )
-  }
+  // if (status === 'loading') {
+  //   return (
+  //     <div style={{ position: 'absolute', inset: 0 }}>
+  //       <Loading />
+  //     </div>
+  //   )
+  // }
 
   if (status === 'unauthenticated') {
     router.replace('/auth/login')

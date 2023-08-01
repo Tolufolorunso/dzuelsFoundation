@@ -2,18 +2,15 @@ import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import AddIcon from '@mui/icons-material/Add'
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered'
-
+import FileDownloadIcon from '@mui/icons-material/FileDownload'
 import classes from './patron-function-btns.module.css'
 import { useRouter } from 'next/router'
+import usePatronStore from '@/store/patronStore'
 
-function PatronFunctionBtns() {
+function PatronFunctionBtns(props) {
+  const { exportToExcel } = props
+
   const router = useRouter()
-
-  function GetAllBooksHandler() {
-    if (router.route == '/catalogs/create') {
-      router.push('/catalogs')
-    }
-  }
 
   return (
     <div className={classes.btns}>
@@ -30,7 +27,21 @@ function PatronFunctionBtns() {
           onClick={() => router.push('/patrons')}
           startIcon={<FormatListNumberedIcon />}
         >
-          Get All books
+          Get All patrons (Updated)
+        </Button>
+        <Button
+          variant='outlined'
+          onClick={() => exportToExcel('quick')}
+          startIcon={<FileDownloadIcon />}
+        >
+          Export As Excel - Quick
+        </Button>
+        <Button
+          variant='outlined'
+          onClick={() => exportToExcel('detail')}
+          startIcon={<FileDownloadIcon />}
+        >
+          Export As Excel - Detail
         </Button>
       </Stack>
     </div>

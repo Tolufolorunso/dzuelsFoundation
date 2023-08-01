@@ -8,6 +8,20 @@ const usePatronStore = create((set) => ({
     allPatrons: null,
     selectedPatronType: 'student',
     isLoading: false,
+    searchTerm: {
+      patronType: '',
+      surname: '',
+      firstname: '',
+      barcode: '',
+    },
+  },
+  addSearchTerm: (searchTerm) => {
+    set((state) => ({
+      patrons: {
+        ...state.patrons,
+        searchTerm: searchTerm,
+      },
+    }))
   },
   setAllPatrons: (patrons) => {
     set((state) => ({
