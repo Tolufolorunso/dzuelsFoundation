@@ -2,7 +2,6 @@ import XLSX from 'xlsx'
 import { saveAs } from 'file-saver'
 
 export const exportToExcel = (data) => {
-  console.log(5, data)
   const worksheet = XLSX.utils.json_to_sheet(data)
   const workbook = XLSX.utils.book_new()
   XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1')

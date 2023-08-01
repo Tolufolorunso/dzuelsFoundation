@@ -70,8 +70,6 @@ function AddItemPage() {
       year: '',
       ISBN: '',
       barcode: '',
-      classification: '',
-      controlNumber: '',
       indexTermGenre: '',
       informationSummary: '',
       physicalDescription: '',

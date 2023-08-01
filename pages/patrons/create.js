@@ -52,9 +52,6 @@ function CreatePatronPage() {
       gender: '',
       dateOfBirth: '',
       street: '',
-      city: '',
-      state: '',
-      country: '',
       barcode: '',
       employerName: '',
       schoolName: '',
@@ -68,7 +65,6 @@ function CreatePatronPage() {
       parentPhoneNumber: '',
       relationshipToPatron: '',
       parentEmail: '',
-      messagePreferences: '',
     }))
   }
 
