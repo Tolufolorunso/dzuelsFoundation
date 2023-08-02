@@ -7,11 +7,11 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import usePatronStore from '@/store/patronStore'
 import { getSession } from 'next-auth/react'
-import { useEffect, useState } from 'react'
 import useAppStore from '@/store/applicationStateStore'
 
 import XLSX from 'xlsx'
 import { saveAs } from 'file-saver'
+import AwardPoints from '@/components/patron/AwardPoints'
 
 function PatronsHomePage(props) {
   const setPatrons = usePatronStore((state) => state.setAllPatrons)
@@ -21,7 +21,6 @@ function PatronsHomePage(props) {
   const router = useRouter()
 
   const exportToExcel = (data) => {
-    console.log(5, data)
     const worksheet = XLSX.utils.json_to_sheet(data)
     const workbook = XLSX.utils.book_new()
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1')
@@ -85,7 +84,11 @@ function PatronsHomePage(props) {
   return (
     <Container>
       <main className='patron-container'>
-        <Aside />
+        <div>
+          <Aside />
+          <AwardPoints />
+        </div>
+
         {errorMessage ? (
           <Box
             sx={{

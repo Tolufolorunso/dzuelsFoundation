@@ -87,6 +87,10 @@ const PatronSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    points: {
+      type: Number,
+      default: 0,
+    },
     checkoutHistory: [
       {
         itemBarcode: {

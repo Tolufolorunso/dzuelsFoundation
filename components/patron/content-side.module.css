@@ -1,9 +1,9 @@
 .patron {
-  flex: 1;
+  /* flex: 1; */
 }
 
 @media (max-width: 768px) {
   .patron {
-    width: 100%;
+    width: 100% !important;
   }
 }

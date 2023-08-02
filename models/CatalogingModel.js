@@ -76,6 +76,7 @@ const CatalogingSchema = new mongoose.Schema(
       type: String,
     },
     isCheckedOut: { type: Boolean, default: false },
+
     checkedOutHistory: [
       {
         checkedOutBy: {

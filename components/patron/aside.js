@@ -76,7 +76,7 @@ function Aside() {
     <aside className={classes.aside}>
       <CustomHeader level={3} text='Search for Patron' />
 
-      <Box sx={{ mb: 3, width: '300px' }}>
+      <Box sx={{ mb: 2, width: '300px' }}>
         <TextField
           hiddenLabel={false}
           fullWidth
@@ -89,7 +89,7 @@ function Aside() {
           onChange={handleChange}
         />
       </Box>
-      <Box sx={{ mb: 3, width: '300px' }}>
+      <Box sx={{ mb: 2, width: '300px' }}>
         <TextField
           hiddenLabel={false}
           fullWidth
@@ -100,7 +100,7 @@ function Aside() {
           onChange={handleChange}
         />
       </Box>
-      <Box sx={{ mb: 3, width: '300px' }}>
+      <Box sx={{ mb: 2, width: '300px' }}>
         <TextField
           hiddenLabel={false}
           fullWidth
@@ -111,7 +111,7 @@ function Aside() {
           onChange={handleChange}
         />
       </Box>
-      <Box sx={{ mb: 3, width: '300px' }}>
+      <Box sx={{ mb: 2, width: '300px' }}>
         <FormControl fullWidth>
           <InputLabel id='patronType'>Patron Type</InputLabel>
           <Select

@@ -47,6 +47,15 @@ export default async function handler(req, res) {
         })
       }
 
+      // Check if the book is checked in on or before the due date
+      const currentDate = new Date()
+      const dueDate = new Date(isPatronBorrowedTheItem.dueDate)
+
+      if (currentDate <= dueDate) {
+        // Award a point to the patron if checked in on or before the due date
+        patron.points += 1
+      }
+
       // Remove the book object from cataloging's checkoutHistory
       cataloging.checkedOutHistory = cataloging.checkedOutHistory.filter(
         (historyItem) => historyItem.checkedOutBy !== patronBarcode

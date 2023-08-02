@@ -4,7 +4,6 @@ import { DataGrid } from '@mui/x-data-grid'
 function PatronList(props) {
   const patrons = usePatronStore((state) => state.patrons.allPatrons)
   const { columns, onCellClickHandler } = props
-  console.log(patrons)
   return (
     <div style={{ height: '500px', width: '100%' }}>
       <DataGrid
