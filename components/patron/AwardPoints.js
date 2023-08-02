@@ -62,6 +62,7 @@ function AwardPoints() {
           value={points}
           placeholder='Enter points'
           onChange={handleChange}
+          size='small'
         />
       </Box>
       <Box sx={{ mb: 2, width: '300px' }}>

@@ -4,6 +4,9 @@ import { DataGrid } from '@mui/x-data-grid'
 function PatronList(props) {
   const patrons = usePatronStore((state) => state.patrons.allPatrons)
   const { columns, onCellClickHandler } = props
+  function getRowId(barcode) {
+    console.log(barcode)
+  }
   return (
     <div style={{ height: '500px', width: '100%' }}>
       <DataGrid
@@ -18,7 +21,7 @@ function PatronList(props) {
         pageSizeOptions={[5, 7, 10, 15, 20]}
         checkboxSelection={false}
         // onCellClick={onCellClickHandler}
-        getRowId={(row) => row.barcode}
+        getRowId={(row) => getRowId(row.barcode)}
       />
     </div>
   )

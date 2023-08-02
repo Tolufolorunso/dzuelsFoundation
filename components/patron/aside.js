@@ -87,6 +87,7 @@ function Aside() {
           value={searchTerm.surname}
           placeholder='Surname'
           onChange={handleChange}
+          size='small'
         />
       </Box>
       <Box sx={{ mb: 2, width: '300px' }}>
@@ -98,6 +99,7 @@ function Aside() {
           value={searchTerm.firstname}
           placeholder='Firstname'
           onChange={handleChange}
+          size='small'
         />
       </Box>
       <Box sx={{ mb: 2, width: '300px' }}>
@@ -109,6 +111,7 @@ function Aside() {
           value={searchTerm.barcode}
           placeholder='Enter patron barcode'
           onChange={handleChange}
+          size='small'
         />
       </Box>
       <Box sx={{ mb: 2, width: '300px' }}>
@@ -121,6 +124,7 @@ function Aside() {
             label='Patron Type'
             name='patronType'
             onChange={handleChange}
+            size='small'
           >
             <MenuItem value='any'>Any</MenuItem>
             <MenuItem value='staff'>Staff</MenuItem>
