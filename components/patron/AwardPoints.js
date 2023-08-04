@@ -69,7 +69,7 @@ function AwardPoints() {
         <TextField
           hiddenLabel={false}
           fullWidth
-          label='patronBarcode'
+          label='Patron Barcode'
           name='patronBarcode'
           value={patronBarcode}
           placeholder='Enter Patron Barcode'
