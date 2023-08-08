@@ -1,10 +1,14 @@
+import StudentsPage from '@/components/cohort/StudentsPage'
 import Container from '@/components/layout/container'
+import fetchApi from '@/utils/fetchApi'
 import { getSession } from 'next-auth/react'
 
-function CohortClassPage() {
+function CohortClassPage(props) {
+  const { patrons } = props
+  console.log(patrons)
   return (
     <Container>
-      <h1>Students in cohort class</h1>
+      <StudentsPage />
     </Container>
   )
 }
@@ -20,14 +24,31 @@ export async function getServerSideProps(ctx) {
       },
     }
   }
-  return {
-    props: {
-      user: {
-        username: session.user.username,
-        role: session.user.role,
-        name: session.user.name,
+
+  let endpoint =
+    process.env.NEXT_ENV === 'development'
+      ? process.env.LOCALURL
+      : process.env.BASEURL
+
+  try {
+    const res = await fetchApi(`${endpoint}/cohort`)
+    const { status, patrons } = res
+
+    if (status) {
+      return {
+        props: {
+          patrons,
+        },
+      }
+    } else {
+      throw new Error('Error occurred while fetching')
+    }
+  } catch (error) {
+    return {
+      props: {
+        errorMessage: error.message,
       },
-    },
+    }
   }
 }
 

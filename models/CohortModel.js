@@ -1,0 +1,32 @@
+const mongoose = require('mongoose')
+
+const CohortSchema = new mongoose.Schema(
+  {
+    barcode: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    firstname: {
+      type: String,
+      required: true,
+    },
+    surname: {
+      type: String,
+      required: true,
+    },
+    middlename: String,
+    attendance: [
+      {
+        date: Date,
+        attended: {
+          type: Boolean,
+          default: false,
+        },
+      },
+    ],
+  },
+  { timestamps: true }
+)
+
+export default mongoose.models.Cohort || mongoose.model('Cohort', CohortSchema)
