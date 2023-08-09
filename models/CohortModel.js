@@ -16,9 +16,14 @@ const CohortSchema = new mongoose.Schema(
       required: true,
     },
     middlename: String,
+    active: {
+      type: Boolean,
+      default: true,
+    },
     attendance: [
       {
         date: Date,
+        week: Number,
         attended: {
           type: Boolean,
           default: false,

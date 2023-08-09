@@ -11,6 +11,8 @@ import Toast from '@/components/layout/alert'
 import { useRouter } from 'next/router'
 import { SessionProvider } from 'next-auth/react'
 
+import NextNProgress from 'nextjs-progressbar'
+
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
 
@@ -36,6 +38,7 @@ function MyApp(props) {
           {!auth ? <Header /> : null}
           <div style={{ marginTop: '80px' }}>
             <Toast />
+            <NextNProgress color='#6A0406' height={3} />
             <Component {...pageProps} />
           </div>
         </ThemeProvider>

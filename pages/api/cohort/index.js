@@ -56,7 +56,7 @@ export default async function handler(req, res) {
 
       return res.status(200).json({
         status: true,
-        message: `Patron with barcode ${'39434'} Added to Cohort Class successfully`,
+        message: `Patron with barcode ${barcode} Added to Cohort Class successfully`,
       })
     } catch (error) {
       console.error('Error fetching books:', error)

@@ -1,14 +1,19 @@
 import StudentsPage from '@/components/cohort/StudentsPage'
 import Container from '@/components/layout/container'
+import useCohortStore from '@/store/cohortStore'
 import fetchApi from '@/utils/fetchApi'
 import { getSession } from 'next-auth/react'
 
 function CohortClassPage(props) {
-  const { patrons } = props
-  console.log(patrons)
+  const { patrons, barcodes } = props
+
+  // set all cohort class student barcodes in global state management
+  const setStudentsInStore = useCohortStore((state) => state.setStudents)
+  setStudentsInStore(barcodes)
+
   return (
     <Container>
-      <StudentsPage />
+      <StudentsPage students={patrons} />
     </Container>
   )
 }
@@ -34,10 +39,13 @@ export async function getServerSideProps(ctx) {
     const res = await fetchApi(`${endpoint}/cohort`)
     const { status, patrons } = res
 
+    const barcodesArray = patrons.map((student) => student.barcode)
+
     if (status) {
       return {
         props: {
           patrons,
+          barcodes: barcodesArray,
         },
       }
     } else {
