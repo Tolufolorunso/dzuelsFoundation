@@ -28,7 +28,7 @@ function MarkAttendanceModal(props) {
   useEffect(() => {
     const handleKeyDown = (e) => {
       // If keycode is 13 (enter) the check if there are barcode scan keys and if there are handle barcode scan
-      console.log(barcodeScan.length)
+      // console.log(barcodeScan.length)
       if (e.keyCode === 13 && barcodeScan.length > 3) {
         handleScan(barcodeScan)
         e.preventDefault()
@@ -58,7 +58,7 @@ function MarkAttendanceModal(props) {
   })
 
   const handleScan = (barcodeString) => {
-    console.log('60', barcodeString)
+    // console.log('60', barcodeString)
     setStudentBarcode(barcodeString)
     markTheStudent()
   }

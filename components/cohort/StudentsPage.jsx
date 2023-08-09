@@ -46,7 +46,6 @@ function StudentsPage() {
       if (status) {
         setSuccessMessage(message)
         setPresent(studentBarcode)
-        console.log(cohort)
       }
     } catch (error) {
       setErrorMessage(error.message)
@@ -73,7 +72,6 @@ function StudentsPage() {
     try {
       const res = await fetchApi('/cohort', 'POST', { barcode: patronBarcode })
       const { status, message } = res
-      console.log(50, res)
       if (status) {
         setSuccessMessage(message)
       } else {
