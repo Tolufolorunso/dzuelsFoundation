@@ -26,6 +26,7 @@ const fetchApi = async (endpoint, method = 'GET', data = null) => {
     }
   } catch (error) {
     // Handle any other errors that might occur during the fetch process
+    console.log(29, error.message)
     throw new Error(error.message)
   }
 }
