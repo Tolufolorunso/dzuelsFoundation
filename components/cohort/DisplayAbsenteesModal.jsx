@@ -22,7 +22,7 @@ function DisplayAbsenteesModal(props) {
       <Box
         sx={{
           position: 'absolute',
-          top: '40%',
+          top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
           width: 400,
@@ -44,6 +44,9 @@ function DisplayAbsenteesModal(props) {
         </Button>
         <Typography variant='h6' gutterBottom>
           Those who are not present
+        </Typography>
+        <Typography variant='h6' gutterBottom>
+          Total number of absentees: {absentees.length}
         </Typography>
         {absentees.map((num) => {
           return (

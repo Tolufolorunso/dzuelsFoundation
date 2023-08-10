@@ -13,8 +13,10 @@ import fetchApi from '@/utils/fetchApi'
 import MarkAttendanceModal from './MarkAttendanceModal'
 import useCohortStore from '@/store/cohortStore'
 import DisplayAbsenteesModal from './DisplayAbsenteesModal'
+import StudentTable from './StudentList'
 
-function StudentsPage() {
+function StudentsPage(props) {
+  // const { students } = props
   const { setErrorMessage, setSuccessMessage, clearMessage } = useAppStore(
     (state) => state
   )
@@ -58,10 +60,13 @@ function StudentsPage() {
     }
   }
 
-  function handleRemoveStudent(index) {
-    // Implement the remove student functionality
-    const updatedStudents = students.filter((_, i) => i !== index)
-    setStudents(updatedStudents)
+  function handleRemoveStudent(barcode) {
+    const isvalid = prompt(
+      `Are you sure you want to remove this student, enter ${barcode}`
+    )
+    if (isvalid === barcode) {
+      console.log(barcode)
+    }
   }
 
   async function addStudentToCohort() {
@@ -116,20 +121,20 @@ function StudentsPage() {
           value={patronBarcode}
           onChange={(e) => setPatronBarcode(e.target.value)}
           style={{ marginBottom: '1rem' }}
+          size='small'
         />
         <Button
           variant='contained'
           color='primary'
           onClick={addStudentToCohort}
           mt={2}
+          disabled
         >
           Add Patron to Cohort class
         </Button>
       </Box>
 
-      <List>
-        <h1>Hello</h1>
-      </List>
+      <StudentTable students={props.students} onRemove={handleRemoveStudent} />
 
       <MarkAttendanceModal
         open={isModalOpen}
