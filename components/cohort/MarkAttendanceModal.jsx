@@ -9,7 +9,7 @@ import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
-import useScanDetection from 'use-scan-detection'
+import useScanDetection from 'use-scan-detection-react18'
 
 function MarkAttendanceModal(props) {
   const {
