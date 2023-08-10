@@ -15,6 +15,7 @@ const StudentTable = ({ students, onRemove }) => {
       <Table sx={{ minWidth: 650 }}>
         <TableHead>
           <TableRow>
+            <TableCell>No</TableCell>
             <TableCell>Barcode</TableCell>
             <TableCell>Firstname</TableCell>
             <TableCell>Surname</TableCell>
@@ -25,12 +26,15 @@ const StudentTable = ({ students, onRemove }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {students.map((student) => (
+          {students.map((student, index) => (
             <TableRow key={student.barcode}>
+              <TableCell>{index + 1}</TableCell>
               <TableCell>{student.barcode}</TableCell>
               <TableCell>{student.firstname}</TableCell>
               <TableCell>{student.surname}</TableCell>
-              <TableCell>{student.attendance[0].week}</TableCell>
+              <TableCell>
+                {student.attendance[student.attendance.length - 1].week}
+              </TableCell>
               <TableCell>{`${
                 student.attendance.filter((record) => record.attended).length
               }/${student.attendance.length}`}</TableCell>
