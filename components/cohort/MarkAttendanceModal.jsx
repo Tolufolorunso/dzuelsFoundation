@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Modal from '@mui/material/Modal'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -8,6 +8,8 @@ import CloseIcon from '@mui/icons-material/Close'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
+
+import useScanDetection from 'use-scan-detection'
 
 function MarkAttendanceModal(props) {
   const {
@@ -23,48 +25,21 @@ function MarkAttendanceModal(props) {
   const [week, setWeek] = useState(1)
   const [attendanceStatus, setAttendanceStatus] = useState('attend')
 
-  let barcodeScan = ''
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      // If keycode is 13 (enter) the check if there are barcode scan keys and if there are handle barcode scan
-      // console.log(barcodeScan.length)
-      if (e.keyCode === 13 && barcodeScan.length > 3) {
-        handleScan(barcodeScan)
-        e.preventDefault()
-        return
-      }
-
-      if (e.keyCode === 16) {
-        return
-      }
-
-      //push keycode to barcode scan variable
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      barcodeScan += e.key
-
-      //set Timeout to clear variables
-      setTimeout(() => {
-        barcodeScan = ''
-      }, 100)
-    }
-
-    document.addEventListener('keydown', handleKeyDown)
-
-    // Clean up the event listener when the component unmounts
-    return function cleanup() {
-      document.removeEventListener('keydown', handleKeyDown)
-    }
-  })
-
-  const handleScan = (barcodeString) => {
-    // console.log('60', barcodeString)
-    setStudentBarcode(barcodeString)
-    markTheStudent()
-  }
-
   function markTheStudent() {
     markStudentHandler(date, attendanceStatus, week)
+  }
+
+  function comingFromScanDetection(scanDetectionValue) {
+    setStudentBarcode(scanDetectionValue)
+    markStudentHandler(date, attendanceStatus, week)
+  }
+
+  if (typeof window !== 'undefined') {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useScanDetection({
+      onComplete: comingFromScanDetection,
+      minLength: 5,
+    })
   }
 
   return (

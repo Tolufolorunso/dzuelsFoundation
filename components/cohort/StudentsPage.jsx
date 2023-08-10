@@ -50,7 +50,7 @@ function StudentsPage() {
     } catch (error) {
       setErrorMessage(error.message)
     } finally {
-      // setStudentBarcode('')
+      setStudentBarcode('')
       studentBarcodeRef.current.focus()
       setTimeout(() => {
         clearMessage()

@@ -46,10 +46,11 @@ const PatronSchema = new mongoose.Schema(
       required: true,
       default: 'AAoJ',
     },
-    patronExpiryDate: {
-      type: Date,
-      default: Date.now,
+    active: {
+      type: Boolean,
+      default: true,
     },
+    patronExpiryDate: Date,
     employerInfo: {
       employerName: String,
       schoolName: String,
