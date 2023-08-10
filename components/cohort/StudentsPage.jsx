@@ -19,7 +19,7 @@ function StudentsPage() {
     (state) => state
   )
   const setPresent = useCohortStore((state) => state.setPresent)
-  const cohort = useCohortStore((state) => state.cohort)
+  // const cohort = useCohortStore((state) => state.cohort)
 
   const [students, setStudents] = useState([])
   const [patronBarcode, setPatronBarcode] = useState('')
