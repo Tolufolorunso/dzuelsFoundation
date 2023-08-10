@@ -30,8 +30,8 @@ const StudentTable = ({ students, onRemove }) => {
             <TableRow key={student.barcode}>
               <TableCell>{index + 1}</TableCell>
               <TableCell>{student.barcode}</TableCell>
-              <TableCell>{student.firstname}</TableCell>
-              <TableCell>{student.surname}</TableCell>
+              <TableCell>{student.firstname.toUpperCase()}</TableCell>
+              <TableCell>{student.surname.toUpperCase()}</TableCell>
               <TableCell>
                 {student.attendance[student.attendance.length - 1].week}
               </TableCell>
