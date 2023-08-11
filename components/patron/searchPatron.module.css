@@ -1,0 +1,13 @@
+.aside {
+  background-color: var(--white);
+  padding: 0.3rem 1.5rem;
+  max-width: 500px;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .aside {
+    width: 100%;
+    flex: 1;
+  }
+}

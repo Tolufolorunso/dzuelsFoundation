@@ -1,5 +1,5 @@
 import CustomHeader from '../typography/custom-header'
-import classes from './aside.module.css'
+import classes from './searchPatron.module.css'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 import React from 'react'
@@ -9,68 +9,9 @@ import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
-import usePatronStore from '@/store/patronStore'
 
-function Aside() {
-  const setPatrons = usePatronStore((state) => state.setAllPatrons)
-  const patrons = usePatronStore((state) => state.patrons.allPatrons)
-  const addSearchTerm = usePatronStore((state) => state.addSearchTerm)
-
-  const [searchTerm, setSearchTerm] = React.useState({
-    patronType: 'any',
-    surname: '',
-    firstname: '',
-    barcode: '',
-  })
-
-  function handleChange(event) {
-    setSearchTerm({ ...searchTerm, [event.target.name]: event.target.value })
-  }
-
-  function searchHandler() {
-    const filteredData = patrons.filter((item) => {
-      // Check if patronType matches the search term
-      if (
-        searchTerm.patronType !== 'any' &&
-        item.patronType !== searchTerm.patronType
-      ) {
-        return false
-      }
-
-      // Check if surname matches the search term
-      if (
-        searchTerm.surname &&
-        item.surname.toLowerCase().indexOf(searchTerm.surname.toLowerCase()) ===
-          -1
-      ) {
-        return false
-      }
-
-      // Check if firstname matches the search term
-      if (
-        searchTerm.firstname &&
-        item.firstname
-          .toLowerCase()
-          .indexOf(searchTerm.firstname.toLowerCase()) === -1
-      ) {
-        return false
-      }
-
-      // Check if barcode matches the search term
-      if (
-        searchTerm.barcode &&
-        item.barcode.indexOf(searchTerm.barcode) === -1
-      ) {
-        return false
-      }
-
-      // If all search terms are empty or match, return true to keep the item in the filteredData
-      return true
-    })
-
-    addSearchTerm(searchTerm)
-    setPatrons(filteredData)
-  }
+function SearchPatron(props) {
+  const { handleChange, searchTerm, clearTerms } = props
 
   return (
     <aside className={classes.aside}>
@@ -88,6 +29,7 @@ function Aside() {
           placeholder='Surname'
           onChange={handleChange}
           size='small'
+          autoComplete='off'
         />
       </Box>
       <Box sx={{ mb: 2, width: '300px' }}>
@@ -100,6 +42,7 @@ function Aside() {
           placeholder='Firstname'
           onChange={handleChange}
           size='small'
+          autoComplete='off'
         />
       </Box>
       <Box sx={{ mb: 2, width: '300px' }}>
@@ -112,6 +55,7 @@ function Aside() {
           placeholder='Enter patron barcode'
           onChange={handleChange}
           size='small'
+          autoComplete='off'
         />
       </Box>
       <Box sx={{ mb: 2, width: '300px' }}>
@@ -136,16 +80,16 @@ function Aside() {
       </Box>
       <Box sx={{ mb: 2, width: '300px' }}>
         <Stack direction='row' spacing={2}>
-          <Button variant='contained' onClick={searchHandler}>
-            Search
+          <Button variant='contained' onClick={() => clearTerms(searchTerm)}>
+            Clear Search
           </Button>
-          <Button variant='outlined' color='error'>
+          {/* <Button variant='outlined' color='error'>
             Cancel
-          </Button>
+          </Button> */}
         </Stack>
       </Box>
     </aside>
   )
 }
 
-export default Aside
+export default SearchPatron

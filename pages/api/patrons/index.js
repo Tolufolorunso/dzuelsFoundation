@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
       await dbConnect()
-      const { firstname, surname, library, barcode, gender, patronType, mode } =
+      let { firstname, surname, library, barcode, gender, patronType, mode } =
         req.query
 
       // Build the query object based on the provided filters

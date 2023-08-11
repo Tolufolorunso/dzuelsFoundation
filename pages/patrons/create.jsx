@@ -1,5 +1,5 @@
 import Container from '@/components/layout/container'
-import AddPatron from '@/components/patron/add-patron'
+import AddPatron from '@/components/patron/AddPatron'
 import useAppStore from '@/store/applicationStateStore'
 import usePatronStore from '@/store/patronStore'
 import fetchApi from '@/utils/fetchApi'

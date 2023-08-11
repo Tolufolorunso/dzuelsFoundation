@@ -4,9 +4,6 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemText from '@mui/material'
 
 import useAppStore from '@/store/applicationStateStore'
 import fetchApi from '@/utils/fetchApi'
@@ -23,9 +20,9 @@ function StudentsPage(props) {
   const setPresent = useCohortStore((state) => state.setPresent)
   // const cohort = useCohortStore((state) => state.cohort)
 
-  const [students, setStudents] = useState([])
   const [patronBarcode, setPatronBarcode] = useState('')
   const [studentBarcode, setStudentBarcode] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const studentBarcodeRef = useRef(null)
 
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -36,6 +33,8 @@ function StudentsPage(props) {
       setErrorMessage('Enter all fields')
       return false
     }
+
+    setIsLoading(true)
 
     try {
       const res = await fetchApi('/cohort/mark', 'POST', {
@@ -54,6 +53,7 @@ function StudentsPage(props) {
     } finally {
       setStudentBarcode('')
       studentBarcodeRef.current.focus()
+      setIsLoading(false)
       setTimeout(() => {
         clearMessage()
       }, 1500)
@@ -143,6 +143,7 @@ function StudentsPage(props) {
         studentBarcode={studentBarcode}
         setStudentBarcode={setStudentBarcode}
         studentBarcodeRef={studentBarcodeRef}
+        isLoading={isLoading}
       />
       <DisplayAbsenteesModal
         open={isDisplayAbsenteesOpen}

@@ -17,6 +17,17 @@ function CatalogingForm(props) {
     type,
   } = props
 
+  const buttonContent = loading ? (
+    <>
+      <CircularProgress size={10} color='inherit' />
+      <span style={{ marginLeft: '5px' }}>Saving...</span>
+    </>
+  ) : type === 'edit' ? (
+    'Update Item'
+  ) : (
+    'Add Book'
+  )
+
   return (
     <FormContainer>
       <CustomHeader level={2} text='Add a book' />
@@ -78,74 +89,9 @@ function CatalogingForm(props) {
           </FieldSetFormLayout>
 
           <FieldSetFormLayout legend='General'>
-            <CustomGridInput
-              label='ISBN'
-              name='ISBN'
-              value={formData.ISBN}
-              onChange={handleChange}
-              required
-            />
-            <CustomGridInput
-              label='Classification'
-              name='classification'
-              value={formData.classification}
-              onChange={handleChange}
-              required
-            />
-            <CustomGridInput
-              label='Control Number'
-              name='controlNumber'
-              value={formData.controlNumber}
-              onChange={handleChange}
-              required
-            />
-            <CustomGridInput
-              label='Index Term-Genre/Form'
-              name='indexTermGenre'
-              value={formData.indexTermGenre}
-              onChange={handleChange}
-              required
-            />
-            <CustomGridInput
-              label='General information'
-              name='informationSummary'
-              value={formData.informationSummary}
-              onChange={handleChange}
-            />
-            <CustomGridInput
-              label='Language'
-              name='language'
-              value={formData.language}
-              onChange={handleChange}
-              required
-            />
-            <CustomGridInput
-              label='Barcode'
-              name='barcode'
-              value={formData.barcode}
-              onChange={handleChange}
-              required
-            />
-            <CustomGridInput
-              label='Physical Description'
-              name='physicalDescription'
-              value={formData.physicalDescription}
-              onChange={handleChange}
-            />
-
-            <CustomGridInput
-              label='Holdings Information'
-              name='holdingsInformation'
-              value={formData.holdingsInformation}
-              onChange={handleChange}
-              required
-            />
-            <CustomGridInput
-              label='Library'
-              name='library'
-              value={formData.library}
-              onChange={handleChange}
-              required
+            <GeneralInfoFormSection
+              formData={formData}
+              handleChange={handleChange}
             />
           </FieldSetFormLayout>
         </Grid>
@@ -158,16 +104,7 @@ function CatalogingForm(props) {
             style={{ marginTop: '1rem' }}
             // className={classes.btn}
           >
-            {loading ? (
-              <>
-                <CircularProgress size={10} color='inherit' />
-                <span style={{ marginLeft: '5px' }}>Saving...</span>
-              </>
-            ) : type === 'edit' ? (
-              'Update Item'
-            ) : (
-              'Add Book'
-            )}
+            {buttonContent}
           </Button>
           <Button
             type='button'
@@ -185,3 +122,80 @@ function CatalogingForm(props) {
 }
 
 export default CatalogingForm
+
+function GeneralInfoFormSection(props) {
+  const { formData, handleChange } = props
+  return (
+    <>
+      <CustomGridInput
+        label='ISBN'
+        name='ISBN'
+        value={formData.ISBN}
+        onChange={handleChange}
+        required
+      />
+      <CustomGridInput
+        label='Classification'
+        name='classification'
+        value={formData.classification}
+        onChange={handleChange}
+        required
+      />
+      <CustomGridInput
+        label='Control Number'
+        name='controlNumber'
+        value={formData.controlNumber}
+        onChange={handleChange}
+        required
+      />
+      <CustomGridInput
+        label='Index Term-Genre/Form'
+        name='indexTermGenre'
+        value={formData.indexTermGenre}
+        onChange={handleChange}
+        required
+      />
+      <CustomGridInput
+        label='General information'
+        name='informationSummary'
+        value={formData.informationSummary}
+        onChange={handleChange}
+      />
+      <CustomGridInput
+        label='Language'
+        name='language'
+        value={formData.language}
+        onChange={handleChange}
+        required
+      />
+      <CustomGridInput
+        label='Barcode'
+        name='barcode'
+        value={formData.barcode}
+        onChange={handleChange}
+        required
+      />
+      <CustomGridInput
+        label='Physical Description'
+        name='physicalDescription'
+        value={formData.physicalDescription}
+        onChange={handleChange}
+      />
+
+      <CustomGridInput
+        label='Holdings Information'
+        name='holdingsInformation'
+        value={formData.holdingsInformation}
+        onChange={handleChange}
+        required
+      />
+      <CustomGridInput
+        label='Library'
+        name='library'
+        value={formData.library}
+        onChange={handleChange}
+        required
+      />
+    </>
+  )
+}

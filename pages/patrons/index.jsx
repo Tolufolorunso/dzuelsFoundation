@@ -1,5 +1,4 @@
 import Container from '@/components/layout/container'
-import Aside from '@/components/patron/aside'
 import ContentSide from '@/components/patron/content-side'
 import fetchApi from '@/utils/fetchApi'
 import { useRouter } from 'next/router'
@@ -12,47 +11,64 @@ import useAppStore from '@/store/applicationStateStore'
 import XLSX from 'xlsx'
 import { saveAs } from 'file-saver'
 import AwardPoints from '@/components/patron/AwardPoints'
+import SearchPatron from '@/components/patron/SearchPatron'
+import { filterPatrons } from '@/utils/filterPatrons'
+import { useState } from 'react'
+import { exportToExcel } from '@/utils/export'
 
 function PatronsHomePage(props) {
   const setPatrons = usePatronStore((state) => state.setAllPatrons)
-  const searchTerm = usePatronStore((state) => state.patrons.searchTerm)
+  // const searchTerm = usePatronStore((state) => state.patrons.searchTerm)
   const { setErrorMessage, setSuccessMessage } = useAppStore((state) => state)
   const { columns, errorMessage, patrons } = props
   const router = useRouter()
 
-  const exportToExcel = (data) => {
-    const worksheet = XLSX.utils.json_to_sheet(data)
-    const workbook = XLSX.utils.book_new()
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1')
-    const excelBuffer = XLSX.write(workbook, {
-      bookType: 'xlsx',
-      type: 'array',
-    })
-    const dataBlob = new Blob([excelBuffer], {
-      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    })
-    saveAs(dataBlob, 'data.xlsx')
-  }
+  const [searchTerm, setSearchTerm] = useState({
+    patronType: 'any',
+    surname: '',
+    firstname: '',
+    barcode: '',
+  })
 
-  // const [fil]
+  function handleChange(event) {
+    setSearchTerm({ ...searchTerm, [event.target.name]: event.target.value })
+  }
 
   if (!errorMessage) {
     setPatrons(patrons)
   }
 
-  function onCellClickHandler(books) {
-    // router.push(`/patrons/${books.row.barcode}`, books.row)
+  const rows = filterPatrons({ searchTerm, data: patrons })
+
+  // console.log(rows, patrons)
+
+  function onRowClickHandler(item) {
     router.push({
-      pathname: `/patrons/${books.row.barcode}`, // not router.asPath
+      pathname: `/patrons/${item.row.barcode}`,
       // query: { confirm: true },
+    })
+  }
+
+  function clearTerms() {
+    setSearchTerm({
+      patronType: 'any',
+      surname: '',
+      firstname: '',
+      barcode: '',
     })
   }
 
   async function exportToExcelFrontend(type) {
     if (type === 'detail') {
       try {
+        const patronType =
+          searchTerm?.patronType === 'any' ? '' : searchTerm?.patronType
+        const firstname = searchTerm.firstname
+        const surname = searchTerm.surname
+        const barcode = searchTerm.barcode
+
         const res = await fetchApi(
-          `/patrons?mode=detail&patronType=${searchTerm?.patronType}`
+          `/patrons?mode=detail&patronType=${patronType}&firstname=${firstname}&surname=${surname}&barcode=${barcode}`
         )
         const { status, patrons } = res
         if (status) {
@@ -85,7 +101,11 @@ function PatronsHomePage(props) {
     <Container>
       <main className='patron-container'>
         <div>
-          <Aside />
+          <SearchPatron
+            handleChange={handleChange}
+            searchTerm={searchTerm}
+            clearTerms={clearTerms}
+          />
           <AwardPoints />
         </div>
 
@@ -105,9 +125,8 @@ function PatronsHomePage(props) {
           </Box>
         ) : (
           <ContentSide
-            rows={patrons}
-            onCellClickHandler={onCellClickHandler}
-            onRowClick={onCellClickHandler}
+            rows={rows}
+            onRowClick={onRowClickHandler}
             columns={columns}
             exportToExcel={exportToExcelFrontend}
           />

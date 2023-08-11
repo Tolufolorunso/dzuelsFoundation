@@ -1,3 +1,5 @@
+import Box from '@mui/material/Box'
+
 import CatalogFunctionBtns from '@/components/cataloging/catalog-function-btns'
 import Container from '@/components/layout/container'
 
@@ -6,13 +8,36 @@ import { useRouter } from 'next/router'
 import fetchApi from '@/utils/fetchApi'
 
 import { useAuth } from '@/utils/protectedPage'
-import Loading from '@/components/layout/Loading'
+import FilterItems from '@/components/cataloging/FilterItems'
+import { useState } from 'react'
+import { filterCataloging } from '@/utils/filterCataloging'
 
 function CatalogPage(props) {
-  const session = useAuth()
   const { columns, items } = props
 
   const router = useRouter()
+
+  const [searchTerm, setSearchTerm] = useState({
+    title: '',
+    author: '',
+    barcode: '',
+    classification: '',
+    controlNumber: '',
+  })
+
+  function handleChange(event) {
+    setSearchTerm({ ...searchTerm, [event.target.name]: event.target.value })
+  }
+
+  function clearSearchTerm() {
+    setSearchTerm({
+      title: '',
+      author: '',
+      barcode: '',
+      classification: '',
+      controlNumber: '',
+    })
+  }
 
   function onListClickHandler(books) {
     // router.push(`/catalogs/${books.row.barcode}`, books.row)
@@ -35,14 +60,31 @@ function CatalogPage(props) {
       })
     : []
 
+  const rows = filterCataloging({ searchTerm, data: transformedArray })
+
   return (
     <Container>
-      <CatalogFunctionBtns />
-      <BookList
-        rows={transformedArray}
-        onRowDoubleClick={onListClickHandler}
-        columns={columns}
-      />
+      <Box
+        display='flex'
+        flexDirection={{ xs: 'column', sm: 'row' }}
+        width='100%'
+        gap={3}
+        flexWrap='wrap'
+      >
+        <FilterItems
+          searchTerm={searchTerm}
+          clearTerms={clearSearchTerm}
+          handleChange={handleChange}
+        />
+        <Box width={{ xs: '100%', sm: '70%' }}>
+          <CatalogFunctionBtns />
+          <BookList
+            rows={rows}
+            onRowDoubleClick={onListClickHandler}
+            columns={columns}
+          />
+        </Box>
+      </Box>
     </Container>
   )
 }
@@ -50,18 +92,18 @@ function CatalogPage(props) {
 export async function getServerSideProps(ctx) {
   const columns = [
     { field: 'barcode', headerName: 'Barcode', width: 100 },
-    { field: 'title', headerName: 'Title', width: 350 },
+    { field: 'title', headerName: 'Title', width: 250 },
     { field: 'author', headerName: 'Author', width: 150 },
     {
       field: 'classification',
       headerName: 'Classification',
       type: 'number',
-      width: 130,
+      width: 100,
     },
     {
       field: 'controlNumber',
       headerName: 'Control Number',
-      width: 150,
+      width: 100,
     },
   ]
 

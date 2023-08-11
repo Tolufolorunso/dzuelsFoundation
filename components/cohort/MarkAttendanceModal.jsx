@@ -8,6 +8,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
+import CircularProgress from '@mui/material/CircularProgress'
 
 import useScanDetection from 'use-scan-detection-react18'
 
@@ -19,6 +20,7 @@ function MarkAttendanceModal(props) {
     studentBarcode,
     setStudentBarcode,
     studentBarcodeRef,
+    isLoading,
   } = props
 
   const [date, setDate] = useState('')
@@ -83,6 +85,7 @@ function MarkAttendanceModal(props) {
           type='number'
           onChange={(e) => setWeek(e.target.value)}
           sx={{ mb: 2 }}
+          autoComplete='off'
         />
 
         <TextField
@@ -95,6 +98,7 @@ function MarkAttendanceModal(props) {
           onChange={(e) => setStudentBarcode(e.target.value)}
           sx={{ mb: 2 }}
           inputRef={studentBarcodeRef}
+          autoComplete='off'
         />
         <RadioGroup
           row
@@ -115,7 +119,14 @@ function MarkAttendanceModal(props) {
           />
         </RadioGroup>
         <Button variant='contained' color='primary' onClick={markTheStudent}>
-          Mark Student
+          {isLoading ? (
+            <>
+              <CircularProgress size={10} color='inherit' />
+              <span style={{ marginLeft: '5px' }}>Marking...</span>
+            </>
+          ) : (
+            'Mark Student'
+          )}
         </Button>
         <Button
           variant='contained'

@@ -1,13 +1,12 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-  Button,
-} from '@mui/material'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
+import Paper from '@mui/material/Paper'
+
+import StudentRow from './StudentRow'
 
 const StudentTable = ({ students, onRemove }) => {
   return (
@@ -27,32 +26,12 @@ const StudentTable = ({ students, onRemove }) => {
         </TableHead>
         <TableBody>
           {students.map((student, index) => (
-            <TableRow key={student.barcode}>
-              <TableCell>{index + 1}</TableCell>
-              <TableCell>{student.barcode}</TableCell>
-              <TableCell>{student.firstname.toUpperCase()}</TableCell>
-              <TableCell>{student.surname.toUpperCase()}</TableCell>
-              <TableCell>
-                {student.attendance[student.attendance.length - 1].week}
-              </TableCell>
-              <TableCell>{`${
-                student.attendance.filter((record) => record.attended).length
-              }/${student.attendance.length}`}</TableCell>
-              <TableCell>{`${(
-                (student.attendance.filter((record) => record.attended).length /
-                  student.attendance.length) *
-                100
-              ).toFixed(2)}%`}</TableCell>
-              <TableCell>
-                <Button
-                  variant='contained'
-                  color='primary'
-                  onClick={() => onRemove(student.barcode)}
-                >
-                  Remove
-                </Button>
-              </TableCell>
-            </TableRow>
+            <StudentRow
+              key={student.barcode}
+              {...student}
+              index={index}
+              onRemove={onRemove}
+            />
           ))}
         </TableBody>
       </Table>

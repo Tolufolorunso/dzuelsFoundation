@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import Snackbar from '@mui/material/Snackbar'
 
-import CatalogingForm from '@/components/cataloging/cataloging-form'
+import CatalogingForm from '@/components/cataloging/CatalogingForm'
 import Container from '@/components/layout/container'
 import CatalogFunctionBtns from '@/components/cataloging/catalog-function-btns'
 

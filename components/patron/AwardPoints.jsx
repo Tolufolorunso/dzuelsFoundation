@@ -1,5 +1,5 @@
 import CustomHeader from '../typography/custom-header'
-import classes from './aside.module.css'
+import classes from './searchPatron.module.css'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 import React, { useState } from 'react'

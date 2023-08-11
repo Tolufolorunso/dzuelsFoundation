@@ -1,4 +1,4 @@
-import CatalogingForm from '@/components/cataloging/cataloging-form'
+import CatalogingForm from '@/components/cataloging/CatalogingForm'
 import Container from '@/components/layout/container'
 import { getSession } from 'next-auth/react'
 import { useState } from 'react'

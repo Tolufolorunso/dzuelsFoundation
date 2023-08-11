@@ -2,13 +2,12 @@ import usePatronStore from '@/store/patronStore'
 import { DataGrid } from '@mui/x-data-grid'
 
 function PatronList(props) {
-  const patrons = usePatronStore((state) => state.patrons.allPatrons)
-  const { columns, onCellClickHandler } = props
+  const { columns, rows, onRowClick } = props
   return (
     <div style={{ height: '500px', width: '100%' }}>
       <DataGrid
         sx={{ fontSize: '1.2rem' }}
-        rows={patrons}
+        rows={rows}
         columns={columns}
         initialState={{
           pagination: {
@@ -17,7 +16,7 @@ function PatronList(props) {
         }}
         pageSizeOptions={[5, 7, 10, 15, 20]}
         checkboxSelection={false}
-        // onCellClick={onCellClickHandler}
+        onRowClick={onRowClick}
         getRowId={(row) => row.barcode}
       />
     </div>

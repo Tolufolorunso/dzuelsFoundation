@@ -4,12 +4,8 @@ import SaveAltIcon from '@mui/icons-material/SaveAlt'
 import CustomHeader from '@/components/typography/custom-header'
 import CircularProgress from '@mui/material/CircularProgress'
 
-import FormControl from '@mui/material/FormControl'
-import InputLabel from '@mui/material/InputLabel'
-import Input from '@mui/material/Input'
-
-import classes from './add-patron.module.css'
-import PatronForm from './patron-form'
+import classes from './AddPatron.module.css'
+import PatronForm from './AddPatronForm'
 
 import { useRef, useState } from 'react'
 import SelectPatronType from './select-patron-type'
