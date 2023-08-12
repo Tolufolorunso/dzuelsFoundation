@@ -4,7 +4,7 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import ButtonGroup from '@mui/material/ButtonGroup'
 
-import classes from './CirculationContent.module.css'
+import classes from './Circulation.module.css'
 import CustomHeader from '../typography/custom-header'
 
 function CirculationContent(props) {
@@ -36,7 +36,7 @@ function CirculationContent(props) {
                 key='three'
                 fullWidth
                 className={classes.button}
-                onClick={() => alert('Not ready')}
+                onClick={() => goTo('renew')}
               >
                 Renew
               </Button>

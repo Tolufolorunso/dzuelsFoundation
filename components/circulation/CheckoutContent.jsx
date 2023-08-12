@@ -3,8 +3,8 @@ import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
 import { Divider } from '@mui/material'
+import classes from './Circulation.module.css'
 
-import classes from './CheckoutContent.module.css'
 import useCirculationStore from '@/store/circulationStore'
 import CirculationUserInfo from './CirculationUserInfo'
 import CirculationCheckoutSection from './CirculationCheckoutSection'
@@ -94,13 +94,9 @@ function CheckoutContent(props) {
                   id='barcode'
                   name='barcode'
                   placeholder='Search Patron Barcode'
-                  style={{
-                    padding: '8px',
-                    fontSize: '16px',
-                    border: '1px solid #ccc',
-                    borderRadius: '4px',
-                  }}
+                  className={classes.input}
                   ref={inputRef}
+                  autoComplete='off'
                 />
               </div>
               <Button

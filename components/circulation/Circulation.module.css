@@ -1,0 +1,79 @@
+/* general css */
+.input {
+  padding: 8px !important;
+  font-size: 16px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
+  outline: none !important;
+  transition: all 0.3s ease-in-out !important;
+}
+
+.input:focus {
+  border: 1px solid var(--main) !important;
+}
+
+.button {
+  background-color: #969593 !important;
+  text-align: left !important;
+  padding: 1.3rem !important;
+  display: inline-block !important;
+  color: var(--white) !important;
+  font-size: 2rem !important;
+}
+
+.button:hover {
+  background-color: var(--dark-main) !important;
+}
+
+/* Checkout Section */
+.checkingHeader {
+  font-weight: 600;
+  color: var(--black);
+  font-size: 1.8rem;
+}
+
+.enterBarcode {
+  font-weight: 300;
+  margin-top: -5px;
+  font-size: 1.4rem;
+  color: var(--logo-grey);
+}
+
+/* Checkin css */
+.checkin {
+  background-color: var(--white);
+  padding: 2rem;
+  width: min(100%, 1000px);
+  margin: auto;
+}
+
+.checkin p {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.4rem;
+}
+
+.checkin input {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.checkin input:last-of-type {
+  margin-bottom: 1rem;
+}
+
+.checkin input:focus {
+  border: 1px solid var(--main) !important;
+}
+
+/* Checkout Content css */
+.searchPatronBtn {
+  width: 30% !important;
+  padding: 9px !important;
+}
+
+/* Renew Css Code */

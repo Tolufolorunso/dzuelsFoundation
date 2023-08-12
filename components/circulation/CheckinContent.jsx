@@ -1,4 +1,4 @@
-import classes from './CheckinContent.module.css'
+import classes from './Circulation.module.css'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
@@ -32,6 +32,8 @@ function CheckinContent(props) {
               name='barcode'
               placeholder='Enter Patron Barcode'
               ref={patronBarcodeRef}
+              className={classes.input}
+              autoComplete='off'
             />
             <input
               type='text'
@@ -39,6 +41,8 @@ function CheckinContent(props) {
               name='barcode'
               placeholder='Enter Item Barcode'
               ref={itemBarcodeRef}
+              className={classes.input}
+              autoComplete='off'
             />
           </Stack>
           <Button variant='outlined' onClick={clickHandler}>

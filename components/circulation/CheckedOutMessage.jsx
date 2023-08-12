@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box'
-import classes from './CirculationCheckoutSection.module.css'
+import classes from './Circulation.module.css'
 
 function CheckedOutMessage(props) {
   const { title, dueDate, itemBarcode } = props

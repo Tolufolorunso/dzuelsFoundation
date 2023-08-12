@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
 import Divider from '@mui/material/Divider'
 
-import classes from './CirculationCheckoutSection.module.css'
+import classes from './Circulation.module.css'
 import { useEffect, useRef, useState } from 'react'
 import useAppStore from '@/store/applicationStateStore'
 import CheckedOutMessage from './CheckedOutMessage'
@@ -114,13 +114,9 @@ function CirculationCheckoutSection() {
                   id='barcode'
                   name='barcode'
                   placeholder='Search Patron Barcode'
-                  style={{
-                    padding: '8px',
-                    fontSize: '16px',
-                    border: '1px solid #ccc',
-                    borderRadius: '4px',
-                  }}
+                  className={classes.input}
                   ref={inputRef}
+                  autoComplete='off'
                 />
               </div>
               <Button
