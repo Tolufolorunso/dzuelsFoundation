@@ -1,10 +1,10 @@
 import CustomHeader from '../typography/custom-header'
 import classes from './FilterItem.module.css'
-import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 import React from 'react'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
+import FilterTextField from './FilterTextField'
 
 function FilterItems(props) {
   const { searchTerm, handleChange, clearTerms } = props
@@ -12,74 +12,17 @@ function FilterItems(props) {
   return (
     <aside className={classes.aside}>
       <CustomHeader level={3} text='Search for Item' />
-
-      <Box sx={{ mb: 2, width: '300px' }}>
-        <TextField
-          hiddenLabel={false}
-          fullWidth
-          label='Title'
-          autoFocus
-          name='title'
-          value={searchTerm.title}
-          placeholder='Search by title'
-          onChange={handleChange}
-          size='small'
-          autoComplete='off'
-        />
-      </Box>
-      <Box sx={{ mb: 2, width: '300px' }}>
-        <TextField
-          hiddenLabel={false}
-          fullWidth
-          label='Author'
-          name='author'
-          value={searchTerm.author}
-          placeholder='Search by author'
-          onChange={handleChange}
-          size='small'
-          autoComplete='off'
-        />
-      </Box>
-      <Box sx={{ mb: 2, width: '300px' }}>
-        <TextField
-          hiddenLabel={false}
-          fullWidth
-          label='classification'
-          name='classification'
-          value={searchTerm.classification}
-          placeholder='Enter classification'
-          onChange={handleChange}
-          size='small'
-          autoComplete='off'
-        />
-      </Box>
-      <Box sx={{ mb: 2, width: '300px' }}>
-        <TextField
-          hiddenLabel={false}
-          fullWidth
-          label='controlNumber'
-          name='controlNumber'
-          value={searchTerm.controlNumber}
-          placeholder='Enter controlNumber'
-          onChange={handleChange}
-          size='small'
-          autoComplete='off'
-        />
-      </Box>
-      <Box sx={{ mb: 2, width: '300px' }}>
-        <TextField
-          hiddenLabel={false}
-          fullWidth
-          label='Barcode'
-          name='barcode'
-          value={searchTerm.barcode}
-          placeholder='Enter barcode'
-          onChange={handleChange}
-          size='small'
-          autoComplete='off'
-        />
-      </Box>
-
+      {filterFields.map((field) => (
+        <Box key={field.name} sx={{ mb: 2, width: '300px' }}>
+          <FilterTextField
+            label={field.label}
+            name={field.name}
+            value={searchTerm[field.name]}
+            placeholder={field.placeholder}
+            onChange={handleChange}
+          />
+        </Box>
+      ))}
       <Box sx={{ mb: 2, width: '300px' }}>
         <Stack direction='row' spacing={2}>
           <Button variant='contained' onClick={clearTerms}>
@@ -92,3 +35,19 @@ function FilterItems(props) {
 }
 
 export default FilterItems
+
+const filterFields = [
+  { label: 'Title', name: 'title', placeholder: 'Search by title' },
+  { label: 'Author', name: 'author', placeholder: 'Search by author' },
+  {
+    label: 'Classification',
+    name: 'classification',
+    placeholder: 'Enter classification',
+  },
+  {
+    label: 'Control Number',
+    name: 'controlNumber',
+    placeholder: 'Enter Control Number',
+  },
+  { label: 'Barcode', name: 'barcode', placeholder: 'Enter barcode' },
+]

@@ -7,14 +7,41 @@ import BookList from '@/components/cataloging/book-list'
 import { useRouter } from 'next/router'
 import fetchApi from '@/utils/fetchApi'
 
-import { useAuth } from '@/utils/protectedPage'
 import FilterItems from '@/components/cataloging/FilterItems'
-import { useState } from 'react'
 import { filterCataloging } from '@/utils/filterCataloging'
+import { useState } from 'react'
+
+import classes from '@/components/cataloging/home.module.css'
+
+const columns = [
+  { field: 'barcode', headerName: 'Barcode', width: 100 },
+  {
+    field: 'title',
+    headerName: 'Title',
+    width: 250,
+    cellClassName: classes.titleField,
+  },
+  {
+    field: 'author',
+    headerName: 'Author',
+    width: 150,
+    cellClassName: classes.titleField,
+  },
+  {
+    field: 'classification',
+    headerName: 'Classification',
+    type: 'number',
+    width: 100,
+  },
+  {
+    field: 'controlNumber',
+    headerName: 'Control Number',
+    width: 100,
+  },
+]
 
 function CatalogPage(props) {
-  const { columns, items } = props
-
+  const { items } = props
   const router = useRouter()
 
   const [searchTerm, setSearchTerm] = useState({
@@ -90,23 +117,6 @@ function CatalogPage(props) {
 }
 
 export async function getServerSideProps(ctx) {
-  const columns = [
-    { field: 'barcode', headerName: 'Barcode', width: 100 },
-    { field: 'title', headerName: 'Title', width: 250 },
-    { field: 'author', headerName: 'Author', width: 150 },
-    {
-      field: 'classification',
-      headerName: 'Classification',
-      type: 'number',
-      width: 100,
-    },
-    {
-      field: 'controlNumber',
-      headerName: 'Control Number',
-      width: 100,
-    },
-  ]
-
   let endpoint =
     process.env.NEXT_ENV === 'development'
       ? process.env.LOCALURL
@@ -120,7 +130,6 @@ export async function getServerSideProps(ctx) {
       return {
         props: {
           items,
-          columns,
         },
       }
     }

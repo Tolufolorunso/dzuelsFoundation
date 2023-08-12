@@ -8,8 +8,6 @@ import usePatronStore from '@/store/patronStore'
 import { getSession } from 'next-auth/react'
 import useAppStore from '@/store/applicationStateStore'
 
-import XLSX from 'xlsx'
-import { saveAs } from 'file-saver'
 import AwardPoints from '@/components/patron/AwardPoints'
 import SearchPatron from '@/components/patron/SearchPatron'
 import { filterPatrons } from '@/utils/filterPatrons'

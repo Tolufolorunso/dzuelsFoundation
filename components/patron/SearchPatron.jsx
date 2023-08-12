@@ -83,9 +83,6 @@ function SearchPatron(props) {
           <Button variant='contained' onClick={() => clearTerms(searchTerm)}>
             Clear Search
           </Button>
-          {/* <Button variant='outlined' color='error'>
-            Cancel
-          </Button> */}
         </Stack>
       </Box>
     </aside>
