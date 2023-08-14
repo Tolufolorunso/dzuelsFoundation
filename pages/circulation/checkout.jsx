@@ -9,11 +9,19 @@ import { getSession } from 'next-auth/react'
 import { useEffect } from 'react'
 
 function Checkout() {
-  const setErrorMessage = useAppStore((state) => state.setErrorMessage)
+  const { setErrorMessage, clearMessage } = useAppStore((state) => state)
   const setPatron = useCirculationStore((state) => state.setPatron)
   const clearPatronData = useCirculationStore((state) => state.clearPatronData)
 
   async function getPatron(patronBarcode, type) {
+    if (!patronBarcode) {
+      setErrorMessage('Enter a valid patron barcode')
+      setTimeout(() => {
+        clearMessage()
+      }, 3000)
+      return false
+    }
+
     if (type === 'patron') {
       try {
         const data = await fetchApi(
