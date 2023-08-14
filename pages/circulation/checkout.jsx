@@ -13,10 +13,9 @@ function Checkout() {
   const setPatron = useCirculationStore((state) => state.setPatron)
   const clearPatronData = useCirculationStore((state) => state.clearPatronData)
 
-  async function getPatron(patronBarcode, type, inputRef) {
-    if (!patronBarcode) {
+  async function getPatron(patronBarcode, type) {
+    if (!patronBarcode || patronBarcode.length !== 8) {
       setErrorMessage('Enter a valid patron barcode')
-      inputRef.current.focus()
       setTimeout(() => {
         clearMessage()
       }, 3000)
