@@ -148,8 +148,9 @@ export async function getServerSideProps(ctx) {
 
   const columns = [
     { field: 'barcode', headerName: 'Barcode', width: 100 },
-    { field: 'firstname', headerName: 'Firstname', width: 200 },
-    { field: 'surname', headerName: 'Surname', width: 200 },
+    { field: 'firstname', headerName: 'Firstname', width: 150 },
+    { field: 'surname', headerName: 'Surname', width: 150 },
+    { field: 'phoneNumber', headerName: 'Phone-No', width: 150 },
     {
       field: 'patronType',
       headerName: 'Patron Type',
