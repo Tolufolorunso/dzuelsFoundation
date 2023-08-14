@@ -72,7 +72,7 @@ function CheckoutContent(props) {
   const handleScan = (barcodeString) => {
     //set barcode display to data
     if (!patronData) {
-      getPatron(barcodeString, 'patron')
+      getPatron(barcodeString, 'patron', inputRef)
     }
   }
 
