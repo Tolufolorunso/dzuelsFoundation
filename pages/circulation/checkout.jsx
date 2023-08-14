@@ -11,6 +11,7 @@ import { useEffect } from 'react'
 function Checkout() {
   const setErrorMessage = useAppStore((state) => state.setErrorMessage)
   const setPatron = useCirculationStore((state) => state.setPatron)
+  const clearPatronData = useCirculationStore((state) => state.clearPatronData)
 
   async function getPatron(patronBarcode, type) {
     if (type === 'patron') {
@@ -24,7 +25,13 @@ function Checkout() {
       }
     }
   }
-  
+
+  // clear patron data when navigate away from checkout page
+  useEffect(() => {
+    return () => {
+      clearPatronData()
+    }
+  })
 
   return (
     <Container>

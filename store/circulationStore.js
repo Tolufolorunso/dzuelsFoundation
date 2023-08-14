@@ -15,6 +15,14 @@ const useCirculationStore = create((set) => ({
       },
     }))
   },
+  clearPatronData: (patron) => {
+    set((state) => ({
+      circulation: {
+        ...state.circulation,
+        patronData: null,
+      },
+    }))
+  },
   checkout: async (checkoutData) => {
     try {
       const res = await fetchApi('/circulation/checkout', 'POST', checkoutData)

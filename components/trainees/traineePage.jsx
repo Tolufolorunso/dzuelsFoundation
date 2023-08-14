@@ -136,7 +136,7 @@ function TraineePage(props) {
         </Button>
       </Box>
 
-      <StudentTable students={props.students} onRemove={handleRemoveStudent} />
+      <StudentTable trainees={props.students} onRemove={handleRemoveStudent} />
 
       <MarkAttendanceModal
         open={isModalOpen}

@@ -45,7 +45,12 @@ function CirculationContent(props) {
           <Grid item xs={12} md={4}>
             <CustomHeader level={3} text='Holds' />
             <Stack direction='column' spacing={3}>
-              <Button fullWidth key='one' className={classes.button}>
+              <Button
+                fullWidth
+                key='one'
+                className={classes.button}
+                onClick={() => goTo('holds')}
+              >
                 Hold Queue
               </Button>
             </Stack>

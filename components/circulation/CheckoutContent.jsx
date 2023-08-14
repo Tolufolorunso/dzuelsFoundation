@@ -14,6 +14,7 @@ function CheckoutContent(props) {
   const patronData = useCirculationStore(
     (state) => state.circulation.patronData
   )
+  const clearPatronData = useCirculationStore((state) => state.clearPatronData)
   const { getPatron } = props
   const formRef = useRef(null)
   const inputRef = useRef(null)
@@ -62,6 +63,12 @@ function CheckoutContent(props) {
     getPatron(inputValue, 'patron')
   }
 
+  function clearPatronDataHandler() {
+    clearPatronData()
+    inputRef.current.focus()
+    inputRef.current.value = ''
+  }
+
   const handleScan = (barcodeString) => {
     //set barcode display to data
     if (!patronData) {
@@ -105,6 +112,13 @@ function CheckoutContent(props) {
                 onClick={submitBtnClickHandler}
               >
                 Submit
+              </Button>
+              <Button
+                variant='outlined'
+                className={classes.searchPatronBtn}
+                onClick={clearPatronDataHandler}
+              >
+                Clear Patron Data
               </Button>
             </Stack>
           </form>
