@@ -27,8 +27,10 @@ export default async function handler(req, res) {
 
       // Fetch cataloging records based on the query
       const patrons = await Patron.find(query).select(
-        'firstname surname library barcode gender patronType, phoneNumber'
+        'firstname surname library barcode gender patronType phoneNumber'
       )
+
+      console.log(patrons)
 
       return res.status(200).json({ status: true, patrons })
     } catch (error) {
