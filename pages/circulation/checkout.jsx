@@ -14,7 +14,7 @@ function Checkout() {
   const clearPatronData = useCirculationStore((state) => state.clearPatronData)
 
   async function getPatron(patronBarcode, type) {
-    if (!patronBarcode || patronBarcode.length !== 6) {
+    if (!patronBarcode || patronBarcode.length < 6) {
       setErrorMessage('Enter a valid patron barcode')
       setTimeout(() => {
         clearMessage()
@@ -39,6 +39,7 @@ function Checkout() {
     return () => {
       clearPatronData()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
