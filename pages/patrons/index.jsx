@@ -154,8 +154,9 @@ export async function getServerSideProps(ctx) {
     {
       field: 'patronType',
       headerName: 'Patron Type',
-      width: 130,
+      width: 150,
     },
+    { field: 'points', headerName: 'Points', width: 150 },
   ]
 
   let endpoint =

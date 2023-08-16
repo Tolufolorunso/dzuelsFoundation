@@ -95,7 +95,7 @@ const PatronSchema = new mongoose.Schema(
     checkoutHistory: [
       {
         itemBarcode: {
-          type: String,
+          type: mongoose.Schema.Types.ObjectId,
           ref: 'Cataloging',
         },
         checkoutDate: Date,

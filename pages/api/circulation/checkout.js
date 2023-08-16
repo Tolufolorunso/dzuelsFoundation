@@ -59,7 +59,7 @@ export default async function handler(req, res) {
 
       // Update the cataloging record with checkout details
       cataloging.checkedOutHistory.push({
-        checkedOutBy: patronBarcode,
+        checkedOutBy: patron._id,
         checkedOutAt: currentDate,
         dueDate: dueDate,
       })
@@ -72,7 +72,7 @@ export default async function handler(req, res) {
 
       // Update the patron's checkout history
       patron.checkoutHistory.push({
-        itemBarcode: cataloging.barcode,
+        itemBarcode: cataloging._id,
         checkoutDate: new Date(),
         dueDate: dueDate,
       })
