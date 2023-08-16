@@ -8,7 +8,6 @@ import Paper from '@mui/material/Paper'
 import HoldsRow from './HoldsListRow'
 
 function HoldsLists(props) {
-  console.log(props)
   const { holds } = props
   return (
     <TableContainer component={Paper}>
@@ -24,7 +23,7 @@ function HoldsLists(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {holds.map((hold, index) => (
+          {holds?.map((hold, index) => (
             <HoldsRow key={hold.patronBarcode} {...hold} index={index} />
           ))}
         </TableBody>

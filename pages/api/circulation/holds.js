@@ -13,6 +13,8 @@ export default async function handler(req, res) {
         path: 'checkedOutHistory.checkedOutBy',
         select: 'barcode firstname surname',
       })
+
+      // console.log(17, checkoutHistory[1].checkedOutHistory)
       const formattedHistory = checkoutHistory
         .map((item) => {
           return item.checkedOutHistory.map((checkout) => ({
