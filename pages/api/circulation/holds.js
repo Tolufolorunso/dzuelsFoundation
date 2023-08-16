@@ -13,8 +13,6 @@ export default async function handler(req, res) {
         path: 'checkedOutHistory.checkedOutBy',
         select: 'barcode firstname surname',
       })
-
-      console.log(17, checkoutHistory[0])
       const formattedHistory = checkoutHistory
         .map((item) => {
           return item.checkedOutHistory.map((checkout) => ({
@@ -26,8 +24,6 @@ export default async function handler(req, res) {
           }))
         })
         .flat()
-
-      console.log(27, formattedHistory)
 
       return res
         .status(200)

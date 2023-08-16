@@ -9,7 +9,7 @@ import HoldsRow from './HoldsListRow'
 
 function HoldsLists(props) {
   console.log(props)
-  const { patrons } = props
+  const { holds } = props
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }}>
@@ -19,20 +19,15 @@ function HoldsLists(props) {
             <TableCell>Patron Barcode</TableCell>
             <TableCell>Name</TableCell>
             <TableCell>Book Title</TableCell>
-            <TableCell>Date</TableCell>
+            <TableCell>Borrowed On</TableCell>
             <TableCell>Due Date</TableCell>
           </TableRow>
         </TableHead>
-        {/* <TableBody>
-          {patrons.map((patron, index) => (
-            <HoldsRow
-              key={student.barcode}
-              {...student}
-              index={index}
-              onRemove={onRemove}
-            />
+        <TableBody>
+          {holds.map((hold, index) => (
+            <HoldsRow key={hold.patronBarcode} {...hold} index={index} />
           ))}
-        </TableBody> */}
+        </TableBody>
       </Table>
     </TableContainer>
   )

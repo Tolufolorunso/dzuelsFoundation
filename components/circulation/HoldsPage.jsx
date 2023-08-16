@@ -5,7 +5,7 @@ function HoldsPage(props) {
   console.log(holds)
   return (
     <div>
-      <HoldsLists />
+      <HoldsLists holds={holds} />
     </div>
   )
 }

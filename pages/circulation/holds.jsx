@@ -38,6 +38,8 @@ export async function getServerSideProps(ctx) {
     const res = await fetchApi(`${endpoint}/circulation/holds`)
     const { status, holds } = res
 
+    console.log('41 holds', holds)
+
     if (status) {
       return {
         props: {

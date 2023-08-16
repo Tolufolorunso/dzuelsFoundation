@@ -11,7 +11,7 @@ function PatronList(props) {
         columns={columns}
         initialState={{
           pagination: {
-            paginationModel: { page: 0, pageSize: 7 },
+            paginationModel: { page: 0, pageSize: 20 },
           },
         }}
         pageSizeOptions={[5, 7, 10, 15, 20]}

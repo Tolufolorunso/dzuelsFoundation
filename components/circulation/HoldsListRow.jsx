@@ -1,34 +1,25 @@
 import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
 import Button from '@mui/material/Button'
+import { formatDate } from '@/utils/formattedDate'
 
 function HoldsRow(props) {
-  const { barcode, firstname, surname, attendance, onRemove, index } = props
-  const curWeek = attendance[attendance.length - 1].week
-  const attendanceInfo = `${
-    attendance.filter((record) => record.attended).length
-  }/${attendance.length}`
-  const AttendancePercentage = `${(
-    (attendance.filter((record) => record.attended).length /
-      attendance.length) *
-    100
-  ).toFixed(2)}%`
+  let { index, patronBarcode, title, patronName, borrowingDate, dueDate } =
+    props
 
-  function handleClick() {
-    onRemove(barcode)
-  }
+  borrowingDate = formatDate(borrowingDate)
+  dueDate = formatDate(dueDate)
 
   return (
     <>
-      {/* <TableRow>
+      <TableRow>
         <TableCell>{index + 1}</TableCell>
-        <TableCell>{barcode}</TableCell>
-        <TableCell>{firstname.toUpperCase()}</TableCell>
-        <TableCell>{surname.toUpperCase()}</TableCell>
-        <TableCell>{curWeek}</TableCell>
-        <TableCell>{attendanceInfo}</TableCell>
-        <TableCell>{AttendancePercentage}</TableCell>
-      </TableRow> */}
+        <TableCell>{patronBarcode}</TableCell>
+        <TableCell>{patronName}</TableCell>
+        <TableCell>{title}</TableCell>
+        <TableCell>{borrowingDate}</TableCell>
+        <TableCell>{dueDate}</TableCell>
+      </TableRow>
     </>
   )
 }
