@@ -10,8 +10,6 @@ export default async function handler(req, res) {
       let { patronBarcode, itemBarcode, dueDay = 2 } = req.body
       dueDay = Number(dueDay)
 
-      console.log(patronBarcode, itemBarcode, dueDay)
-
       // Find the patron and the cataloging record by ID and barcode, respectively
       const cataloging = await Cataloging.findOne({ barcode: itemBarcode })
       const patron = await Patron.findOne({ barcode: patronBarcode })
@@ -24,7 +22,8 @@ export default async function handler(req, res) {
 
       // Check if the item is checked out by the patron
       const borrowedBook = patron.checkoutHistory.find(
-        (historyItem) => historyItem.itemBarcode === itemBarcode
+        (historyItem) =>
+          historyItem.itemId.toString() === cataloging._id.toString()
       )
 
       if (!borrowedBook) {
@@ -40,7 +39,8 @@ export default async function handler(req, res) {
 
       // Update the cataloging record with the new due date
       const checkoutHistoryEntry = cataloging.checkedOutHistory.find(
-        (historyItem) => historyItem.checkedOutBy === patronBarcode
+        (historyItem) =>
+          historyItem.checkedOutBy.toString() === patron._id.toString()
       )
       if (checkoutHistoryEntry) {
         checkoutHistoryEntry.dueDate = newDueDate
@@ -50,7 +50,7 @@ export default async function handler(req, res) {
 
       // Update the patron's checkout history with the new due date
       const patronCheckoutEntry = patron.checkoutHistory.find(
-        (historyItem) => historyItem.itemBarcode === itemBarcode
+        (historyItem) => historyItem.itemId === cataloging._id.toString()
       )
       if (patronCheckoutEntry) {
         patronCheckoutEntry.dueDate = newDueDate

@@ -102,6 +102,10 @@ const PatronSchema = new mongoose.Schema(
         dueDate: Date,
       },
     ],
+    is18: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 )
