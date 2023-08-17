@@ -20,8 +20,11 @@ export default async function handler(req, res) {
 
       // Check if the borrowed book is inside cataloging checkedOutHistory array
       const isPatronBorrowedTheItem = cataloging.checkedOutHistory.find(
-        (historyItem) => historyItem.checkedOutBy === patronBarcode
+        (historyItem) =>
+          historyItem.checkedOutBy.toString() === patron._id.toString()
       )
+
+      console.log(27, !isPatronBorrowedTheItem)
 
       if (!isPatronBorrowedTheItem) {
         return res.status(409).json({
@@ -37,7 +40,8 @@ export default async function handler(req, res) {
 
       // Check if the patron has borrowed the book by comparing checkedOutHistory
       const borrowedBook = patron.checkoutHistory.find(
-        (historyItem) => historyItem.itemBarcode === itemBarcode
+        (historyItem) =>
+          historyItem.itemId.toString() === cataloging._id.toString()
       )
 
       if (!borrowedBook) {
@@ -58,7 +62,10 @@ export default async function handler(req, res) {
 
       // Remove the book object from cataloging's checkoutHistory
       cataloging.checkedOutHistory = cataloging.checkedOutHistory.filter(
-        (historyItem) => historyItem.checkedOutBy !== patronBarcode
+        (historyItem) => {
+          return historyItem.checkedOutBy.toString() !== patron._id.toString()
+          return historyItem.checkedOutBy !== patronBarcode
+        }
       )
 
       cataloging.isCheckedOut = false
