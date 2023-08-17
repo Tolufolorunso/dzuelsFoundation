@@ -3,9 +3,10 @@ import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
 import { useRef } from 'react'
+import CircularProgress from '@mui/material/CircularProgress'
 
 function CheckinContent(props) {
-  const { checkinHandler } = props
+  const { checkinHandler, isLoading } = props
   const patronBarcodeRef = useRef(null)
   const itemBarcodeRef = useRef(null)
 
@@ -46,7 +47,14 @@ function CheckinContent(props) {
             />
           </Stack>
           <Button variant='outlined' onClick={clickHandler}>
-            Checkin
+            {isLoading ? (
+              <>
+                <CircularProgress size={10} color='inherit' />
+                <span style={{ marginLeft: '5px' }}>Login...</span>
+              </>
+            ) : (
+              'Checkin'
+            )}
           </Button>
         </form>
       </Box>

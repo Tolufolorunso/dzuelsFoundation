@@ -32,13 +32,9 @@ export async function getServerSideProps(ctx) {
       ? process.env.LOCALURL
       : process.env.BASEURL
 
-  console.log('tolu')
-
   try {
     const res = await fetchApi(`${endpoint}/circulation/holds`)
     const { status, holds } = res
-
-    console.log('41 holds', holds)
 
     if (status) {
       return {

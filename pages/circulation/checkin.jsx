@@ -3,11 +3,15 @@ import Container from '@/components/layout/container'
 import useAppStore from '@/store/applicationStateStore'
 import fetchApi from '@/utils/fetchApi'
 import { getSession } from 'next-auth/react'
+import { useState } from 'react'
 
 function Checkin() {
   const { setErrorMessage, setSuccessMessage } = useAppStore((state) => state)
+  const [loading, setLoading] = useState(false)
+
   async function checkinHandler(checkinData) {
     try {
+      setLoading(true)
       const res = await fetchApi('/circulation/checkin', 'POST', checkinData)
       const { status, successMessage, checkedInData } = res
       if (status) {
@@ -15,11 +19,13 @@ function Checkin() {
       }
     } catch (error) {
       setErrorMessage(error.message)
+    } finally {
+      setLoading(false)
     }
   }
   return (
     <Container>
-      <CheckinContent checkinHandler={checkinHandler} />
+      <CheckinContent checkinHandler={checkinHandler} isLoading={loading} />
     </Container>
   )
 }
