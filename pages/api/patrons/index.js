@@ -26,7 +26,14 @@ export default async function handler(req, res) {
       }
 
       // Fetch cataloging records based on the query
-      const patrons = await Patron.find(query).select(
+      // const patrons = await Patron.find(query).select(
+      //   'firstname surname library barcode gender patronType phoneNumber points'
+      // )
+
+      const patrons = await Patron.find({
+        ...query,
+        is18: { $ne: true },
+      }).select(
         'firstname surname library barcode gender patronType phoneNumber points'
       )
 
