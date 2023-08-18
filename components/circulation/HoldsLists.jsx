@@ -7,6 +7,8 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import HoldsRow from './HoldsListRow'
 
+const cell = { fontSize: '1.6rem', fontWeight: 500 }
+
 function HoldsLists(props) {
   const { holds } = props
   return (
@@ -14,12 +16,12 @@ function HoldsLists(props) {
       <Table sx={{ minWidth: 650 }}>
         <TableHead>
           <TableRow>
-            <TableCell>No</TableCell>
-            <TableCell>Patron Barcode</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Book Title</TableCell>
-            <TableCell>Borrowed On</TableCell>
-            <TableCell>Due Date</TableCell>
+            <TableCell sx={cell}>No</TableCell>
+            <TableCell sx={cell}>Patron Barcode</TableCell>
+            <TableCell sx={cell}>Name</TableCell>
+            <TableCell sx={cell}>Book Title</TableCell>
+            <TableCell sx={cell}>Borrowed On</TableCell>
+            <TableCell sx={cell}>Due Date</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

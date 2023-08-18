@@ -5,7 +5,8 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
-import HoldsRow from './HoldsListRow'
+
+const cell = { fontSize: '1.6rem', fontWeight: 500 }
 
 function OverdueList(props) {
   const { itemsOverdue } = props
@@ -14,12 +15,15 @@ function OverdueList(props) {
       <Table sx={{ minWidth: 650 }}>
         <TableHead>
           <TableRow>
-            <TableCell>No</TableCell>
-            <TableCell>Patron Barcode</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Book Title</TableCell>
-            <TableCell>Borrowed On</TableCell>
-            <TableCell>Due Date</TableCell>
+            <TableCell size='small' sx={cell}>
+              No
+            </TableCell>
+            <TableCell size='medium' sx={cell}>
+              Patron Barcode
+            </TableCell>
+            <TableCell sx={cell}>Name</TableCell>
+            <TableCell sx={cell}>Book Title</TableCell>
+            <TableCell sx={cell}>Due Date</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
