@@ -4,7 +4,7 @@ function OverduePage(props) {
   const { itemsOverdue } = props
 
   return (
-    <div>
+    <div style={{ marginBottom: '6rem' }}>
       <OverdueList itemsOverdue={itemsOverdue} />
     </div>
   )

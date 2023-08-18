@@ -1,10 +1,11 @@
 import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
-import Button from '@mui/material/Button'
 import { formatDate } from '@/utils/formattedDate'
 
 const cell = {
   fontSize: '1.3rem',
+  fontWeight: '500',
+  textTransform: 'capitalize !important',
 }
 
 function HoldsRow(props) {
@@ -16,13 +17,29 @@ function HoldsRow(props) {
 
   return (
     <>
-      <TableRow>
-        <TableCell sx={cell}>{index + 1}</TableCell>
-        <TableCell sx={cell}>{patronBarcode}</TableCell>
-        <TableCell sx={cell}>{patronName}</TableCell>
-        <TableCell sx={cell}>{title}</TableCell>
-        <TableCell sx={cell}>{borrowingDate}</TableCell>
-        <TableCell sx={cell}>{dueDate}</TableCell>
+      <TableRow
+        sx={{ cursor: 'pointer' }}
+        hover={true}
+        onClick={() => console.log(patronBarcode)}
+      >
+        <TableCell sx={cell} align='right'>
+          {index + 1}
+        </TableCell>
+        <TableCell sx={cell} align='center'>
+          {patronBarcode}
+        </TableCell>
+        <TableCell sx={cell} align='center'>
+          {patronName}
+        </TableCell>
+        <TableCell sx={cell} align='center'>
+          {title}
+        </TableCell>
+        <TableCell sx={cell} align='center'>
+          {borrowingDate}
+        </TableCell>
+        <TableCell sx={cell} align='center'>
+          {dueDate}
+        </TableCell>
       </TableRow>
     </>
   )

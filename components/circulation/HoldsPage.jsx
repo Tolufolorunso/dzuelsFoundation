@@ -4,7 +4,7 @@ function HoldsPage(props) {
   const { holds } = props
 
   return (
-    <div>
+    <div style={{ marginBottom: '6rem' }}>
       <HoldsLists holds={holds} />
     </div>
   )
