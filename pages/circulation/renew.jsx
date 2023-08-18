@@ -17,7 +17,6 @@ function RenewPage() {
     try {
       const res = await fetchApi('/circulation/renew', 'POST', renewData)
       const { status, message } = res
-      console.log(res)
       if (status) {
         setSuccessMessage(message)
       }

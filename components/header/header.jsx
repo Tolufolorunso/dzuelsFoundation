@@ -6,9 +6,8 @@ import RightDrawer from './mobile-nav'
 import { useState, useEffect } from 'react'
 import useAppStore from '@/store/applicationStateStore'
 import { useRouter } from 'next/router'
-import { useSession, signOut } from 'next-auth/react'
-import Button from '@mui/material/Button'
-import Loading from '../layout/Loading'
+import { useSession } from 'next-auth/react'
+import Profile from './Profile'
 
 function Header() {
   const { data, status } = useSession()
@@ -86,12 +85,8 @@ function Header() {
                 <li className='item'>
                   <Link href='/inventory'>Inventory</Link>
                 </li>
-                {data?.user && (
-                  <li className='item'>
-                    <Button onClick={() => signOut()}>Log out</Button>
-                  </li>
-                )}
               </ul>
+              <Profile data={data} />
               <input
                 type='checkbox'
                 className={classes.navigationCheckbox}

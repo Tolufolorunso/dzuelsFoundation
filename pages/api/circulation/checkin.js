@@ -24,8 +24,6 @@ export default async function handler(req, res) {
           historyItem.checkedOutBy.toString() === patron._id.toString()
       )
 
-      console.log(27, !isPatronBorrowedTheItem)
-
       if (!isPatronBorrowedTheItem) {
         return res.status(409).json({
           status: false,

@@ -30,7 +30,6 @@ export default async function handler(req, res) {
         .status(200)
         .json({ status: true, message: 'Fetched', holds: formattedHistory })
     } catch (error) {
-      console.log(error)
       return res
         .status(500)
         .json({ status: false, errorMessage: 'Internal server error' })

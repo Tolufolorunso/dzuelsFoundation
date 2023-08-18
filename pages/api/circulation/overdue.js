@@ -29,7 +29,6 @@ export default async function handler(req, res) {
         overdueItems: formattedOverdueItems,
       })
     } catch (error) {
-      console.log(error)
       return res
         .status(500)
         .json({ status: false, errorMessage: error.message })

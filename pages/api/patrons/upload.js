@@ -26,9 +26,9 @@ export default async function handler(req, res) {
     if (extName !== '.xlsx') {
       fs.unlink(tempFilePath, (err) => {
         if (err) {
-          console.error('Error deleting temporary file:', err)
+          // console.error('Error deleting temporary file:', err)
         } else {
-          console.log('Temporary file deleted successfully.')
+          // console.log('Temporary file deleted successfully.')
         }
       })
 

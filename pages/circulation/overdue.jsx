@@ -47,7 +47,6 @@ export async function getServerSideProps(ctx) {
       throw new Error('Error occurred while fetching')
     }
   } catch (error) {
-    console.log(error)
     return {
       props: {
         errorMessage: error.message,

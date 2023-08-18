@@ -65,7 +65,7 @@ function TraineePage(props) {
       `Are you sure you want to remove this student, enter ${barcode}`
     )
     if (isvalid === barcode) {
-      console.log(barcode)
+      // console.log(barcode)
     }
   }
 
