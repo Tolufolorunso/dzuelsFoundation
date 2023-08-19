@@ -1,9 +1,9 @@
 import Box from '@mui/material/Box'
 
-import CatalogFunctionBtns from '@/components/cataloging/catalog-function-btns'
+import CatalogFunctionBtns from '@/components/cataloging/CatalogFunctionBtns'
 import Container from '@/components/layout/container'
 
-import BookList from '@/components/cataloging/book-list'
+import BookList from '@/components/cataloging/BookList'
 import { useRouter } from 'next/router'
 import fetchApi from '@/utils/fetchApi'
 

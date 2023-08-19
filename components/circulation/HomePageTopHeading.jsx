@@ -1,6 +1,6 @@
 import Stack from '@mui/material/Stack'
 import classes from './HomePageTopHeading.module.css'
-import CustomHeader from '../typography/custom-header'
+import CustomHeader from '../typography/CustomHeader'
 import CirculationContent from './CirculationContent'
 
 function HomePageTopHeading() {

@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import classes from './header.module.css'
-import RightDrawer from './mobile-nav'
+import RightDrawer from './MobileNav'
 import { useState, useEffect } from 'react'
 import useAppStore from '@/store/applicationStateStore'
 import { useRouter } from 'next/router'

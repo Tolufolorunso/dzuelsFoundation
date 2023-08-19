@@ -18,6 +18,7 @@ function HoldsLists(props) {
   const [rowsPerPage, setRowsPerPage] = useState(10)
 
   const handleChangePage = (event, newPage) => {
+    console.log(event.target, newPage)
     setPage(newPage)
   }
 

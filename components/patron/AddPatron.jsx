@@ -1,7 +1,7 @@
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
 import SaveAltIcon from '@mui/icons-material/SaveAlt'
-import CustomHeader from '@/components/typography/custom-header'
+import CustomHeader from '@/components/typography/CustomHeader'
 import CircularProgress from '@mui/material/CircularProgress'
 
 import classes from './AddPatron.module.css'

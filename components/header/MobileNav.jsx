@@ -1,6 +1,6 @@
 import React from 'react'
 import Drawer from '@mui/material/Drawer'
-import DrawerLinkList from './drawer-link-list'
+import DrawerLinkList from './DrawerLinkList'
 import Image from 'next/image'
 import Link from 'next/link'
 import useAppStore from '@/store/applicationStateStore'

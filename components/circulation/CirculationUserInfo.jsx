@@ -8,7 +8,7 @@ import ListItemText from '@mui/material/ListItemText'
 import Divider from '@mui/material/Divider'
 import InboxIcon from '@mui/icons-material/Inbox'
 import DraftsIcon from '@mui/icons-material/Drafts'
-import CustomHeader from '../typography/custom-header'
+import CustomHeader from '../typography/CustomHeader'
 
 function CirculationUserInfo(props) {
   const { patronData } = props

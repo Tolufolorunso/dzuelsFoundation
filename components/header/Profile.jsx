@@ -12,7 +12,7 @@ function Profile(props) {
   return (
     <ul className={classes.links}>
       <li className='item'>
-        <Avatar sx={{}} alt='Remy Sharp' src='/images/book-default.jp'>
+        <Avatar sx={{}} alt={user?.name} src='/images/book-default.jp'>
           {initials?.toUpperCase()}
         </Avatar>
       </li>

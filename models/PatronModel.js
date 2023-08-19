@@ -106,6 +106,13 @@ const PatronSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    event: [
+      {
+        eventName: String,
+        points: Number,
+        eventDate: Date,
+      },
+    ],
   },
   { timestamps: true }
 )

@@ -5,7 +5,7 @@ import Snackbar from '@mui/material/Snackbar'
 
 import CatalogingForm from '@/components/cataloging/CatalogingForm'
 import Container from '@/components/layout/container'
-import CatalogFunctionBtns from '@/components/cataloging/catalog-function-btns'
+import CatalogFunctionBtns from '@/components/cataloging/CatalogFunctionBtns'
 
 import MuiAlert from '@mui/material/Alert'
 import { getSession } from 'next-auth/react'

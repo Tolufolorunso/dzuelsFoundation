@@ -2,7 +2,7 @@ import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import CircularProgress from '@mui/material/CircularProgress'
 
-import CustomHeader from '../typography/custom-header'
+import CustomHeader from '../typography/CustomHeader'
 import FieldSetFormLayout from '../layout/field-set-layout'
 import CustomGridInput from '../layout/custom-grid-input'
 import FormContainer from '../layout/form-container'

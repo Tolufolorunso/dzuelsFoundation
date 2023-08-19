@@ -5,10 +5,13 @@ import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Grid from '@mui/material/Grid'
 import NotificationsIcon from '@mui/icons-material/Notifications'
+import EventIcon from '@mui/icons-material/Event'
 
 import classes from './Home.module.css'
 
-function Home() {
+function Home(props) {
+  const { onClick, event } = props
+
   return (
     <Box className={classes.container}>
       <Grid container sx={{ maxWidth: 1200, margin: '0 auto' }}>
@@ -19,15 +22,40 @@ function Home() {
               backgroundColor: '#e3e4e4',
               borderRadius: 4,
               padding: 2,
+              marginBottom: 2,
             }}
           >
             <Typography variant='h6' gutterBottom>
-              <NotificationsIcon /> News &amp; Notifications
+              <NotificationsIcon sx={{ fontSize: 30 }} /> News &amp;
+              Notifications
             </Typography>
             <ul style={{ listStyle: 'none' }}>
               <li>New books available</li>
               <li>New patron registered</li>
             </ul>
+          </Box>
+          <Box
+            sx={{
+              backgroundColor: '#e3e4e4',
+              borderRadius: 4,
+              padding: 2,
+            }}
+          >
+            <Box
+              sx={{
+                marginBottom: 3,
+              }}
+            >
+              <Typography variant='h6' gutterBottom>
+                <EventIcon sx={{ fontSize: 30 }} /> {event.eventName}
+              </Typography>
+              <Typography variant='p' gutterBottom>
+                {event.eventDescription}
+              </Typography>
+            </Box>
+            <Button variant='contained' color='primary' onClick={onClick}>
+              Mark attendance
+            </Button>
           </Box>
         </Grid>
 

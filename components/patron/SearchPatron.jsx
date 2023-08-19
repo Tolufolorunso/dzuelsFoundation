@@ -1,4 +1,4 @@
-import CustomHeader from '../typography/custom-header'
+import CustomHeader from '../typography/CustomHeader'
 import classes from './searchPatron.module.css'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'

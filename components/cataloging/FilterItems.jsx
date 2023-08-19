@@ -1,4 +1,4 @@
-import CustomHeader from '../typography/custom-header'
+import CustomHeader from '../typography/CustomHeader'
 import classes from './FilterItem.module.css'
 import Box from '@mui/material/Box'
 import React from 'react'
