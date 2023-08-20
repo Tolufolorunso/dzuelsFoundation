@@ -6,10 +6,10 @@ import { CacheProvider } from '@emotion/react'
 import theme from '@/styles/theme'
 import createEmotionCache from '@/createEmotionCache'
 import '@/styles/global.css'
-import Header from '@/components/header/Header'
 import Toast from '@/components/layout/alert'
 import { useRouter } from 'next/router'
 import { SessionProvider } from 'next-auth/react'
+import Header from '@/components/header/Header'
 
 import NextNProgress from 'nextjs-progressbar'
 
