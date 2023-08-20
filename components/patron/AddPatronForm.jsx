@@ -1,7 +1,7 @@
 import FieldSetFormLayout from '../layout/field-set-layout'
 import CustomGridInput from '../layout/custom-grid-input'
 import FormContainer from '../layout/form-container'
-import { formFields } from './patronFieldsData'
+import { formFields } from './PatronFieldsData'
 import usePatronStore from '@/store/patronStore'
 
 function PatronForm(props) {

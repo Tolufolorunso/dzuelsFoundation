@@ -7,6 +7,8 @@ import { getSession } from 'next-auth/react'
 function holds(props) {
   const { overdueItems } = props
 
+  console.log(overdueItems)
+
   return (
     <Container>
       <OverduePage overdueItems={overdueItems} />
@@ -34,6 +36,7 @@ export async function getServerSideProps(ctx) {
       : process.env.BASEURL
 
   try {
+    console.log(`${endpoint}/circulation/overdue`)
     const res = await fetchApi(`${endpoint}/circulation/overdue`)
     const { status, overdueItems } = res
 
