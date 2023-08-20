@@ -12,6 +12,7 @@ import { SessionProvider } from 'next-auth/react'
 // import Header from '@/components/header/Header'
 
 import NextNProgress from 'nextjs-progressbar'
+import Header from '@/components/header/Header'
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
@@ -35,7 +36,7 @@ function MyApp(props) {
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          {/* {!auth ? <Header /> : null} */}
+          {!auth ? <Header /> : null}
           <div style={{ marginTop: '80px' }}>
             <Toast />
             <NextNProgress color='#6A0406' height={3} />
