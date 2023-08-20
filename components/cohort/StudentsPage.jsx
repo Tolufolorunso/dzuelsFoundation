@@ -11,6 +11,15 @@ import MarkAttendanceModal from './MarkAttendanceModal'
 import useCohortStore from '@/store/cohortStore'
 import DisplayAbsenteesModal from './DisplayAbsenteesModal'
 import StudentTable from './StudentList'
+import FileDownloadIcon from '@mui/icons-material/FileDownload'
+import { exportToExcel } from '@/utils/export'
+
+const btn = {
+  fontSize: '1.2rem',
+  fontWeight: 500,
+  wordSpacing: 1,
+  letterSpacing: 1,
+}
 
 function StudentsPage(props) {
   // const { students } = props
@@ -60,6 +69,64 @@ function StudentsPage(props) {
     }
   }
 
+  async function exportAttendance2ExcelHandler() {
+    try {
+      const res = await fetchApi('/cohort/attendance')
+      console.log(res)
+      const { status, attendance, message } = res
+
+      if (status) {
+        setSuccessMessage('Your file is ready to be downloaded in 2 seconds.')
+        const formattedData = attendance.map((person) => {
+          const { barcode, firstname, surname, attendance } = person
+
+          const attendanceCount = attendance.length
+          const attendedCount = attendance.filter(
+            (entry) => entry.attended
+          ).length
+          const attendancePercentage =
+            ((attendedCount / attendanceCount) * 100).toFixed(2) + '%'
+
+          const formattedPerson = {
+            barcode,
+            name: `${firstname} ${surname}`,
+            attendance: `${attendedCount}/${attendanceCount}`,
+            percentage: attendancePercentage,
+          }
+
+          attendance.forEach((entry) => {
+            formattedPerson[`week ${entry.week}`] = entry.attended
+              ? 'present'
+              : 'absent'
+          })
+
+          return formattedPerson
+        })
+        setTimeout(() => {
+          setSuccessMessage('')
+          exportToExcel(formattedData)
+          // exportToExcel([
+          //   {
+          //     barcode: '202302',
+          //     name: 'tolu kola',
+          //     attendance: '2/3',
+          //     percentage: '80%',
+          //     'week 1': 'present',
+          //     'week 2': 'absent',
+          //     'week 3': 'present',
+          //   },
+          // ])
+        }, 2000)
+      }
+    } catch (error) {
+      setErrorMessage(error.message)
+    } finally {
+      setTimeout(() => {
+        clearMessage()
+      }, 1500)
+    }
+  }
+
   function handleRemoveStudent(barcode) {
     const isvalid = prompt(
       `Are you sure you want to remove this student, enter ${barcode}`
@@ -95,9 +162,18 @@ function StudentsPage(props) {
         </Typography>
         <Box sx={{ display: 'flex', gap: '1rem' }}>
           <Button
+            variant='outlined'
+            onClick={() => exportAttendance2ExcelHandler()}
+            startIcon={<FileDownloadIcon />}
+            sx={btn}
+          >
+            Export As Excel - Detail
+          </Button>
+          <Button
             variant='contained'
             color='primary'
             onClick={() => setIsModalOpen(true)}
+            sx={btn}
           >
             Mark Attendance
           </Button>
@@ -105,6 +181,7 @@ function StudentsPage(props) {
             variant='contained'
             color='primary'
             onClick={() => setIsDisplayAbsenteesOpen(true)}
+            sx={btn}
           >
             Fail to Come
           </Button>

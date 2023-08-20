@@ -1,6 +1,6 @@
 import classes from './content-side.module.css'
-import PatronFunctionBtns from './patron-function-btns'
-import PatronList from './patron-list'
+import PatronFunctionBtns from './PatronFunctionBtns'
+import PatronList from './PatronList'
 
 function ContentSide(props) {
   return (

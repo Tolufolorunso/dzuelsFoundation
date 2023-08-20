@@ -46,6 +46,9 @@ function Home(props) {
                 marginBottom: 3,
               }}
             >
+              <Typography variant='h3' gutterBottom>
+                Latest Event
+              </Typography>
               <Typography variant='h6' gutterBottom>
                 <EventIcon sx={{ fontSize: 30 }} /> {event.eventName}
               </Typography>

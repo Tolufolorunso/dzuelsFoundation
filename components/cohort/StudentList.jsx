@@ -8,20 +8,38 @@ import Paper from '@mui/material/Paper'
 
 import StudentRow from './StudentRow'
 
+const cell = { fontSize: '1.3rem', fontWeight: 700 }
+
 const StudentTable = ({ students, onRemove }) => {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }}>
         <TableHead>
           <TableRow>
-            <TableCell>No</TableCell>
-            <TableCell>Barcode</TableCell>
-            <TableCell>Firstname</TableCell>
-            <TableCell>Surname</TableCell>
-            <TableCell>Week</TableCell>
-            <TableCell>Attendance</TableCell>
-            <TableCell>Percentage</TableCell>
-            <TableCell>Actions</TableCell>
+            <TableCell sx={cell} align='center'>
+              No
+            </TableCell>
+            <TableCell sx={cell} align='center'>
+              Barcode
+            </TableCell>
+            <TableCell sx={cell} align='center'>
+              Firstname
+            </TableCell>
+            <TableCell sx={cell} align='center'>
+              Surname
+            </TableCell>
+            <TableCell sx={cell} align='center'>
+              Week
+            </TableCell>
+            <TableCell sx={cell} align='center'>
+              Attendance
+            </TableCell>
+            <TableCell sx={cell} align='center'>
+              Percentage
+            </TableCell>
+            <TableCell sx={cell} align='center'>
+              Actions
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

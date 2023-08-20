@@ -1,5 +1,5 @@
 import Container from '@/components/layout/container'
-import ContentSide from '@/components/patron/content-side'
+import ContentSide from '@/components/patron/ContentSide'
 import fetchApi from '@/utils/fetchApi'
 import { useRouter } from 'next/router'
 import Box from '@mui/material/Box'

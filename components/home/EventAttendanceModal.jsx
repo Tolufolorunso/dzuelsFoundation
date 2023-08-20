@@ -67,6 +67,7 @@ function EventAttendanceModal(props) {
         >
           <CloseIcon />
         </Button>
+
         <Typography variant='h6' gutterBottom>
           {event.eventName}
         </Typography>

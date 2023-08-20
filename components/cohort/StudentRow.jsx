@@ -2,6 +2,8 @@ import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
 import Button from '@mui/material/Button'
 
+const cell = { fontSize: '1.3rem', fontWeight: 500 }
+
 function StudentRow(props) {
   const { barcode, firstname, surname, attendance, onRemove, index } = props
   const curWeek = attendance[attendance.length - 1].week
@@ -21,14 +23,28 @@ function StudentRow(props) {
   return (
     <>
       <TableRow>
-        <TableCell>{index + 1}</TableCell>
-        <TableCell>{barcode}</TableCell>
-        <TableCell>{firstname.toUpperCase()}</TableCell>
-        <TableCell>{surname.toUpperCase()}</TableCell>
-        <TableCell>{curWeek}</TableCell>
-        <TableCell>{attendanceInfo}</TableCell>
-        <TableCell>{AttendancePercentage}</TableCell>
-        <TableCell>
+        <TableCell sx={cell} align='center'>
+          {index + 1}
+        </TableCell>
+        <TableCell sx={cell} align='center'>
+          {barcode}
+        </TableCell>
+        <TableCell sx={cell} align='center'>
+          {firstname.toUpperCase()}
+        </TableCell>
+        <TableCell sx={cell} align='center'>
+          {surname.toUpperCase()}
+        </TableCell>
+        <TableCell sx={cell} align='center'>
+          {curWeek}
+        </TableCell>
+        <TableCell sx={cell} align='center'>
+          {attendanceInfo}
+        </TableCell>
+        <TableCell sx={cell} align='center'>
+          {AttendancePercentage}
+        </TableCell>
+        <TableCell sx={cell} align='center'>
           <Button variant='contained' color='primary' onClick={handleClick}>
             Remove
           </Button>
