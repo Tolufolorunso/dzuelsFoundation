@@ -1,11 +1,11 @@
 import OverdueList from './OverdueList'
 
 function OverduePage(props) {
-  const { itemsOverdue } = props
+  const { overdueItems } = props
 
   return (
     <div style={{ marginBottom: '6rem' }}>
-      <OverdueList itemsOverdue={itemsOverdue} />
+      <OverdueList overdueItems={overdueItems} />
     </div>
   )
 }

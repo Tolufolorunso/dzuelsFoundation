@@ -15,11 +15,12 @@ const HomePage = () => {
   const [studentBarcode, setStudentBarcode] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const studentBarcodeRef = useRef(null)
+  const [date, setDate] = useState('2023-08-10')
+  const [points, setPoints] = useState(0)
 
   const event = {
-    eventName: 'Event: Career Talk',
-    eventDescription:
-      'The career talk going on at the Doherty Memorial Grammar school',
+    eventName: 'Event: Teacher Training',
+    eventDescription: 'Teacher Training at the AAoJ Memorial Learning Center',
     eventPoint: 2,
   }
 
@@ -31,9 +32,8 @@ const HomePage = () => {
     setIsModalOpen(false)
   }
 
-  async function markStudentHandler({ date }) {
-    console.log(studentBarcode, date, event.eventPoint)
-    if (!studentBarcode || !date || !event.eventPoint) {
+  async function markStudentHandler() {
+    if (!studentBarcode || !date) {
       setErrorMessage('Enter all fields')
       return false
     }
@@ -43,6 +43,8 @@ const HomePage = () => {
     try {
       const res = await fetchApi('/events', 'POST', {
         barcode: studentBarcode,
+        points,
+        date,
       })
       const { status, message } = res
       if (status) {
@@ -54,9 +56,9 @@ const HomePage = () => {
       setStudentBarcode('')
       studentBarcodeRef.current.focus()
       setIsLoading(false)
-      setTimeout(() => {
-        clearMessage()
-      }, 1500)
+      // setTimeout(() => {
+      //   clearMessage()
+      // }, 1500)
     }
   }
 
@@ -72,7 +74,14 @@ const HomePage = () => {
         loading={isLoading}
         markStudent={markStudentHandler}
       />
-      <Home onClick={openEventHandler} event={event} />
+      <Home
+        onClick={openEventHandler}
+        event={event}
+        date={date}
+        setDate={setDate}
+        point={points}
+        setPoint={setPoints}
+      />
     </>
   )
 }

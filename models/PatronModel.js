@@ -108,7 +108,7 @@ const PatronSchema = new mongoose.Schema(
     },
     event: [
       {
-        eventName: String,
+        eventTitle: String,
         points: Number,
         eventDate: Date,
       },

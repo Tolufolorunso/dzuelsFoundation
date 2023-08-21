@@ -7,8 +7,6 @@ import { getSession } from 'next-auth/react'
 function holds(props) {
   const { overdueItems } = props
 
-  console.log(overdueItems)
-
   return (
     <Container>
       <OverduePage overdueItems={overdueItems} />

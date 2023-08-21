@@ -9,7 +9,6 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import CircularProgress from '@mui/material/CircularProgress'
 
 import useScanDetection from 'use-scan-detection-react18'
-import { useEffect } from 'react'
 
 function EventAttendanceModal(props) {
   const {
@@ -23,11 +22,9 @@ function EventAttendanceModal(props) {
     markStudent,
   } = props
 
-  const [date, setDate] = useState('')
-
   function comingFromScanDetection(scanDetectionValue) {
     setStudentBarcode(scanDetectionValue)
-    markStudent({ date })
+    markStudent()
   }
 
   if (typeof window !== 'undefined') {
@@ -39,7 +36,7 @@ function EventAttendanceModal(props) {
   }
 
   function clickHandler() {
-    markStudent({ date })
+    markStudent()
   }
 
   return (
@@ -71,14 +68,7 @@ function EventAttendanceModal(props) {
         <Typography variant='h6' gutterBottom>
           {event.eventName}
         </Typography>
-        <TextField
-          type='date'
-          fullWidth
-          sx={{ mb: 2 }}
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-        />
-        <TextField fullWidth type='number' sx={{ mb: 2 }} autoComplete='off' />
+
         <TextField
           label='Student Barcode'
           fullWidth

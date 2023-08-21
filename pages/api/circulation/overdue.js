@@ -15,7 +15,6 @@ export default async function handler(req, res) {
         select: 'barcode firstname surname',
       })
 
-      console.log('overdue server')
       const formattedOverdueItems = overdueItems.map((item) => ({
         title: item.title.mainTitle,
         itemBarcode: item.barcode,
@@ -23,8 +22,6 @@ export default async function handler(req, res) {
         patronName: `${item.checkedOutHistory[0].checkedOutBy.firstname} ${item.checkedOutHistory[0].checkedOutBy.surname}`,
         dueDate: item.checkedOutHistory[0].dueDate,
       }))
-
-      console.log(formattedOverdueItems)
 
       return res.status(200).json({
         status: true,

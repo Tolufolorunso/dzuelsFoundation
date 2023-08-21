@@ -10,7 +10,7 @@ import EventIcon from '@mui/icons-material/Event'
 import classes from './Home.module.css'
 
 function Home(props) {
-  const { onClick, event } = props
+  const { onClick, event, date, setDate, point, setPoint } = props
 
   return (
     <Box className={classes.container}>
@@ -56,6 +56,24 @@ function Home(props) {
                 {event.eventDescription}
               </Typography>
             </Box>
+            <TextField
+              type='date'
+              fullWidth
+              sx={{ mb: 2 }}
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+            />
+            <TextField
+              label='Point for the event'
+              fullWidth
+              type='number'
+              id='point'
+              name='point'
+              value={point}
+              onChange={(e) => setPoint(e.target.value)}
+              sx={{ mb: 2 }}
+              autoComplete='off'
+            />
             <Button variant='contained' color='primary' onClick={onClick}>
               Mark attendance
             </Button>
