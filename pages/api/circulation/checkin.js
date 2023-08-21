@@ -48,7 +48,6 @@ export default async function handler(req, res) {
           errorMessage: 'The patron did not borrow this book',
         })
       }
-
       // Check if the book is checked in on or before the due date
       const currentDate = new Date()
       const dueDate = new Date(isPatronBorrowedTheItem.dueDate)

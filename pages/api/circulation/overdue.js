@@ -2,10 +2,9 @@ import dbConnect from '@/lib/dbConnect'
 import Cataloging from '@/models/CatalogingModel'
 
 export default async function handler(req, res) {
+  await dbConnect()
   if (req.method === 'GET') {
     try {
-      await dbConnect()
-
       const currentDate = new Date()
 
       const overdueItems = await Cataloging.find({

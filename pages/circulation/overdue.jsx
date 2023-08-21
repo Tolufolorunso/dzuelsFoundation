@@ -38,6 +38,8 @@ export async function getServerSideProps(ctx) {
     const res = await fetchApi(`${endpoint}/circulation/overdue`)
     const { status, overdueItems } = res
 
+    // console.log(41, overdueItems)
+
     if (status) {
       return {
         props: {
