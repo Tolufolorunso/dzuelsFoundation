@@ -18,6 +18,7 @@ export default async function handler(req, res) {
         .map((item) => {
           return item.checkedOutHistory.map((checkout) => ({
             patronBarcode: checkout.checkedOutBy.barcode,
+            itemBarcode: item.barcode,
             title: item.title.mainTitle,
             patronName: `${checkout.checkedOutBy.firstname} ${checkout.checkedOutBy.surname}`,
             borrowingDate: checkout.checkedOutAt,

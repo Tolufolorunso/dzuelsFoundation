@@ -9,8 +9,15 @@ const cell = {
 }
 
 function HoldsRow(props) {
-  let { index, patronBarcode, title, patronName, borrowingDate, dueDate } =
-    props
+  let {
+    index,
+    patronBarcode,
+    title,
+    patronName,
+    borrowingDate,
+    dueDate,
+    itemBarcode,
+  } = props
 
   borrowingDate = formatDate(borrowingDate)
   dueDate = formatDate(dueDate)
@@ -32,7 +39,7 @@ function HoldsRow(props) {
           {patronName}
         </TableCell>
         <TableCell sx={cell} align='center'>
-          {title}
+          {title} ({itemBarcode})
         </TableCell>
         <TableCell sx={cell} align='center'>
           {borrowingDate}
