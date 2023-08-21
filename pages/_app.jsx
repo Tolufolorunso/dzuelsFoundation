@@ -9,10 +9,9 @@ import '@/styles/global.css'
 import Toast from '@/components/layout/alert'
 import { useRouter } from 'next/router'
 import { SessionProvider } from 'next-auth/react'
-// import Header from '@/components/header/Header'
 
 import NextNProgress from 'nextjs-progressbar'
-import Header from '@/components/header/Header'
+import Header from '../components/header/Header'
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
