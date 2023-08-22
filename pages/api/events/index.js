@@ -17,13 +17,25 @@ export default async function handler(req, res) {
           errorMessage: 'Patron not found',
         })
       }
+
+      const existingEvent = patron.event.find(
+        (event) =>
+          event.eventDate.toISOString() === new Date(date).toISOString()
+      )
+      if (existingEvent) {
+        return res.status(400).json({
+          status: false,
+          errorMessage: 'Event already exists for this date',
+        })
+      }
+
       patron.event.push({
         eventTitle,
         points,
         eventDate: new Date(date),
       })
 
-      patron.points += +points
+      patron.points += points
       await patron.save()
 
       return res.status(200).json({

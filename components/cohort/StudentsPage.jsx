@@ -72,7 +72,6 @@ function StudentsPage(props) {
   async function exportAttendance2ExcelHandler() {
     try {
       const res = await fetchApi('/cohort/attendance')
-      console.log(res)
       const { status, attendance, message } = res
 
       if (status) {

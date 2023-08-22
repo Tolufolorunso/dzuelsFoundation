@@ -50,7 +50,8 @@ function Home(props) {
                 Latest Event
               </Typography>
               <Typography variant='h6' gutterBottom>
-                <EventIcon sx={{ fontSize: 30 }} /> {event.eventName}
+                <EventIcon sx={{ fontSize: 30 }} />
+                Event: {event.eventTitle}
               </Typography>
               <Typography variant='p' gutterBottom>
                 {event.eventDescription}

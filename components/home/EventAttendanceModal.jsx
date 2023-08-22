@@ -7,7 +7,6 @@ import Button from '@mui/material/Button'
 import CloseIcon from '@mui/icons-material/Close'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import CircularProgress from '@mui/material/CircularProgress'
-
 import useScanDetection from 'use-scan-detection-react18'
 
 function EventAttendanceModal(props) {
@@ -66,7 +65,7 @@ function EventAttendanceModal(props) {
         </Button>
 
         <Typography variant='h6' gutterBottom>
-          {event.eventName}
+          {event.eventTitle}
         </Typography>
 
         <TextField
@@ -77,7 +76,7 @@ function EventAttendanceModal(props) {
           name='barcode'
           value={studentBarcode}
           onChange={(e) => setStudentBarcode(e.target.value)}
-          sx={{ mb: 2 }}
+          sx={{ mb: 2, mt: 4 }}
           inputRef={studentBarcodeRef}
           autoComplete='off'
         />

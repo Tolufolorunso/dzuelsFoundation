@@ -15,11 +15,11 @@ const HomePage = () => {
   const [studentBarcode, setStudentBarcode] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const studentBarcodeRef = useRef(null)
-  const [date, setDate] = useState('2023-08-10')
+  const [date, setDate] = useState(new Date().toISOString().split('T')[0])
   const [points, setPoints] = useState(0)
 
   const event = {
-    eventName: 'Event: Teacher Training',
+    eventTitle: 'Teacher Training',
     eventDescription: 'Teacher Training at the AAoJ Memorial Learning Center',
     eventPoint: 2,
   }
@@ -35,6 +35,7 @@ const HomePage = () => {
   async function markStudentHandler() {
     if (!studentBarcode || !date) {
       setErrorMessage('Enter all fields')
+      studentBarcodeRef.current.focus()
       return false
     }
 
@@ -45,6 +46,7 @@ const HomePage = () => {
         barcode: studentBarcode,
         points,
         date,
+        eventTitle: event.eventTitle,
       })
       const { status, message } = res
       if (status) {
