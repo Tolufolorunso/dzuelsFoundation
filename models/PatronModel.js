@@ -6,15 +6,18 @@ const PatronSchema = new mongoose.Schema(
     firstname: {
       type: String,
       required: true,
+      trim: true,
     },
     surname: {
       type: String,
       required: true,
+      trim: true,
     },
     middlename: String,
     email: {
       type: String,
       lowercase: true,
+      trim: true,
     },
     phoneNumber: String,
     gender: {
@@ -36,6 +39,7 @@ const PatronSchema = new mongoose.Schema(
     barcode: {
       type: String,
       unique: true,
+      trim: true,
     },
     registeredDate: {
       type: Date,

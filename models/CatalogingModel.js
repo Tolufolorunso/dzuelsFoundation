@@ -68,6 +68,7 @@ const CatalogingSchema = new mongoose.Schema(
     barcode: {
       type: String,
       required: true,
+      trim: true,
     },
     holdingsInformation: {
       type: Number,
