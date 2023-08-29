@@ -98,7 +98,7 @@ function PatronsHomePage(props) {
   return (
     <Container>
       <main className='patron-container'>
-        <div>
+        <div className='sticky'>
           <SearchPatron
             handleChange={handleChange}
             searchTerm={searchTerm}

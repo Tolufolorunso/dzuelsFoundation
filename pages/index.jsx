@@ -19,9 +19,9 @@ const HomePage = () => {
   const [points, setPoints] = useState(0)
 
   const event = {
-    eventTitle: 'Teacher Training',
-    eventDescription: 'Teacher Training at the AAoJ Memorial Learning Center',
-    eventPoint: 2,
+    eventTitle: 'Literacy Intervention',
+    eventDescription: 'Literacy Intervention classes started',
+    eventPoint: 0,
   }
 
   function openEventHandler() {

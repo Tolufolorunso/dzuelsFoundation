@@ -3,6 +3,11 @@ import { DataGrid } from '@mui/x-data-grid'
 
 function PatronList(props) {
   const { columns, rows, onRowClick } = props
+
+  // if (rows.length === 0) {
+  //   return <p>No data available.</p> // Your custom message when rows are empty
+  // }
+
   return (
     <div style={{ height: '500px', width: '100%' }}>
       <DataGrid

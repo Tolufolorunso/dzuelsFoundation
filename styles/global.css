@@ -74,3 +74,8 @@ body {
 .success {
   background-color: green !important;
 }
+
+.sticky {
+  position: sticky;
+  top: 8rem;
+}

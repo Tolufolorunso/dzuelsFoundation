@@ -1,5 +1,7 @@
 export function filterPatrons(filterTerms) {
-  const { data, searchTerm } = filterTerms
+  let { data, searchTerm } = filterTerms
+  console.log(data)
+  data = data?.length && data ? data : []
   const filteredData = data.filter((item) => {
     // Check if patronType matches the search term
     if (
