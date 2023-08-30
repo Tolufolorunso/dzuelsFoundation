@@ -24,13 +24,13 @@ function OverdueRow(props) {
           {index + 1}
         </TableCell>
         <TableCell sx={cell} align='center'>
-          {title}
+          {patronBarcode}
         </TableCell>
         <TableCell sx={cell} align='center'>
           {patronName}
         </TableCell>
         <TableCell sx={cell} align='center'>
-          {patronBarcode}
+          {title}
         </TableCell>
         <TableCell sx={cell} align='center'>
           {dueDate}
