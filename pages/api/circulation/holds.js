@@ -1,6 +1,5 @@
 import dbConnect from '@/lib/dbConnect'
 import Cataloging from '@/models/CatalogingModel'
-import Patron from '@/models/PatronModel'
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {

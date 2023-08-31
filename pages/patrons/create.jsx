@@ -7,10 +7,18 @@ import { getSession } from 'next-auth/react'
 import { useState } from 'react'
 
 function CreatePatronPage() {
-  const setErrorMessage = useAppStore((state) => state.setErrorMessage)
-  const setSuccessMessage = useAppStore((state) => state.setSuccessMessage)
-  const patronType = usePatronStore((state) => state.patrons.selectedPatronType)
-  const setIsLoading = usePatronStore((state) => state.setIsLoading)
+  // const setErrorMessage = useAppStore((state) => state.setErrorMessage)
+  // const setSuccessMessage = useAppStore((state) => state.setSuccessMessage)
+  // const patronType = usePatronStore((state) => state.patrons.selectedPatronType)
+  // const setIsLoading = usePatronStore((state) => state.setIsLoading)
+  const [setErrorMessage, setSuccessMessage] = usePatronStore((state) => [
+    state.setErrorMessage,
+    state.setSuccessMessage,
+  ])
+  const [patronType, setIsLoading] = usePatronStore((state) => [
+    state.patrons.selectedPatronType,
+    state.setIsLoading,
+  ])
 
   const [formData, setFormData] = useState({
     surname: '',
