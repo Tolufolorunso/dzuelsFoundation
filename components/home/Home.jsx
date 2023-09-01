@@ -148,9 +148,7 @@ function Home(props) {
                 style={{ border: 'none' }}
                 width='100%'
                 height='400'
-                padding='30'
                 allowfullscreen={true}
-                title='iframe Example 1'
               ></iframe>
             </Box>
           </Box>

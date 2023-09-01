@@ -21,7 +21,8 @@ function PatronList(props) {
         }}
         pageSizeOptions={[5, 7, 10, 15, 20]}
         checkboxSelection={false}
-        onRowClick={onRowClick}
+        // onRowClick={onRowClick}
+        onRowDoubleClick={onRowClick}
         getRowId={(row) => row.barcode}
       />
     </div>
