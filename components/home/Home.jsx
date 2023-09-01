@@ -124,6 +124,36 @@ function Home(props) {
               }}
             />
           </Box>
+
+          {/* Calender */}
+          <Box
+            sx={{
+              backgroundColor: '#ffffff',
+              borderRadius: 4,
+              padding: 4,
+              mt: 4,
+            }}
+          >
+            <Typography variant='h4' gutterBottom>
+              Welcome to the Dzuels Educational Foundation Calender
+            </Typography>
+            <Box
+              sx={{
+                borderRadius: 4,
+                paddingTop: 4,
+              }}
+            >
+              <iframe
+                src='https://calendar.google.com/calendar/embed?height=400&wkst=1&bgcolor=%23ffffff&ctz=UTC&title=Event%20For%202023&src=aWN0QGR6dWVsc2ZvdW5kYXRpb24ub3Jn&src=Y19lYmI0YmE4MzMwMTU3NzlhYWExOGU4N2UyODZkYTc2MGY0OTczZDcyZGE0ZmJlMWJmOGJlODM2YjI1MjNiZjY3QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4ubmcjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039BE5&color=%23D81B60&color=%2333B679&color=%230B8043'
+                style={{ border: 'none' }}
+                width='100%'
+                height='400'
+                padding='30'
+                allowfullscreen={true}
+                title='iframe Example 1'
+              ></iframe>
+            </Box>
+          </Box>
         </Grid>
       </Grid>
     </Box>
