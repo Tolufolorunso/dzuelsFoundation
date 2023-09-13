@@ -9,6 +9,15 @@ import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
 import Profile from './Profile'
 
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/catalogs', label: 'Cataloging' },
+  { href: '/patrons', label: 'Patrons' },
+  { href: '/circulation', label: 'Circulation' },
+  { href: '/cohort', label: 'Cohort Class' },
+  { href: '/inventory', label: 'Inventory' },
+]
+
 function Header() {
   const { data, status } = useSession()
 
@@ -31,14 +40,6 @@ function Header() {
     // Clean up the event listener when the component unmounts
     return () => window.removeEventListener('resize', handleResize)
   }, [])
-
-  // if (status === 'loading') {
-  //   return (
-  //     <div style={{ position: 'absolute', inset: 0 }}>
-  //       <Loading />
-  //     </div>
-  //   )
-  // }
 
   if (status === 'unauthenticated') {
     router.replace('/auth/login')
@@ -65,26 +66,16 @@ function Header() {
                 className={classes.links}
                 style={{ display: isMobile ? 'none' : 'block' }}
               >
-                <li className='item'>
-                  <Link href='/' className='active'>
-                    Home
-                  </Link>
-                </li>
-                <li className='item'>
-                  <Link href='/catalogs'>Cataloging</Link>
-                </li>
-                <li className='item'>
-                  <Link href='/patrons'>Patrons</Link>
-                </li>
-                <li className='item'>
-                  <Link href='/circulation'>Circulation</Link>
-                </li>
-                <li className='item'>
-                  <Link href='/cohort'>Cohort Class</Link>
-                </li>
-                <li className='item'>
-                  <Link href='/inventory'>Inventory</Link>
-                </li>
+                {
+                  links.map((link) => (
+                    <li className='item' key={link.href}>
+                      <Link href={link.href}>
+                        {link.label}
+                      </Link>
+                    </li> 
+                  )
+                  )
+                }
               </ul>
               <Profile data={data} />
               <input

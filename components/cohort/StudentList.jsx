@@ -11,6 +11,7 @@ import StudentRow from './StudentRow'
 const cell = { fontSize: '1.3rem', fontWeight: 700 }
 
 const StudentTable = ({ students, onRemove }) => {
+  students = students || []
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }}>

@@ -165,6 +165,7 @@ export async function getServerSideProps(ctx) {
       : process.env.BASEURL
 
   try {
+    console.log(`${endpoint}/patrons`);
     const res = await fetchApi(`${endpoint}/patrons`)
     const { status, patrons } = res
 
