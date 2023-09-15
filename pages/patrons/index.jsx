@@ -57,6 +57,7 @@ function PatronsHomePage(props) {
   }
 
   async function exportToExcelFrontend(type) {
+    const filename = searchTerm.patronType === 'any' ? "dzuels-patrons-details" :  'dzuels-' + searchTerm.patronType + "-details"
     if (type === 'detail') {
       try {
         const patronType =
@@ -83,7 +84,7 @@ function PatronsHomePage(props) {
           })
           setTimeout(() => {
             setSuccessMessage('')
-            exportToExcel(flattenedArray)
+            exportToExcel(flattenedArray,filename)
           }, 2000)
         }
       } catch (error) {
