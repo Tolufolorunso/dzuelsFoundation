@@ -9,6 +9,8 @@ import CatalogFunctionBtns from '@/components/cataloging/CatalogFunctionBtns'
 
 import MuiAlert from '@mui/material/Alert'
 import { getSession } from 'next-auth/react'
+import fetchApi from '@/utils/fetchApi'
+import toast from 'react-hot-toast'
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />
@@ -73,6 +75,7 @@ function AddItemPage() {
       indexTermGenre: '',
       informationSummary: '',
       physicalDescription: '',
+      controlNumber: ''
     }))
   }
 
@@ -81,30 +84,15 @@ function AddItemPage() {
     setLoading(true)
 
     try {
-      // Send the form data to the Next.js backend (API route)
-      const response = await fetch('/api/cataloging', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-
-      const data = await response.json()
-      if (response.ok) {
-        // Book added successfully, do something (e.g., show a success message)
+      const res = await fetchApi('/cataloging', 'POST', formData)
+      const { status, message, data } = res
+      if (status) {
+        toast.success(message)
         clearFormDataExceptLibrary()
-        setState({
-          ...state,
-          open: true,
-          message: `${data.message}. Barcode: ${data.data.barcode}`,
-        })
-      } else {
-        // Handle the error (e.g., show an error message)
-        setState({ ...state, open: true, message: data.error })
       }
     } catch (error) {
-      setState({ ...state, open: true })
+      console.log(error.message)
+      toast.error(error.message)
     } finally {
       setLoading(false)
     }

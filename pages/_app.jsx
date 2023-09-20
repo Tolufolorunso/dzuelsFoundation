@@ -9,6 +9,7 @@ import '@/styles/global.css'
 import Toast from '@/components/layout/alert'
 import { useRouter } from 'next/router'
 import { SessionProvider } from 'next-auth/react'
+import { Toaster } from 'react-hot-toast'
 
 import NextNProgress from 'nextjs-progressbar'
 import Header from '../components/header/Header'
@@ -38,6 +39,7 @@ function MyApp(props) {
           {!auth ? <Header /> : null}
           <div style={{ marginTop: '80px' }}>
             <Toast />
+            <Toaster />
             <NextNProgress color='#6A0406' height={3} />
             <Component {...pageProps} />
           </div>

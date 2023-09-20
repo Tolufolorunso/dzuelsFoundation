@@ -76,15 +76,15 @@ function CatalogPage(props) {
 
   const transformedArray = items
     ? items.map((item) => {
-        const { barcode, title, author, classification, controlNumber } = item
-        return {
-          barcode,
-          title: title.mainTitle,
-          author: author.mainAuthor,
-          classification,
-          controlNumber,
-        }
-      })
+      const { barcode, title, author, classification, controlNumber } = item
+      return {
+        barcode,
+        title: title.mainTitle,
+        author: author.mainAuthor,
+        classification,
+        controlNumber,
+      }
+    })
     : []
 
   const rows = filterCataloging({ searchTerm, data: transformedArray })

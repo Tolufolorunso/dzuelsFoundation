@@ -6,13 +6,30 @@ async function handler(req, res) {
     try {
       await dbConnect()
 
-      // Check if the barcode already exists in the database
-      const existingBookWithBarcode = await Cataloging.findOne({
-        barcode: req.body.barcode,
-      })
+      const barcode = req.body.barcode.trim()
+      const controlNumber = req.body.controlNumber.trim()
+      const title = req.body.title.trim()
 
-      if (existingBookWithBarcode) {
-        return res.status(409).json({ error: 'Barcode already in use' })
+      if (!barcode || !controlNumber || !title) {
+        return res.status(400).json({
+          status: false,
+          errorMessage: "All fields with asterics are required."
+        })
+      }
+
+      // Check if the barcode already exists in the database
+      const existingBook = await Cataloging.findOne({
+        $or: [
+          { controlNumber },
+          { barcode }
+        ]
+      });
+
+      if (existingBook) {
+        return res.status(409).json({
+          status: false,
+          errorMessage: "Barcode or control number already exists"
+        })
       }
 
       const indexTermGenre = req.body.indexTermGenre.split(', ')
@@ -37,7 +54,7 @@ async function handler(req, res) {
 
       return res.status(201).json({
         status: true,
-        message: 'Book added successfully',
+        message: `Book added successfully. Book Name: ${newBook.title.mainTitle}, ControlNumber: ${newBook.controlNumber}`,
         data: { barcode: newBook.barcode, title: newBook.title.mainTitle },
       })
     } catch (error) {

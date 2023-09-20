@@ -1,10 +1,11 @@
 import LoginContent from '@/components/auth/LoginContent'
 import useAppStore from '@/store/applicationStateStore'
-import { getSession, signIn } from 'next-auth/react'
+import { getSession, signIn, } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 function LoginPage() {
+
   const { setErrorMessage, setSuccessMessage } = useAppStore((state) => state)
   const [loading, setLoading] = useState(false)
 
@@ -23,8 +24,14 @@ function LoginPage() {
         throw new Error(res.error)
       } else {
         setSuccessMessage('login successful')
+        const session = await getSession()
+        console.log(session.user.role);
         setTimeout(() => {
-          router.replace('/')
+          if (session.user.role === 'ima' || session.user.role) {
+            router.replace('/dashboard/' + session.user.role)
+          } else {
+            router.replace('/')
+          }
         }, 1500)
       }
     } catch (error) {
