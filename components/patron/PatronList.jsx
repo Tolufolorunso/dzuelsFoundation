@@ -19,7 +19,7 @@ function PatronList(props) {
             paginationModel: { page: 0, pageSize: 20 },
           },
         }}
-        pageSizeOptions={[5, 7, 10, 15, 20]}
+        pageSizeOptions={[10, 15, 20, 30, 40, 50]}
         checkboxSelection={false}
         // onRowClick={onRowClick}
         onRowDoubleClick={onRowClick}

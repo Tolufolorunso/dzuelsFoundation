@@ -8,11 +8,11 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogActions from '@mui/material/DialogActions';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function BookList(props) {
-  const { rows: initialRows, onRowDoubleClick } = props;
-  const [updatedRows, setUpdatedRows] = useState(initialRows);
+  const { rows, onRowDoubleClick } = props;
+  const [updatedRows, setUpdatedRows] = useState(rows);
   const [open, setOpen] = useState(false);
 
   const columns = [
@@ -46,9 +46,6 @@ function BookList(props) {
       sortable: false,
       width: 100,
       renderCell: (params) => {
-
-        // Initialize with the initial rows
-
         const handleClose = () => {
           setOpen(false);
         };
@@ -106,10 +103,13 @@ function BookList(props) {
 
   // Handle selection change
   const handleSelectionChange = (newSelection) => {
-    console.log(newSelection)
     setSelectedRowIds(newSelection.selectionModel);
     console.log(selectedRowIds)
   };
+
+  useEffect(() => {
+    setUpdatedRows(rows)
+  }, [rows])
 
   return (
     <div style={{ height: '500px', width: '100%' }}>
@@ -119,10 +119,10 @@ function BookList(props) {
         columns={columns}
         initialState={{
           pagination: {
-            paginationModel: { page: 0, pageSize: 7 },
+            paginationModel: { page: 0, pageSize: 20 },
           },
         }}
-        pageSizeOptions={[5, 7, 10, 15, 20]}
+        pageSizeOptions={[10, 15, 20, 30, 40, 50]}
         checkboxSelection
         onRowDoubleClick={onRowDoubleClick}
         getRowId={(row) => row.barcode}
