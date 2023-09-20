@@ -67,4 +67,23 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Something went wrong' })
     }
   }
+
+  if (req.method === 'DELETE') {
+    try {
+      await dbConnect()
+      const item = await Cataloging.findOneAndDelete({ barcode: itemBarcode });
+
+      if (!item) {
+        return res
+          .status(404)
+          .json({ status: false, errorMessage: 'Item not found' })
+      }
+
+      return res.status(200).json({ status: true, message: 'Item found', item })
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ status: false, errorMessage: 'Something went wrong' })
+    }
+  }
 }

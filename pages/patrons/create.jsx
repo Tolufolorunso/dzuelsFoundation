@@ -5,16 +5,9 @@ import usePatronStore from '@/store/patronStore'
 import fetchApi from '@/utils/fetchApi'
 import { getSession } from 'next-auth/react'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 
 function CreatePatronPage() {
-  // const setErrorMessage = useAppStore((state) => state.setErrorMessage)
-  // const setSuccessMessage = useAppStore((state) => state.setSuccessMessage)
-  // const patronType = usePatronStore((state) => state.patrons.selectedPatronType)
-  // const setIsLoading = usePatronStore((state) => state.setIsLoading)
-  const [setErrorMessage, setSuccessMessage] = usePatronStore((state) => [
-    state.setErrorMessage,
-    state.setSuccessMessage,
-  ])
   const [patronType, setIsLoading] = usePatronStore((state) => [
     state.patrons.selectedPatronType,
     state.setIsLoading,
@@ -114,7 +107,7 @@ function CreatePatronPage() {
 
       if (status) {
         clearFormDataExceptLibrary()
-        setSuccessMessage(
+        toast.success(
           `${message}. Welcome ${patron.firstname}: ${patron.barcode}`
         )
       } else {
@@ -123,7 +116,7 @@ function CreatePatronPage() {
         )
       }
     } catch (error) {
-      setErrorMessage(error.message)
+      toast.error(error.message)
     } finally {
       setIsLoading(false)
     }

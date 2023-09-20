@@ -13,32 +13,7 @@ import { useState } from 'react'
 
 import classes from '@/components/cataloging/home.module.css'
 
-const columns = [
-  { field: 'barcode', headerName: 'Barcode', width: 100 },
-  {
-    field: 'title',
-    headerName: 'Title',
-    width: 250,
-    cellClassName: classes.titleField,
-  },
-  {
-    field: 'author',
-    headerName: 'Author',
-    width: 150,
-    cellClassName: classes.titleField,
-  },
-  {
-    field: 'classification',
-    headerName: 'Classification',
-    type: 'number',
-    width: 100,
-  },
-  {
-    field: 'controlNumber',
-    headerName: 'Control Number',
-    width: 100,
-  },
-]
+
 
 function CatalogPage(props) {
   const { items } = props
@@ -108,7 +83,6 @@ function CatalogPage(props) {
           <BookList
             rows={rows}
             onRowDoubleClick={onListClickHandler}
-            columns={columns}
           />
         </Box>
       </Box>

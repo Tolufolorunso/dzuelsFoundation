@@ -3,10 +3,9 @@ import useAppStore from '@/store/applicationStateStore'
 import { getSession, signIn, } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 
 function LoginPage() {
-
-  const { setErrorMessage, setSuccessMessage } = useAppStore((state) => state)
   const [loading, setLoading] = useState(false)
 
   const router = useRouter()
@@ -23,9 +22,8 @@ function LoginPage() {
       if (res.error) {
         throw new Error(res.error)
       } else {
-        setSuccessMessage('login successful')
         const session = await getSession()
-        console.log(session.user.role);
+        toast.success(`Authenticated as ${session.user.name}`)
         setTimeout(() => {
           if (session.user.role === 'ima' || session.user.role) {
             router.replace('/dashboard/' + session.user.role)
@@ -35,7 +33,7 @@ function LoginPage() {
         }, 1500)
       }
     } catch (error) {
-      setErrorMessage(error.message)
+      toast.error(error.message)
     } finally {
       setLoading(false)
     }
