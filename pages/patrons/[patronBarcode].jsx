@@ -16,6 +16,7 @@ function PatronPage() {
 
         if (status) {
           setPatronData(patron);
+          console.log(patron)
           toast.success(message)
         } else {
           // Handle error, e.g., patron not found

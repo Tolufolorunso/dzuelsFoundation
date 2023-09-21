@@ -51,5 +51,4 @@ const filterFields = [
     placeholder: 'Enter Control Number',
   },
   { label: 'Barcode', name: 'barcode', placeholder: 'Enter barcode' },
-  { label: 'Holdings Information', name: 'holdingsInformation', placeholder: 'holdings Information' },
 ]

@@ -17,7 +17,6 @@ function BookList(props) {
 
   const columns = [
     { field: 'barcode', headerName: 'Barcode', width: 100 },
-    { field: 'holdingsInformation', headerName: 'holdingsInformation', width: 100 },
     {
       field: 'title',
       headerName: 'Title',

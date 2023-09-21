@@ -40,10 +40,6 @@ export function filterCataloging(filterTerms) {
       return false
     }
 
-    if (searchTerm.holdingsInformation.toString() && item.holdingsInformation.toString().indexOf(searchTerm.holdingsInformation.toString()) === -1) {
-      return false
-    }
-
     // If all search terms are empty or match, return true to keep the item in the filteredData
     return true
   })

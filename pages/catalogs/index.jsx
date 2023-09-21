@@ -25,7 +25,6 @@ function CatalogPage(props) {
     barcode: '',
     classification: '',
     controlNumber: '',
-    holdingsInformation: '',
   })
 
   function handleChange(event) {
@@ -39,7 +38,6 @@ function CatalogPage(props) {
       barcode: '',
       classification: '',
       controlNumber: '',
-      holdingsInformation: '',
     })
   }
 
@@ -53,7 +51,7 @@ function CatalogPage(props) {
 
   const transformedArray = items
     ? items.map((item) => {
-      const { barcode, title, author, classification, controlNumber, holdingsInformation } = item
+      const { barcode, title, author, classification, controlNumber, isCheckedOut } = item
       return {
         barcode,
         title: title.mainTitle,
@@ -61,8 +59,7 @@ function CatalogPage(props) {
         author: author.mainAuthor,
         classification,
         controlNumber,
-        holdingsInformation
-
+        isCheckedOut
       }
     })
     : []
