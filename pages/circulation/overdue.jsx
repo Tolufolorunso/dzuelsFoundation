@@ -14,7 +14,6 @@ function Holds(props) {
     state.getHolds,
   ])
   const [overdue, setOverdue] = useState(overdueItems)
-  // console.log(11, overdueItems)
   // const { overdueItems } = props
 
   useEffect(() => {

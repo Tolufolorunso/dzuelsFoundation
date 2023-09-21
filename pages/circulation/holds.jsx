@@ -7,7 +7,6 @@ import { getSession } from 'next-auth/react'
 function holds(props) {
   const { holds } = props
 
-  console.log('holds', props)
   return (
     <Container>
       <HoldsPage holds={holds} />
@@ -35,10 +34,8 @@ export async function getServerSideProps(ctx) {
       : process.env.BASEURL
 
   try {
-    console.log('endpoint', endpoint)
     const res = await fetchApi(`${endpoint}/circulation/holds`)
     const { status, holds } = res
-    console.log(res)
     if (status) {
       return {
         props: {

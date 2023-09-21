@@ -61,7 +61,7 @@ export default async function handler(req, res) {
       cataloging.checkedOutHistory = cataloging.checkedOutHistory.filter(
         (historyItem) => {
           return historyItem.checkedOutBy.toString() !== patron._id.toString()
-          return historyItem.checkedOutBy !== patronBarcode
+          // return historyItem.checkedOutBy !== patronBarcode
         }
       )
 

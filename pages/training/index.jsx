@@ -7,8 +7,6 @@ import { getSession } from 'next-auth/react'
 function CohortClassPage(props) {
   const { trainees, barcodes } = props
 
-  // console.log(patrons)
-
   // set all cohort class student barcodes in global state management
   const setStudentsInStore = useCohortStore((state) => state.setStudents)
   setStudentsInStore(barcodes)

@@ -16,6 +16,13 @@ export function filterCataloging(filterTerms) {
     }
 
     if (
+      searchTerm.subTitle &&
+      item.subTitle.toLowerCase().indexOf(searchTerm.subTitle.toLowerCase()) === -1
+    ) {
+      return false
+    }
+
+    if (
       searchTerm.controlNumber &&
       item.controlNumber.indexOf(searchTerm.controlNumber) === -1
     ) {
@@ -30,6 +37,10 @@ export function filterCataloging(filterTerms) {
     }
 
     if (searchTerm.barcode && item.barcode.indexOf(searchTerm.barcode) === -1) {
+      return false
+    }
+
+    if (searchTerm.holdingsInformation.toString() && item.holdingsInformation.toString().indexOf(searchTerm.holdingsInformation.toString()) === -1) {
       return false
     }
 

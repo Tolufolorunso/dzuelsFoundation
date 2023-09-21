@@ -17,6 +17,7 @@ function BookList(props) {
 
   const columns = [
     { field: 'barcode', headerName: 'Barcode', width: 100 },
+    { field: 'holdingsInformation', headerName: 'holdingsInformation', width: 100 },
     {
       field: 'title',
       headerName: 'Title',
@@ -104,7 +105,6 @@ function BookList(props) {
   // Handle selection change
   const handleSelectionChange = (newSelection) => {
     setSelectedRowIds(newSelection.selectionModel);
-    console.log(selectedRowIds)
   };
 
   useEffect(() => {

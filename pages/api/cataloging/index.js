@@ -80,7 +80,7 @@ async function handler(req, res) {
 
       // Fetch cataloging records based on the query
       const catalogingRecords = await Cataloging.find(query).select(
-        'barcode author title classification controlNumber'
+        'barcode author title classification controlNumber holdingsInformation'
       )
 
       return res.status(200).json({ status: true, items: catalogingRecords })

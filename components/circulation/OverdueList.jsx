@@ -11,7 +11,6 @@ const cell = { fontSize: '1.6rem', fontWeight: 500 }
 
 function OverdueList(props) {
   const { overdueItems } = props
-  // console.log(13, overdueItems)
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }}>

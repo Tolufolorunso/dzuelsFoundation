@@ -91,7 +91,6 @@ function AddItemPage() {
         clearFormDataExceptLibrary()
       }
     } catch (error) {
-      console.log(error.message)
       toast.error(error.message)
     } finally {
       setLoading(false)

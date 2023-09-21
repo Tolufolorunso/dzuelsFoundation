@@ -38,7 +38,6 @@ function PatronsHomePage(props) {
 
   const rows = filterPatrons({ searchTerm, data: patrons })
 
-  // console.log(rows, patrons)
 
   function onRowClickHandler(item) {
     router.push({
@@ -57,7 +56,7 @@ function PatronsHomePage(props) {
   }
 
   async function exportToExcelFrontend(type) {
-    const filename = searchTerm.patronType === 'any' ? "dzuels-patrons-details" :  'dzuels-' + searchTerm.patronType + "-details"
+    const filename = searchTerm.patronType === 'any' ? "dzuels-patrons-details" : 'dzuels-' + searchTerm.patronType + "-details"
     if (type === 'detail') {
       try {
         const patronType =
@@ -84,7 +83,7 @@ function PatronsHomePage(props) {
           })
           setTimeout(() => {
             setSuccessMessage('')
-            exportToExcel(flattenedArray,filename)
+            exportToExcel(flattenedArray, filename)
           }, 2000)
         }
       } catch (error) {
@@ -166,7 +165,6 @@ export async function getServerSideProps(ctx) {
       : process.env.BASEURL
 
   try {
-    console.log(`${endpoint}/patrons`);
     const res = await fetchApi(`${endpoint}/patrons`)
     const { status, patrons } = res
 

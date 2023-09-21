@@ -63,10 +63,12 @@ export default async function handler(req, res) {
         checkedOutAt: currentDate,
         dueDate: dueDate,
       })
-      cataloging.isCheckedOut =
-        cataloging.checkedOutHistory.length === cataloging.holdingsInformation
-          ? true
-          : false
+      // cataloging.isCheckedOut =
+      //   cataloging.checkedOutHistory.length === cataloging.holdingsInformation
+      //     ? true
+      //     : false
+
+      cataloging.isCheckedOut = true
       // Set the due date here based on library policies
       await cataloging.save()
 

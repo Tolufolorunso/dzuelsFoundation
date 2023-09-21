@@ -38,6 +38,7 @@ export default FilterItems
 
 const filterFields = [
   { label: 'Title', name: 'title', placeholder: 'Search by title' },
+  { label: 'Sub Title', name: 'subTitle', placeholder: 'Search by Sub-title' },
   { label: 'Author', name: 'author', placeholder: 'Search by author' },
   {
     label: 'Classification',
@@ -50,4 +51,5 @@ const filterFields = [
     placeholder: 'Enter Control Number',
   },
   { label: 'Barcode', name: 'barcode', placeholder: 'Enter barcode' },
+  { label: 'Holdings Information', name: 'holdingsInformation', placeholder: 'holdings Information' },
 ]

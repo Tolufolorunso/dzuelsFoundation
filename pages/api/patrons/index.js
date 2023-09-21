@@ -9,8 +9,6 @@ export default async function handler(req, res) {
       let { firstname, surname, library, barcode, gender, patronType, mode } =
         req.query
 
-      console.log(firstname)
-
       // Build the query object based on the provided filters
       const query = {}
       if (firstname) query.firstname = new RegExp(firstname, 'i') // Case-insensitive search
