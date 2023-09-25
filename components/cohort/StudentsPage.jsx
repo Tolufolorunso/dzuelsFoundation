@@ -13,6 +13,11 @@ import DisplayAbsenteesModal from './DisplayAbsenteesModal'
 import StudentTable from './StudentList'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
 import { exportToExcel } from '@/utils/export'
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import toast from 'react-hot-toast'
 
 const btn = {
   fontSize: '1.2rem',
@@ -39,7 +44,7 @@ function StudentsPage(props) {
 
   async function markStudentHandler(date, attendanceStatus, week) {
     if (!date || !studentBarcode || !attendanceStatus || !week) {
-      setErrorMessage('Enter all fields')
+      toast.error('Enter all fields')
       return false
     }
 
@@ -51,14 +56,15 @@ function StudentsPage(props) {
         attendanceStatus,
         barcode: studentBarcode,
         week: Number(week),
+        cohortType: props.cohortType
       })
       const { status, message } = res
       if (status) {
-        setSuccessMessage(message)
+        toast.success(message)
         setPresent(studentBarcode)
       }
     } catch (error) {
-      setErrorMessage(error.message)
+      toast.error(error.message)
     } finally {
       setStudentBarcode('')
       studentBarcodeRef.current.focus()
@@ -75,7 +81,7 @@ function StudentsPage(props) {
       const { status, attendance, message } = res
 
       if (status) {
-        setSuccessMessage('Your file is ready to be downloaded in 2 seconds.')
+        toast.success('Your file is ready to be downloaded in 2 seconds.')
         const formattedData = attendance.map((person) => {
           const { barcode, firstname, surname, attendance } = person
 
@@ -102,7 +108,6 @@ function StudentsPage(props) {
           return formattedPerson
         })
         setTimeout(() => {
-          setSuccessMessage('')
           exportToExcel(formattedData)
           // exportToExcel([
           //   {
@@ -118,7 +123,7 @@ function StudentsPage(props) {
         }, 2000)
       }
     } catch (error) {
-      setErrorMessage(error.message)
+      toast.error(error.message)
     } finally {
       setTimeout(() => {
         clearMessage()
@@ -131,25 +136,26 @@ function StudentsPage(props) {
       `Are you sure you want to remove this student, enter ${barcode}`
     )
     if (isvalid === barcode) {
-      // console.log(barcode)
+      console.log(barcode)
     }
   }
 
   async function addStudentToCohort() {
     if (!patronBarcode) {
-      setErrorMessage('Please enter patron Barcode')
+      toast.error('Please enter patron Barcode')
       return false
     }
     try {
-      const res = await fetchApi('/cohort', 'POST', { barcode: patronBarcode })
+      const res = await fetchApi('/cohort', 'POST', { barcode: patronBarcode, cohortType: props.cohortType })
       const { status, message } = res
       if (status) {
-        setSuccessMessage(message)
+        toast.success(message)
       } else {
         throw new Error('Error Adding patron')
       }
     } catch (error) {
-      setErrorMessage(error.message)
+      console.log(162, error)
+      toast.error(error.message)
     }
   }
 
@@ -160,6 +166,18 @@ function StudentsPage(props) {
           Cohort Class 2023
         </Typography>
         <Box sx={{ display: 'flex', gap: '1rem' }}>
+
+          <FormControl>
+            {/* <InputLabel id="demo-simple-select-label">Cohort</InputLabel> */}
+            <Select
+              value={props.cohortType}
+              onChange={props.onChange}
+            >
+              <MenuItem value={'cohortOne'} selected>Cohort One</MenuItem>
+              <MenuItem value={'cohortTwo'}>Cohort Two</MenuItem>
+              <MenuItem value={'outOfClass'}>Out Of School</MenuItem>
+            </Select>
+          </FormControl>
           <Button
             variant='outlined'
             onClick={() => exportAttendance2ExcelHandler()}
@@ -204,7 +222,7 @@ function StudentsPage(props) {
           color='primary'
           onClick={addStudentToCohort}
           mt={2}
-          disabled
+          disabled={props.cohortType === 'cohortOne' ? true : false}
         >
           Add Patron to Cohort class
         </Button>

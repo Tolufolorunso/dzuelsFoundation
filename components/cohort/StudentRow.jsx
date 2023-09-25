@@ -6,15 +6,17 @@ const cell = { fontSize: '1.3rem', fontWeight: 500 }
 
 function StudentRow(props) {
   const { barcode, firstname, surname, attendance, onRemove, index } = props
-  const curWeek = attendance[attendance.length - 1].week
-  const attendanceInfo = `${
-    attendance.filter((record) => record.attended).length
-  }/${attendance.length}`
-  const AttendancePercentage = `${(
+
+  const curWeek = attendance[attendance.length - 1]?.week || 0
+
+  const attendanceInfo = `${attendance.filter((record) => record.attended).length
+    }/${attendance.length}`
+
+  const AttendancePercentage = curWeek > 0 ? `${(
     (attendance.filter((record) => record.attended).length /
       attendance.length) *
     100
-  ).toFixed(2)}%`
+  ).toFixed(2)}%` : '0%'
 
   function handleClick() {
     onRemove(barcode)

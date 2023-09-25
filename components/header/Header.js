@@ -14,8 +14,8 @@ const links = [
   { href: '/catalogs', label: 'Cataloging' },
   { href: '/patrons', label: 'Patrons' },
   { href: '/circulation', label: 'Circulation' },
-  { href: '/cohort', label: 'Cohort Class' },
   { href: '/inventory', label: 'Inventory' },
+  { href: '/cohort', label: 'Cohort Class' },
 ]
 
 function Header() {
@@ -72,7 +72,7 @@ function Header() {
                       <Link href={link.href}>
                         {link.label}
                       </Link>
-                    </li> 
+                    </li>
                   )
                   )
                 }

@@ -6,14 +6,14 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
       await dbConnect()
-      const { date, attendanceStatus, barcode, week } = req.body
+      const { date, attendanceStatus, barcode, week, cohortType } = req.body
 
-      const student = await Cohort.findOne({ barcode })
+      const student = await Cohort.findOne({ barcode, cohortType })
 
       if (!student) {
         return res
           .status(404)
-          .json({ status: false, errorMessage: 'Student not found' })
+          .json({ status: false, errorMessage: 'Student not found or not with this Cohort' })
       }
 
       const existingAttendance = student.attendance.find(

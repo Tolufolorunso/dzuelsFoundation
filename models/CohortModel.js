@@ -21,6 +21,10 @@ const CohortSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    cohortType: {
+      type: String,
+      required: true,
+    },
     attendance: [
       {
         date: Date,

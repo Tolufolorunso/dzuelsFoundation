@@ -4,10 +4,20 @@ import Cohort from '@/models/CohortModel'
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
+    const cohortType = req.query.cohortType
+    let query = {}
+    if (cohortType) {
+      query.cohortType = cohortType
+    } else {
+      query.cohortType = 'cohortOne'
+    }
     try {
       await dbConnect()
 
-      const patrons = await Cohort.find().select(
+      // Add cohortType: "cohortOne" to 30 documents
+      // await Cohort.updateMany({ $set: { cohortType: 'cohortOne' } });
+
+      const patrons = await Cohort.find(query).select(
         '-createdAt -updatedAt -_id -__v'
       )
 
@@ -22,7 +32,7 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
       await dbConnect()
-      const { barcode } = req.body
+      const { barcode, cohortType } = req.body
 
       // Check if the patron with the same email already exists
       const patron = await Patron.findOne({ barcode })
@@ -50,6 +60,7 @@ export default async function handler(req, res) {
         firstname,
         surname,
         middlename,
+        cohortType
       })
 
       await newCohort.save()
@@ -59,10 +70,10 @@ export default async function handler(req, res) {
         message: `Patron with barcode ${barcode} Added to Cohort Class successfully`,
       })
     } catch (error) {
-      console.error('Error fetching books:', error)
+      console.error('Error fetching books:', error.message)
       return res
         .status(500)
-        .json({ status: true, errorMessage: 'Something went wrong' })
+        .json({ status: false, errorMessage: 'Something went wrong' })
     }
   }
 }
