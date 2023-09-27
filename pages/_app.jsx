@@ -23,24 +23,33 @@ function MyApp(props) {
   const router = useRouter()
 
   const auth = router.pathname.includes('auth')
+  const dashboard = router.pathname.includes('dashboard')
+
+  function renderHeader() {
+    if (auth || dashboard) {
+      return null
+    } else {
+      return <Header />
+    }
+  }
 
   return (
     <SessionProvider session={pageProps.session}>
       <CacheProvider value={emotionCache}>
         <Head>
-          <meta name='viewport' content='initial-scale=1, width=device-width' />
-          <meta name='description' content='Dzuels foundation' />
-          <meta name='robots' content='noindex' />
+          <meta name="viewport" content="initial-scale=1, width=device-width" />
+          <meta name="description" content="Dzuels foundation" />
+          <meta name="robots" content="noindex" />
           <title>Dzuels Foundation</title>
         </Head>
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          {!auth ? <Header /> : null}
+          {renderHeader()}
           <div style={{ marginTop: '80px' }}>
             <Toast />
             <Toaster />
-            <NextNProgress color='#6A0406' height={3} />
+            <NextNProgress color="#6A0406" height={3} />
             <Component {...pageProps} />
           </div>
         </ThemeProvider>
