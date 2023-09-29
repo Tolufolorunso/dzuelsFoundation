@@ -26,6 +26,8 @@ function Header() {
   const router = useRouter()
   const [isMobile, setIsMobile] = useState(false)
 
+  console.log(data?.user)
+
   useEffect(() => {
     function handleResize() {
       setIsMobile(window.innerWidth <= 768) // Adjust the breakpoint as needed
@@ -51,11 +53,11 @@ function Header() {
         <nav>
           <div className={classes.container}>
             <div className={classes.nav_items}>
-              <div className='logo'>
-                <Link href='/' className={classes.logo_link}>
+              <div className="logo">
+                <Link href="/" className={classes.logo_link}>
                   <Image
-                    src='/images/logo.png'
-                    alt='Logo'
+                    src="/images/logo.png"
+                    alt="Logo"
                     width={80}
                     height={40}
                     quality={60}
@@ -66,27 +68,31 @@ function Header() {
                 className={classes.links}
                 style={{ display: isMobile ? 'none' : 'block' }}
               >
-                {
-                  links.map((link) => (
-                    <li className='item' key={link.href}>
-                      <Link href={link.href}>
-                        {link.label}
-                      </Link>
+                {links.map((link) => {
+                  return (
+                    <li className="item" key={link.href}>
+                      <Link href={link.href}>{link.label}</Link>
                     </li>
                   )
-                  )
-                }
+                })}
+                {data?.user?.role === 'ict' || data?.user?.role === 'ima' ? (
+                  <li className="item">
+                    <Link href={`dashboard/${data?.user?.role}`}>
+                      Dashboard
+                    </Link>
+                  </li>
+                ) : null}
               </ul>
               <Profile data={data} />
               <input
-                type='checkbox'
+                type="checkbox"
                 className={classes.navigationCheckbox}
-                id='navi-toggle'
+                id="navi-toggle"
                 checked={isMenuOpen}
                 onChange={closeMenu}
               />
               <label
-                htmlFor='navi-toggle'
+                htmlFor="navi-toggle"
                 className={classes.navigationButton}
                 style={{ display: isMobile ? 'flex' : 'none' }}
               >

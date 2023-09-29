@@ -1,6 +1,6 @@
 import LoginContent from '@/components/auth/LoginContent'
 import useAppStore from '@/store/applicationStateStore'
-import { getSession, signIn, } from 'next-auth/react'
+import { getSession, signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
@@ -25,7 +25,7 @@ function LoginPage() {
         const session = await getSession()
         toast.success(`Authenticated as ${session.user.name}`)
         setTimeout(() => {
-          if (session.user.role === 'ima' || session.user.role) {
+          if (session.user.role === 'ima' || session.user.role === 'ict') {
             router.replace('/dashboard/' + session.user.role)
           } else {
             router.replace('/')
@@ -54,9 +54,7 @@ export async function getServerSideProps(ctx) {
   }
 
   return {
-    props: {
-      ...session,
-    },
+    props: { ...session },
   }
 }
 

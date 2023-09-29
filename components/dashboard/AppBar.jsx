@@ -1,19 +1,10 @@
 import MuiAppBar from '@mui/material/AppBar'
 import { styled } from '@mui/material/styles'
 import Toolbar from '@mui/material/Toolbar'
-import List from '@mui/material/List'
 import Typography from '@mui/material/Typography'
-import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
-import ChevronRightIcon from '@mui/icons-material/ChevronRight'
-import ListItem from '@mui/material/ListItem'
-import ListItemButton from '@mui/material/ListItemButton'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import ListItemText from '@mui/material/ListItemText'
-import InboxIcon from '@mui/icons-material/MoveToInbox'
-import MailIcon from '@mui/icons-material/Mail'
+import Box from '@mui/material/Box'
 
 const drawerWidth = 240
 
@@ -27,6 +18,10 @@ const AppBar = styled(MuiAppBar, {
   ...(open && {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: `${drawerWidth}px`,
+    background: 'white',
+    boxShadow: 'none',
+    paddingBlock: '10px',
+    paddingInline: '25px',
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
@@ -48,9 +43,24 @@ function DashboardAppBar(props) {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" noWrap component="div">
-          Persistent drawer
-        </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '10px 0',
+            color: 'black',
+          }}
+        >
+          <Box>
+            <Typography variant="h4" noWrap component="h1">
+              Welcome back, IMA
+            </Typography>
+            <Typography variant="subtitle1" noWrap component="p">
+              Track, manage and forecast your customers and orders.
+            </Typography>
+          </Box>
+        </Box>
       </Toolbar>
     </AppBar>
   )

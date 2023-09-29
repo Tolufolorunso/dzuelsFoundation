@@ -13,22 +13,19 @@ async function handler(req, res) {
       if (!barcode || !controlNumber || !title) {
         return res.status(400).json({
           status: false,
-          errorMessage: "All fields with asterics are required."
+          errorMessage: 'All fields with asterics are required.',
         })
       }
 
       // Check if the barcode already exists in the database
       const existingBook = await Cataloging.findOne({
-        $or: [
-          { controlNumber },
-          { barcode }
-        ]
-      });
+        $or: [{ controlNumber }, { barcode }],
+      })
 
       if (existingBook) {
         return res.status(409).json({
           status: false,
-          errorMessage: "Barcode or control number already exists"
+          errorMessage: 'Barcode or control number already exists',
         })
       }
 

@@ -13,7 +13,7 @@ import fetchApi from '@/utils/fetchApi'
 import toast from 'react-hot-toast'
 
 const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
 })
 
 function AddItemPage() {
@@ -75,7 +75,7 @@ function AddItemPage() {
       indexTermGenre: '',
       informationSummary: '',
       physicalDescription: '',
-      controlNumber: ''
+      controlNumber: '',
     }))
   }
 
@@ -135,7 +135,7 @@ function AddItemPage() {
         autoHideDuration={6000}
         onClose={handleClose}
       >
-        <Alert onClose={handleClose} severity='success' sx={{ width: '100%' }}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
           {message}
         </Alert>
       </Snackbar>

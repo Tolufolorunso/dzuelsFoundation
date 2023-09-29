@@ -71,7 +71,7 @@ export default async function handler(req, res) {
   if (req.method === 'DELETE') {
     try {
       await dbConnect()
-      const item = await Cataloging.findOneAndDelete({ barcode: itemBarcode });
+      const item = await Cataloging.findOneAndDelete({ barcode: itemBarcode })
 
       if (!item) {
         return res

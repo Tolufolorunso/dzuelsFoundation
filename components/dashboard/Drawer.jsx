@@ -13,11 +13,13 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
 import MailIcon from '@mui/icons-material/Mail'
+import { useRouter } from 'next/router'
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   padding: theme.spacing(0, 1),
+  // color: 'white',
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: 'space-between',
@@ -27,6 +29,7 @@ const drawerWidth = 240
 
 function DashboardDrawer(props) {
   const theme = useTheme()
+  const router = useRouter()
 
   const { open, handleDrawerClose } = props
 
@@ -35,10 +38,13 @@ function DashboardDrawer(props) {
       sx={{
         width: drawerWidth,
         flexShrink: 0,
+
         // display: 'flex',
         '& .MuiDrawer-paper': {
           width: drawerWidth,
           boxSizing: 'border-box',
+          // backgroundColor: 'black',
+          // color: 'white',
         },
       }}
       variant="persistent"
@@ -46,9 +52,9 @@ function DashboardDrawer(props) {
       open={open}
     >
       <DrawerHeader>
-        <div>
+        <Box>
           <h1>Dzuels</h1>
-        </div>
+        </Box>
         <IconButton onClick={handleDrawerClose}>
           {theme.direction === 'ltr' ? (
             <ChevronLeftIcon />
@@ -59,8 +65,8 @@ function DashboardDrawer(props) {
       </DrawerHeader>
       <Divider />
       <List>
-        {['Home', 'Dashboard', 'Patrons', 'Staff'].map((text, index) => (
-          <ListItem key={text} disablePadding onClick={() => console.log(text)}>
+        {['Home', 'Patrons', 'Staff'].map((text, index) => (
+          <ListItem key={text} disablePadding onClick={() => router.push('/')}>
             <ListItemButton>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}

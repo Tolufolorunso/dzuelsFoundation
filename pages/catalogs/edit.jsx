@@ -81,7 +81,7 @@ function EditItemPage() {
         handleChange={handleChange}
         goToCatalogPageHandler={GetAllBooksHandler}
         loading={isLoading}
-        type='edit'
+        type="edit"
       />
     </Container>
   )
