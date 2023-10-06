@@ -13,13 +13,11 @@ export default function AlertDialog(props) {
     <div>
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={() => handleClose(false)}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">Delete Patron</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             {children}

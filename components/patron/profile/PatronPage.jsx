@@ -38,7 +38,7 @@ function PatronProfilePage({ patronData }) {
 
   const editPatronHandler = () => router.push(`/patrons/edit/${barcode}`)
 
-  const deletedPatronHandler = () => {
+  const deletePatronHandler = () => {
     setIsLoading(true)
     fetchApi(`/patrons/${barcode}`, 'DELETE')
       .then((res) => {
@@ -58,9 +58,10 @@ function PatronProfilePage({ patronData }) {
       })
   }
 
-  const deletePatronHandler = (isDelete) => {
+  const deleteClickHandler = (isDelete) => {
+    console.log(isDelete)
     if (isDelete) {
-      deletedPatronHandler()
+      deletePatronHandler()
     } else {
       setIsLoading(false)
     }
@@ -134,10 +135,7 @@ function PatronProfilePage({ patronData }) {
           component={<AreaChartComponent data={itemsCheckedOutHistory} />}
         />
       </div>
-      <AlertDialog
-        open={isDeleteConfirmation}
-        handleClose={deletePatronHandler}
-      >
+      <AlertDialog open={isDeleteConfirmation} handleClose={deleteClickHandler}>
         Are you sure you want to delete this patron?
       </AlertDialog>
     </React.Fragment>
