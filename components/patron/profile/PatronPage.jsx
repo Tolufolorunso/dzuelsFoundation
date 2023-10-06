@@ -14,6 +14,7 @@ import toast from 'react-hot-toast'
 import { useState } from 'react'
 import CircularProgress from '@mui/material/CircularProgress'
 import AlertDialog from '@/components/layout/AlertDialog'
+import ModeEditIcon from '@mui/icons-material/ModeEdit'
 
 function PatronProfilePage({ patronData }) {
   const {
@@ -76,11 +77,19 @@ function PatronProfilePage({ patronData }) {
             barcode={barcode}
           />
           <Typography
-            sx={{ fontSize: '2.4rem', fontWeight: 400, lineHeight: 1.334 }}
+            sx={{
+              fontSize: '2.4rem',
+              fontWeight: 400,
+              textTransform: 'capitalize',
+            }}
             variant="h5"
           >{`${patronData.surname}, ${patronData.firstname} ${patronData.middlename}`}</Typography>
-          <Typography variant="body2">Library: {library}</Typography>
-          <Typography variant="body2">Gender: {gender}</Typography>
+          <Typography sx={{ fontWeight: 'bold' }} variant="body2">
+            Library: {library}
+          </Typography>
+          <Typography sx={{ fontWeight: 'bold' }} variant="body2">
+            Gender: {gender}
+          </Typography>
           <Chip
             variant="filled"
             label={active ? 'Active' : 'Not Active'}
@@ -90,7 +99,7 @@ function PatronProfilePage({ patronData }) {
           <div className={classes.actionGroupStyle}>
             <Button
               variant="outlined"
-              startIcon={<DeleteIcon />}
+              startIcon={<ModeEditIcon />}
               onClick={editPatronHandler}
             >
               Edit
@@ -114,7 +123,7 @@ function PatronProfilePage({ patronData }) {
       </div>
       <div className={classes.summaryCards}>
         <SummaryCard
-          title={'Number Of Books Read'}
+          title={'Number Of Books Read For The Month'}
           value={`${itemsCheckedOutHistory.length} Book(s)`}
         />
         <SummaryCard title={'Attendence'} value={`${event.length} Event(s)`} />
