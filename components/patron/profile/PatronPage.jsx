@@ -76,14 +76,9 @@ function PatronProfilePage({ patronData }) {
             alt={`${surname} ${firstname} ${middlename}'s photo`}
             barcode={barcode}
           />
-          <Typography
-            sx={{
-              fontSize: '2.4rem',
-              fontWeight: 400,
-              textTransform: 'capitalize',
-            }}
-            variant="h5"
-          >{`${patronData.surname}, ${patronData.firstname} ${patronData.middlename}`}</Typography>
+          <Typography className={classes.fullname} variant="h5">
+            {`${patronData.surname}, ${patronData.firstname} ${patronData.middlename}`}
+          </Typography>
           <Typography sx={{ fontWeight: 'bold' }} variant="body2">
             Library: {library}
           </Typography>
