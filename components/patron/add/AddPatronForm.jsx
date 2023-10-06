@@ -1,8 +1,8 @@
-import FieldSetFormLayout from '../layout/field-set-layout'
-import CustomGridInput from '../layout/custom-grid-input'
-import FormContainer from '../layout/form-container'
-import { formFields } from './PatronFieldsData'
+import CustomGridInput from '@/components/layout/custom-grid-input'
+import FieldSetFormLayout from '@/components/layout/field-set-layout'
+import FormContainer from '@/components/layout/form-container'
 import usePatronStore from '@/store/patronStore'
+import { formFields } from './PatronFieldsData'
 
 function PatronForm(props) {
   const { handleSubmit, formData, handleChange, goToCatalogPageHandler } = props

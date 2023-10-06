@@ -14,6 +14,9 @@ import ListItemText from '@mui/material/ListItemText'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
 import MailIcon from '@mui/icons-material/Mail'
 import { useRouter } from 'next/router'
+import useDashboardStore from '@/store/dashboardStore'
+
+import classes from './dashboard.module.css'
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -27,9 +30,30 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 const drawerWidth = 240
 
+const menu = [
+  {
+    label: 'Dashboard',
+    name: 'base',
+    icon: <InboxIcon />,
+  },
+  {
+    label: 'Patrons',
+    name: 'patronsList',
+    icon: <InboxIcon />,
+  },
+  {
+    label: 'Staffs',
+    name: 'staff',
+    icon: <InboxIcon />,
+  },
+]
 function DashboardDrawer(props) {
   const theme = useTheme()
   const router = useRouter()
+  const switchComponent = useDashboardStore((state) => state.switchComponent)
+  const activeComponent = useDashboardStore(
+    (state) => state.dashboardState.activeComponent
+  )
 
   const { open, handleDrawerClose } = props
 
@@ -65,13 +89,27 @@ function DashboardDrawer(props) {
       </DrawerHeader>
       <Divider />
       <List>
-        {['Home', 'Patrons', 'Staff'].map((text, index) => (
-          <ListItem key={text} disablePadding onClick={() => router.push('/')}>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
+        <ListItem disablePadding onClick={() => router.push('/')}>
+          <ListItemButton>
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItemButton>
+        </ListItem>
+        {menu.map((m, index) => (
+          <ListItem
+            key={m.label}
+            disablePadding
+            onClick={() => switchComponent(m.name)}
+            sx={{ fontSize: '40px' }}
+          >
+            <ListItemButton
+              selected={m.name == activeComponent}
+              disabled={m.name == activeComponent}
+            >
+              <ListItemIcon>{m.icon}</ListItemIcon>
+              <ListItemText primary={m.label} style={{ fontSize: '40px' }} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -89,7 +127,10 @@ function DashboardDrawer(props) {
           </ListItem>
         ))}
       </List>
-      <Box sx={{ position: 'fixed', bottom: 0 }}>hello</Box>
+      <Box sx={{ flex: 1 }}></Box>
+      <Box>
+        <h1>Dzuels</h1>
+      </Box>
     </Drawer>
   )
 }

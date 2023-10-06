@@ -58,10 +58,22 @@ export default async function handler(req, res) {
       const dueDate = new Date().setDate(currentDate.getDate() + dueDay)
 
       // Update the cataloging record with checkout details
-      cataloging.checkedOutHistory.push({
+      // cataloging.checkedOutHistory.push({
+      //   checkedOutBy: patron._id,
+      //   checkedOutAt: currentDate,
+      //   dueDate: dueDate,
+      // })
+
+      cataloging.patronsCheckedOutHistory.push({
         checkedOutBy: patron._id,
         checkedOutAt: currentDate,
         dueDate: dueDate,
+        fullname: `${patron.surname}, ${patron.firstname} ${patron.middlename}`,
+        contactNumber:
+          patron.phoneNumber ||
+          patron.parentInfo.parentPhoneNumber ||
+          'No Phone Number',
+        barcode: patron.barcode,
       })
       // cataloging.isCheckedOut =
       //   cataloging.checkedOutHistory.length === cataloging.holdingsInformation
@@ -73,10 +85,19 @@ export default async function handler(req, res) {
       await cataloging.save()
 
       // Update the patron's checkout history
-      patron.checkoutHistory.push({
+      // patron.checkoutHistory.push({
+      //   itemId: cataloging._id,
+      //   checkoutDate: new Date(),
+      //   dueDate: dueDate,
+      // })
+
+      patron.itemsCheckedOutHistory.push({
         itemId: cataloging._id,
-        checkoutDate: new Date(),
+        checkoutDate: currentDate,
         dueDate: dueDate,
+        itemTitle: cataloging.title.mainTitle,
+        itemSubTitle: cataloging.title.subtitle,
+        itemBarcode: cataloging.barcode,
       })
 
       patron.hasBorrowedBook = true

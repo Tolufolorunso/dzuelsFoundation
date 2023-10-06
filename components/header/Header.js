@@ -26,8 +26,6 @@ function Header() {
   const router = useRouter()
   const [isMobile, setIsMobile] = useState(false)
 
-  console.log(data?.user)
-
   useEffect(() => {
     function handleResize() {
       setIsMobile(window.innerWidth <= 768) // Adjust the breakpoint as needed
@@ -77,7 +75,7 @@ function Header() {
                 })}
                 {data?.user?.role === 'ict' || data?.user?.role === 'ima' ? (
                   <li className="item">
-                    <Link href={`dashboard/${data?.user?.role}`}>
+                    <Link href={`/dashboard/${data?.user?.role}`}>
                       Dashboard
                     </Link>
                   </li>

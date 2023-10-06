@@ -6,12 +6,23 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
       await dbConnect()
+      // const checkoutHistory = await Cataloging.find({
+      //   'checkedOutHistory.0': { $exists: true },
+      // }).populate({
+      //   path: 'checkedOutHistory.checkedOutBy',
+      //   select: 'barcode firstname surname',
+      // })
+
       const checkoutHistory = await Cataloging.find({
-        'checkedOutHistory.0': { $exists: true },
-      }).populate({
-        path: 'checkedOutHistory.checkedOutBy',
-        select: 'barcode firstname surname',
+        'patronsCheckedOutHistory.0': { $exists: true },
       })
+
+      // const checkoutHistory = await Cataloging.find({
+      //   'patronsCheckedOutHistory.0': { $exists: true },
+      // }).populate({
+      //   path: 'patronsCheckedOutHistory.checkedOutBy',
+      //   select: 'barcode firstname surname',
+      // })
 
       const formattedHistory = checkoutHistory
         .map((item) => {
@@ -30,7 +41,6 @@ export default async function handler(req, res) {
         .status(200)
         .json({ status: true, message: 'Fetched', holds: formattedHistory })
     } catch (error) {
-      console.log(error)
       return res
         .status(500)
         .json({ status: false, errorMessage: 'Internal server error' })

@@ -89,6 +89,20 @@ const CatalogingSchema = new mongoose.Schema(
       },
     ],
 
+    patronsCheckedOutHistory: [
+      {
+        checkedOutBy: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Patron',
+        },
+        checkedOutAt: { type: Date, default: null },
+        dueDate: Date,
+        fullname: String,
+        contactNumber: String,
+        barcode: String,
+      },
+    ],
+
     library: {
       type: String,
       default: 'AAoJ',

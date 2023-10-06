@@ -14,6 +14,10 @@ const usePatronStore = create((set) => ({
       firstname: '',
       barcode: '',
     },
+    patronData: null,
+  },
+  setPatronData: (data) => {
+    console.log(20, data)
   },
   addSearchTerm: (searchTerm) => {
     set((state) => ({

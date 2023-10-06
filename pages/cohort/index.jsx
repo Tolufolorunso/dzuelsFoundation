@@ -11,19 +11,15 @@ function CohortClassPage(props) {
   const [students, setStudents] = useState(patrons || [])
   const [studentBarcodes, setStudentBarcodes] = useState(barcodes)
 
-  const [cohortType, setCohortType] = useState('cohortOne');
+  const [cohortType, setCohortType] = useState('cohortOne')
 
   async function handleChange(event) {
-    setCohortType(event.target.value);
-  };
-
+    setCohortType(event.target.value)
+  }
 
   // set all cohort class student barcodes in global state management
   const setStudentsInStore = useCohortStore((state) => state.setStudents)
   setStudentsInStore(studentBarcodes)
-
-
-
 
   useEffect(() => {
     async function fetchStudents(event) {
@@ -39,13 +35,18 @@ function CohortClassPage(props) {
       } catch (error) {
         toast.error(error.messsage)
       }
-    };
+    }
     fetchStudents()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cohortType])
 
   return (
     <Container>
-      <StudentsPage students={students} onChange={handleChange} cohortType={cohortType} />
+      <StudentsPage
+        students={students}
+        onChange={handleChange}
+        cohortType={cohortType}
+      />
     </Container>
   )
 }

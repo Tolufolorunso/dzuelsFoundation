@@ -6,6 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline'
 import MainContent from '@/components/dashboard/MainContent'
 import DashboardDrawer from '@/components/dashboard/Drawer'
 import DashboardAppBar from '@/components/dashboard/AppBar'
+import ResponsiveDrawer from '@/components/dashboard/AppBar'
 
 const drawerWidth = 240
 
@@ -52,7 +53,8 @@ export default function PersistentDrawerLeft() {
       }}
     >
       <CssBaseline />
-      <DashboardAppBar open={open} handleDrawerOpen={handleDrawerOpen} />
+      {/* <DashboardAppBar open={open} handleDrawerOpen={handleDrawerOpen} /> */}
+      <ResponsiveDrawer open={open} handleDrawerOpen={handleDrawerOpen} />
       <DashboardDrawer open={open} handleDrawerClose={handleDrawerClose} />
       <Main open={open}>
         <MainContent />

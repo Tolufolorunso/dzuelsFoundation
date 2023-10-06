@@ -1,16 +1,15 @@
 import Container from '@/components/layout/container'
-import AddPatron from '@/components/patron/add/AddPatron'
+import EditForm from '@/components/patron/Edit/EditForm'
 import usePatronStore from '@/store/patronStore'
 import fetchApi from '@/utils/fetchApi'
 import { getSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 
-function CreatePatronPage() {
-  const [patronType, setIsLoading] = usePatronStore((state) => [
-    state.patrons.selectedPatronType,
-    state.setIsLoading,
-  ])
+function EditPatronPage() {
+  const patronData = usePatronStore((state) => state.patrons.patronData)
+  const { query, push } = useRouter()
 
   const [formData, setFormData] = useState({
     surname: '',
@@ -38,35 +37,9 @@ function CreatePatronPage() {
     parentPhoneNumber: '',
     relationshipToPatron: '',
     parentEmail: '',
-    messagePreferences: 'email,sms,call',
+    messagePreferences: '',
   })
-
-  const clearFormDataExceptLibrary = () => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      surname: '',
-      firstname: '',
-      middlename: '',
-      email: '',
-      phoneNumber: '',
-      gender: '',
-      dateOfBirth: '',
-      street: '',
-      barcode: '',
-      employerName: '',
-      schoolName: '',
-      schoolAdress: '',
-      schoolEmail: '',
-      schoolPhoneNumber: '',
-      headOfSchool: '',
-      currentClass: '',
-      parentName: '',
-      parentAddress: '',
-      parentPhoneNumber: '',
-      relationshipToPatron: '',
-      parentEmail: '',
-    }))
-  }
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -78,37 +51,18 @@ function CreatePatronPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    let patronData = { ...formData, patronType: patronType }
-
-    if (patronType === 'guest') {
-      patronData = {
-        surname: patronData.surname,
-        firstname: patronData.firstname,
-        middlename: patronData.middlename,
-        email: patronData.email,
-        phoneNumber: patronData.phoneNumber,
-        gender: patronData.gender,
-        dateOfBirth: patronData.dateOfBirth,
-        street: patronData.street,
-        city: patronData.city,
-        state: patronData.state,
-        country: patronData.country,
-        barcode: patronData.barcode,
-        library: 'AAoj',
-        patronType: patronType,
-      }
-    }
-
     try {
       setIsLoading(true)
-      const res = await fetchApi('/patrons', 'POST', patronData)
+      const res = await fetchApi(
+        '/patrons/' + formData.barcode,
+        'PUT',
+        formData
+      )
       const { status, message, patron } = res
 
       if (status) {
-        clearFormDataExceptLibrary()
-        toast.success(
-          `${message}. Welcome ${patron.firstname}: ${patron.barcode}`
-        )
+        toast.success(message)
+        setTimeout(() => push('/patrons/' + patron.barcode), 1500)
       } else {
         throw new Error(
           'Something bad went wrong. Please contact your administrator'
@@ -121,12 +75,21 @@ function CreatePatronPage() {
     }
   }
 
+  function handleCancelClick() {
+    push('/patrons/' + query.patronBarcode)
+  }
+
   return (
     <Container>
-      <AddPatron
+      <EditForm
         formData={formData}
         handleSubmit={handleSubmit}
         handleChange={handleChange}
+        patronBarcode={query.patronBarcode}
+        patronData={patronData}
+        setFormData={setFormData}
+        isLoading={isLoading}
+        handleCancelClick={handleCancelClick}
       />
     </Container>
   )
@@ -155,4 +118,4 @@ export async function getServerSideProps(ctx) {
   }
 }
 
-export default CreatePatronPage
+export default EditPatronPage

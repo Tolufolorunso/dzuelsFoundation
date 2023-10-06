@@ -4,12 +4,13 @@ import SaveAltIcon from '@mui/icons-material/SaveAlt'
 import CustomHeader from '@/components/typography/CustomHeader'
 import CircularProgress from '@mui/material/CircularProgress'
 
-import classes from './AddPatron.module.css'
+import classes from '../style/FormPatron.module.css'
 import PatronForm from './AddPatronForm'
 
 import { useRef, useState } from 'react'
 import SelectPatronType from './select-patron-type'
 import usePatronStore from '@/store/patronStore'
+import FixedButtonWrapper from '../Form/FixedButtonWrapper'
 
 function AddPatron(props) {
   const fileInputRef = useRef(null)
@@ -55,51 +56,51 @@ function AddPatron(props) {
   return (
     <div className={classes.form}>
       <CustomHeader level={4} text={`Add Patron (${patronType})`} />
-      <div className={classes.fixedButtonWrapper}>
+      <FixedButtonWrapper>
         <Stack
           spacing={2}
-          direction='row'
+          direction="row"
           // style={{ position: 'absolute', top: 0 }}
         >
           <Button
             onClick={handleSubmit}
-            variant='contained'
-            color='success'
+            variant="contained"
+            color="success"
             startIcon={isLoading ? null : <SaveAltIcon />}
           >
             {isLoading ? (
               <>
-                <CircularProgress size={10} color='inherit' />
+                <CircularProgress size={10} color="inherit" />
                 <span style={{ marginLeft: '5px' }}>Saving...</span>
               </>
             ) : (
               'Save'
             )}
           </Button>
-          <Button variant='text'>Cancel</Button>
+          <Button variant="text">Cancel</Button>
           <div>
             <input
-              type='file'
-              accept='.xlsx'
+              type="file"
+              accept=".xlsx"
               onChange={handleUpload}
               ref={fileInputRef}
               style={{ display: 'none' }}
-              id='file-input'
+              id="file-input"
             />
-            <label htmlFor='file-input'>
+            <label htmlFor="file-input">
               <Button
-                component='span'
+                component="span"
                 // onClick={handleUpload}
                 disabled={!file}
-                variant='contained'
-                color='primary'
+                variant="contained"
+                color="primary"
               >
                 Upload Patron Excel
               </Button>
             </label>
           </div>
         </Stack>
-      </div>
+      </FixedButtonWrapper>
       <SelectPatronType
         patronType={patronType}
         changePatronTypeHandler={changeSelectedPatronType}

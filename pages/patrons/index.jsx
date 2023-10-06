@@ -1,5 +1,4 @@
 import Container from '@/components/layout/container'
-import ContentSide from '@/components/patron/ContentSide'
 import fetchApi from '@/utils/fetchApi'
 import { useRouter } from 'next/router'
 import Box from '@mui/material/Box'
@@ -8,11 +7,12 @@ import usePatronStore from '@/store/patronStore'
 import { getSession } from 'next-auth/react'
 import useAppStore from '@/store/applicationStateStore'
 
-import AwardPoints from '@/components/patron/AwardPoints'
-import SearchPatron from '@/components/patron/SearchPatron'
+import AwardPoints from '@/components/patron/page/AwardPoints'
 import { filterPatrons } from '@/utils/filterPatrons'
 import { useState } from 'react'
 import { exportToExcel } from '@/utils/export'
+import ContentSide from '@/components/patron/page/ContentSide'
+import SearchPatron from '@/components/patron/page/SearchPatron'
 
 function PatronsHomePage(props) {
   const setPatrons = usePatronStore((state) => state.setAllPatrons)
@@ -38,7 +38,6 @@ function PatronsHomePage(props) {
 
   const rows = filterPatrons({ searchTerm, data: patrons })
 
-
   function onRowClickHandler(item) {
     router.push({
       pathname: `/patrons/${item.row.barcode}`,
@@ -56,7 +55,10 @@ function PatronsHomePage(props) {
   }
 
   async function exportToExcelFrontend(type) {
-    const filename = searchTerm.patronType === 'any' ? "dzuels-patrons-details" : 'dzuels-' + searchTerm.patronType + "-details"
+    const filename =
+      searchTerm.patronType === 'any'
+        ? 'dzuels-patrons-details'
+        : 'dzuels-' + searchTerm.patronType + '-details'
     if (type === 'detail') {
       try {
         const patronType =
@@ -97,8 +99,8 @@ function PatronsHomePage(props) {
 
   return (
     <Container>
-      <main className='patron-container'>
-        <div className='sticky'>
+      <main className="patron-container">
+        <div className="sticky">
           <SearchPatron
             handleChange={handleChange}
             searchTerm={searchTerm}
@@ -117,7 +119,7 @@ function PatronsHomePage(props) {
               alignItems: 'center',
             }}
           >
-            <Typography variant='h6' color='error'>
+            <Typography variant="h6" color="error">
               {errorMessage}
             </Typography>
           </Box>

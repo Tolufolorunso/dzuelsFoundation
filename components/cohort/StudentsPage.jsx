@@ -13,10 +13,10 @@ import DisplayAbsenteesModal from './DisplayAbsenteesModal'
 import StudentTable from './StudentList'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
 import { exportToExcel } from '@/utils/export'
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import FormControl from '@mui/material/FormControl'
+import Select from '@mui/material/Select'
 import toast from 'react-hot-toast'
 
 const btn = {
@@ -56,7 +56,7 @@ function StudentsPage(props) {
         attendanceStatus,
         barcode: studentBarcode,
         week: Number(week),
-        cohortType: props.cohortType
+        cohortType: props.cohortType,
       })
       const { status, message } = res
       if (status) {
@@ -146,7 +146,10 @@ function StudentsPage(props) {
       return false
     }
     try {
-      const res = await fetchApi('/cohort', 'POST', { barcode: patronBarcode, cohortType: props.cohortType })
+      const res = await fetchApi('/cohort', 'POST', {
+        barcode: patronBarcode,
+        cohortType: props.cohortType,
+      })
       const { status, message } = res
       if (status) {
         toast.success(message)
@@ -154,32 +157,29 @@ function StudentsPage(props) {
         throw new Error('Error Adding patron')
       }
     } catch (error) {
-      console.log(162, error)
       toast.error(error.message)
     }
   }
 
   return (
     <Box p={4}>
-      <Box display='flex' justifyContent='space-between' mb={4}>
-        <Typography variant='h4' gutterBottom>
+      <Box display="flex" justifyContent="space-between" mb={4}>
+        <Typography variant="h4" gutterBottom>
           Cohort Class 2023
         </Typography>
         <Box sx={{ display: 'flex', gap: '1rem' }}>
-
           <FormControl>
             {/* <InputLabel id="demo-simple-select-label">Cohort</InputLabel> */}
-            <Select
-              value={props.cohortType}
-              onChange={props.onChange}
-            >
-              <MenuItem value={'cohortOne'} selected>Cohort One</MenuItem>
+            <Select value={props.cohortType} onChange={props.onChange}>
+              <MenuItem value={'cohortOne'} selected>
+                Cohort One
+              </MenuItem>
               <MenuItem value={'cohortTwo'}>Cohort Two</MenuItem>
               <MenuItem value={'outOfClass'}>Out Of School</MenuItem>
             </Select>
           </FormControl>
           <Button
-            variant='outlined'
+            variant="outlined"
             onClick={() => exportAttendance2ExcelHandler()}
             startIcon={<FileDownloadIcon />}
             sx={btn}
@@ -187,16 +187,16 @@ function StudentsPage(props) {
             Export As Excel - Detail
           </Button>
           <Button
-            variant='contained'
-            color='primary'
+            variant="contained"
+            color="primary"
             onClick={() => setIsModalOpen(true)}
             sx={btn}
           >
             Mark Attendance
           </Button>
           <Button
-            variant='contained'
-            color='primary'
+            variant="contained"
+            color="primary"
             onClick={() => setIsDisplayAbsenteesOpen(true)}
             sx={btn}
           >
@@ -205,21 +205,21 @@ function StudentsPage(props) {
         </Box>
       </Box>
 
-      <Box mb={2} bgcolor='white' p={4} borderRadius={2}>
-        <label htmlFor='patronBarcode'>Patron Barcode:</label>
+      <Box mb={2} bgcolor="white" p={4} borderRadius={2}>
+        <label htmlFor="patronBarcode">Patron Barcode:</label>
         <TextField
-          id='patronBarcode'
-          placeholder='Patron Barcode'
-          variant='outlined'
+          id="patronBarcode"
+          placeholder="Patron Barcode"
+          variant="outlined"
           fullWidth
           value={patronBarcode}
           onChange={(e) => setPatronBarcode(e.target.value)}
           style={{ marginBottom: '1rem' }}
-          size='small'
+          size="small"
         />
         <Button
-          variant='contained'
-          color='primary'
+          variant="contained"
+          color="primary"
           onClick={addStudentToCohort}
           mt={2}
           disabled={props.cohortType === 'cohortOne' ? true : false}
