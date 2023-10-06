@@ -59,12 +59,7 @@ function PatronProfilePage({ patronData }) {
   }
 
   const deleteClickHandler = (isDelete) => {
-    console.log(isDelete)
-    if (isDelete) {
-      deletePatronHandler()
-    } else {
-      setIsLoading(false)
-    }
+    setIsLoading(false)
     setIsDeleteConfirmation(false)
   }
 
@@ -135,8 +130,13 @@ function PatronProfilePage({ patronData }) {
           component={<AreaChartComponent data={itemsCheckedOutHistory} />}
         />
       </div>
-      <AlertDialog open={isDeleteConfirmation} handleClose={deleteClickHandler}>
-        Are you sure you want to delete this patron?
+      <AlertDialog
+        open={isDeleteConfirmation}
+        handleClose={deleteClickHandler}
+        patronBarcode={barcode}
+        onConfirm={deletePatronHandler}
+      >
+        Are you sure you want to delete? Enter patron Barcode?
       </AlertDialog>
     </React.Fragment>
   )
