@@ -133,14 +133,14 @@ function PatronProfilePage({ patronData }) {
             <div className={classes.phoneNumber}>
               <a href={`tel:${patronData.phoneNumber}`}>
                 Patron Number:{' '}
-                {patronData.phoneNumber ? patronData.phoneNumber : null}
+                {patronData.phoneNumber ? patronData.phoneNumber : 'null'}
               </a>
               <br />
               <a href={`tel:${patronData.parentInfo.parentPhoneNumber}`}>
                 Parennt Number:{' '}
                 {patronData.parentInfo.parentPhoneNumber
                   ? patronData.parentInfo.parentPhoneNumber
-                  : null}
+                  : 'null'}
               </a>
             </div>
           }
