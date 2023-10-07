@@ -46,7 +46,7 @@ function PatronPage() {
     <Container>
       <PatronProfileHeader
         imageUrl={'/images/book-default.jpg'}
-        title={'Patron Cover Image'}
+        text="Dzuels Foundation"
       />
       <PatronProfilePage patronData={patronData} />
       <h1>Patron Page</h1>
