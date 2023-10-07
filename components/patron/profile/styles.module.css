@@ -119,3 +119,8 @@
   font-weight: 800;
   -webkit-font-smoothing: antialiased;
 }
+
+.phoneNumber a {
+  text-decoration: none !important;
+  color: #6a0406;
+}

@@ -31,6 +31,8 @@ function PatronProfilePage({ patronData }) {
     image_url,
   } = patronData
 
+  console.log(patronData)
+
   const [isLoading, setIsLoading] = useState(false)
   const [isDeleteConfirmation, setIsDeleteConfirmation] = useState(false)
 
@@ -123,6 +125,27 @@ function PatronProfilePage({ patronData }) {
           value={hasBorrowedBook ? 'Yes' : 'No'}
         />
         <SummaryCard title={'Barcode'} value={barcode} />
+      </div>
+      <div className={classes.summaryCards}>
+        <SummaryCard
+          title="Contact: Phone Number"
+          component={
+            <div className={classes.phoneNumber}>
+              <a href={`tel:${patronData.phoneNumber}`}>
+                Patron Number:{' '}
+                {patronData.phoneNumber ? patronData.phoneNumber : null}
+              </a>
+              <br />
+              <a href={`tel:${patronData.parentInfo.parentPhoneNumber}`}>
+                Parennt Number:{' '}
+                {patronData.parentInfo.parentPhoneNumber
+                  ? patronData.parentInfo.parentPhoneNumber
+                  : null}
+              </a>
+            </div>
+          }
+        />
+        <SummaryCard title="Contact: House Address" value={``} />
       </div>
       <div className={classes.summaryCards}>
         <SummaryCard
