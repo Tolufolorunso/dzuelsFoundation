@@ -145,7 +145,12 @@ function PatronProfilePage({ patronData }) {
             </div>
           }
         />
-        <SummaryCard title="Contact: House Address" value={``} />
+        <SummaryCard
+          title="Contact: House Address"
+          value={`hfhhhn
+        \n
+        iihihhh`}
+        />
       </div>
       <div className={classes.summaryCards}>
         <SummaryCard

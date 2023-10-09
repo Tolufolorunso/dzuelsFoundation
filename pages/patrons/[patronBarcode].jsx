@@ -3,6 +3,7 @@ import PatronProfilePage from '@/components/patron/profile/PatronPage'
 import PatronProfileHeader from '@/components/patron/profile/PatronProfileHeader'
 import usePatronStore from '@/store/patronStore'
 import fetchApi from '@/utils/fetchApi'
+import { Box, Typography } from '@mui/material'
 import { getSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
@@ -39,7 +40,21 @@ function PatronPage() {
   }, [router.query.patronsID])
 
   if (!patronData) {
-    return <div>Loading...</div>
+    return (
+      <Box
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Typography variant="p" sx={{ fontSize: '4rem', color: 'tomato' }}>
+          Loading...
+        </Typography>
+      </Box>
+    )
   }
 
   return (
@@ -49,7 +64,6 @@ function PatronPage() {
         text="Dzuels Foundation"
       />
       <PatronProfilePage patronData={patronData} />
-      <h1>Patron Page</h1>
     </Container>
   )
 }
