@@ -1,4 +1,4 @@
-import { hashPassword } from '@/lib/auth'
+import { hashPassword } from '@/lib/hashPass'
 import dbConnect from '@/lib/dbConnect'
 import User from '@/models/UserModel'
 

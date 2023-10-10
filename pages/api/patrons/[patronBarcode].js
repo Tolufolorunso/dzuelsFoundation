@@ -4,6 +4,13 @@ import { extractErrorMessages } from '@/utils/extractErrorMessage'
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
+    // const authorized = await isAuthorized(req)
+    // if (authorized) {
+    //   return res
+    //     .status(401)
+    //     .json({ status: false, errorMessage: 'Unauthorized' })
+    // }
+
     try {
       await dbConnect()
       const { patronBarcode } = req.query

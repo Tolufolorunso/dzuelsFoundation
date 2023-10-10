@@ -13,29 +13,45 @@ export default async function handler(req, res) {
       //   select: 'barcode firstname surname',
       // })
 
-      const checkoutHistory = await Cataloging.find({
-        'patronsCheckedOutHistory.0': { $exists: true },
-      })
-
       // const checkoutHistory = await Cataloging.find({
       //   'patronsCheckedOutHistory.0': { $exists: true },
-      // }).populate({
-      //   path: 'patronsCheckedOutHistory.checkedOutBy',
-      //   select: 'barcode firstname surname',
       // })
+
+      const checkoutHistory = await Cataloging.find({
+        'patronsCheckedOutHistory.0': { $exists: true },
+      }).populate({
+        path: 'patronsCheckedOutHistory.checkedOutBy',
+        select: 'barcode firstname surname',
+      })
+
+      // const formattedHistory = checkoutHistory
+      //   .map((item) => {
+      //     return item.checkedOutHistory.map((checkout) => ({
+      //       patronBarcode: checkout.checkedOutBy.barcode,
+      //       itemBarcode: item.barcode,
+      //       title: item.title.mainTitle,
+      //       patronName: `${checkout.checkedOutBy.firstname} ${checkout.checkedOutBy.surname}`,
+      //       borrowingDate: checkout.checkedOutAt,
+      //       dueDate: checkout.dueDate,
+      //     }))
+      //   })
+      //   .flat()
 
       const formattedHistory = checkoutHistory
         .map((item) => {
-          return item.checkedOutHistory.map((checkout) => ({
-            patronBarcode: checkout.checkedOutBy.barcode,
+          return item.patronsCheckedOutHistory.map((patron) => ({
+            patronBarcode: patron.barcode,
             itemBarcode: item.barcode,
             title: item.title.mainTitle,
-            patronName: `${checkout.checkedOutBy.firstname} ${checkout.checkedOutBy.surname}`,
-            borrowingDate: checkout.checkedOutAt,
-            dueDate: checkout.dueDate,
+            subtitle: item.title.subtitle,
+            patronName: patron.fullname,
+            borrowingDate: patron.checkedOutAt,
+            dueDate: patron.dueDate,
           }))
         })
         .flat()
+
+      // console.log(formattedHistory)
 
       return res
         .status(200)

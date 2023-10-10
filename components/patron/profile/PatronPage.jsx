@@ -132,14 +132,14 @@ function PatronProfilePage({ patronData }) {
           component={
             <div className={classes.phoneNumber}>
               <a href={`tel:${patronData.phoneNumber}`}>
-                Patron Number:{' '}
+                <span style={{ fontWeight: 'bold' }}>Patron Number: </span>
                 {patronData.phoneNumber ? patronData.phoneNumber : 'null'}
               </a>
               <br />
-              <a href={`tel:${patronData.parentInfo.parentPhoneNumber}`}>
-                Parennt Number:{' '}
-                {patronData.parentInfo.parentPhoneNumber
-                  ? patronData.parentInfo.parentPhoneNumber
+              <a href={`tel:${patronData?.parentInfo?.parentPhoneNumber}`}>
+                <span style={{ fontWeight: 'bold' }}>Parent Number: </span>
+                {patronData?.parentInfo?.parentPhoneNumber
+                  ? patronData?.parentInfo?.parentPhoneNumber
                   : 'null'}
               </a>
             </div>
@@ -147,9 +147,9 @@ function PatronProfilePage({ patronData }) {
         />
         <SummaryCard
           title="Contact: House Address"
-          value={`hfhhhn
-        \n
-        iihihhh`}
+          component={
+            <Typography>{patronData?.parentInfo?.parentAddress}</Typography>
+          }
         />
       </div>
       <div className={classes.summaryCards}>

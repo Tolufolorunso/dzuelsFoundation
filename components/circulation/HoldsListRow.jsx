@@ -1,6 +1,7 @@
 import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
 import { formatDate } from '@/utils/formattedDate'
+import { useRouter } from 'next/router'
 
 const cell = {
   fontSize: '1.3rem',
@@ -9,6 +10,7 @@ const cell = {
 }
 
 function HoldsRow(props) {
+  const router = useRouter()
   let {
     index,
     patronBarcode,
@@ -17,6 +19,7 @@ function HoldsRow(props) {
     borrowingDate,
     dueDate,
     itemBarcode,
+    subtitle,
   } = props
 
   borrowingDate = formatDate(borrowingDate)
@@ -27,24 +30,25 @@ function HoldsRow(props) {
       <TableRow
         sx={{ cursor: 'pointer' }}
         hover={true}
-        onClick={() => console.log(patronBarcode)}
+        onClick={() => router.push('/patrons/' + patronBarcode)}
       >
-        <TableCell sx={cell} align='right'>
+        <TableCell sx={cell} align="right">
           {index + 1}
         </TableCell>
-        <TableCell sx={cell} align='center'>
+        <TableCell sx={cell} align="center">
           {patronBarcode}
         </TableCell>
-        <TableCell sx={cell} align='center'>
+        <TableCell sx={cell} align="center">
           {patronName}
         </TableCell>
-        <TableCell sx={cell} align='center'>
-          {title} ({itemBarcode})
+        <TableCell sx={cell} align="center">
+          {title} ({itemBarcode}) <br />
+          {subtitle ? `Sub-Title: ${subtitle}` : null}
         </TableCell>
-        <TableCell sx={cell} align='center'>
+        <TableCell sx={cell} align="center">
           {borrowingDate}
         </TableCell>
-        <TableCell sx={cell} align='center'>
+        <TableCell sx={cell} align="center">
           {dueDate}
         </TableCell>
       </TableRow>

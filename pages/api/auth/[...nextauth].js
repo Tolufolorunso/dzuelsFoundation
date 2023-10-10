@@ -4,7 +4,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 
 import dbConnect from '@/lib/dbConnect'
 import User from '@/models/UserModel'
-import { verifyPassword } from '@/lib/auth'
+import { verifyPassword } from '@/lib/hashPass'
 
 export const authOptions = {
   session: { strategy: 'jwt', maxAge: 18000 },
