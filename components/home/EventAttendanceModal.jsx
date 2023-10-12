@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import CloseIcon from '@mui/icons-material/Close'
-import FormControlLabel from '@mui/material/FormControlLabel'
 import CircularProgress from '@mui/material/CircularProgress'
 import useScanDetection from 'use-scan-detection-react18'
 
@@ -64,26 +63,26 @@ function EventAttendanceModal(props) {
           <CloseIcon />
         </Button>
 
-        <Typography variant='h6' gutterBottom>
+        <Typography variant="h6" gutterBottom>
           {event.eventTitle}
         </Typography>
 
         <TextField
-          label='Student Barcode'
+          label="Student Barcode"
           fullWidth
-          type='text'
-          id='barcode'
-          name='barcode'
+          type="text"
+          id="barcode"
+          name="barcode"
           value={studentBarcode}
           onChange={(e) => setStudentBarcode(e.target.value)}
           sx={{ mb: 2, mt: 4 }}
           inputRef={studentBarcodeRef}
-          autoComplete='off'
+          autoComplete="off"
         />
-        <Button variant='contained' color='primary' onClick={clickHandler}>
+        <Button variant="contained" color="primary" onClick={clickHandler}>
           {loading ? (
             <>
-              <CircularProgress size={10} color='inherit' />
+              <CircularProgress size={10} color="inherit" />
               <span style={{ marginLeft: '5px' }}>Marking...</span>
             </>
           ) : (

@@ -2,19 +2,17 @@ import useCirculationStore from '@/store/circulationStore'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
-import Divider from '@mui/material/Divider'
 
 import classes from './Circulation.module.css'
 import { useEffect, useRef, useState } from 'react'
-import useAppStore from '@/store/applicationStateStore'
 import CheckedOutMessage from './CheckedOutMessage'
+import toast from 'react-hot-toast'
 
 function CirculationCheckoutSection() {
   const patronData = useCirculationStore(
     (state) => state.circulation.patronData
   )
   const checkout = useCirculationStore((state) => state.checkout)
-  const { setErrorMessage, setSuccessMessage } = useAppStore((state) => state)
 
   const [checkedOutSuccess, setCheckedOutSuccess] = useState(null)
 
@@ -75,10 +73,10 @@ function CirculationCheckoutSection() {
 
       setCheckedOutSuccess(checkedOut)
       if (status) {
-        setSuccessMessage(message)
+        toast.success(message)
       }
     } catch (error) {
-      setErrorMessage(error.message)
+      toast.error(error.message)
     }
   }
 
@@ -106,21 +104,21 @@ function CirculationCheckoutSection() {
                   flexDirection: 'column',
                 }}
               >
-                <label htmlFor='barcode' className={classes.enterBarcode}>
+                <label htmlFor="barcode" className={classes.enterBarcode}>
                   Enter Item barcode or keyword
                 </label>
                 <input
-                  type='text'
-                  id='barcode'
-                  name='barcode'
-                  placeholder='Search Patron Barcode'
+                  type="text"
+                  id="barcode"
+                  name="barcode"
+                  placeholder="Search Patron Barcode"
                   className={classes.input}
                   ref={inputRef}
-                  autoComplete='off'
+                  autoComplete="off"
                 />
               </div>
               <Button
-                variant='outlined'
+                variant="outlined"
                 className={classes.searchPatronBtn}
                 onClick={checkoutHandler}
               >

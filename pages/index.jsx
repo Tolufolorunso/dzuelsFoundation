@@ -6,11 +6,9 @@ import { getSession } from 'next-auth/react'
 import { useEffect } from 'react'
 import { useRef } from 'react'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 
 const HomePage = () => {
-  const { setErrorMessage, setSuccessMessage, clearMessage } = useAppStore(
-    (state) => state
-  )
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [studentBarcode, setStudentBarcode] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -34,7 +32,7 @@ const HomePage = () => {
 
   async function markStudentHandler() {
     if (!studentBarcode || !date) {
-      setErrorMessage('Enter all fields')
+      toast.error('Enter all fields')
       studentBarcodeRef.current.focus()
       return false
     }
@@ -50,10 +48,10 @@ const HomePage = () => {
       })
       const { status, message } = res
       if (status) {
-        setSuccessMessage(message)
+        toast.success(message)
       }
     } catch (error) {
-      setErrorMessage(error.message)
+      toast.error(error.message)
     } finally {
       setStudentBarcode('')
       studentBarcodeRef.current.focus()
