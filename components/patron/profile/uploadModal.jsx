@@ -29,6 +29,11 @@ function UploadModal({ open, barcode, setImgUrl, handleClose }) {
   const [imageLoaded, setImageLoaded] = useState(false)
   const [isCameraActive, setIsCameraActive] = useState(false)
 
+  const [size, setSize] = useState({
+    width: 0,
+    height: 0,
+  })
+
   // useEffect(() => {
   //   if (open) {
   //     startCamera()
@@ -85,6 +90,7 @@ function UploadModal({ open, barcode, setImgUrl, handleClose }) {
       const context = canvas.getContext('2d')
       canvas.width = video.videoWidth
       canvas.height = video.videoHeight
+      setSize({ width: canvas.width, height: canvas.height })
       context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight)
       const dataUrl = canvas.toDataURL('image/jpeg')
       setPhotoData(dataUrl)
@@ -179,6 +185,8 @@ function UploadModal({ open, barcode, setImgUrl, handleClose }) {
               src={photoData}
               alt="Captured"
               onLoad={handleImageLoad}
+              width={size.width}
+              height={size.height}
               style={{
                 display: imageLoaded ? 'block' : 'none',
                 width: '100%',

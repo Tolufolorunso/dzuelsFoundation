@@ -78,7 +78,14 @@ function CreatePatronPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    let patronData = { ...formData, patronType: patronType }
+
+    const session = await getSession()
+    const registerBy = session.user.name
+    let patronData = {
+      ...formData,
+      patronType: patronType,
+      registeredBy: registerBy,
+    }
 
     if (patronType === 'guest') {
       patronData = {

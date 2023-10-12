@@ -29,6 +29,7 @@ function PatronProfilePage({ patronData }) {
     hasBorrowedBook,
     barcode,
     image_url,
+    registeredBy,
   } = patronData
 
   console.log(patronData)
@@ -150,6 +151,10 @@ function PatronProfilePage({ patronData }) {
           component={
             <Typography>{patronData?.parentInfo?.parentAddress}</Typography>
           }
+        />
+        <SummaryCard
+          title="Registered By"
+          component={<Typography>{registeredBy || 'null'}</Typography>}
         />
       </div>
       <div className={classes.summaryCards}>
