@@ -128,26 +128,29 @@ function PatronProfilePage({ patronData }) {
         />
         <SummaryCard title={'Barcode'} value={barcode} />
       </div>
-      <div className={classes.summaryCards}>
-        <SummaryCard
-          title={'Student School Name'}
-          value={studentSchoolInfo.schoolName}
-        />
-        <SummaryCard
-          title={'Student School Address'}
-          value={studentSchoolInfo.schoolAdress}
-        />
-        <SummaryCard
-          title={'Student Current Class'}
-          value={studentSchoolInfo.currentClass}
-        />
-        <SummaryCard
-          title={'Student school PhoneNumber'}
-          value={
-            studentSchoolInfo.schoolPhoneNumber || studentSchoolInfo.schoolEmail
-          }
-        />
-      </div>
+      {studentSchoolInfo && (
+        <div className={classes.summaryCards}>
+          <SummaryCard
+            title={'Student School Name'}
+            value={studentSchoolInfo.schoolName}
+          />
+          <SummaryCard
+            title={'Student School Address'}
+            value={studentSchoolInfo.schoolAdress}
+          />
+          <SummaryCard
+            title={'Student Current Class'}
+            value={studentSchoolInfo.currentClass}
+          />
+          <SummaryCard
+            title={'Student school PhoneNumber'}
+            value={
+              studentSchoolInfo.schoolPhoneNumber ||
+              studentSchoolInfo.schoolEmail
+            }
+          />
+        </div>
+      )}
       <div className={classes.summaryCards}>
         <SummaryCard
           title="Contact: Phone Number"
