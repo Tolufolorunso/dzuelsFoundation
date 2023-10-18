@@ -30,9 +30,10 @@ function PatronProfilePage({ patronData }) {
     barcode,
     image_url,
     registeredBy,
+    studentSchoolInfo,
   } = patronData
 
-  console.log(patronData)
+  console.log(studentSchoolInfo)
 
   const [isLoading, setIsLoading] = useState(false)
   const [isDeleteConfirmation, setIsDeleteConfirmation] = useState(false)
@@ -126,6 +127,26 @@ function PatronProfilePage({ patronData }) {
           value={hasBorrowedBook ? 'Yes' : 'No'}
         />
         <SummaryCard title={'Barcode'} value={barcode} />
+      </div>
+      <div className={classes.summaryCards}>
+        <SummaryCard
+          title={'Student School Name'}
+          value={studentSchoolInfo.schoolName}
+        />
+        <SummaryCard
+          title={'Student School Address'}
+          value={studentSchoolInfo.schoolAdress}
+        />
+        <SummaryCard
+          title={'Student Current Class'}
+          value={studentSchoolInfo.currentClass}
+        />
+        <SummaryCard
+          title={'Student school PhoneNumber'}
+          value={
+            studentSchoolInfo.schoolPhoneNumber || studentSchoolInfo.schoolEmail
+          }
+        />
       </div>
       <div className={classes.summaryCards}>
         <SummaryCard
