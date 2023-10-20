@@ -1,4 +1,4 @@
-import HoldsPage from '@/components/circulation/HoldsPage'
+import HoldsPage from '@/components/circulation/holds/HoldsPage'
 import Container from '@/components/layout/container'
 import fetchApi from '@/utils/fetchApi'
 

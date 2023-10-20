@@ -9,7 +9,8 @@ const cell = {
 }
 
 function OverdueRow(props) {
-  let { index, patronBarcode, title, patronName, dueDate } = props
+  let { index, patronBarcode, title, patronName, dueDate, getOverDuePatron } =
+    props
 
   dueDate = formatDate(dueDate)
 
@@ -18,21 +19,21 @@ function OverdueRow(props) {
       <TableRow
         sx={{ cursor: 'pointer' }}
         hover={true}
-        onClick={() => console.log(patronBarcode)}
+        onClick={() => getOverDuePatron(patronBarcode)}
       >
-        <TableCell sx={cell} align='center'>
+        <TableCell sx={cell} align="center">
           {index + 1}
         </TableCell>
-        <TableCell sx={cell} align='center'>
+        <TableCell sx={cell} align="center">
           {patronBarcode}
         </TableCell>
-        <TableCell sx={cell} align='center'>
+        <TableCell sx={cell} align="center">
           {patronName}
         </TableCell>
-        <TableCell sx={cell} align='center'>
+        <TableCell sx={cell} align="center">
           {title}
         </TableCell>
-        <TableCell sx={cell} align='center'>
+        <TableCell sx={cell} align="center">
           {dueDate}
         </TableCell>
       </TableRow>

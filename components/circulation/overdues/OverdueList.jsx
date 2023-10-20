@@ -10,32 +10,37 @@ import OverdueRow from './OverdueRow'
 const cell = { fontSize: '1.6rem', fontWeight: 500 }
 
 function OverdueList(props) {
-  const { overdueItems } = props
+  const { overdueItems, getOverDuePatron } = props
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }}>
         <TableHead>
           <TableRow>
-            <TableCell size='small' sx={cell} align='center'>
+            <TableCell size="small" sx={cell} align="center">
               No
             </TableCell>
-            <TableCell size='medium' sx={cell} align='center'>
+            <TableCell size="medium" sx={cell} align="center">
               Patron Barcode
             </TableCell>
-            <TableCell sx={cell} align='center'>
+            <TableCell sx={cell} align="center">
               Name
             </TableCell>
-            <TableCell sx={cell} align='center'>
+            <TableCell sx={cell} align="center">
               Book Title
             </TableCell>
-            <TableCell sx={cell} align='center'>
+            <TableCell sx={cell} align="center">
               Due Date
             </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {overdueItems?.map((item, index) => (
-            <OverdueRow key={item.patronBarcode} {...item} index={index} />
+            <OverdueRow
+              key={item.patronBarcode}
+              {...item}
+              getOverDuePatron={getOverDuePatron}
+              index={index}
+            />
           ))}
         </TableBody>
       </Table>

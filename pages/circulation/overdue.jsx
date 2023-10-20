@@ -1,4 +1,4 @@
-import OverduePage from '@/components/circulation/OverduePage'
+import OverduePage from '@/components/circulation/overdues/OverduePage'
 import Container from '@/components/layout/container'
 import useCirculationStore from '@/store/circulationStore'
 import fetchApi from '@/utils/fetchApi'
