@@ -31,9 +31,15 @@ function PatronProfilePage({ patronData }) {
     image_url,
     registeredBy,
     studentSchoolInfo,
+    checkoutHistoryInThisMonth,
   } = patronData
 
-  console.log(studentSchoolInfo)
+  const currentDate = new Date()
+  const month = currentDate.toLocaleString('default', { month: 'long' })
+
+  // console.log(patronData)
+
+  // console.log(38, checkoutHistoryInThisMonth)
 
   const [isLoading, setIsLoading] = useState(false)
   const [isDeleteConfirmation, setIsDeleteConfirmation] = useState(false)
@@ -119,7 +125,7 @@ function PatronProfilePage({ patronData }) {
       <div className={classes.summaryCards}>
         <SummaryCard
           title={'Number Of Books Read For The Month'}
-          value={`${itemsCheckedOutHistory.length} Book(s)`}
+          value={`${checkoutHistoryInThisMonth?.length} Book(s) in ${month}`}
         />
         <SummaryCard title={'Attendence'} value={`${event.length} Event(s)`} />
         <SummaryCard

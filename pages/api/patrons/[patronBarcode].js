@@ -11,10 +11,14 @@ export default async function handler(req, res) {
     //     .json({ status: false, errorMessage: 'Unauthorized' })
     // }
 
+    const currentDate = new Date()
+    const month = currentDate.getMonth() // Month is zero-based (0 = January, 1 = February, ...)
+    const year = currentDate.getFullYear()
+
     try {
       await dbConnect()
       const { patronBarcode } = req.query
-      const patron = await Patron.findOne({ barcode: patronBarcode })
+      let patron = await Patron.findOne({ barcode: patronBarcode })
 
       if (!patron) {
         return res.status(404).json({
@@ -22,6 +26,20 @@ export default async function handler(req, res) {
           errorMessage: 'Patron is not found',
         })
       }
+
+      patron = patron.toObject()
+      // Filter the itemsCheckedOutHistory for the specified month and year
+      const checkoutHistoryInThisMonth = patron.itemsCheckedOutHistory.filter(
+        (item) => {
+          const checkoutDate = new Date(item.checkoutDate)
+          return (
+            checkoutDate.getMonth() === month &&
+            checkoutDate.getFullYear() === year
+          )
+        }
+      )
+
+      patron.checkoutHistoryInThisMonth = checkoutHistoryInThisMonth
 
       return res
         .status(200)

@@ -16,6 +16,7 @@ const links = [
   { href: '/circulation', label: 'Circulation' },
   { href: '/inventory', label: 'Inventory' },
   { href: '/cohort', label: 'Cohort Class' },
+  { href: '/events/reading-competition', label: 'Reading Competition' },
 ]
 
 function Header() {
@@ -67,6 +68,7 @@ function Header() {
                 style={{ display: isMobile ? 'none' : 'block' }}
               >
                 {links.map((link) => {
+                  console.log(link)
                   return (
                     <li className="item" key={link.href}>
                       <Link href={link.href}>{link.label}</Link>

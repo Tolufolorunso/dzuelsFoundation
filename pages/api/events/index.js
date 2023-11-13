@@ -48,4 +48,30 @@ export default async function handler(req, res) {
         .json({ status: false, errorMessage: error.message })
     }
   }
+
+  if (req.method === 'GET') {
+    try {
+      const { startDate, endDate } = req.query
+      const patrons = await Patron.find(
+        {
+          'itemsCheckedOutHistory.checkoutDate': {
+            $gte: new Date(startDate),
+            $lte: new Date(endDate),
+          },
+        },
+        'firstname surname middlename barcode itemsCheckedOutHistory'
+      )
+
+      return res.status(200).json({
+        status: true,
+        message: 'Fetched successfully',
+        patrons,
+        date: { startDate, endDate },
+      })
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ status: false, errorMessage: error.message })
+    }
+  }
 }

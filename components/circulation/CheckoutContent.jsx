@@ -66,7 +66,7 @@ function CheckoutContent(props) {
   function clearPatronDataHandler() {
     clearPatronData()
     inputRef.current.focus()
-    inputRef.current.value = ''
+    inputRef.current.value = 20230 + ''
   }
 
   const handleScan = (barcodeString) => {
@@ -93,28 +93,28 @@ function CheckoutContent(props) {
                   flexDirection: 'column',
                 }}
               >
-                <label htmlFor='barcode' style={{ fontWeight: 'bold' }}>
+                <label htmlFor="barcode" style={{ fontWeight: 'bold' }}>
                   Scan Patron Barcode
                 </label>
                 <input
-                  type='text'
-                  id='barcode'
-                  name='barcode'
-                  placeholder='Search Patron Barcode'
+                  type="text"
+                  id="barcode"
+                  name="barcode"
+                  placeholder="Search Patron Barcode"
                   className={classes.input}
                   ref={inputRef}
-                  autoComplete='off'
+                  autoComplete="off"
                 />
               </div>
               <Button
-                variant='outlined'
+                variant="outlined"
                 className={classes.searchPatronBtn}
                 onClick={submitBtnClickHandler}
               >
                 Submit
               </Button>
               <Button
-                variant='outlined'
+                variant="outlined"
                 className={classes.searchPatronBtn}
                 onClick={clearPatronDataHandler}
               >
