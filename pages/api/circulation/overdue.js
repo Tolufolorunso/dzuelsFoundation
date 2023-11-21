@@ -76,7 +76,6 @@ export default async function handler(req, res) {
         .json({ status: false, errorMessage: 'Method Not Allowed' })
     }
   } catch (error) {
-    console.error('Error:', error)
     return res
       .status(500)
       .json({ status: false, errorMessage: 'Internal Server Error' })

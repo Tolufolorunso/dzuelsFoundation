@@ -24,6 +24,13 @@ const LibrarySchema = new mongoose.Schema({
       type: String,
     },
   },
+  competitionDetails: {
+    isActive: {
+      type: Boolean,
+      default: false,
+    },
+    title: String,
+  },
 })
 
 export default mongoose.models.Library ||

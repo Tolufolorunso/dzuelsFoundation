@@ -37,9 +37,6 @@ function PatronProfilePage({ patronData }) {
   const currentDate = new Date()
   const month = currentDate.toLocaleString('default', { month: 'long' })
 
-  // console.log(patronData)
-
-  // console.log(38, checkoutHistoryInThisMonth)
 
   const [isLoading, setIsLoading] = useState(false)
   const [isDeleteConfirmation, setIsDeleteConfirmation] = useState(false)

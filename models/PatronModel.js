@@ -120,6 +120,11 @@ const PatronSchema = new mongoose.Schema(
         itemBarcode: String,
         checkoutDate: Date,
         dueDate: Date,
+        event: {
+          type: Boolean,
+          default: false,
+        },
+        eventTitle: String,
       },
     ],
     is18: {

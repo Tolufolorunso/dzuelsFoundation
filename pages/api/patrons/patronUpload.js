@@ -45,7 +45,6 @@ export default async function handler(req, res) {
         imageUrl: result.secure_url,
       })
     } catch (error) {
-      console.error(error)
       return res.status(500).json({
         status: false,
         errorMessage: 'Internal Server Error',

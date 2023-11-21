@@ -68,7 +68,6 @@ function Header() {
                 style={{ display: isMobile ? 'none' : 'block' }}
               >
                 {links.map((link) => {
-                  console.log(link)
                   return (
                     <li className="item" key={link.href}>
                       <Link href={link.href}>{link.label}</Link>

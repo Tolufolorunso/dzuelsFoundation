@@ -16,8 +16,6 @@ const fetchApi = async (endpoint, method = 'GET', data = null) => {
 
     const uri = endpoint.includes('api') ? endpoint : `${baseUrl}${endpoint}`
 
-    console.log(uri)
-
     const response = await fetch(uri, config)
     const result = await response.json()
 

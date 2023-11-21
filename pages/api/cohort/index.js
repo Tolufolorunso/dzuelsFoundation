@@ -70,7 +70,6 @@ export default async function handler(req, res) {
         message: `Patron with barcode ${barcode} Added to Cohort Class successfully`,
       })
     } catch (error) {
-      console.error('Error fetching books:', error.message)
       return res
         .status(500)
         .json({ status: false, errorMessage: 'Something went wrong' })

@@ -20,7 +20,6 @@ function EventPage() {
         `/events?startDate=${startDate}&endDate=${endDate}`
       )
       const { status, message, event, patrons } = res
-      console.log(15, event)
       if (status) {
         setPatrons(patrons)
       }

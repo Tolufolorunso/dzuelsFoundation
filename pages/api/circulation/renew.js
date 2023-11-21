@@ -67,7 +67,6 @@ export default async function handler(req, res) {
         },
       })
     } catch (error) {
-      console.error('Error during renewal:', error)
       return res.status(500).json({ error: 'Something went wrong' })
     }
   }

@@ -23,7 +23,6 @@ export default async function Post(request) {
       // Use multer to parse the form data and handle file upload
       upload.single('imageFile')(req, res, async function (err) {
         if (err) {
-          console.error(err)
           return res.status(400).json({
             status: false,
             message: 'File upload failed',
@@ -64,7 +63,6 @@ export default async function Post(request) {
         })
       })
     } catch (error) {
-      console.error(error)
       return res.status(500).json({
         status: false,
         message: 'Internal server error',

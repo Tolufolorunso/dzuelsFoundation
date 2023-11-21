@@ -55,7 +55,6 @@ async function handler(req, res) {
         data: { barcode: newBook.barcode, title: newBook.title.mainTitle },
       })
     } catch (error) {
-      console.error('Error adding book:', error)
       return res.status(500).json({ error: 'Something went wrong' })
     }
   }

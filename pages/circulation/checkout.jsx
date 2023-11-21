@@ -16,7 +16,6 @@ function Checkout() {
       toast.error('Enter a valid patron barcode')
       return false
     }
-
     if (type === 'patron') {
       try {
         const data = await fetchApi(

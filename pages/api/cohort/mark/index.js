@@ -49,7 +49,6 @@ export default async function handler(req, res) {
         })
       }
     } catch (error) {
-      console.error('Error fetching books:', error)
       res.status(500).json({ status: false, errorMessage: error.message })
     }
   }
