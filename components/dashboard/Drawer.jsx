@@ -42,6 +42,11 @@ const menu = [
     icon: <InboxIcon />,
   },
   {
+    label: 'Competitions',
+    name: 'competition',
+    icon: <InboxIcon />,
+  },
+  {
     label: 'Staffs',
     name: 'staff',
     icon: <InboxIcon />,

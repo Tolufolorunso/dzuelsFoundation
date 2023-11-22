@@ -7,6 +7,7 @@ import MainContent from '@/components/dashboard/MainContent'
 import DashboardDrawer from '@/components/dashboard/Drawer'
 import DashboardAppBar from '@/components/dashboard/AppBar'
 import ResponsiveDrawer from '@/components/dashboard/AppBar'
+import { Divider } from '@mui/material'
 
 const drawerWidth = 240
 

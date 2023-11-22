@@ -1,4 +1,4 @@
-import XLSX from 'xlsx'
+import * as XLSX from 'xlsx'
 import { saveAs } from 'file-saver'
 
 export const exportToExcel = (data, filename = 'dzuels-data-to-excel') => {

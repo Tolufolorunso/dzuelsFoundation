@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import BaseComponent from './home/Main'
 import PatronList from './patronList/PatronList'
 import Staff from './staff/Staff'
+import CompetitionScreen from './competition/Competition'
 
 function MainContent() {
   const activeComponent = useDashboardStore(
@@ -14,6 +15,7 @@ function MainContent() {
     <React.Fragment>
       {activeComponent === 'base' && <BaseComponent />}
       {activeComponent === 'patronsList' && <PatronList />}
+      {activeComponent === 'competition' && <CompetitionScreen />}
       {activeComponent === 'staff' && <Staff />}
     </React.Fragment>
   )

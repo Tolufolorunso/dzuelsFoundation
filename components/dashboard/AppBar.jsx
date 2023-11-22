@@ -32,7 +32,11 @@ const AppBar = styled(MuiAppBar, {
 function DashboardAppBar(props) {
   const { open, handleDrawerOpen } = props
   return (
-    <AppBar position="fixed" open={open}>
+    <AppBar
+      position="fixed"
+      open={open}
+      style={{ borderBottom: '3px solid black' }}
+    >
       <Toolbar>
         <IconButton
           color="inherit"
@@ -57,7 +61,7 @@ function DashboardAppBar(props) {
               Welcome back, IMA
             </Typography>
             <Typography variant="subtitle1" noWrap component="p">
-              Track, manage and forecast your customers and orders.
+              Managing Dzuels Foundation Activities
             </Typography>
           </Box>
         </Box>
