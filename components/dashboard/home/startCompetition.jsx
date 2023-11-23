@@ -9,8 +9,8 @@ import { useState } from 'react'
 import classes from './main.module.css'
 import CircularProgress from '@mui/material/CircularProgress'
 
-function CreateLibraryModel(props) {
-  const { submitHandler, loading, onClose, onChange, libraryInfo } = props
+function CompetitionModal(props) {
+  const { submitHandler, loading, onClose, onChange } = props
   const [state, setState] = useState({
     libraryName: '',
     password: '',
@@ -92,4 +92,4 @@ function CreateLibraryModel(props) {
   )
 }
 
-export default CreateLibraryModel
+export default CompetitionModal

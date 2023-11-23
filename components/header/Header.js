@@ -44,6 +44,7 @@ function Header() {
 
   if (status === 'unauthenticated') {
     router.replace('/auth/login')
+    return
   }
 
   return (

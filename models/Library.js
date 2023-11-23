@@ -6,6 +6,7 @@ const LibrarySchema = new mongoose.Schema({
   libraryName: {
     type: String,
     require: true,
+    lowercase: true,
   },
   address: {
     street: {

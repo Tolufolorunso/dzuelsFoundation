@@ -45,16 +45,32 @@ export default async function handler(req, res) {
         })
       }
 
-      if (!cataloging || !patron) {
+      if (!patron) {
         return res
           .status(404)
-          .json({ status: false, errorMessage: 'Patron or Item not found' })
+          .json({ status: false, errorMessage: 'Patron not found' })
+      }
+
+      if (!cataloging) {
+        return res
+          .status(404)
+          .json({ status: false, errorMessage: 'Item not found' })
       }
 
       if (patron.hasBorrowedBook) {
         return res.status(409).json({
           errorMessage:
             'You are not allowed to borrow more than one item at a time',
+        })
+      }
+
+      if (
+        patron.itemsCheckedOutHistory.some(
+          (item) => item.itemBarcode === cataloging.barcode
+        )
+      ) {
+        return res.status(409).json({
+          errorMessage: 'You have already borrowed this item before',
         })
       }
 
