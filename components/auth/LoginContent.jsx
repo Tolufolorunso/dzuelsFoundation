@@ -17,7 +17,6 @@ function LoginContent(props) {
   })
 
   function handleChenge(event) {
-    event.preventDefault()
     setState({ ...state, [event.target.name]: event.target.value })
   }
 
