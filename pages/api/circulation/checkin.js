@@ -6,7 +6,9 @@ import Cataloging from '@/models/CatalogingModel'
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     await dbConnect()
-    const { itemBarcode, patronBarcode } = req.body
+    const { itemBarcode, patronBarcode, isPatronRead } = req.body
+
+    console.log(isPatronRead)
 
     try {
       const patron = await Patron.findOne({ barcode: patronBarcode })
@@ -64,6 +66,14 @@ export default async function handler(req, res) {
           // return historyItem.checkedOutBy !== patronBarcode
         })
 
+      if (isPatronRead.toLowerCase() === 'no') {
+        console.log('remove the book from the history item')
+        // Remove the book from the patron's itemsCheckedOutHistory
+        patron.itemsCheckedOutHistory = patron.itemsCheckedOutHistory.filter(
+          (item) => item.itemId.toString() !== cataloging._id.toString()
+        )
+      }
+
       cataloging.isCheckedOut = false
       patron.hasBorrowedBook = false
 
@@ -72,7 +82,9 @@ export default async function handler(req, res) {
 
       res.status(200).json({
         status: true,
-        successMessage: 'Checkin Successfully',
+        successMessage: `Checkin Successfully${
+          isPatronRead.toLowerCase() === 'no' ? ', Book Not read' : ''
+        }`,
         checkedInData: {},
       })
     } catch (error) {

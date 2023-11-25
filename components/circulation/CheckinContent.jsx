@@ -10,11 +10,13 @@ function CheckinContent(props) {
   const { checkinHandler, isLoading } = props
   const patronBarcodeRef = useRef(null)
   const itemBarcodeRef = useRef(null)
+  const isPatronRead = useRef(null)
 
   function clickHandler() {
     checkinHandler({
       patronBarcode: patronBarcodeRef.current.value,
       itemBarcode: itemBarcodeRef.current.value,
+      isPatronRead: isPatronRead.current.value,
     })
   }
 
@@ -30,28 +32,38 @@ function CheckinContent(props) {
               style={{ width: '60%' }}
             >
               <input
-                type='text'
-                id='barcode'
-                name='barcode'
-                placeholder='Enter Patron Barcode'
+                type="text"
+                id="barcode"
+                name="barcode"
+                placeholder="Enter Patron Barcode"
                 ref={patronBarcodeRef}
                 className={classes.input}
-                autoComplete='off'
+                autoComplete="off"
               />
               <input
-                type='text'
-                id='barcode'
-                name='barcode'
-                placeholder='Enter Item Barcode'
+                type="text"
+                id="barcode"
+                name="barcode"
+                placeholder="Enter Item Barcode"
                 ref={itemBarcodeRef}
                 className={classes.input}
-                autoComplete='off'
+                autoComplete="off"
               />
+              <label htmlFor="read">Is Patron read the book?</label>
+              <select
+                name="IsPatronRead"
+                id="read"
+                className={classes.input}
+                ref={isPatronRead}
+              >
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
             </Stack>
-            <Button variant='outlined' onClick={clickHandler}>
+            <Button variant="outlined" onClick={clickHandler}>
               {isLoading ? (
                 <>
-                  <CircularProgress size={10} color='inherit' />
+                  <CircularProgress size={10} color="inherit" />
                   <span style={{ marginLeft: '5px' }}>Login...</span>
                 </>
               ) : (
