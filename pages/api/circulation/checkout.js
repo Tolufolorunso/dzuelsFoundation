@@ -102,6 +102,7 @@ export default async function handler(req, res) {
           'No Phone Number',
         barcode: patron.barcode,
       })
+
       // cataloging.isCheckedOut =
       //   cataloging.checkedOutHistory.length === cataloging.holdingsInformation
       //     ? true
@@ -125,6 +126,8 @@ export default async function handler(req, res) {
         itemTitle: cataloging.title.mainTitle,
         itemSubTitle: cataloging.title.subtitle,
         itemBarcode: cataloging.barcode,
+        eventTitle: 'Reading Competition',
+        event: true,
       })
 
       patron.hasBorrowedBook = true
