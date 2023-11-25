@@ -30,7 +30,7 @@ function DisplayAbsenteesModal(props) {
   const cohort = useCohortStore((state) => state.cohort)
   const absentees = []
 
-  for (const student of cohort.students) {
+  for (const student of cohort?.students) {
     if (!cohort.presents.includes(student)) {
       absentees.push(student)
     }
@@ -42,15 +42,15 @@ function DisplayAbsenteesModal(props) {
         <Button sx={style.btn} onClick={onClose}>
           <CloseIcon />
         </Button>
-        <Typography variant='h6' gutterBottom>
+        <Typography variant="h6" gutterBottom>
           Those who are not present
         </Typography>
-        <Typography variant='h6' gutterBottom>
+        <Typography variant="h6" gutterBottom>
           Total number of absentees: {absentees.length}
         </Typography>
         {absentees.map((num) => {
           return (
-            <Typography variant='h6' key={num}>
+            <Typography variant="h6" key={num}>
               {num}
             </Typography>
           )

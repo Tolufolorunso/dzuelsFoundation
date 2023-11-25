@@ -67,7 +67,7 @@ export async function getServerSideProps(ctx) {
     process.env.NEXT_ENV === 'development'
       ? process.env.LOCALURL
       : process.env.BASEURL
-
+  console.log(70, endpoint)
   try {
     const res = await fetchApi(`${endpoint}/cohort?cohortType=cohortOne`)
     const { status, patrons } = res

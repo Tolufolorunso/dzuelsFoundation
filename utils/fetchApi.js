@@ -14,6 +14,9 @@ const fetchApi = async (endpoint, method = 'GET', data = null) => {
       config.body = JSON.stringify(data)
     }
 
+    console.log(17, endpoint)
+    console.log(18, `${baseUrl}${endpoint}`)
+
     const uri = endpoint.includes('api') ? endpoint : `${baseUrl}${endpoint}`
 
     const response = await fetch(uri, config)
