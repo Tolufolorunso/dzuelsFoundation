@@ -50,21 +50,22 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'GET') {
+    await dbConnect()
     try {
-      const { startDate, endDate } = req.query
-      const patrons = await Patron.find(
-        {
-          'itemsCheckedOutHistory.event': true,
-          'itemsCheckedOutHistory.eventTitle': 'reading competition',
-        },
-        'firstname surname middlename barcode itemsCheckedOutHistory points'
-      )
+      const { title } = req.query
+      // const patrons = await Patron.find(
+      //   {
+      //     'itemsCheckedOutHistory.event': true,
+      //     'itemsCheckedOutHistory.eventTitle': title,
+      //   },
+      //   'firstname surname middlename barcode itemsCheckedOutHistory points'
+      // )
+      // console.log(patrons)
 
       return res.status(200).json({
         status: true,
         message: 'Fetched successfully',
-        patrons,
-        date: { startDate, endDate },
+        // patrons,
       })
     } catch (error) {
       return res

@@ -1,6 +1,6 @@
 import StudentsPage from '@/components/cohort/StudentsPage'
 import Container from '@/components/layout/container'
-import { BASEURL } from '@/lib/contant'
+// import { BASEURL } from '@/lib/contant'
 import useCohortStore from '@/store/cohortStore'
 import fetchApi from '@/utils/fetchApi'
 import { getServerSession } from 'next-auth'
@@ -67,8 +67,13 @@ export async function getServerSideProps(ctx) {
     }
   }
 
+  const BASE_URL =
+    process.env.NEXT_ENV === 'development'
+      ? process.env.BASE_URL_LOCAL
+      : process.env.BASE_URL
+
   try {
-    const res = await fetchApi(`${BASEURL}/cohort?cohortType=cohortOne`)
+    const res = await fetchApi(`${BASE_URL}/cohort?cohortType=cohortOne`)
     const { status, patrons } = res
 
     const barcodesArray = patrons.map((student) => student.barcode)

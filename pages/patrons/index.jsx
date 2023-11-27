@@ -13,7 +13,7 @@ import { useState } from 'react'
 import { exportToExcel } from '@/utils/export'
 import ContentSide from '@/components/patron/page/ContentSide'
 import SearchPatron from '@/components/patron/page/SearchPatron'
-import { BASEURL } from '@/lib/contant'
+// import { BASEURL } from '@/lib/contant'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../api/auth/[...nextauth]'
 
@@ -165,8 +165,13 @@ export async function getServerSideProps(ctx) {
     { field: 'points', headerName: 'Points', width: 150 },
   ]
 
+  const BASE_URL =
+    process.env.NEXT_ENV === 'development'
+      ? process.env.BASE_URL_LOCAL
+      : process.env.BASE_URL
+
   try {
-    const res = await fetchApi(`${BASEURL}/patrons`)
+    const res = await fetchApi(`${BASE_URL}/patrons`)
     const { status, patrons } = res
 
     if (status) {

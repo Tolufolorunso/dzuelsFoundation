@@ -27,14 +27,14 @@ function LoginPage() {
       } else {
         const session = await getSession()
         toast.success(`Authenticated as ${session.user.name}`)
-        router.replace('/')
-        // setTimeout(() => {
-        //   if (session.user.role === 'ima' || session.user.role === 'ict') {
-        //     router.replace('/dashboard/' + session.user.role)
-        //   } else {
-        //     router.replace('/')
-        //   }
-        // }, 1500)
+
+        setTimeout(() => {
+          if (session.user.role === 'ima' || session.user.role === 'ict') {
+            router.replace('/dashboard/' + session.user.role)
+          } else {
+            router.replace('/')
+          }
+        }, 1500)
       }
     } catch (error) {
       toast.error(error.message)
@@ -47,7 +47,6 @@ function LoginPage() {
 }
 
 export async function getServerSideProps(ctx) {
-  // const session = await getSession(ctx)
   const session = await getServerSession(ctx.req, ctx.res, authOptions)
 
   if (session) {

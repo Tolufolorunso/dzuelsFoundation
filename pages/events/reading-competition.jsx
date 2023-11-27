@@ -8,9 +8,9 @@ import TextField from '@mui/material/TextField'
 import { Divider } from '@mui/material'
 
 import classes from '@/components/events/event.module.css'
-import { getSession } from 'next-auth/react'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../api/auth/[...nextauth]'
+// import { BASEURL } from '@/lib/contant'
 
 function EventPage() {
   const [startDate, setStartDate] = useState('')
@@ -108,13 +108,51 @@ export async function getServerSideProps(ctx) {
     }
   }
 
-  return {
-    props: {
-      user: {
-        username: session.user.username,
-        role: session.user.role,
-        name: session.user.name,
-      },
+  const columns = [
+    { field: 'barcode', headerName: 'Barcode', width: 100 },
+    { field: 'firstname', headerName: 'Firstname', width: 150 },
+    { field: 'surname', headerName: 'Surname', width: 150 },
+    { field: 'phoneNumber', headerName: 'Phone-No', width: 150 },
+    {
+      field: 'patronType',
+      headerName: 'Patron Type',
+      width: 150,
     },
+    { field: 'points', headerName: 'Points', width: 150 },
+  ]
+
+  const BASE_URL =
+    process.env.NEXT_ENV === 'development'
+      ? process.env.BASE_URL_LOCAL
+      : process.env.BASE_URL
+
+  try {
+    const res = await fetchApi(
+      `${BASE_URL}/events?eventTitle=reading_competition`
+    )
+    const { status, patrons, message } = res
+
+    if (status) {
+      return {
+        props: {
+          user: {
+            username: session.user.username,
+            role: session.user.role,
+            name: session.user.name,
+          },
+          patrons,
+          columns,
+        },
+      }
+    } else {
+      throw new Error('Error occurred while fetching')
+    }
+  } catch (error) {
+    return {
+      props: {
+        errorMessage: error.message,
+        columns,
+      },
+    }
   }
 }

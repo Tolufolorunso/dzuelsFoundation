@@ -12,7 +12,7 @@ import { filterCataloging } from '@/utils/filterCataloging'
 import { useState } from 'react'
 
 import classes from '@/components/cataloging/home.module.css'
-import { BASEURL } from '@/lib/contant'
+// import { BASEURL } from '@/lib/contant'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../api/auth/[...nextauth]'
 
@@ -109,8 +109,13 @@ export async function getServerSideProps(ctx) {
     }
   }
 
+  const BASE_URL =
+    process.env.NEXT_ENV === 'development'
+      ? process.env.BASE_URL_LOCAL
+      : process.env.BASE_URL
+
   try {
-    const res = await fetchApi(`${BASEURL}/cataloging`)
+    const res = await fetchApi(`${BASE_URL}/cataloging`)
     const { status, items } = res
 
     if (status) {

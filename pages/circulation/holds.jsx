@@ -1,6 +1,6 @@
 import HoldsPage from '@/components/circulation/holds/HoldsPage'
 import Container from '@/components/layout/container'
-import { BASEURL } from '@/lib/contant'
+// import { BASEURL } from '@/lib/contant'
 import fetchApi from '@/utils/fetchApi'
 import { getServerSession } from 'next-auth'
 
@@ -32,8 +32,15 @@ export async function getServerSideProps(ctx) {
     }
   }
 
+  const BASE_URL =
+    process.env.NEXT_ENV === 'development'
+      ? process.env.BASE_URL_LOCAL
+      : process.env.BASE_URL
+
+  console.log(BASE_URL)
+
   try {
-    const res = await fetchApi(`${BASEURL}/circulation/holds`)
+    const res = await fetchApi(`${BASE_URL}/circulation/holds`)
 
     const { status, holds } = res
     if (status) {

@@ -1,7 +1,7 @@
 import CirculationContent from '@/components/circulation/CirculationContent'
 import HomePageTopHeading from '@/components/circulation/HomePageTopHeading'
 import Container from '@/components/layout/container'
-import { BASEURL } from '@/lib/contant'
+// import { BASEURL } from '@/lib/contant'
 import useCirculationStore from '@/store/circulationStore'
 import fetchApi from '@/utils/fetchApi'
 import { getServerSession } from 'next-auth'
@@ -45,8 +45,13 @@ export async function getServerSideProps(ctx) {
     }
   }
 
+  const BASE_URL =
+    process.env.NEXT_ENV === 'development'
+      ? process.env.BASE_URL_LOCAL
+      : process.env.BASE_URL
+
   try {
-    const res = await fetchApi(`${BASEURL}/circulation/holds`)
+    const res = await fetchApi(`${BASE_URL}/circulation/holds`)
     const { status, holds } = res
 
     if (status) {

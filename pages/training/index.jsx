@@ -1,6 +1,6 @@
 import Container from '@/components/layout/container'
 import TraineePage from '@/components/trainees/traineePage'
-import { BASEURL } from '@/lib/contant'
+// import { BASEURL } from '@/lib/contant'
 import useCohortStore from '@/store/cohortStore'
 import fetchApi from '@/utils/fetchApi'
 import { getServerSession } from 'next-auth'
@@ -34,8 +34,13 @@ export async function getServerSideProps(ctx) {
     }
   }
 
+  const BASE_URL =
+    process.env.NEXT_ENV === 'development'
+      ? process.env.BASE_URL_LOCAL
+      : process.env.BASE_URL
+
   try {
-    const res = await fetchApi(`${BASEURL}/trainees`)
+    const res = await fetchApi(`${BASE_URL}/trainees`)
     const { status, patrons } = res
 
     const barcodesArray = patrons.map((student) => student.barcode)
