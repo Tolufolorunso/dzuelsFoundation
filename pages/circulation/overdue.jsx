@@ -8,6 +8,7 @@ import { getServerSession } from 'next-auth'
 import { getSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { authOptions } from '../api/auth/[...nextauth]'
+import { BASEURL } from '@/lib/contant'
 
 function Holds(props) {
   const [overdueItems, setHolds, getHolds] = useCirculationStore((state) => [
@@ -44,6 +45,8 @@ export async function getServerSideProps(ctx) {
   // const session = await getSession(ctx)
   const session = await getServerSession(ctx.req, ctx.res, authOptions)
 
+  console.log('hello')
+
   if (!session) {
     return {
       redirect: {
@@ -53,8 +56,13 @@ export async function getServerSideProps(ctx) {
     }
   }
 
+  console.log(`${BASEURL}/circulation/holds`)
+
   try {
     const res = await fetchApi(`${BASEURL}/circulation/holds`)
+
+    console.log(res)
+
     const { status, holds } = res
     if (status) {
       return {
@@ -66,6 +74,7 @@ export async function getServerSideProps(ctx) {
       throw new Error('Error occurred while fetching')
     }
   } catch (error) {
+    console.log(error)
     return {
       props: {
         errorMessage: error.message,

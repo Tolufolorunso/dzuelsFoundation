@@ -34,6 +34,7 @@ export async function getServerSideProps(ctx) {
 
   try {
     const res = await fetchApi(`${BASEURL}/circulation/holds`)
+
     const { status, holds } = res
     if (status) {
       return {
