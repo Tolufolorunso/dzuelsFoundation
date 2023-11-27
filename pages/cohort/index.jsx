@@ -1,10 +1,13 @@
 import StudentsPage from '@/components/cohort/StudentsPage'
 import Container from '@/components/layout/container'
+import { BASEURL } from '@/lib/contant'
 import useCohortStore from '@/store/cohortStore'
 import fetchApi from '@/utils/fetchApi'
+import { getServerSession } from 'next-auth'
 import { getSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 function CohortClassPage(props) {
   const { patrons, barcodes } = props
@@ -52,7 +55,8 @@ function CohortClassPage(props) {
 }
 
 export async function getServerSideProps(ctx) {
-  const session = await getSession(ctx)
+  // const session = await getSession(ctx)
+  const session = await getServerSession(ctx.req, ctx.res, authOptions)
 
   if (!session) {
     return {
@@ -63,13 +67,8 @@ export async function getServerSideProps(ctx) {
     }
   }
 
-  let endpoint =
-    process.env.NEXT_ENV === 'development'
-      ? process.env.LOCALURL
-      : process.env.BASEURL
-  console.log(70, endpoint)
   try {
-    const res = await fetchApi(`${endpoint}/cohort?cohortType=cohortOne`)
+    const res = await fetchApi(`${BASEURL}/cohort?cohortType=cohortOne`)
     const { status, patrons } = res
 
     const barcodesArray = patrons.map((student) => student.barcode)

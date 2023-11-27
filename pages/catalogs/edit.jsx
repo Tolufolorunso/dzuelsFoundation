@@ -5,6 +5,8 @@ import { getSession } from 'next-auth/react'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import fetchApi from '@/utils/fetchApi'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 function EditItemPage() {
   const { setErrorMessage, setSuccessMessage } = useAppStore((state) => state)
@@ -88,7 +90,8 @@ function EditItemPage() {
 }
 
 export async function getServerSideProps(ctx) {
-  const session = await getSession(ctx)
+  // const session = await getSession(ctx)
+  const session = await getServerSession(ctx.req, ctx.res, authOptions)
 
   if (!session) {
     return {

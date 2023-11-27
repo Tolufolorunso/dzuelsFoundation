@@ -1,12 +1,12 @@
 import EventAttendanceModal from '@/components/home/EventAttendanceModal'
 import Home from '@/components/home/Home'
-import useAppStore from '@/store/applicationStateStore'
 import fetchApi from '@/utils/fetchApi'
 import { getSession } from 'next-auth/react'
-import { useEffect } from 'react'
 import { useRef } from 'react'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
+import { authOptions } from './api/auth/[...nextauth]'
+import { getServerSession } from 'next-auth'
 
 const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -87,7 +87,8 @@ const HomePage = () => {
 }
 
 export async function getServerSideProps(ctx) {
-  const session = await getSession(ctx)
+  // const session = await getSession(ctx)
+  const session = await getServerSession(ctx.req, ctx.res, authOptions)
   if (!session) {
     return {
       redirect: {

@@ -3,9 +3,11 @@ import Container from '@/components/layout/container'
 import useCirculationStore from '@/store/circulationStore'
 import fetchApi from '@/utils/fetchApi'
 import { getOverDue } from '@/utils/getOverdue'
+import { getServerSession } from 'next-auth'
 
 import { getSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 function Holds(props) {
   const [overdueItems, setHolds, getHolds] = useCirculationStore((state) => [
@@ -39,7 +41,8 @@ function Holds(props) {
 export default Holds
 
 export async function getServerSideProps(ctx) {
-  const session = await getSession(ctx)
+  // const session = await getSession(ctx)
+  const session = await getServerSession(ctx.req, ctx.res, authOptions)
 
   if (!session) {
     return {
@@ -48,10 +51,24 @@ export async function getServerSideProps(ctx) {
         permanent: false,
       },
     }
-  } else {
+  }
+
+  try {
+    const res = await fetchApi(`${BASEURL}/circulation/holds`)
+    const { status, holds } = res
+    if (status) {
+      return {
+        props: {
+          holds: holds || [],
+        },
+      }
+    } else {
+      throw new Error('Error occurred while fetching')
+    }
+  } catch (error) {
     return {
       props: {
-        ...session,
+        errorMessage: error.message,
       },
     }
   }

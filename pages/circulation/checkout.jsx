@@ -3,9 +3,11 @@ import HomePageTopHeading from '@/components/circulation/HomePageTopHeading'
 import Container from '@/components/layout/container'
 import useCirculationStore from '@/store/circulationStore'
 import fetchApi from '@/utils/fetchApi'
+import { getServerSession } from 'next-auth'
 import { getSession } from 'next-auth/react'
 import { useEffect } from 'react'
 import toast from 'react-hot-toast'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 function Checkout() {
   const setPatron = useCirculationStore((state) => state.setPatron)
@@ -45,7 +47,8 @@ function Checkout() {
 }
 
 export async function getServerSideProps(ctx) {
-  const session = await getSession(ctx)
+  // const session = await getSession(ctx)
+  const session = await getServerSession(ctx.req, ctx.res, authOptions)
 
   if (!session) {
     return {

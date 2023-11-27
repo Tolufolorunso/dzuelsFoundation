@@ -11,6 +11,8 @@ import MuiAlert from '@mui/material/Alert'
 import { getSession } from 'next-auth/react'
 import fetchApi from '@/utils/fetchApi'
 import toast from 'react-hot-toast'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
@@ -144,7 +146,8 @@ function AddItemPage() {
 }
 
 export async function getServerSideProps(ctx) {
-  const session = await getSession(ctx)
+  // const session = await getSession(ctx)
+  const session = await getServerSession(ctx.req, ctx.res, authOptions)
 
   if (!session) {
     return {

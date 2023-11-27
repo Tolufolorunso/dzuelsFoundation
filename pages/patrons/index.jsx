@@ -13,6 +13,9 @@ import { useState } from 'react'
 import { exportToExcel } from '@/utils/export'
 import ContentSide from '@/components/patron/page/ContentSide'
 import SearchPatron from '@/components/patron/page/SearchPatron'
+import { BASEURL } from '@/lib/contant'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 function PatronsHomePage(props) {
   const setPatrons = usePatronStore((state) => state.setAllPatrons)
@@ -137,7 +140,8 @@ function PatronsHomePage(props) {
 }
 
 export async function getServerSideProps(ctx) {
-  const session = await getSession(ctx)
+  // const session = await getSession(ctx)
+  const session = await getServerSession(ctx.req, ctx.res, authOptions)
 
   if (!session) {
     return {
@@ -161,13 +165,8 @@ export async function getServerSideProps(ctx) {
     { field: 'points', headerName: 'Points', width: 150 },
   ]
 
-  let endpoint =
-    process.env.NEXT_ENV === 'development'
-      ? process.env.LOCALURL
-      : process.env.BASEURL
-
   try {
-    const res = await fetchApi(`${endpoint}/patrons`)
+    const res = await fetchApi(`${BASEURL}/patrons`)
     const { status, patrons } = res
 
     if (status) {

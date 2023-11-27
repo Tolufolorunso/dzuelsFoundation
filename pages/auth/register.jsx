@@ -4,6 +4,8 @@ import RegisterContent from '@/components/auth/RegisterContent'
 import fetchApi from '@/utils/fetchApi'
 import useAppStore from '@/store/applicationStateStore'
 import { useRouter } from 'next/router'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 const RegisterPage = () => {
   const { setErrorMessage, setSuccessMessage, clearMessage } = useAppStore(
@@ -59,6 +61,24 @@ const RegisterPage = () => {
       loading={loading}
     />
   )
+}
+
+export async function getServerSideProps(ctx) {
+  // const session = await getSession(ctx)
+  const session = await getServerSession(ctx.req, ctx.res, authOptions)
+
+  if (session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: { ...session },
+  }
 }
 
 export default RegisterPage

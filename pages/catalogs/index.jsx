@@ -12,8 +12,9 @@ import { filterCataloging } from '@/utils/filterCataloging'
 import { useState } from 'react'
 
 import classes from '@/components/cataloging/home.module.css'
-
-
+import { BASEURL } from '@/lib/contant'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 function CatalogPage(props) {
   const { items } = props
@@ -51,17 +52,24 @@ function CatalogPage(props) {
 
   const transformedArray = items
     ? items.map((item) => {
-      const { barcode, title, author, classification, controlNumber, isCheckedOut } = item
-      return {
-        barcode,
-        title: title.mainTitle,
-        subTitle: title.subtitle,
-        author: author.mainAuthor,
-        classification,
-        controlNumber,
-        isCheckedOut
-      }
-    })
+        const {
+          barcode,
+          title,
+          author,
+          classification,
+          controlNumber,
+          isCheckedOut,
+        } = item
+        return {
+          barcode,
+          title: title.mainTitle,
+          subTitle: title.subtitle,
+          author: author.mainAuthor,
+          classification,
+          controlNumber,
+          isCheckedOut,
+        }
+      })
     : []
 
   const rows = filterCataloging({ searchTerm, data: transformedArray })
@@ -69,11 +77,11 @@ function CatalogPage(props) {
   return (
     <Container>
       <Box
-        display='flex'
+        display="flex"
         flexDirection={{ xs: 'column', sm: 'row' }}
-        width='100%'
+        width="100%"
         gap={3}
-        flexWrap='wrap'
+        flexWrap="wrap"
       >
         <FilterItems
           searchTerm={searchTerm}
@@ -82,10 +90,7 @@ function CatalogPage(props) {
         />
         <Box width={{ xs: '100%', sm: '70%' }}>
           <CatalogFunctionBtns />
-          <BookList
-            rows={rows}
-            onRowDoubleClick={onListClickHandler}
-          />
+          <BookList rows={rows} onRowDoubleClick={onListClickHandler} />
         </Box>
       </Box>
     </Container>
@@ -93,13 +98,19 @@ function CatalogPage(props) {
 }
 
 export async function getServerSideProps(ctx) {
-  let endpoint =
-    process.env.NEXT_ENV === 'development'
-      ? process.env.LOCALURL
-      : process.env.BASEURL
+  const session = await getServerSession(ctx.req, ctx.res, authOptions)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    }
+  }
 
   try {
-    const res = await fetchApi(`${endpoint}/cataloging`)
+    const res = await fetchApi(`${BASEURL}/cataloging`)
     const { status, items } = res
 
     if (status) {

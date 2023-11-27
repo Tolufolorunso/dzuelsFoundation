@@ -4,10 +4,12 @@ import PatronProfileHeader from '@/components/patron/profile/PatronProfileHeader
 import usePatronStore from '@/store/patronStore'
 import fetchApi from '@/utils/fetchApi'
 import { Box, Typography } from '@mui/material'
+import { getServerSession } from 'next-auth'
 import { getSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 function PatronPage() {
   const router = useRouter()
@@ -69,7 +71,8 @@ function PatronPage() {
 }
 
 export async function getServerSideProps(ctx) {
-  const session = await getSession(ctx)
+  // const session = await getSession(ctx)
+  const session = await getServerSession(ctx.req, ctx.res, authOptions)
 
   if (!session) {
     return {

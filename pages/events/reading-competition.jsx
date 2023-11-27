@@ -8,6 +8,9 @@ import TextField from '@mui/material/TextField'
 import { Divider } from '@mui/material'
 
 import classes from '@/components/events/event.module.css'
+import { getSession } from 'next-auth/react'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 function EventPage() {
   const [startDate, setStartDate] = useState('')
@@ -92,3 +95,26 @@ function EventPage() {
 }
 
 export default EventPage
+
+export async function getServerSideProps(ctx) {
+  const session = await getServerSession(ctx.req, ctx.res, authOptions)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/auth/login',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {
+      user: {
+        username: session.user.username,
+        role: session.user.role,
+        name: session.user.name,
+      },
+    },
+  }
+}

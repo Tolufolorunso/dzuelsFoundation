@@ -1,11 +1,14 @@
 import CirculationContent from '@/components/circulation/CirculationContent'
 import HomePageTopHeading from '@/components/circulation/HomePageTopHeading'
 import Container from '@/components/layout/container'
+import { BASEURL } from '@/lib/contant'
 import useCirculationStore from '@/store/circulationStore'
 import fetchApi from '@/utils/fetchApi'
+import { getServerSession } from 'next-auth'
 import { getSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 function CirculationPage(props) {
   const { holds } = props
@@ -30,7 +33,8 @@ function CirculationPage(props) {
 }
 
 export async function getServerSideProps(ctx) {
-  const session = await getSession(ctx)
+  // const session = await getSession(ctx)
+  const session = await getServerSession(ctx.req, ctx.res, authOptions)
 
   if (!session) {
     return {
@@ -41,13 +45,8 @@ export async function getServerSideProps(ctx) {
     }
   }
 
-  let endpoint =
-    process.env.NEXT_ENV === 'development'
-      ? process.env.LOCALURL
-      : process.env.BASEURL
-
   try {
-    const res = await fetchApi(`${endpoint}/circulation/holds`)
+    const res = await fetchApi(`${BASEURL}/circulation/holds`)
     const { status, holds } = res
 
     if (status) {

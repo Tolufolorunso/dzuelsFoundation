@@ -1,7 +1,9 @@
 import Container from '@/components/layout/container'
 import EditForm from '@/components/patron/Edit/EditForm'
+import { authOptions } from '@/pages/api/auth/[...nextauth]'
 import usePatronStore from '@/store/patronStore'
 import fetchApi from '@/utils/fetchApi'
+import { getServerSession } from 'next-auth'
 import { getSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -96,7 +98,8 @@ function EditPatronPage() {
 }
 
 export async function getServerSideProps(ctx) {
-  const session = await getSession(ctx)
+  // const session = await getSession(ctx)
+  const session = await getServerSession(ctx.req, ctx.res, authOptions)
 
   if (!session) {
     return {

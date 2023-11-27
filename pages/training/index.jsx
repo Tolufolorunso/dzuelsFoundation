@@ -1,8 +1,11 @@
 import Container from '@/components/layout/container'
 import TraineePage from '@/components/trainees/traineePage'
+import { BASEURL } from '@/lib/contant'
 import useCohortStore from '@/store/cohortStore'
 import fetchApi from '@/utils/fetchApi'
+import { getServerSession } from 'next-auth'
 import { getSession } from 'next-auth/react'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 function CohortClassPage(props) {
   const { trainees, barcodes } = props
@@ -19,7 +22,8 @@ function CohortClassPage(props) {
 }
 
 export async function getServerSideProps(ctx) {
-  const session = await getSession(ctx)
+  // const session = await getSession(ctx)
+  const session = await getServerSession(ctx.req, ctx.res, authOptions)
 
   if (!session) {
     return {
@@ -30,13 +34,8 @@ export async function getServerSideProps(ctx) {
     }
   }
 
-  let endpoint =
-    process.env.NEXT_ENV === 'development'
-      ? process.env.LOCALURL
-      : process.env.BASEURL
-
   try {
-    const res = await fetchApi(`${endpoint}/trainees`)
+    const res = await fetchApi(`${BASEURL}/trainees`)
     const { status, patrons } = res
 
     const barcodesArray = patrons.map((student) => student.barcode)

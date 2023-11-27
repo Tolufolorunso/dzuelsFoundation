@@ -2,9 +2,11 @@ import Container from '@/components/layout/container'
 import AddPatron from '@/components/patron/add/AddPatron'
 import usePatronStore from '@/store/patronStore'
 import fetchApi from '@/utils/fetchApi'
+import { getServerSession } from 'next-auth'
 import { getSession } from 'next-auth/react'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 function CreatePatronPage() {
   const [patronType, setIsLoading] = usePatronStore((state) => [
@@ -140,7 +142,8 @@ function CreatePatronPage() {
 }
 
 export async function getServerSideProps(ctx) {
-  const session = await getSession(ctx)
+  // const session = await getSession(ctx)
+  const session = await getServerSession(ctx.req, ctx.res, authOptions)
 
   if (!session) {
     return {

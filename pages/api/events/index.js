@@ -54,12 +54,10 @@ export default async function handler(req, res) {
       const { startDate, endDate } = req.query
       const patrons = await Patron.find(
         {
-          'itemsCheckedOutHistory.checkoutDate': {
-            $gte: new Date(startDate),
-            $lte: new Date(endDate),
-          },
+          'itemsCheckedOutHistory.event': true,
+          'itemsCheckedOutHistory.eventTitle': 'reading competition',
         },
-        'firstname surname middlename barcode itemsCheckedOutHistory'
+        'firstname surname middlename barcode itemsCheckedOutHistory points'
       )
 
       return res.status(200).json({

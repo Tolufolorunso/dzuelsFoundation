@@ -5,6 +5,7 @@ import fetchApi from '@/utils/fetchApi'
 import { getSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 function ItemPage() {
   const router = useRouter()
@@ -40,7 +41,8 @@ function ItemPage() {
 }
 
 export async function getServerSideProps(ctx) {
-  const session = await getSession(ctx)
+  // const session = await getSession(ctx)
+  const session = await getServerSession(ctx.req, ctx.res, authOptions)
 
   if (!session) {
     return {
