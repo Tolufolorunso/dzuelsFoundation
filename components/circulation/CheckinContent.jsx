@@ -13,12 +13,19 @@ function CheckinContent(props) {
   const isPatronRead = useRef(null)
 
   function clickHandler() {
-    checkinHandler({
+    const res = checkinHandler({
       patronBarcode: patronBarcodeRef.current.value,
       itemBarcode: itemBarcodeRef.current.value,
       isPatronRead: isPatronRead.current.value,
     })
-    isPatronRead.current.value = 'yes'
+
+    if (res) {
+      patronBarcodeRef.current.value = ''
+      itemBarcodeRef.current.value = ''
+      isPatronRead.current.value = 'yes'
+    } else {
+      isPatronRead.current.value = 'yes'
+    }
   }
 
   return (

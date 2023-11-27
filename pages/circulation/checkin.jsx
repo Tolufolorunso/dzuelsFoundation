@@ -18,9 +18,11 @@ function Checkin() {
       const { status, successMessage, checkedInData } = res
       if (status) {
         setSuccessMessage(successMessage)
+        return true
       }
     } catch (error) {
       setErrorMessage(error.message)
+      return false
     } finally {
       setLoading(false)
     }
