@@ -125,7 +125,7 @@ function CheckoutContent(props) {
         </Box>
         <Divider />
         {patronData ? (
-          <Stack container spacing={4} direction={{ sm: 'column', md: 'row' }}>
+          <Stack spacing={4} direction={{ sm: 'column', md: 'row' }}>
             <Box sx={{ width: '30%' }}>
               <CirculationUserInfo patronData={patronData} />
             </Box>

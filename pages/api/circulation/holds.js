@@ -1,8 +1,17 @@
 import dbConnect from '@/lib/dbConnect'
 import Cataloging from '@/models/CatalogingModel'
 import Patron from '@/models/PatronModel'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../auth/[...nextauth]'
 
 export default async function handler(req, res) {
+  const session = await getServerSession(req, res, authOptions)
+  if (!session) {
+    return res.status(401).json({
+      status: false,
+      errorMessage: 'You are not allowed to access this routes',
+    })
+  }
   if (req.method === 'GET') {
     try {
       await dbConnect()
@@ -50,7 +59,6 @@ export default async function handler(req, res) {
           }))
         })
         .flat()
-
 
       return res
         .status(200)

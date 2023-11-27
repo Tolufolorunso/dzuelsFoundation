@@ -2,13 +2,21 @@
 import dbConnect from '@/lib/dbConnect'
 import Patron from '@/models/PatronModel'
 import Cataloging from '@/models/CatalogingModel'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../auth/[...nextauth]'
 
 export default async function handler(req, res) {
+  const session = await getServerSession(req, res, authOptions)
+  if (!session) {
+    return res.status(401).json({
+      status: false,
+      errorMessage: 'You are not allowed to access this routes',
+    })
+  }
+
   if (req.method === 'POST') {
     await dbConnect()
     const { itemBarcode, patronBarcode, isPatronRead } = req.body
-
-    console.log(isPatronRead)
 
     try {
       const patron = await Patron.findOne({ barcode: patronBarcode })
@@ -67,7 +75,6 @@ export default async function handler(req, res) {
         })
 
       if (isPatronRead.toLowerCase() === 'no') {
-        console.log('remove the book from the history item')
         // Remove the book from the patron's itemsCheckedOutHistory
         patron.itemsCheckedOutHistory = patron.itemsCheckedOutHistory.filter(
           (item) => item.itemId.toString() !== cataloging._id.toString()

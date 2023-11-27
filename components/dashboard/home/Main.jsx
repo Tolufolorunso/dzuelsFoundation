@@ -37,12 +37,10 @@ function BaseComponent() {
 
   async function submitLibraryInfo(info) {
     setLoading(true)
-    console.log(libraryInfo)
     try {
       // Send library info to the API endpoint
       const res = await fetchApi('/admin/library', 'POST', libraryInfo)
       const { status, message, library } = res // Handle the response as needed
-      console.log(status, message, library)
       if (status) {
         toast.success(message)
         closeModal()
@@ -59,12 +57,10 @@ function BaseComponent() {
 
   async function submitStartCompetition(info) {
     setLoading(true)
-    console.log(libraryInfo)
     try {
       // Send library info to the API endpoint
       const res = await fetchApi(`/admin/library`, 'POST', libraryInfo)
       const { status, message, library } = res // Handle the response as needed
-      console.log(status, message, library)
       if (status) {
         toast.success(message)
         closeModal()
