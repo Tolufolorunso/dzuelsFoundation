@@ -18,6 +18,7 @@ function CheckinContent(props) {
       itemBarcode: itemBarcodeRef.current.value,
       isPatronRead: isPatronRead.current.value,
     })
+    isPatronRead.current.value = 'yes'
   }
 
   return (
