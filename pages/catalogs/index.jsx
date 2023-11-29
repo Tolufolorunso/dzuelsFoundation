@@ -12,9 +12,6 @@ import { filterCataloging } from '@/utils/filterCataloging'
 import { useState } from 'react'
 
 import classes from '@/components/cataloging/home.module.css'
-// import { BASEURL } from '@/lib/contant'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '../api/auth/[...nextauth]'
 
 function CatalogPage(props) {
   const { items } = props
@@ -98,24 +95,13 @@ function CatalogPage(props) {
 }
 
 export async function getServerSideProps(ctx) {
-  const session = await getServerSession(ctx.req, ctx.res, authOptions)
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/auth/login',
-        permanent: false,
-      },
-    }
-  }
-
-  const BASE_URL =
+  let endpoint =
     process.env.NEXT_ENV === 'development'
-      ? process.env.BASE_URL_LOCAL
-      : process.env.BASE_URL
+      ? process.env.LOCALURL
+      : process.env.BASEURL
 
   try {
-    const res = await fetchApi(`${BASE_URL}/cataloging`)
+    const res = await fetchApi(`${endpoint}/cataloging`)
     const { status, items } = res
 
     if (status) {
@@ -129,7 +115,7 @@ export async function getServerSideProps(ctx) {
     return {
       props: {
         errorMessage: error.message,
-        columns,
+        // columns,
       },
     }
   }

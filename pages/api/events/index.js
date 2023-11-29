@@ -52,20 +52,44 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     await dbConnect()
     try {
-      const { title } = req.query
-      // const patrons = await Patron.find(
-      //   {
-      //     'itemsCheckedOutHistory.event': true,
-      //     'itemsCheckedOutHistory.eventTitle': title,
-      //   },
-      //   'firstname surname middlename barcode itemsCheckedOutHistory points'
-      // )
-      // console.log(patrons)
+      let { eventTitle } = req.query
+      eventTitle = eventTitle.replace(/_/g, ' ')
+
+      const patrons = await Patron.find(
+        {},
+        'firstname middlename surname points barcode itemsCheckedOutHistory'
+      )
+
+      // Filter patrons based on itemsCheckedOutHistory meeting the criteria
+      const filteredPatrons = patrons.reduce((filtered, patron) => {
+        const filteredItems = patron.itemsCheckedOutHistory.filter(
+          (item) => item.event === true && item.eventTitle === eventTitle
+        )
+
+        if (filteredItems.length > 0) {
+          const fullname = `${patron.surname}, ${patron.firstname} ${patron.middlename}`
+          filtered.push({
+            fullname: fullname.toUpperCase(),
+            points: patron.points,
+            barcode: patron.barcode,
+            itemsCheckedOutHistory: filteredItems,
+            numberOfItems: filteredItems.length,
+          })
+        }
+
+        return filtered
+      }, [])
+
+      if (filteredPatrons.length === 0) {
+        return res
+          .status(400)
+          .json({ status: false, errorMessage: 'No Competition Found' })
+      }
 
       return res.status(200).json({
         status: true,
         message: 'Fetched successfully',
-        // patrons,
+        patrons: filteredPatrons,
       })
     } catch (error) {
       return res

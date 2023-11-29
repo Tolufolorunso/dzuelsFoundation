@@ -57,7 +57,7 @@ function CheckinContent(props) {
                 className={classes.input}
                 autoComplete="off"
               />
-              <label htmlFor="read">Is Patron read the book?</label>
+              <label htmlFor="read">Has the patron read the book?</label>
               <select
                 name="IsPatronRead"
                 id="read"

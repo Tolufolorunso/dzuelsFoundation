@@ -16,7 +16,7 @@ const links = [
   { href: '/circulation', label: 'Circulation' },
   { href: '/inventory', label: 'Inventory' },
   { href: '/cohort', label: 'Cohort Class' },
-  { href: '/events/reading-competition', label: 'Reading Competition' },
+  { href: '/events/competition', label: 'Competition' },
 ]
 
 function Header() {

@@ -10,6 +10,10 @@ const EventSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  eventExpiredDate: {
+    type: Date,
+    required: true,
+  },
   eventDetails: {
     description: String,
     location: String,
