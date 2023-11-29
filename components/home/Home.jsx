@@ -8,6 +8,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications'
 import EventIcon from '@mui/icons-material/Event'
 
 import classes from './Home.module.css'
+import GridLists from '../grid/dataGrid'
 
 function Home(props) {
   const { onClick, event, date, setDate, point, setPoint } = props
@@ -106,6 +107,21 @@ function Home(props) {
                   </Button>
                 </Link>
               </Grid>
+            </Grid>
+          </Box>
+          <Box
+            sx={{
+              backgroundColor: '#ffffff',
+              borderRadius: 4,
+              padding: 4,
+              marginTop: 5,
+            }}
+          >
+            <Typography variant="h4" gutterBottom>
+              Birthdays of the week
+            </Typography>
+            <Grid container spacing={2} sx={{ mt: 4 }}>
+              {/* <GridLists /> */}
             </Grid>
           </Box>
 
