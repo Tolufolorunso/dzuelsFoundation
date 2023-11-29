@@ -38,8 +38,6 @@ function PatronProfilePage({ patronData }) {
   const month = currentDate.toLocaleString('default', { month: 'long' })
   const lastBook = itemsCheckedOutHistory[itemsCheckedOutHistory.length - 1]
 
-  console.log(lastBook.itemTitle)
-
   const [isLoading, setIsLoading] = useState(false)
   const [isDeleteConfirmation, setIsDeleteConfirmation] = useState(false)
 
@@ -136,13 +134,13 @@ function PatronProfilePage({ patronData }) {
       <div className={classes.summaryCards}>
         <SummaryCard
           title={'Last Item Borrowed: Main Title'}
-          value={`${lastBook.itemTitle}`}
+          value={`${lastBook?.itemTitle}`}
         />
         <SummaryCard
           title={'Last Item Borrowed: Sub-Title'}
-          value={`${lastBook.itemSubTitle}`}
+          value={`${lastBook?.itemSubTitle}`}
         />
-        <SummaryCard title={'Item Barcode'} value={lastBook.itemBarcode} />
+        <SummaryCard title={'Item Barcode'} value={lastBook?.itemBarcode} />
       </div>
       {studentSchoolInfo && (
         <div className={classes.summaryCards}>
