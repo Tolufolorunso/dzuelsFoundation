@@ -105,7 +105,7 @@ function EventPage() {
         Competition Page
       </Typography>
       <div>
-        <GridLists columns={columns} rows={patrons} onRowClick={handleClick} />
+        {/* <GridLists columns={columns} rows={patrons} onRowClick={handleClick} /> */}
       </div>
     </Container>
   )
