@@ -2,6 +2,7 @@ import useCirculationStore from '@/store/circulationStore'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
+import CircularProgress from '@mui/material/CircularProgress'
 
 import classes from './Circulation.module.css'
 import { useEffect, useRef, useState } from 'react'
@@ -9,6 +10,7 @@ import CheckedOutMessage from './CheckedOutMessage'
 import toast from 'react-hot-toast'
 
 function CirculationCheckoutSection() {
+  const [loading, setLoading] = useState(false)
   const patronData = useCirculationStore(
     (state) => state.circulation.patronData
   )
@@ -122,7 +124,14 @@ function CirculationCheckoutSection() {
                 className={classes.searchPatronBtn}
                 onClick={checkoutHandler}
               >
-                Checkout
+                {isLoading ? (
+                  <>
+                    <CircularProgress size={10} color="inherit" />
+                    <span style={{ marginLeft: '5px' }}>Checking Out...</span>
+                  </>
+                ) : (
+                  'Checkout'
+                )}
               </Button>
             </Stack>
           </form>

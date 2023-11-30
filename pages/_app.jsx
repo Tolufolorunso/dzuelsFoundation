@@ -33,6 +33,32 @@ function MyApp(props) {
     }
   }
 
+  // Check if it's the Christmas period (from Dec 1st to Dec 25th)
+  const currentDate = new Date()
+  const isChristmasPeriod =
+    currentDate.getMonth() === 11 &&
+    currentDate.getDate() >= 1 &&
+    currentDate.getDate() <= 25
+
+  function renderChristmasMessage() {
+    if (true) {
+      return (
+        <div
+          style={{
+            background: 'red',
+            color: 'white',
+            textAlign: 'center',
+            padding: '10px',
+            marginTop: '-10px',
+          }}
+        >
+          It's Christmas time! 🎅🎄 Spread joy and happiness!
+        </div>
+      )
+    }
+    return null
+  }
+
   return (
     <SessionProvider session={pageProps.session}>
       <CacheProvider value={emotionCache}>
@@ -47,6 +73,7 @@ function MyApp(props) {
           <CssBaseline />
           {renderHeader()}
           <div style={{ marginTop: '80px' }}>
+            {renderChristmasMessage()}
             <Toast />
             <Toaster />
             <NextNProgress color="#6A0406" height={3} />
