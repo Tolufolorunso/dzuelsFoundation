@@ -10,7 +10,7 @@ import CheckedOutMessage from './CheckedOutMessage'
 import toast from 'react-hot-toast'
 
 function CirculationCheckoutSection() {
-  const [loading, setLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const patronData = useCirculationStore(
     (state) => state.circulation.patronData
   )
@@ -69,6 +69,7 @@ function CirculationCheckoutSection() {
 
   async function handleCheckout(itemBarcode) {
     const patronBarcode = patronData ? patronData.barcode : null
+    setIsLoading(true)
     try {
       const res = await checkout({ itemBarcode, patronBarcode })
       const { status, message, checkedOut } = res
@@ -79,6 +80,8 @@ function CirculationCheckoutSection() {
       }
     } catch (error) {
       toast.error(error.message)
+    } finally {
+      setIsLoading(false)
     }
   }
 

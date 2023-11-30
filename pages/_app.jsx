@@ -50,6 +50,8 @@ function MyApp(props) {
             textAlign: 'center',
             padding: '10px',
             marginTop: '-10px',
+            position: 'fixed',
+            width: '100%',
           }}
         >
           It is Christmas time! 🎅🎄 Spread joy and happiness!
