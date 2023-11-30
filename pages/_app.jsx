@@ -52,7 +52,7 @@ function MyApp(props) {
             marginTop: '-10px',
           }}
         >
-          It's Christmas time! 🎅🎄 Spread joy and happiness!
+          It is Christmas time! 🎅🎄 Spread joy and happiness!
         </div>
       )
     }
