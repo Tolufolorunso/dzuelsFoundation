@@ -17,6 +17,14 @@ import { authOptions } from '../api/auth/[...nextauth]'
 import toast from 'react-hot-toast'
 import GridLists from '@/components/grid/dataGrid'
 const columns = [
+  {
+    field: 'rowNumber',
+    headerName: '#',
+    width: 70,
+    renderCell: (params) => {
+      return <div>{params.row.id + 1}</div>
+    },
+  },
   { field: 'barcode', headerName: 'Barcode', width: 150 },
   { field: 'fullname', headerName: 'Full Name', width: 550 },
   { field: 'points', headerName: 'Points', width: 150 },
@@ -105,7 +113,14 @@ function EventPage() {
         Competition Page
       </Typography>
       <div>
-        {/* <GridLists columns={columns} rows={patrons} onRowClick={handleClick} /> */}
+        <GridLists
+          columns={columns}
+          // rows={patrons}
+          rows={[]}
+          onRowClick={handleClick}
+          sortField="numberOfItems"
+          sort="desc"
+        />
       </div>
     </Container>
   )

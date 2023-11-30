@@ -1,23 +1,21 @@
 import { DataGrid } from '@mui/x-data-grid'
 
 function GridLists(props) {
-  const { columns, rows, onRowClick } = props
-
-  console.log(rows)
-
-  // if (rows.length === 0) {
-  //   return <p>No data available.</p> // Your custom message when rows are empty
-  // }
+  const { columns, rows, onRowClick, sortField = null, sort = 'asc' } = props
 
   return (
     <div style={{ height: '500px', width: '100%' }}>
       <DataGrid
         sx={{ fontSize: '1.2rem' }}
-        rows={rows}
+        // rows={rows}
+        rows={rows.map((row, index) => ({ ...row, id: index }))}
         columns={columns}
         initialState={{
           pagination: {
             paginationModel: { page: 0, pageSize: 50 },
+          },
+          sorting: {
+            sortModel: [{ field: sortField, sort }],
           },
         }}
         pageSizeOptions={[30, 40, 50, 60, 80, 100]}
