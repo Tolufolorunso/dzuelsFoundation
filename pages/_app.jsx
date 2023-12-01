@@ -85,7 +85,7 @@ function MyApp(props) {
       const mouseX = e.clientX
       const mouseY = e.clientY
       const star = document.createElement('span')
-      star.className = 'star fa-star fa-solid'
+      star.className = 'star fa-solid fa-gift'
       star.style.left = `${mouseX}px`
       star.style.top = `${mouseY}px`
       star.style.color = selectRandom(colors)
