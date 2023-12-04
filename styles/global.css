@@ -36,14 +36,16 @@
 
 html {
   font-size: 62.5% !important;
+  /* min-height: 100vh; */
 }
 
 body {
   font-family: 'Poppins', sans-serif !important;
   font-size: 1.6rem !important;
   background-color: var(--bg) !important;
-  height: 100vh;
-  overflow: hidden;
+  /* min-height: 100vh; */
+  /* overflow: hidden; */
+  overflow-x: hidden;
 }
 
 .container {
@@ -93,14 +95,14 @@ body {
 
 .star {
   position: absolute;
-  font-size: 3.5rem;
+  /* font-size: 3.5rem; */
+  width: 200px;
   color: white;
-
   animation: fall 1500ms forwards;
 }
 
 .star::after {
-  content: 'HAPPY NEW MONTH';
+  /* content: 'Merry Xmas'; */
   letter-spacing: 3px;
   display: inline-block;
   font-size: 1rem;

@@ -74,7 +74,12 @@ export default async function handler(req, res) {
           // return historyItem.checkedOutBy !== patronBarcode
         })
 
-      if (isPatronRead.toLowerCase() === 'no') {
+      // I will do it later, on monday
+      if (
+        isPatronRead.toLowerCase() === 'no' &&
+        patronBarcode !== '20230054' &&
+        patronBarcode !== '20230055'
+      ) {
         // Remove the book from the patron's itemsCheckedOutHistory
         patron.itemsCheckedOutHistory = patron.itemsCheckedOutHistory.filter(
           (item) => item.itemId.toString() !== cataloging._id.toString()

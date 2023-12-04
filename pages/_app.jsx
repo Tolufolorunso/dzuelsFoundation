@@ -84,8 +84,13 @@ function MyApp(props) {
     window.onmousemove = (e) => {
       const mouseX = e.clientX
       const mouseY = e.clientY
-      const star = document.createElement('span')
-      star.className = 'star fa-solid fa-gift'
+      // star.className = 'star fa-solid fa-gift'
+      // const star = document.createElement('span')
+      const star = document.createElement('img')
+      star.className = 'star'
+      star.src = '/santa.svg'
+      // star.style.width = '100%'
+      star.style.objectFit = 'cover'
       star.style.left = `${mouseX}px`
       star.style.top = `${mouseY}px`
       star.style.color = selectRandom(colors)
