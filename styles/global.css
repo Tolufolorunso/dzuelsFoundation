@@ -36,16 +36,16 @@
 
 html {
   font-size: 62.5% !important;
-  /* min-height: 100vh; */
+  min-height: auto;
 }
 
 body {
   font-family: 'Poppins', sans-serif !important;
   font-size: 1.6rem !important;
   background-color: var(--bg) !important;
-  /* min-height: 100vh; */
+  min-height: auto;
   /* overflow: hidden; */
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 .container {

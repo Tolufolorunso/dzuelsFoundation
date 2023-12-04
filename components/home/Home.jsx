@@ -11,7 +11,17 @@ import classes from './Home.module.css'
 import GridLists from '../grid/dataGrid'
 
 function Home(props) {
-  const { onClick, event, date, setDate, point, setPoint } = props
+  const {
+    onClick,
+    event,
+    date,
+    setDate,
+    point,
+    setPoint,
+    birthdayData,
+    handleBirthDayRowClick,
+    birthDayColumns,
+  } = props
 
   return (
     <Box className={classes.container}>
@@ -121,7 +131,11 @@ function Home(props) {
               Birthdays of the week
             </Typography>
             <Grid container spacing={2} sx={{ mt: 4 }}>
-              {/* <GridLists /> */}
+              <GridLists
+                columns={birthDayColumns}
+                rows={birthdayData}
+                onRowClick={handleBirthDayRowClick}
+              />
             </Grid>
           </Box>
 

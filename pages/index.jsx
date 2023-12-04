@@ -81,6 +81,9 @@ const HomePage = () => {
         setDate={setDate}
         point={points}
         setPoint={setPoints}
+        birthDayColumns={[]}
+        birthdayData={[]}
+        handleBirthDayRowClick={() => console.log('hello')}
       />
     </>
   )
@@ -89,6 +92,7 @@ const HomePage = () => {
 export async function getServerSideProps(ctx) {
   // const session = await getSession(ctx)
   const session = await getServerSession(ctx.req, ctx.res, authOptions)
+
   if (!session) {
     return {
       redirect: {
@@ -98,14 +102,51 @@ export async function getServerSideProps(ctx) {
     }
   }
 
-  return {
-    props: {
-      user: {
-        username: session.user.username,
-        role: session.user.role,
-        name: session.user.name,
-      },
+  const columns = [
+    { field: 'barcode', headerName: 'Barcode', width: 100 },
+    { field: 'firstname', headerName: 'Firstname', width: 150 },
+    { field: 'surname', headerName: 'Surname', width: 150 },
+    { field: 'phoneNumber', headerName: 'Phone-No', width: 150 },
+    {
+      field: 'patronType',
+      headerName: 'Patron Type',
+      width: 150,
     },
+    { field: 'points', headerName: 'Points', width: 150 },
+  ]
+
+  const BASE_URL =
+    process.env.NEXT_ENV === 'development'
+      ? process.env.BASE_URL_LOCAL
+      : process.env.BASE_URL
+
+  try {
+    const res = await fetchApi(`${BASE_URL}/events/birth`)
+    console.log(res)
+    const { status, patrons } = res
+
+    if (status) {
+      return {
+        props: {
+          user: {
+            username: session.user.username,
+            role: session.user.role,
+            name: session.user.name,
+          },
+          patrons,
+          columns,
+        },
+      }
+    } else {
+      throw new Error('Error occurred while fetching')
+    }
+  } catch (error) {
+    return {
+      props: {
+        errorMessage: error.message,
+        columns,
+      },
+    }
   }
 }
 

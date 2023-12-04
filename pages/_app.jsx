@@ -83,7 +83,7 @@ function MyApp(props) {
 
     window.onmousemove = (e) => {
       const mouseX = e.clientX
-      const mouseY = e.clientY
+      const mouseY = e.clientY + window.scrollY
       // star.className = 'star fa-solid fa-gift'
       // const star = document.createElement('span')
       const star = document.createElement('img')
