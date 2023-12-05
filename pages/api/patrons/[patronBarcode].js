@@ -12,12 +12,13 @@ export default async function handler(req, res) {
     // }
 
     const currentDate = new Date()
-    const month = currentDate.getMonth() // Month is zero-based (0 = January, 1 = February, ...)
+    const month = currentDate.getMonth()
     const year = currentDate.getFullYear()
 
     try {
       await dbConnect()
       const { patronBarcode } = req.query
+
       let patron = await Patron.findOne({ barcode: patronBarcode })
 
       if (!patron) {

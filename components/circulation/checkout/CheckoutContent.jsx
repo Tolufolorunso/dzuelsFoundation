@@ -1,27 +1,27 @@
-import useCirculationStore from '@/store/circulationStore'
+import { useEffect, useRef } from 'react'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
-import CircularProgress from '@mui/material/CircularProgress'
+import { Divider } from '@mui/material'
+import classes from '../Circulation.module.css'
 
-import classes from './Circulation.module.css'
-import { useEffect, useRef, useState } from 'react'
-import CheckedOutMessage from './CheckedOutMessage'
-import toast from 'react-hot-toast'
+import useCirculationStore from '@/store/circulationStore'
+import CirculationUserInfo from '../home/CirculationUserInfo'
+import CirculationCheckoutSection from './CirculationCheckoutSection'
+// import useScanner from '@/hooks/useScanner'
 
-function CirculationCheckoutSection() {
-  const [isLoading, setIsLoading] = useState(false)
+function CheckoutContent(props) {
   const patronData = useCirculationStore(
     (state) => state.circulation.patronData
   )
-  const checkout = useCirculationStore((state) => state.checkout)
-
-  const [checkedOutSuccess, setCheckedOutSuccess] = useState(null)
-
+  const clearPatronData = useCirculationStore((state) => state.clearPatronData)
+  const { getPatron } = props
   const formRef = useRef(null)
   const inputRef = useRef(null)
 
   let barcodeScan = ''
+
+  // const { barcode, inputRef: customInputRef } = useScanner(handleScan)
 
   useEffect(() => {
     inputRef.current.focus()
@@ -58,43 +58,27 @@ function CirculationCheckoutSection() {
     }
   })
 
-  function checkoutHandler() {
+  function submitBtnClickHandler() {
     const inputValue = formRef.current.barcode.value
-    handleCheckout(inputValue)
+    getPatron(inputValue, 'patron')
+  }
+
+  function clearPatronDataHandler() {
+    clearPatronData()
+    inputRef.current.focus()
+    inputRef.current.value = 20230 + ''
   }
 
   const handleScan = (barcodeString) => {
-    handleCheckout(barcodeString)
-  }
-
-  async function handleCheckout(itemBarcode) {
-    const patronBarcode = patronData ? patronData.barcode : null
-    setIsLoading(true)
-    try {
-      const res = await checkout({ itemBarcode, patronBarcode })
-      const { status, message, checkedOut } = res
-
-      setCheckedOutSuccess(checkedOut)
-      if (status) {
-        toast.success(message)
-      }
-    } catch (error) {
-      toast.error(error.message)
-    } finally {
-      setIsLoading(false)
+    //set barcode display to data
+    if (!patronData) {
+      getPatron(barcodeString, 'patron')
     }
   }
 
-  const patronBarcode = patronData ? patronData.barcode : null
-  const patronName = patronData
-    ? `${patronData.firstname} ${patronData.firstname}`
-    : null
   return (
-    <>
-      <Box sx={{ p: 2, border: '1px dashed grey' }}>
-        <p className={classes.checkingHeader}>
-          Checking out to <span>{patronName}</span> ({patronBarcode})
-        </p>
+    <Box sx={{ width: '100%' }}>
+      <Stack spacing={2}>
         <Box sx={{ width: '100%' }}>
           <form ref={formRef}>
             <Stack
@@ -109,8 +93,8 @@ function CirculationCheckoutSection() {
                   flexDirection: 'column',
                 }}
               >
-                <label htmlFor="barcode" className={classes.enterBarcode}>
-                  Enter Item barcode or keyword
+                <label htmlFor="barcode" style={{ fontWeight: 'bold' }}>
+                  Scan Patron Barcode
                 </label>
                 <input
                   type="text"
@@ -125,24 +109,34 @@ function CirculationCheckoutSection() {
               <Button
                 variant="outlined"
                 className={classes.searchPatronBtn}
-                onClick={checkoutHandler}
+                onClick={submitBtnClickHandler}
               >
-                {isLoading ? (
-                  <>
-                    <CircularProgress size={10} color="inherit" />
-                    <span style={{ marginLeft: '5px' }}>Checking Out...</span>
-                  </>
-                ) : (
-                  'Checkout'
-                )}
+                Submit
+              </Button>
+              <Button
+                variant="outlined"
+                className={classes.searchPatronBtn}
+                onClick={clearPatronDataHandler}
+              >
+                Clear Patron Data
               </Button>
             </Stack>
           </form>
         </Box>
-      </Box>
-      {checkedOutSuccess ? <CheckedOutMessage {...checkedOutSuccess} /> : null}
-    </>
+        <Divider />
+        {patronData ? (
+          <Stack spacing={4} direction={{ sm: 'column', md: 'row' }}>
+            <Box sx={{ width: '30%' }}>
+              <CirculationUserInfo patronData={patronData} />
+            </Box>
+            <Box sx={{ width: '70%' }}>
+              <CirculationCheckoutSection />
+            </Box>
+          </Stack>
+        ) : null}
+      </Stack>
+    </Box>
   )
 }
 
-export default CirculationCheckoutSection
+export default CheckoutContent

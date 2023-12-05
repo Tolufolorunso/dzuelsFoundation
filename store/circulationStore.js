@@ -9,6 +9,7 @@ const useCirculationStore = create((set) => ({
     patronData: null,
     holds: [],
     overdue: [],
+    isPatronDialogOpen: false,
   },
   setPatron: (patron) => {
     set((state) => ({
@@ -18,7 +19,15 @@ const useCirculationStore = create((set) => ({
       },
     }))
   },
-  clearPatronData: (patron) => {
+  openPatronDialog: async (isOpen) => {
+    set((state) => ({
+      circulation: {
+        ...state.circulation,
+        isPatronDialogOpen: isOpen,
+      },
+    }))
+  },
+  clearPatronData: () => {
     set((state) => ({
       circulation: {
         ...state.circulation,

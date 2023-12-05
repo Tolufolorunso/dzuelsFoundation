@@ -122,7 +122,6 @@ export async function getServerSideProps(ctx) {
 
   try {
     const res = await fetchApi(`${BASE_URL}/events/birth`)
-    console.log(res)
     const { status, patrons } = res
 
     if (status) {

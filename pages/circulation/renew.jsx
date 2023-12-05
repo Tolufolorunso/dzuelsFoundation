@@ -1,9 +1,8 @@
-import RenewItem from '@/components/circulation/Renew'
+import RenewItem from '@/components/circulation/renew/Renew'
 import Container from '@/components/layout/container'
 import useAppStore from '@/store/applicationStateStore'
 import fetchApi from '@/utils/fetchApi'
 import { getServerSession } from 'next-auth'
-import { getSession } from 'next-auth/react'
 import { authOptions } from '../api/auth/[...nextauth]'
 
 function RenewPage() {
@@ -38,7 +37,6 @@ function RenewPage() {
 }
 
 export async function getServerSideProps(ctx) {
-  // const session = await getSession(ctx)
   const session = await getServerSession(ctx.req, ctx.res, authOptions)
 
   if (!session) {

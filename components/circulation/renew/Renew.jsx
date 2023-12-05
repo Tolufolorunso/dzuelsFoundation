@@ -1,4 +1,4 @@
-import classes from './Circulation.module.css'
+import classes from '../Circulation.module.css'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Button from '@mui/material/Button'
@@ -28,35 +28,35 @@ function RenewItem(props) {
           style={{ width: '60%' }}
         >
           <input
-            type='text'
-            id='barcode'
-            name='barcode'
-            placeholder='Enter Patron Barcode'
+            type="text"
+            id="barcode"
+            name="barcode"
+            placeholder="Enter Patron Barcode"
             ref={patronBarcodeRef}
             className={classes.input}
-            autoComplete='off'
+            autoComplete="off"
             required
           />
           <input
-            type='text'
-            id='barcode'
-            name='barcode'
-            placeholder='Enter Item Barcode'
+            type="text"
+            id="barcode"
+            name="barcode"
+            placeholder="Enter Item Barcode"
             ref={itemBarcodeRef}
             className={classes.input}
-            autoComplete='off'
+            autoComplete="off"
             required={true}
           />
           <input
-            type='number'
-            name='barcode'
-            placeholder='Enter Numbers of Days'
+            type="number"
+            name="barcode"
+            placeholder="Enter Numbers of Days"
             ref={dueDayRef}
             className={classes.input}
-            autoComplete='off'
+            autoComplete="off"
           />
         </Stack>
-        <Button variant='outlined' onClick={handleClick}>
+        <Button variant="outlined" onClick={handleClick}>
           Renew
         </Button>
       </Box>

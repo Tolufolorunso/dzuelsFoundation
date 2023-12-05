@@ -3,8 +3,8 @@ import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 
-import classes from './Circulation.module.css'
-import CustomHeader from '../typography/CustomHeader'
+import classes from '../Circulation.module.css'
+import CustomHeader from '../../typography/CustomHeader'
 
 function CirculationContent(props) {
   const { goTo } = props
@@ -13,18 +13,18 @@ function CirculationContent(props) {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={4}>
           <Grid item xs={12} md={4}>
-            <CustomHeader level={3} text='Circulation' />
-            <Stack direction='column' spacing={3}>
+            <CustomHeader level={3} text="Circulation" />
+            <Stack direction="column" spacing={3}>
               <Button
                 fullWidth
-                key='one'
+                key="one"
                 className={classes.button}
                 onClick={() => goTo('checkout')}
               >
                 Checkout
               </Button>
               <Button
-                key='two'
+                key="two"
                 fullWidth
                 className={classes.button}
                 onClick={() => goTo('checkin')}
@@ -32,7 +32,7 @@ function CirculationContent(props) {
                 Checkin
               </Button>
               <Button
-                key='three'
+                key="three"
                 fullWidth
                 className={classes.button}
                 onClick={() => goTo('renew')}
@@ -42,11 +42,11 @@ function CirculationContent(props) {
             </Stack>
           </Grid>
           <Grid item xs={12} md={4}>
-            <CustomHeader level={3} text='Holds' />
-            <Stack direction='column' spacing={3}>
+            <CustomHeader level={3} text="Holds" />
+            <Stack direction="column" spacing={3}>
               <Button
                 fullWidth
-                key='one'
+                key="one"
                 className={classes.button}
                 onClick={() => goTo('holds')}
               >
@@ -55,11 +55,11 @@ function CirculationContent(props) {
             </Stack>
           </Grid>
           <Grid item xs={12} md={4}>
-            <CustomHeader level={3} text='Transfer' />
-            <Stack direction='column' spacing={3}>
+            <CustomHeader level={3} text="Transfer" />
+            <Stack direction="column" spacing={3}>
               <Button
                 fullWidth
-                key='one'
+                key="one"
                 className={classes.button}
                 onClick={() => goTo('overdue')}
               >

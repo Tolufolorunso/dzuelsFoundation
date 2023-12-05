@@ -22,8 +22,6 @@ function PatronPage() {
         const res = await fetchApi(`/patrons/${router.query.patronBarcode}`)
         const { status, message, patron } = res
 
-        console.log(patron)
-
         if (status) {
           setPatronData(patron)
           setPatrondataInStore(patron)

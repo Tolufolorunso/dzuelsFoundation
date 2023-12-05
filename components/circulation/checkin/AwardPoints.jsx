@@ -1,5 +1,5 @@
-import CustomHeader from '../typography/CustomHeader'
-import classes from './searchPatron.module.css'
+import CustomHeader from '../../typography/CustomHeader'
+import classes from '../searchPatron.module.css'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 import React, { useState } from 'react'
@@ -49,48 +49,48 @@ function AwardPoints() {
 
   return (
     <aside className={classes.aside} style={{ marginTop: '5rem' }}>
-      <CustomHeader level={3} text='Award Points' />
+      <CustomHeader level={3} text="Award Points" />
 
       <Box sx={{ mb: 2, width: '300px' }}>
         <TextField
           hiddenLabel={false}
           fullWidth
-          label='Award Point'
+          label="Award Point"
           autoFocus
-          name='points'
-          type='number'
+          name="points"
+          type="number"
           value={points}
-          placeholder='Enter points'
+          placeholder="Enter points"
           onChange={handleChange}
-          size='small'
+          size="small"
         />
       </Box>
       <Box sx={{ mb: 2, width: '300px' }}>
         <TextField
           hiddenLabel={false}
           fullWidth
-          label='Patron Barcode'
-          name='patronBarcode'
+          label="Patron Barcode"
+          name="patronBarcode"
           value={patronBarcode}
-          placeholder='Enter Patron Barcode'
+          placeholder="Enter Patron Barcode"
           onChange={handleChange}
-          size='small'
+          size="small"
         />
       </Box>
 
       <Box sx={{ mb: 2, width: '300px' }}>
-        <Stack direction='row' spacing={2}>
-          <Button variant='contained' onClick={AddPointsHandler}>
+        <Stack direction="row" spacing={2}>
+          <Button variant="contained" onClick={AddPointsHandler}>
             {loading ? (
               <>
-                <CircularProgress size={10} color='inherit' />
+                <CircularProgress size={10} color="inherit" />
                 <span style={{ marginLeft: '5px' }}>Adding Points...</span>
               </>
             ) : (
               'Add Point(s)'
             )}
           </Button>
-          <Button variant='outlined' color='error' onClick={clearFieldsHandler}>
+          <Button variant="outlined" color="error" onClick={clearFieldsHandler}>
             Clear Fields
           </Button>
         </Stack>
