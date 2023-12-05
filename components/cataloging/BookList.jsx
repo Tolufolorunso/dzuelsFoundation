@@ -1,19 +1,19 @@
-import { DataGrid } from '@mui/x-data-grid';
-import Button from '@mui/material/Button';
-import classes from '@/components/cataloging/home.module.css';
-import fetchApi from '@/utils/fetchApi';
-import toast from 'react-hot-toast';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogActions from '@mui/material/DialogActions';
-import { useEffect, useState } from 'react';
+import { DataGrid } from '@mui/x-data-grid'
+import Button from '@mui/material/Button'
+import classes from '@/components/cataloging/home.module.css'
+import fetchApi from '@/utils/fetchApi'
+import toast from 'react-hot-toast'
+import Dialog from '@mui/material/Dialog'
+import DialogTitle from '@mui/material/DialogTitle'
+import DialogContent from '@mui/material/DialogContent'
+import DialogContentText from '@mui/material/DialogContentText'
+import DialogActions from '@mui/material/DialogActions'
+import { useEffect, useState } from 'react'
 
 function BookList(props) {
-  const { rows, onRowDoubleClick } = props;
-  const [updatedRows, setUpdatedRows] = useState(rows);
-  const [open, setOpen] = useState(false);
+  const { rows, onRowDoubleClick } = props
+  const [updatedRows, setUpdatedRows] = useState(rows)
+  const [open, setOpen] = useState(false)
 
   const columns = [
     { field: 'barcode', headerName: 'Barcode', width: 100 },
@@ -47,27 +47,32 @@ function BookList(props) {
       width: 100,
       renderCell: (params) => {
         const handleClose = () => {
-          setOpen(false);
-        };
+          setOpen(false)
+        }
 
         const handleConfirmDelete = async () => {
           try {
-            const res = await fetchApi(`/cataloging/${params.row.barcode}`, 'DELETE');
-            const { status, message } = res;
+            const res = await fetchApi(
+              `/cataloging/${params.row.barcode}`,
+              'DELETE'
+            )
+            const { status, message } = res
 
             if (status) {
-              toast.success(message);
+              toast.success(message)
 
               // Remove the deleted row from the updatedRows state
-              const filteredRows = updatedRows.filter((row) => row.barcode !== params.row.barcode);
-              setUpdatedRows(filteredRows);
+              const filteredRows = updatedRows.filter(
+                (row) => row.barcode !== params.row.barcode
+              )
+              setUpdatedRows(filteredRows)
             }
           } catch (error) {
-            toast.error(error.message);
+            toast.error(error.message)
           } finally {
-            handleClose();
+            handleClose()
           }
-        };
+        }
 
         return (
           <>
@@ -95,16 +100,16 @@ function BookList(props) {
               </DialogActions>
             </Dialog>
           </>
-        );
+        )
       },
     },
-  ];
-  const [selectedRowIds, setSelectedRowIds] = useState([]);
+  ]
+  const [selectedRowIds, setSelectedRowIds] = useState([])
 
   // Handle selection change
   const handleSelectionChange = (newSelection) => {
-    setSelectedRowIds(newSelection.selectionModel);
-  };
+    setSelectedRowIds(newSelection.selectionModel)
+  }
 
   useEffect(() => {
     setUpdatedRows(rows)
@@ -128,7 +133,7 @@ function BookList(props) {
         onRowSelectionModelChange={handleSelectionChange}
       />
     </div>
-  );
+  )
 }
 
-export default BookList;
+export default BookList

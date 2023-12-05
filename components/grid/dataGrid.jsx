@@ -7,8 +7,7 @@ function GridLists(props) {
     <div style={{ height: '500px', width: '100%' }}>
       <DataGrid
         sx={{ fontSize: '1.2rem' }}
-        // rows={rows}
-        rows={rows.map((row, index) => ({ ...row, id: index }))}
+        rows={rows}
         columns={columns}
         initialState={{
           pagination: {
@@ -20,7 +19,6 @@ function GridLists(props) {
         }}
         pageSizeOptions={[30, 40, 50, 60, 80, 100]}
         checkboxSelection={false}
-        // onRowClick={onRowClick}
         onRowDoubleClick={onRowClick}
         getRowId={(row) => row.barcode}
       />

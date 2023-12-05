@@ -16,15 +16,9 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '../api/auth/[...nextauth]'
 import toast from 'react-hot-toast'
 import GridLists from '@/components/grid/dataGrid'
+import { exportToExcel } from '@/utils/export'
+
 const columns = [
-  {
-    field: 'rowNumber',
-    headerName: '#',
-    width: 70,
-    renderCell: (params) => {
-      return <div>{params.row.id + 1}</div>
-    },
-  },
   { field: 'barcode', headerName: 'Barcode', width: 150 },
   { field: 'fullname', headerName: 'Full Name', width: 550 },
   { field: 'points', headerName: 'Points', width: 150 },
@@ -35,6 +29,7 @@ function EventPage() {
   const [eventTitle, setEventTitle] = useState('')
   const [patrons, setPatrons] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const [isExportLoading, setIsExportLoading] = useState(false)
 
   const fetchCompetition = async () => {
     if (!eventTitle) {
@@ -61,6 +56,26 @@ function EventPage() {
     console.log('hello')
   }
 
+  function exportCompetition(data) {
+    if (data.length !== 0) {
+      setIsExportLoading(true)
+      toast.success('It will be exported in 2 seconds')
+      setTimeout(function () {
+        exportToExcel(data)
+        setIsExportLoading(false)
+      }, 2000)
+    } else {
+      toast.error('Load data')
+    }
+  }
+
+  function setEventTitleHandler(e) {
+    if (eventTitle !== e.target.value) {
+      setPatrons([])
+    }
+    setEventTitle(e.target.value)
+  }
+
   return (
     <Container>
       <Box sx={{ width: '100%', marginBottom: '30px', marginTop: '30px' }}>
@@ -68,9 +83,9 @@ function EventPage() {
           <Stack
             spacing={2}
             direction={{ xs: 'column', sm: 'row' }}
-            style={{ width: '60%', alignItems: 'flex-end' }}
+            style={{ width: '80%', alignItems: 'flex-end' }}
           >
-            <FormControl sx={{ m: 1, minWidth: '70%' }} size="small">
+            <FormControl sx={{ m: 1, minWidth: '60%' }} size="small">
               <label htmlFor="eventTitle" style={{ fontWeight: 'bold' }}>
                 eventTitle
               </label>
@@ -79,7 +94,7 @@ function EventPage() {
                 id="eventTitle"
                 value={eventTitle}
                 label="eventTitle"
-                onChange={(e) => setEventTitle(e.target.value)}
+                onChange={setEventTitleHandler}
               >
                 <MenuItem value="Change" selected={true}>
                   Change
@@ -103,6 +118,23 @@ function EventPage() {
                 </>
               ) : (
                 'Fetch Patrons'
+              )}
+            </Button>
+            <Button
+              variant="outlined"
+              disabled={!patrons.length}
+              className={classes.searchPatronBtn}
+              onClick={() => exportCompetition(patrons)}
+            >
+              {isExportLoading ? (
+                <>
+                  <CircularProgress size={10} color="inherit" />
+                  <span style={{ marginLeft: '5px' }}>
+                    Exporting spreadsheet...
+                  </span>
+                </>
+              ) : (
+                'Export Competition'
               )}
             </Button>
           </Stack>

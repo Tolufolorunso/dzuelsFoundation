@@ -43,9 +43,9 @@ body {
   font-family: 'Poppins', sans-serif !important;
   font-size: 1.6rem !important;
   background-color: var(--bg) !important;
-  min-height: auto;
+  min-height: 100dvh;
   /* overflow: hidden; */
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
 }
 
 .container {

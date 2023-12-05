@@ -111,7 +111,6 @@ function PatronsHomePage(props) {
           />
           <AwardPoints />
         </div>
-
         {errorMessage ? (
           <Box
             sx={{

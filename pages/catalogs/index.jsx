@@ -95,15 +95,14 @@ function CatalogPage(props) {
 }
 
 export async function getServerSideProps(ctx) {
-  let endpoint =
+  const BASE_URL =
     process.env.NEXT_ENV === 'development'
-      ? process.env.LOCALURL
-      : process.env.BASEURL
+      ? process.env.BASE_URL_LOCAL
+      : process.env.BASE_URL
 
   try {
-    const res = await fetchApi(`${endpoint}/cataloging`)
+    const res = await fetchApi(`${BASE_URL}/cataloging`)
     const { status, items } = res
-
     if (status) {
       return {
         props: {
