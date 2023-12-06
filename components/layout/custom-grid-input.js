@@ -48,7 +48,7 @@ function CustomGridInput(props) {
             onChange={onChange}
           >
             {schools.map((school) => (
-              <MenuItem value={school.name}>
+              <MenuItem value={school.name} key={school.name}>
                 {school.name.toUpperCase()}
               </MenuItem>
             ))}

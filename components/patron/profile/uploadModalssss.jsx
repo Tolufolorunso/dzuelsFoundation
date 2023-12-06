@@ -4,6 +4,7 @@ import Button from '@mui/material/Button'
 import Modal from '@mui/material/Modal'
 import toast from 'react-hot-toast'
 import CircularProgress from '@mui/material/CircularProgress'
+import Image from 'next/image'
 
 const style = {
   position: 'absolute',
@@ -124,7 +125,7 @@ function UploadModal(props) {
         <div>
           {photoData && (
             <div style={{ width: '250px', height: '300px' }}>
-              <img
+              <Image
                 src={photoData}
                 alt="Captured"
                 onLoad={handleImageLoad}
