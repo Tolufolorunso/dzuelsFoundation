@@ -20,9 +20,12 @@ import { exportToExcel } from '@/utils/export'
 
 const columns = [
   { field: 'barcode', headerName: 'Barcode', width: 150 },
-  { field: 'fullname', headerName: 'Full Name', width: 550 },
-  { field: 'points', headerName: 'Points', width: 150 },
+  { field: 'fullname', headerName: 'Full Name', width: 350 },
+  { field: 'points', headerName: 'Points', width: 100 },
   { field: 'numberOfItems', headerName: 'Books', width: 150 },
+  { field: 'schoolName', headerName: 'School Name', width: 250 },
+  { field: 'currentClass', headerName: 'Class', width: 150 },
+  { field: 'schoolAdress', headerName: 'School Address', width: 150 },
 ]
 
 function EventPage() {
@@ -53,7 +56,7 @@ function EventPage() {
   }
 
   function handleClick() {
-    console.log('hello')
+    // ...
   }
 
   function exportCompetition(data) {
@@ -147,8 +150,8 @@ function EventPage() {
       <div>
         <GridLists
           columns={columns}
-          rows={patrons}
-          // rows={[]}
+          // rows={patrons}
+          rows={[]}
           onRowClick={handleClick}
           sortField="numberOfItems"
           sort="desc"

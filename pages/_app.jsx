@@ -89,7 +89,6 @@ function MyApp(props) {
       const star = document.createElement('img')
       star.className = 'star'
       star.src = '/santa.svg'
-      // star.style.width = '100%'
       star.style.objectFit = 'cover'
       star.style.left = `${mouseX}px`
       star.style.top = `${mouseY}px`
@@ -106,10 +105,10 @@ function MyApp(props) {
       document.body.appendChild(glow)
       setTimeout(() => document.body.removeChild(glow), 75)
 
-      if (calcDistance(last.starPosition, last.mousePosition) >= 100) {
+      if (calcDistance(last.starPosition, last.mousePosition) >= 60) {
         document.body.appendChild(star)
         last.starPosition = last.mousePosition
-        setTimeout(() => document.body.removeChild(star), 1500)
+        setTimeout(() => document.body.removeChild(star), 1000)
       }
     }
   }, [])

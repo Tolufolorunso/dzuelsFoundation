@@ -62,7 +62,7 @@ function EditForm(props) {
             setPatronType(patron.patronType)
           }
         } catch (error) {
-          console.log(error)
+          // error
         }
       }
     }

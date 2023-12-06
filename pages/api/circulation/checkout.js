@@ -44,10 +44,6 @@ export default async function handler(req, res) {
       const cataloging = await Cataloging.findOne({ barcode: itemBarcode })
       const patron = await Patron.findOne({ barcode: patronBarcode })
 
-      // console.log(patron)
-
-      // console.log(37, patron?.image_url, !patron?.image_url?.public_id)
-
       if (patron?.image_url && !patron?.image_url?.public_id) {
         return res.status(403).json({
           status: false,

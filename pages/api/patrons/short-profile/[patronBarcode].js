@@ -7,13 +7,9 @@ export default async function handler(req, res) {
       await dbConnect()
       const { patronBarcode } = req.query
 
-      console.log(patronBarcode)
-
       let patron = await Patron.findOne({ barcode: patronBarcode }).select(
         'barcode'
       )
-
-      console.log(26, patron)
 
       if (!patron) {
         return res.status(404).json({

@@ -7,6 +7,7 @@ import { getSession } from 'next-auth/react'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { authOptions } from '../api/auth/[...nextauth]'
+import { schools } from '@/data/schools'
 
 function CreatePatronPage() {
   const [patronType, setIsLoading] = usePatronStore((state) => [
@@ -41,6 +42,7 @@ function CreatePatronPage() {
     relationshipToPatron: '',
     parentEmail: '',
     messagePreferences: 'email,sms,call',
+    otherSchool: '',
   })
 
   const clearFormDataExceptLibrary = () => {
@@ -67,11 +69,24 @@ function CreatePatronPage() {
       parentPhoneNumber: '',
       relationshipToPatron: '',
       parentEmail: '',
+      otherSchool: '',
     }))
   }
 
   const handleChange = (event) => {
     const { name, value } = event.target
+
+    if (name === 'schoolName') {
+      const sch = schools.find(
+        (school) => school.name.toLowerCase() === value.toLowerCase()
+      )
+
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+        schoolAdress: sch['address'],
+      }))
+    }
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -83,10 +98,22 @@ function CreatePatronPage() {
 
     const session = await getSession()
     const registerBy = session.user.name
-    let patronData = {
-      ...formData,
-      patronType: patronType,
-      registeredBy: registerBy,
+
+    let patronData
+    if (formData.schoolName === 'others') {
+      patronData = {
+        ...formData,
+        schoolName: formData.otherSchool,
+        schoolAdress: formData.otherAddress || formData.schoolAdress,
+        patronType: patronType,
+        registeredBy: registerBy,
+      }
+    } else {
+      patronData = {
+        ...formData,
+        patronType: patronType,
+        registeredBy: registerBy,
+      }
     }
 
     if (patronType === 'guest') {
@@ -142,7 +169,6 @@ function CreatePatronPage() {
 }
 
 export async function getServerSideProps(ctx) {
-  // const session = await getSession(ctx)
   const session = await getServerSession(ctx.req, ctx.res, authOptions)
 
   if (!session) {

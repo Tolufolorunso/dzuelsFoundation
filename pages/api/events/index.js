@@ -57,7 +57,7 @@ export default async function handler(req, res) {
 
       const patrons = await Patron.find(
         {},
-        'firstname middlename surname points barcode itemsCheckedOutHistory'
+        'firstname middlename surname points barcode itemsCheckedOutHistory studentSchoolInfo'
       )
 
       // Filter patrons based on itemsCheckedOutHistory meeting the criteria
@@ -74,6 +74,9 @@ export default async function handler(req, res) {
             barcode: patron.barcode,
             itemsCheckedOutHistory: filteredItems,
             numberOfItems: filteredItems.length,
+            schoolName: patron.studentSchoolInfo.schoolName,
+            currentClass: patron.studentSchoolInfo.currentClass,
+            schoolAdress: patron.studentSchoolInfo.schoolAdress,
           })
         }
 

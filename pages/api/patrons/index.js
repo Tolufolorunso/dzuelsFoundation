@@ -69,6 +69,12 @@ export default async function handler(req, res) {
       messagePreferences,
     } = req.body
 
+    // return res.status(201).json({
+    //   status: true,
+    //   patron: {},
+    //   message: 'Patron created successfully',
+    // })
+
     let patronExpiryDate
 
     if (patronType === 'staff') {

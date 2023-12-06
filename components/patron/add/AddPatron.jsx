@@ -44,12 +44,12 @@ function AddPatron(props) {
       const result = await response.json()
 
       if (response.ok) {
-        // console.log('Patron data uploaded successfully!')
+        // 'Patron data uploaded successfully!'
       } else {
-        // console.error('Failed to upload patron data.')
+        // 'Failed to upload patron data.'
       }
     } catch (error) {
-      console.error('Error uploading patron data:', error.message)
+      // 'Error uploading patron data:', error.message
     }
   }
 

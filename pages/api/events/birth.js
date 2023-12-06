@@ -20,8 +20,6 @@ export default async function handler(req, res) {
         'firstname middlename surname dateOfBirth gender image_url barcode'
       )
 
-      console.log(patrons)
-
       return res.status(200).json({
         result: patrons.length,
         status: true,

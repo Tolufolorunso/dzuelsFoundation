@@ -19,7 +19,6 @@ function OverduePage(props) {
 
   function getOverDuePatron(barcode) {
     openPatronDialog(!isPatronDialogOpen)
-    console.log(barcode)
   }
 
   return (

@@ -136,7 +136,7 @@ function StudentsPage(props) {
       `Are you sure you want to remove this student, enter ${barcode}`
     )
     if (isvalid === barcode) {
-      console.log(barcode)
+      // barcode
     }
   }
 

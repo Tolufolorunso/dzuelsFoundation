@@ -41,7 +41,7 @@ export const formFields = [
     inputs: [
       { label: 'Employer Name', type: 'text', name: 'employerName' },
       { label: 'School Name', type: 'text', name: 'schoolName' },
-      { label: 'School Adress', type: 'text', name: 'schoolAdress' },
+      { label: 'School Address', type: 'text', name: 'schoolAdress' },
       { label: 'Head Of School', type: 'text', name: 'headOfSchool' },
       { label: 'School Email', type: 'text', name: 'schoolEmail' },
       { label: 'School Phone Number', type: 'text', name: 'schoolPhoneNumber' },
@@ -51,8 +51,13 @@ export const formFields = [
     legend: 'Student School Info',
     type: 'student',
     inputs: [
-      { label: 'School Name', type: 'text', name: 'schoolName' },
-      { label: 'School Adress', type: 'text', name: 'schoolAdress' },
+      { label: 'School Name', type: 'select', name: 'schoolName' },
+      {
+        label: 'If Other School, Type Here',
+        type: 'text',
+        name: 'otherSchool',
+      },
+      { label: 'School Address', type: 'text', name: 'schoolAdress' },
       { label: 'Head Of School', type: 'text', name: 'headOfSchool' },
       { label: 'Current Class', type: 'text', name: 'currentClass' },
       { label: 'School Email', type: 'text', name: 'schoolEmail' },

@@ -83,7 +83,7 @@ const HomePage = () => {
         setPoint={setPoints}
         birthDayColumns={[]}
         birthdayData={[]}
-        handleBirthDayRowClick={() => console.log('hello')}
+        handleBirthDayRowClick={() => 'hello'}
       />
     </>
   )

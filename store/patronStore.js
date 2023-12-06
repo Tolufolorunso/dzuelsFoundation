@@ -17,7 +17,7 @@ const usePatronStore = create((set) => ({
     patronData: null,
   },
   setPatronData: (data) => {
-    console.log(20, data)
+    // ...
   },
   addSearchTerm: (searchTerm) => {
     set((state) => ({

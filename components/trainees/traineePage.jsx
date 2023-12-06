@@ -65,7 +65,7 @@ function TraineePage(props) {
       `Are you sure you want to remove this student, enter ${barcode}`
     )
     if (isvalid === barcode) {
-      // console.log(barcode)
+      // barcode
     }
   }
 
@@ -91,21 +91,21 @@ function TraineePage(props) {
 
   return (
     <Box p={4}>
-      <Box display='flex' justifyContent='space-between' mb={4}>
-        <Typography variant='h4' gutterBottom>
+      <Box display="flex" justifyContent="space-between" mb={4}>
+        <Typography variant="h4" gutterBottom>
           Cohort Class 2023
         </Typography>
         <Box sx={{ display: 'flex', gap: '1rem' }}>
           <Button
-            variant='contained'
-            color='primary'
+            variant="contained"
+            color="primary"
             onClick={() => setIsModalOpen(true)}
           >
             Mark Attendance
           </Button>
           <Button
-            variant='contained'
-            color='primary'
+            variant="contained"
+            color="primary"
             onClick={() => setIsDisplayAbsenteesOpen(true)}
           >
             Fail to Come
@@ -113,21 +113,21 @@ function TraineePage(props) {
         </Box>
       </Box>
 
-      <Box mb={2} bgcolor='white' p={4} borderRadius={2}>
-        <label htmlFor='patronBarcode'>Patron Barcode:</label>
+      <Box mb={2} bgcolor="white" p={4} borderRadius={2}>
+        <label htmlFor="patronBarcode">Patron Barcode:</label>
         <TextField
-          id='patronBarcode'
-          placeholder='Patron Barcode'
-          variant='outlined'
+          id="patronBarcode"
+          placeholder="Patron Barcode"
+          variant="outlined"
           fullWidth
           value={patronBarcode}
           onChange={(e) => setPatronBarcode(e.target.value)}
           style={{ marginBottom: '1rem' }}
-          size='small'
+          size="small"
         />
         <Button
-          variant='contained'
-          color='primary'
+          variant="contained"
+          color="primary"
           onClick={addStudentToCohort}
           mt={2}
           disabled

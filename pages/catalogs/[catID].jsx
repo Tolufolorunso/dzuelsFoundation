@@ -23,7 +23,7 @@ function ItemPage() {
         }
         setLoading(false)
       } catch (error) {
-        console.log(error)
+        // error
       }
     }
     getItem()
