@@ -19,13 +19,7 @@ function CheckinContent(props) {
       isPatronRead: isPatronRead.current.value,
     })
 
-    if (res) {
-      patronBarcodeRef.current.value = ''
-      itemBarcodeRef.current.value = ''
-      isPatronRead.current.value = 'yes'
-    } else {
-      isPatronRead.current.value = 'yes'
-    }
+    isPatronRead.current.value = 'yes'
   }
 
   return (

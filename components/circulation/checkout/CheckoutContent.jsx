@@ -66,7 +66,7 @@ function CheckoutContent(props) {
   function clearPatronDataHandler() {
     clearPatronData()
     inputRef.current.focus()
-    inputRef.current.value = 20230 + ''
+    // inputRef.current.value = 20230 + ''
   }
 
   const handleScan = (barcodeString) => {
