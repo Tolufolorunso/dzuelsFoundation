@@ -10,6 +10,7 @@ const useCirculationStore = create((set) => ({
     holds: [],
     overdue: [],
     isPatronDialogOpen: false,
+    patronBarcode: null,
   },
   setPatron: (patron) => {
     set((state) => ({
@@ -19,11 +20,12 @@ const useCirculationStore = create((set) => ({
       },
     }))
   },
-  openPatronDialog: async (isOpen) => {
+  openPatronDialog: async (isOpen, barcode) => {
     set((state) => ({
       circulation: {
         ...state.circulation,
         isPatronDialogOpen: isOpen,
+        patronBarcode: barcode,
       },
     }))
   },
@@ -48,7 +50,7 @@ const useCirculationStore = create((set) => ({
       const res = await fetchApi('/circulation/holds')
       return res.holds
     } catch (error) {
-      throw new Error(error.message)
+      return []
     }
   },
   setHolds: async (holds) => {

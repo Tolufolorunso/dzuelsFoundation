@@ -6,27 +6,14 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import OverdueRow from './OverdueRow'
-import useCirculationStore from '@/store/circulationStore'
 
 const cell = { fontSize: '1.6rem', fontWeight: 500 }
 
 function OverduePage(props) {
   const { overdueItems } = props
-  const {
-    openPatronDialog,
-    circulation: { isPatronDialogOpen },
-  } = useCirculationStore((state) => state)
-
-  function getOverDuePatron(barcode) {
-    openPatronDialog(!isPatronDialogOpen)
-  }
 
   return (
     <div style={{ marginBottom: '6rem' }}>
-      {/* <OverdueList
-        overdueItems={overdueItems}
-        getOverDuePatron={getOverDuePatron}
-      /> */}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }}>
           <TableHead>
@@ -50,12 +37,7 @@ function OverduePage(props) {
           </TableHead>
           <TableBody>
             {overdueItems?.map((item, index) => (
-              <OverdueRow
-                key={item.patronBarcode}
-                {...item}
-                getOverDuePatron={getOverDuePatron}
-                index={index}
-              />
+              <OverdueRow key={item.patronBarcode} {...item} index={index} />
             ))}
           </TableBody>
         </Table>

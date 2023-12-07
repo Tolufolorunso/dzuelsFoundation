@@ -150,8 +150,8 @@ function EventPage() {
       <div>
         <GridLists
           columns={columns}
-          // rows={patrons}
-          rows={[]}
+          rows={patrons}
+          // rows={[]}
           onRowClick={handleClick}
           sortField="numberOfItems"
           sort="desc"

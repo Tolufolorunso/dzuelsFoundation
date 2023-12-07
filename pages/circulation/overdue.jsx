@@ -9,19 +9,12 @@ import { authOptions } from '../api/auth/[...nextauth]'
 import PatronDialog from '@/components/circulation/home/PatronDetailDialog'
 
 function Holds() {
-  const [patronBarcode, setPatronBarcode] = useState('')
   const {
-    circulation: { isPatronDialogOpen, overdue: overdueItems },
-    openPatronDialog,
+    circulation: { overdue: overdueItems },
     getHolds,
   } = useCirculationStore((state) => state)
 
   const [overdue, setOverdue] = useState(overdueItems)
-
-  function openPatronDialogHandler() {
-    openPatronDialog(!isPatronDialogOpen)
-    setPatronBarcode(202302)
-  }
 
   useEffect(() => {
     async function holds() {
@@ -38,11 +31,7 @@ function Holds() {
 
   return (
     <React.Fragment>
-      <PatronDialog
-        openPatronDialog={openPatronDialogHandler}
-        isPatronDialogOpen={isPatronDialogOpen}
-        patronBarcode={patronBarcode}
-      />
+      <PatronDialog />
       <Container>
         <OverduePage overdueItems={overdue} />
       </Container>

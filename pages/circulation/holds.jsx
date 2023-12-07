@@ -1,17 +1,22 @@
+import React from 'react'
 import HoldsPage from '@/components/circulation/holds/HoldsPage'
 import Container from '@/components/layout/container'
 import fetchApi from '@/utils/fetchApi'
 import { getServerSession } from 'next-auth'
 
 import { authOptions } from '../api/auth/[...nextauth]'
+import PatronDialog from '@/components/circulation/home/PatronDetailDialog'
 
 function holds(props) {
   const { holds } = props
 
   return (
-    <Container>
-      <HoldsPage holds={holds} />
-    </Container>
+    <React.Fragment>
+      <PatronDialog />
+      <Container>
+        <HoldsPage holds={holds} />
+      </Container>
+    </React.Fragment>
   )
 }
 

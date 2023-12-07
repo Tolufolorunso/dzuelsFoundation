@@ -13,9 +13,9 @@ function GridLists(props) {
           pagination: {
             paginationModel: { page: 0, pageSize: 50 },
           },
-          sorting: {
-            sortModel: [{ field: sortField, sort }],
-          },
+          // sorting: {
+          //   sortModel: [{ field: sortField, sort }],
+          // },
         }}
         pageSizeOptions={[30, 40, 50, 60, 80, 100]}
         checkboxSelection={false}

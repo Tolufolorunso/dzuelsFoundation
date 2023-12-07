@@ -21,9 +21,6 @@ function CustomGridInput(props) {
             label={label}
             onChange={onChange}
           >
-            {/* <MenuItem value='' selected disabled>
-              Select
-            </MenuItem> */}
             <MenuItem value="male" selected>
               Male
             </MenuItem>
