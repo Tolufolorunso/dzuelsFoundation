@@ -9,7 +9,7 @@ function HomePageTopHeading() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
           <CustomHeader level={3} text="Circulation" />
           <p style={{ marginTop: '-12px', fontSize: '1.9rem' }}>
-            Reading Competition Opens
+            Reading Competition Ends
           </p>
         </div>
       </Stack>

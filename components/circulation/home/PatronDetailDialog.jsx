@@ -9,6 +9,7 @@ import toast from 'react-hot-toast'
 import fetchApi from '@/utils/fetchApi'
 import useCirculationStore from '@/store/circulationStore'
 import CircularProgress from '@mui/material/CircularProgress'
+import Image from 'next/image'
 
 export default function PatronDialog() {
   const {
@@ -66,11 +67,24 @@ export default function PatronDialog() {
         <DialogContent>
           {loading ? (
             <div style={{ display: 'flex', alignItems: 'center' }}>
-              <img
-                src={patron.imgUrl}
-                alt={patron.fullname}
-                style={{ width: '300px', marginRight: '20px' }}
-              />
+              <div
+                style={{
+                  position: 'relative',
+                  width: '100%',
+                  maxWidth: '300px',
+                  aspectRatio: '70/45',
+                  margin: '0 1rem',
+                }}
+              >
+                <Image
+                  src={patron.imgUrl}
+                  alt={patron.fullname}
+                  fill
+                  sizes="(max-width: 980px) 100vw, 300px"
+                  // style={{ width: '300px', marginRight: '20px' }}
+                />
+              </div>
+
               <div>
                 <DialogContentText>
                   Full Name: {patron.fullname}
