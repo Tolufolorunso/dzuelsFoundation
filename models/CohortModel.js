@@ -8,6 +8,10 @@ const CohortSchema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
+    active: {
+      type: Boolean,
+      default: true,
+    },
     firstname: {
       type: String,
       required: true,

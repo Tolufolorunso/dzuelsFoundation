@@ -17,6 +17,9 @@ export default async function handler(req, res) {
       // Add cohortType: "cohortOne" to 30 documents
       // await Cohort.updateMany({ $set: { cohortType: 'cohortOne' } });
 
+      // Update all patrons to have active: true
+      await Cohort.updateMany({}, { $set: { 'patrons.active': true } })
+
       const patrons = await Cohort.find(query).select(
         '-createdAt -updatedAt -_id -__v'
       )
@@ -60,7 +63,7 @@ export default async function handler(req, res) {
         firstname,
         surname,
         middlename,
-        cohortType
+        cohortType,
       })
 
       await newCohort.save()
