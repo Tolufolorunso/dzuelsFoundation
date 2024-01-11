@@ -9,6 +9,8 @@ export default async function handler(req, res) {
       await dbConnect()
       let { firstname, surname, library, barcode, gender, patronType, mode } =
         req.query
+      console.log('12')
+      console.log(13, mode)
 
       // Build the query object based on the provided filters
       const query = {}

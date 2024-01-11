@@ -26,12 +26,22 @@ export default async function handler(req, res) {
       //   'patronsCheckedOutHistory.0': { $exists: true },
       // })
 
-      const checkoutHistory = await Cataloging.find({
-        'patronsCheckedOutHistory.0': { $exists: true },
-      }).populate({
-        path: 'patronsCheckedOutHistory.checkedOutBy',
-        select: 'barcode firstname surname',
-      })
+      // const checkoutHistory = await Cataloging.find({
+      //   'patronsCheckedOutHistory.0': { $exists: true },
+      // }).populate({
+      //   path: 'patronsCheckedOutHistory.checkedOutBy',
+      //   select: 'barcode firstname surname phoneNumber parentInfo',
+      // })
+
+      const checkoutHistory = await Cataloging.find(
+        {
+          'patronsCheckedOutHistory.0': { $exists: true },
+        },
+        'firstname patronsCheckedOutHistory barcode title'
+      )
+
+      // console.log(42, checkoutHistory)
+      console.log(42, checkoutHistory.length)
 
       // const formattedHistory = checkoutHistory
       //   .map((item) => {
@@ -48,8 +58,11 @@ export default async function handler(req, res) {
 
       const formattedHistory = checkoutHistory
         .map((item) => {
+          console.log(51, item)
           return item.patronsCheckedOutHistory.map((patron) => ({
             patronBarcode: patron.barcode,
+            patronNumber: item?.phoneNumber,
+            parentPhoneNumber: item?.phoneNumber,
             itemBarcode: item.barcode,
             title: item.title.mainTitle,
             subtitle: item.title.subtitle,

@@ -1,7 +1,13 @@
 import { DataGrid } from '@mui/x-data-grid'
 
 function GridLists(props) {
-  const { columns, rows, onRowClick, sortField = null, sort = 'asc' } = props
+  const {
+    columns,
+    rows,
+    onRowClick = () => {},
+    sortField = null,
+    sort = 'asc',
+  } = props
 
   return (
     <div style={{ height: '500px', width: '100%' }}>

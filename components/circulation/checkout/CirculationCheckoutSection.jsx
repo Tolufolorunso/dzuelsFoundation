@@ -70,10 +70,10 @@ function CirculationCheckoutSection() {
   async function handleCheckout(itemBarcode) {
     const patronBarcode = patronData ? patronData.barcode : null
 
-    if (true) {
-      toast.error('The end of the Reading Competition')
-      return
-    }
+    // if (true) {
+    //   toast.error('The end of the Reading Competition')
+    //   return
+    // }
 
     if (Boolean(patronBarcode) === false) {
       toast.error('provide patron barcode')

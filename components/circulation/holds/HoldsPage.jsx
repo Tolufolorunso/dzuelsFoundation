@@ -15,7 +15,7 @@ function HoldsPage(props) {
   const { holds } = props
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
-
+  // console.log(holds)
   return (
     <div style={{ marginBottom: '6rem' }}>
       {/* <HoldsLists holds={holds} /> */}
