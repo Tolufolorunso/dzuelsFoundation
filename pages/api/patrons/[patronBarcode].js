@@ -164,13 +164,25 @@ export default async function handler(req, res) {
     try {
       await dbConnect()
       const { patronBarcode } = req.query
-      const patron = await Patron.findOneAndDelete({ barcode: patronBarcode })
+      const patron = await Patron.findOne({ barcode: patronBarcode })
       if (!patron) {
         return res.status(404).json({
           status: false,
           errorMessage: 'Patron not found',
         })
       }
+
+      if (!patron.active) {
+        return res.status(404).json({
+          status: false,
+          errorMessage: 'Patron not found',
+        })
+      }
+
+      patron.active = false
+
+      await patron.save()
+
       return res.status(200).json({
         status: true,
         message: 'Patron deleted successfully',

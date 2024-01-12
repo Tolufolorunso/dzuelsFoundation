@@ -11,6 +11,7 @@ export default async function handler(req, res) {
     } else {
       query.cohortType = 'cohortOne'
     }
+    query.active = true
     try {
       await dbConnect()
 
@@ -18,7 +19,7 @@ export default async function handler(req, res) {
       // await Cohort.updateMany({ $set: { cohortType: 'cohortOne' } });
 
       // Update all patrons to have active: true
-      await Cohort.updateMany({}, { $set: { 'patrons.active': true } })
+      // await Cohort.updateMany({}, { $set: { 'patrons.active': true } })
 
       const patrons = await Cohort.find(query).select(
         '-createdAt -updatedAt -_id -__v'

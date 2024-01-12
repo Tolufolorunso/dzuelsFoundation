@@ -9,8 +9,6 @@ export default async function handler(req, res) {
       await dbConnect()
       let { firstname, surname, library, barcode, gender, patronType, mode } =
         req.query
-      console.log('12')
-      console.log(13, mode)
 
       // Build the query object based on the provided filters
       const query = {}
@@ -20,6 +18,8 @@ export default async function handler(req, res) {
       if (gender) query.gender = new RegExp(gender, 'i')
       if (patronType) query.patronType = new RegExp(patronType, 'i')
       if (barcode) query.barcode = barcode
+
+      query.active = true
 
       if (mode === 'detail') {
         const patrons = await Patron.find(query).select(

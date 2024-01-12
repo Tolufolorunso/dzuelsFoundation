@@ -8,7 +8,6 @@ import Container from '@/components/layout/container'
 import CatalogFunctionBtns from '@/components/cataloging/CatalogFunctionBtns'
 
 import MuiAlert from '@mui/material/Alert'
-import { getSession } from 'next-auth/react'
 import fetchApi from '@/utils/fetchApi'
 import toast from 'react-hot-toast'
 import { getServerSession } from 'next-auth'

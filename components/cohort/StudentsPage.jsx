@@ -131,12 +131,24 @@ function StudentsPage(props) {
     }
   }
 
-  function handleRemoveStudent(barcode) {
+  async function handleRemoveStudent(barcode) {
     const isvalid = prompt(
       `Are you sure you want to remove this student, enter ${barcode}`
     )
-    if (isvalid === barcode) {
-      // barcode
+    if (isvalid !== barcode) {
+      toast.error('Not removed')
+      return
+    }
+    try {
+      const res = await fetchApi(`/cohort/${barcode}`, 'DELETE')
+      const { status, message } = res
+      if (status) {
+        toast.success(message)
+      } else {
+        throw new Error('Error Adding patron')
+      }
+    } catch (error) {
+      toast.error(error.message)
     }
   }
 
