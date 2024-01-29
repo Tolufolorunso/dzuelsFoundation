@@ -86,7 +86,7 @@ function CheckinContent(props) {
           </form>
         </Box>
       </div>
-      <AwardPoints />
+      {/* <AwardPoints /> */}
     </>
   )
 }
