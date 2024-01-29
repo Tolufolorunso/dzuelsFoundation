@@ -16,7 +16,9 @@ export default async function handler(req, res) {
 
   if (req.method === 'POST') {
     await dbConnect()
-    const { itemBarcode, patronBarcode, isPatronRead } = req.body
+    let { itemBarcode, patronBarcode, isPatronRead, point } = req.body
+
+    point = Number(point)
 
     try {
       const patron = await Patron.findOne({ barcode: patronBarcode })
@@ -75,16 +77,16 @@ export default async function handler(req, res) {
         })
 
       // I will do it later, on monday
-      if (
-        isPatronRead.toLowerCase() === 'no' &&
-        patronBarcode !== '20230054' &&
-        patronBarcode !== '20230055'
-      ) {
+      if (isPatronRead.toLowerCase() === 'no') {
         // Remove the book from the patron's itemsCheckedOutHistory
         patron.itemsCheckedOutHistory = patron.itemsCheckedOutHistory.filter(
           (item) => item.itemId.toString() !== cataloging._id.toString()
         )
       }
+
+      const DEFAULT_POINT = 1
+
+      patron.points = patron.points + DEFAULT_POINT + point
 
       cataloging.isCheckedOut = false
       patron.hasBorrowedBook = false

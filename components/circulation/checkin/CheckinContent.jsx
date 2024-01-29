@@ -10,12 +10,14 @@ function CheckinContent(props) {
   const { checkinHandler, isLoading } = props
   const patronBarcodeRef = useRef(null)
   const itemBarcodeRef = useRef(null)
+  const pointRef = useRef(null)
   const isPatronRead = useRef(null)
 
   function clickHandler() {
     const res = checkinHandler({
       patronBarcode: patronBarcodeRef.current.value,
       itemBarcode: itemBarcodeRef.current.value,
+      point: pointRef.current.value,
       isPatronRead: isPatronRead.current.value,
     })
 
@@ -48,6 +50,15 @@ function CheckinContent(props) {
                 name="barcode"
                 placeholder="Enter Item Barcode"
                 ref={itemBarcodeRef}
+                className={classes.input}
+                autoComplete="off"
+              />
+              <input
+                type="number"
+                id="point"
+                name="point"
+                placeholder="Enter point"
+                ref={pointRef}
                 className={classes.input}
                 autoComplete="off"
               />

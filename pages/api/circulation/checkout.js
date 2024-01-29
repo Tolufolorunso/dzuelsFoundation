@@ -6,14 +6,6 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '../auth/[...nextauth]'
 
 export default async function handler(req, res) {
-  // const session = await getServerSession(req, res, authOptions)
-  // if (!session) {
-  //   return res.status(401).json({
-  //     status: false,
-  //     errorMessage: 'You are not allowed to access this routes',
-  //   })
-  // }
-
   if (req.method === 'GET') {
     try {
       await dbConnect()
@@ -70,15 +62,15 @@ export default async function handler(req, res) {
         })
       }
 
-      if (
-        patron.itemsCheckedOutHistory.some(
-          (item) => item.itemBarcode === cataloging.barcode
-        )
-      ) {
-        return res.status(409).json({
-          errorMessage: 'You have already borrowed this item before',
-        })
-      }
+      // if (
+      //   patron.itemsCheckedOutHistory.some(
+      //     (item) => item.itemBarcode === cataloging.barcode
+      //   )
+      // ) {
+      //   return res.status(409).json({
+      //     errorMessage: 'You have already borrowed this item before',
+      //   })
+      // }
 
       if (cataloging.isCheckedOut) {
         return res
@@ -125,16 +117,22 @@ export default async function handler(req, res) {
       //   dueDate: dueDate,
       // })
 
-      patron.itemsCheckedOutHistory.push({
-        itemId: cataloging._id,
-        checkoutDate: currentDate,
-        dueDate: dueDate,
-        itemTitle: cataloging.title.mainTitle,
-        itemSubTitle: cataloging.title.subtitle,
-        itemBarcode: cataloging.barcode,
-        eventTitle: 'reading competition',
-        event: true,
-      })
+      if (
+        !patron.itemsCheckedOutHistory.some(
+          (item) => item.itemBarcode === cataloging.barcode
+        )
+      ) {
+        patron.itemsCheckedOutHistory.push({
+          itemId: cataloging._id,
+          checkoutDate: currentDate,
+          dueDate: dueDate,
+          itemTitle: cataloging.title.mainTitle,
+          itemSubTitle: cataloging.title.subtitle,
+          itemBarcode: cataloging.barcode,
+          eventTitle: 'reading competition',
+          event: true,
+        })
+      }
 
       patron.hasBorrowedBook = true
       await patron.save()
