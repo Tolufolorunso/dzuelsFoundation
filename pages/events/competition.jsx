@@ -102,7 +102,7 @@ function EventPage() {
                 <MenuItem value="Change" selected={true}>
                   Change
                 </MenuItem>
-                <MenuItem value="reading_competition">
+                <MenuItem value="readingCompetition">
                   Reading Competition
                 </MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem>

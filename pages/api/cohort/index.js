@@ -48,7 +48,7 @@ export default async function handler(req, res) {
         })
       }
 
-      const isPatronExists = await Cohort.findOne({ barcode })
+      const isPatronExists = await Cohort.findOne({ barcode, cohortType })
 
       if (isPatronExists) {
         return res.status(403).json({

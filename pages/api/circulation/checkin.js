@@ -86,7 +86,8 @@ export default async function handler(req, res) {
 
       const DEFAULT_POINT = 1
 
-      patron.points = patron.points + DEFAULT_POINT + point
+      patron.points =
+        point >= 1 ? patron.points + point : patron.points + DEFAULT_POINT
 
       cataloging.isCheckedOut = false
       patron.hasBorrowedBook = false

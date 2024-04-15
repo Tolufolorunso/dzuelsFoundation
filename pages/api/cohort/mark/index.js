@@ -30,6 +30,7 @@ export default async function handler(req, res) {
           errorMessage: 'Attendance already marked for the given week',
         })
       }
+      
       if (!existingAttendance) {
         if (attendanceStatus === 'attend') {
           student.attendance.push({ date, week, attended: true })
