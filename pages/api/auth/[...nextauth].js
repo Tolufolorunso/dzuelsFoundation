@@ -15,6 +15,11 @@ export const authOptions = {
       async authorize(credentials, req) {
         await dbConnect()
         const { username, password } = credentials
+
+        if (username !== 'tolufolorunso') {
+          throw new Error('Something went wrong, Contact your administrator')
+        }
+
         const user = await User.findOne({ username })
         if (!user) {
           throw new Error('Wrong credentials. Try again.')
